@@ -1,0 +1,57 @@
+name: Weekly News Report
+
+on:
+  schedule:
+    # Monday 06:00 UTC — covers the just-completed Monday→Sunday week
+    - cron: "0 6 * * 1"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Research and write the report
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: >
+            Run the weekly-news skill (.claude/skills/weekly-news/SKILL.md):
+            research the last completed Monday–Sunday week and write the
+            report to reports/<WEEK_ID>.md exactly as the skill instructs.
+            Write the file only — do not commit, push, or open issues.
+          claude_args: >-
+            --allowedTools "WebSearch,WebFetch,Read,Write,Glob,Grep,Bash(date *),Bash(ls *),Bash(mkdir *)"
+
+      - name: Commit and push report
+        id: commit
+        run: |
+          REPORT=$(git ls-files --others --exclude-standard reports/ | head -1)
+          if [ -z "$REPORT" ]; then
+            echo "No new report file was generated." >&2
+            exit 1
+          fi
+          echo "report=$REPORT" >> "$GITHUB_OUTPUT"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add "$REPORT"
+          git commit -m "Add weekly news report $(basename "$REPORT" .md)"
+          git push
+
+      - name: Open issue with the report
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          REPORT="${{ steps.commit.outputs.report }}"
+          TITLE=$(grep -m1 '^# ' "$REPORT" | sed 's/^# //')
+          gh label create weekly-news --color 1D76DB --description "Weekly news reports" 2>/dev/null || true
+          gh issue create \
+            --title "📰 $TITLE" \
+            --body-file "$REPORT" \
+            --label weekly-news
