@@ -13,7 +13,10 @@ preserves everything).
 - **The AI coding subsidy died** — Copilot token billing live Jun 1 (10–50x
   bills, Opus multiplier 7.5x→27x, paid code review); Cursor seat split;
   Anthropic Agent SDK credit split lands Jun 15. Flat-rate AI tooling is
-  ending industry-wide. → [2026-W23](./2026-W23.md)
+  ending industry-wide. Dive thesis: meter = boundary, not business; end
+  state is vertical integration ("unlimited, on our models").
+  → [2026-W23](./2026-W23.md),
+  [dive 2026-06-11](./deep-dives/2026-06-11-ai-coding-honest-pricing.md)
 - **Supply chain vs. AI throughput** — Miasma (32 Red Hat npm pkgs, valid
   SLSA provenance via stolen OIDC) + IronWorm (36 pkgs, harvesting AI API
   keys). Provenance + install-script scanning both defeated. Review/trust
@@ -35,6 +38,7 @@ preserves everything).
 | Made | Prediction | Due | Status |
 |---|---|---|---|
 | 2026-W23 | GitHub partially walks back Copilot pricing (extends promo credits past Aug, restores fallback model, or cuts Opus multiplier) within 30 days, without reversing metering itself | ~2026-07-05 | OPEN |
+| Dive 2026-06-11 | At least two of {GitHub, Cursor, Anthropic} ship an "unlimited on our own/house models" flat tier (subsidy internalized, frontier stays metered) | by 2027-Q1 | OPEN |
 
 ## Coverage index
 
@@ -43,4 +47,5 @@ preserves everything).
   selloff, Copilot metered billing, npm worms, grid politics, AI layoffs
 
 ### Deep dives
-- (none yet)
+- 2026-06-11 — "The Meter Is the Confession" — AI coding pricing: flat-rate
+  era ends, metering as transition to vertical integration (house models)
