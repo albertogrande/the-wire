@@ -4,7 +4,19 @@ on:
   schedule:
     # Monday 06:00 UTC — covers the just-completed Monday→Sunday week
     - cron: "0 6 * * 1"
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "weekly = essay + deep dive; deep-dive-only = just a deep dive"
+        type: choice
+        options:
+          - weekly
+          - deep-dive-only
+        default: weekly
+      topic:
+        description: "Deep-dive topic (optional; agent picks if empty)"
+        type: string
+        default: ""
 
 permissions:
   contents: write
@@ -13,45 +25,76 @@ permissions:
 jobs:
   report:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
 
-      - name: Research and write the report
+      - name: Compose prompt
+        id: prompt
+        env:
+          MODE: ${{ github.event.inputs.mode || 'weekly' }}
+          TOPIC: ${{ github.event.inputs.topic }}
+        run: |
+          if [ "$MODE" = "deep-dive-only" ]; then
+            PROMPT="Run the deep-dive skill (.claude/skills/deep-dive/SKILL.md)"
+            if [ -n "$TOPIC" ]; then
+              PROMPT="$PROMPT with this topic: $TOPIC."
+            else
+              PROMPT="$PROMPT — no topic given, pick the week's most consequential story yourself as the skill instructs."
+            fi
+            PROMPT="$PROMPT Write the dive to reports/deep-dives/ and update reports/MEMORY.md exactly as the skill instructs."
+          else
+            PROMPT="First run the weekly-news skill (.claude/skills/weekly-news/SKILL.md): research the last completed Monday-Sunday week and write the issue to reports/<WEEK_ID>.md, ending with your deep-dive topic pick. Then run the deep-dive skill (.claude/skills/deep-dive/SKILL.md) on that pick, reusing this session's research, writing to reports/deep-dives/. Update reports/MEMORY.md as both skills instruct."
+          fi
+          PROMPT="$PROMPT Write files only — do not commit, push, or open issues."
+          echo "prompt=$PROMPT" >> "$GITHUB_OUTPUT"
+
+      - name: Research and write
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          prompt: >
-            Run the weekly-news skill (.claude/skills/weekly-news/SKILL.md):
-            research the last completed Monday–Sunday week and write the
-            report to reports/<WEEK_ID>.md exactly as the skill instructs.
-            Write the file only — do not commit, push, or open issues.
+          prompt: ${{ steps.prompt.outputs.prompt }}
           claude_args: >-
-            --allowedTools "WebSearch,WebFetch,Read,Write,Glob,Grep,Bash(date *),Bash(ls *),Bash(mkdir *)"
+            --allowedTools "WebSearch,WebFetch,Read,Write,Edit,Glob,Grep,Bash(date *),Bash(ls *),Bash(mkdir *)"
 
-      - name: Commit and push report
+      - name: Commit and push
         id: commit
         run: |
-          REPORT=$(git ls-files --others --exclude-standard reports/ | head -1)
-          if [ -z "$REPORT" ]; then
-            echo "No new report file was generated." >&2
+          NEW_REPORTS=$(git ls-files --others --exclude-standard reports/ | grep '\.md$' || true)
+          git add reports/
+          if git diff --cached --quiet; then
+            echo "Nothing was generated." >&2
             exit 1
           fi
-          echo "report=$REPORT" >> "$GITHUB_OUTPUT"
+          if [ -z "$NEW_REPORTS" ]; then
+            echo "No new report file was generated (only modifications staged)." >&2
+            exit 1
+          fi
+          {
+            echo "new_reports<<EOF"
+            echo "$NEW_REPORTS"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add "$REPORT"
-          git commit -m "Add weekly news report $(basename "$REPORT" .md)"
+          git commit -m "Publish: $(echo "$NEW_REPORTS" | xargs -n1 basename | paste -sd ', ' -)"
           git push
 
-      - name: Open issue with the report
+      - name: Open issues with the reports
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          REPORT="${{ steps.commit.outputs.report }}"
-          TITLE=$(grep -m1 '^# ' "$REPORT" | sed 's/^# //')
-          gh label create weekly-news --color 1D76DB --description "Weekly news reports" 2>/dev/null || true
-          gh issue create \
-            --title "📰 $TITLE" \
-            --body-file "$REPORT" \
-            --label weekly-news
+          gh label create weekly-news --color 1D76DB --description "Weekly news issues" 2>/dev/null || true
+          gh label create deep-dive --color 5319E7 --description "Deep dives" 2>/dev/null || true
+          while IFS= read -r REPORT; do
+            [ -z "$REPORT" ] && continue
+            TITLE=$(grep -m1 '^# ' "$REPORT" | sed 's/^# //')
+            case "$REPORT" in
+              reports/deep-dives/*) LABEL=deep-dive; PREFIX="🔬" ;;
+              *)                    LABEL=weekly-news; PREFIX="📰" ;;
+            esac
+            gh issue create \
+              --title "$PREFIX $TITLE" \
+              --body-file "$REPORT" \
+              --label "$LABEL"
+          done <<< "${{ steps.commit.outputs.new_reports }}"
