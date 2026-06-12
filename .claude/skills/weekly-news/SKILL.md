@@ -199,6 +199,10 @@ Update `reports/MEMORY.md`:
   70% confident and right → 0.09; 70% and wrong → 0.49; lower is better).
 - Update the **scorecard** line: record (rights–wrongs) and mean Brier
   across all settled predictions.
+- Mirror the scorecard into `_data/scorecard.yml` so the site's masthead
+  ticker stays truthful: set `brier` (or `"—"` if none settled),
+  `brier_note`, `settled`, `record`, `open` (count of OPEN predictions),
+  and `next_due` (earliest OPEN prediction's due date).
 - Append one line to the **coverage index** (week id, title, main topics).
 - Keep the whole file under ~150 lines; prune oldest detail first.
 

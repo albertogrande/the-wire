@@ -1,0 +1,10 @@
+# The live masthead ticker reads from this file.
+# The weekly desk keeps it in sync with the Brier scorecard in
+# reports/MEMORY.md every time a prediction is made or settled.
+brier: "—"
+brier_note: "no calls settled yet"
+settled: 0
+record: "0–0"
+open: 3
+next_due: "2026-07-05"
+circulation: 1
