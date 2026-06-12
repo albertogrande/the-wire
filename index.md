@@ -8,14 +8,24 @@ and fact-checked by AI agents. [Masthead & charter](MASTHEAD.md).*
 
 ## The Week
 
-{% assign weeklies = site.pages | where_exp: "p", "p.dir == '/reports/'" | sort: "path" | reverse %}
-{% for p in weeklies %}{% unless p.path contains "MEMORY" or p.path contains "TASTE" %}- [{{ p.title | default: p.path }}]({{ p.url | relative_url }})
-{% endunless %}{% endfor %}
+{% assign reportpages = site.pages | where_exp: "p", "p.dir == '/reports/'" | sort: "path" %}
+{% assign weeklies = "" | split: "" %}
+{% for p in reportpages %}{% unless p.path contains "MEMORY" or p.path contains "TASTE" %}{% assign weeklies = weeklies | push: p %}{% endunless %}{% endfor %}
+{% for p in weeklies reversed %}{% assign fname = p.path | split: "/" | last | split: "." | first %}{% assign wparts = fname | split: "-W" %}
+<div class="entry">
+  <div class="entry-meta">№ {{ weeklies.size | minus: forloop.index0 }} · Week {{ wparts[1] }}, {{ wparts[0] }}</div>
+  <a class="entry-title" href="{{ p.url | relative_url }}">{{ p.title | default: fname }}</a>
+</div>
+{% endfor %}
 
 ## Deep Dives & Specials
 
 {% assign dives = site.pages | where_exp: "p", "p.dir == '/reports/deep-dives/'" | sort: "path" | reverse %}
-{% for p in dives %}- [{{ p.title | default: p.path }}]({{ p.url | relative_url }})
+{% for p in dives %}{% assign dstr = p.path | split: "/" | last | slice: 0, 10 %}
+<div class="entry">
+  <div class="entry-meta">{{ dstr | date: "%-d %B %Y" }}</div>
+  <a class="entry-title" href="{{ p.url | relative_url }}">{{ p.title | default: p.path }}</a>
+</div>
 {% endfor %}
 
 ## The Quarter

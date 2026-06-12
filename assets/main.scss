@@ -1,0 +1,88 @@
+---
+---
+
+// The Observer type spec (June 2026 research): Charter system serif,
+// 19px / 1.5, ~65 characters per line, #111 on #fff, black underlined links.
+// Overriding minima's defaults requires setting its variables before the import.
+
+$base-font-family: Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+$base-font-size:   19px;
+$base-line-height: 1.5;
+$text-color:       #111;
+$background-color: #fff;
+$brand-color:      #111;
+$content-width:    700px;
+
+@import "minima";
+
+a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+a:hover { text-decoration-thickness: 2px; }
+
+// Masthead: centered title over a double rule, no nav.
+.site-header {
+  border-top: none;
+  border-bottom: 3px double $text-color;
+  min-height: 0;
+  padding: 26px 0 14px;
+}
+.site-title, .site-title:visited {
+  float: none;
+  display: block;
+  text-align: center;
+  color: $text-color;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0;
+  text-decoration: none;
+}
+.site-nav { display: none; }
+
+// Homepage: tagline centered, sections as quiet kickers, entries as meta + title.
+.page-heading { display: none; }
+.home > p:first-child {
+  text-align: center;
+  color: #555;
+  font-size: 16px;
+}
+.home h2 {
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #555;
+  margin-top: 42px;
+}
+.entry { margin-bottom: 18px; }
+.entry-meta { font-size: 14px; color: #555; }
+a.entry-title {
+  font-size: 20px;
+  text-decoration: none;
+}
+a.entry-title:hover { text-decoration: underline; text-decoration-thickness: 1px; }
+
+// Article pages: restrained title, the opening italic line reads as a dek.
+h1, h2, h3 { line-height: 1.2; }
+.post-title { font-size: 30px; font-weight: 700; line-height: 1.2; }
+.post-content > p:first-child > em { color: #444; font-size: 18px; }
+
+blockquote {
+  color: #333;
+  border-left: 2px solid #ddd;
+  font-style: normal;
+  font-size: 18px;
+  letter-spacing: normal;
+}
+pre, code { background-color: #f7f7f7; border-color: #e2e2e2; }
+.footnotes {
+  margin-top: 42px;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+  font-size: 15px;
+  color: #555;
+}
+
+.site-footer { border-top: 1px solid #e2e2e2; }
