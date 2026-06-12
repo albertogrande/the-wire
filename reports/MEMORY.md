@@ -21,7 +21,11 @@ preserves everything).
   SLSA provenance via stolen OIDC) + IronWorm (36 pkgs, harvesting AI API
   keys). Provenance + install-script scanning both defeated. Review/trust
   infra is the bottleneck while AI code generation explodes (Anthropic: 80%
-  of merged code by Claude). → [2026-W23](./2026-W23.md)
+  of merged code by Claude). Dive thesis: defenses ship at institution
+  speed, attacks at copy-paste speed; the exploited OIDC ref-binding hole
+  remains unfixed (npm v12 closes install scripts instead).
+  → [2026-W23](./2026-W23.md),
+  [dive 2026-06-12](./deep-dives/2026-06-12-trust-stack-human-speed.md)
 - **Who pays for AI's power** — PJM uncapped capacity auction imminent;
   dueling studies on data centers vs. household bills; 1GW
   bring-your-own-power deals (Vantage–Liberty). Sleeper populist-politics
@@ -39,6 +43,7 @@ preserves everything).
 |---|---|---|---|
 | 2026-W23 | GitHub partially walks back Copilot pricing (extends promo credits past Aug, restores fallback model, or cuts Opus multiplier) within 30 days, without reversing metering itself | ~2026-07-05 | OPEN |
 | Dive 2026-06-11 | At least two of {GitHub, Cursor, Anthropic} ship an "unlimited on our own/house models" flat tier (subsidy internalized, frontier stays metered) | by 2027-Q1 | OPEN |
+| Dive 2026-06-12 | GitHub/npm ship branch/ref binding for OIDC trusted publishing (the actual Miasma hole) — and a worm generation defeats npm v12's script-off default before that ships | by 2026-Q4 | OPEN |
 
 ## Coverage index
 
@@ -49,3 +54,6 @@ preserves everything).
 ### Deep dives
 - 2026-06-11 — "The Meter Is the Confession" — AI coding pricing: flat-rate
   era ends, metering as transition to vertical integration (house models)
+- 2026-06-12 — "The Trust Stack Was Built for Human-Speed Software" — npm
+  worms (Miasma/IronWorm), provenance defeated, OIDC hole unfixed,
+  LLMjacking economics, AI as throughput/loot/camouflage/surface/defense
