@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: write
+  id-token: write
 
 jobs:
   scout:
@@ -25,12 +26,13 @@ jobs:
             capture the last 24h of signals across the beats and append them
             to the current week's signals/ file exactly as the skill
             instructs. Write the file only — do not commit or push.
+          show_full_output: true
           claude_args: >-
             --allowedTools "WebSearch,WebFetch,Read,Write,Edit,Glob,Grep,Bash(date *),Bash(ls *),Bash(mkdir *)"
 
       - name: Commit signals
         run: |
-          git add signals/
+          if [ -d signals ]; then git add signals/; fi
           if git diff --cached --quiet; then
             echo "No new signals captured."
             exit 0
