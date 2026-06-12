@@ -75,6 +75,7 @@ jobs:
           echo "prompt=$PROMPT" >> "$GITHUB_OUTPUT"
 
       - name: Research and write
+        id: claude
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
@@ -135,3 +136,33 @@ jobs:
               --body-file "$REPORT" \
               --label "$LABEL"
           done <<< "${{ steps.commit.outputs.new_reports }}"
+
+      # Quota ledger: every run appends its exact token/cost numbers from the
+      # action transcript, even on failure — failed runs have costs too.
+      - name: Record usage
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXEC_FILE: ${{ steps.claude.outputs.execution_file }}
+          MODEL: claude-opus-4-8
+        run: |
+          mkdir -p usage
+          [ -f usage/ledger.csv ] || echo "date_utc,workflow,run_id,result,model,turns,duration_ms,input_tokens,output_tokens,cache_read,cache_created,cost_usd" > usage/ledger.csv
+          if [ -n "$EXEC_FILE" ] && [ -f "$EXEC_FILE" ]; then
+            jq -r --arg d "$(date -u +%Y-%m-%dT%H:%MZ)" --arg w "$GITHUB_WORKFLOW" --arg r "$GITHUB_RUN_ID" --arg m "$MODEL" '
+              (last(.[] | select(.type=="result"))) as $res
+              | [$d, $w, $r, (if $res.is_error then "error" else "ok" end), $m,
+                 ($res.num_turns // 0), ($res.duration_ms // 0),
+                 ($res.usage.input_tokens // 0), ($res.usage.output_tokens // 0),
+                 ($res.usage.cache_read_input_tokens // 0), ($res.usage.cache_creation_input_tokens // 0),
+                 ($res.total_cost_usd // 0)] | @csv' "$EXEC_FILE" >> usage/ledger.csv || \
+              echo "$(date -u +%Y-%m-%dT%H:%MZ),$GITHUB_WORKFLOW,$GITHUB_RUN_ID,parse-failed,$MODEL,0,0,0,0,0,0,0" >> usage/ledger.csv
+          else
+            echo "$(date -u +%Y-%m-%dT%H:%MZ),$GITHUB_WORKFLOW,$GITHUB_RUN_ID,no-transcript,$MODEL,0,0,0,0,0,0,0" >> usage/ledger.csv
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add usage/ledger.csv
+          git commit -m "Usage: $GITHUB_WORKFLOW run $GITHUB_RUN_ID" || exit 0
+          git pull --rebase origin "$GITHUB_REF_NAME" || true
+          git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:${GITHUB_REF_NAME}"
