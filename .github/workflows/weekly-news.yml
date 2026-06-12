@@ -39,7 +39,7 @@ jobs:
             for N in $(gh issue list --label "$LABEL" --state all --limit 4 --json number --jq '.[].number' 2>/dev/null); do
               gh issue view "$N" --json number,title,comments --jq '
                 . as $i
-                | [$i.comments[] | select(.author.login | test("bot$") | not)]
+                | [$i.comments[] | select(.author.login | test("\\[bot\\]$") | not)]
                 | select(length > 0)
                 | "## Issue #\($i.number): \($i.title)\n"
                   + (map("- \(.author.login) (\(.createdAt)):\n\(.body)\n") | join("\n"))
