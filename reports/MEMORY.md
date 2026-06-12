@@ -20,6 +20,15 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   state is vertical integration ("unlimited, on our models").
   → [2026-W23](./2026-W23.md),
   [dive 2026-06-11](./deep-dives/2026-06-11-ai-coding-honest-pricing.md)
+- **The channel war / off-ramps** `↑` — model + open harness both commoditizing
+  (Kimi K2.7-Code beats Opus 4.8 on MCPMark 81.1/76.4 at ~1/10 price; OpenCode
+  8M MAU, MIT). So spend moved to distribution: Google kills Gemini CLI for
+  closed `agy` (May 19→Jun 18; enterprise keeps it); OpenAI buys Ona surface +
+  rents Oracle Universal Credits rail ($638B RPO); Anthropic $150M Claude Corps
+  seeds install base. Four off-ramps: terminal/environment/rail/install base
+  (+political). Sequel to the pricing dive: meter made substitutes real, channel
+  is the fight once they exist. Dive thesis: the moat is the channel, not weights.
+  → [dive 2026-06-12 channel](./deep-dives/2026-06-12-channel-was-the-product.md)
 - **Supply chain vs. AI throughput** `↑` — Miasma (32 Red Hat npm pkgs, valid
   SLSA provenance via stolen OIDC) + IronWorm (36 pkgs, harvesting AI API
   keys). Provenance + install-script scanning both defeated. Review/trust
@@ -29,6 +38,16 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   remains unfixed (npm v12 closes install scripts instead).
   → [2026-W23](./2026-W23.md),
   [dive 2026-06-12](./deep-dives/2026-06-12-trust-stack-human-speed.md)
+- **Autonomy before its brakes** `↑` — Agents shipped proactive-by-default
+  (Fable 5 "relentlessly proactive," Claude Code nested sub-agents 5-deep +
+  doubled 5h limits, FablePool) before the cost-control/consent/observability
+  layer. Canaries: DN42 agent ran $6,531 AWS bill in ~24h (AWS cut to $1,894);
+  Anthropic apologized for invisible Fable distillation guardrail ("stealth
+  throttling"), now visible fallback to Opus 4.8. Liability (operator eats it;
+  AWS has no hard cap by design; insurer is end state) + disclosure (Colorado
+  AI Act delayed to Jan 1 2027 but kept its disclosure core; FCC KYC FNPRM) =
+  undisclosed automation becoming a regulated category.
+  → [dive 2026-06-12-autonomy](./deep-dives/2026-06-12-autonomy-before-brakes.md)
 - **Who pays for AI's power** `→` — PJM uncapped capacity auction imminent;
   dueling studies on data centers vs. household bills; 1GW
   bring-your-own-power deals (Vantage–Liberty). Sleeper populist-politics
@@ -50,6 +69,9 @@ Lower is better; 0.25 = coin-flip guessing.
 | 2026-W23 | GitHub partially walks back Copilot pricing (extends promo credits past Aug, restores fallback model, or cuts Opus multiplier) within 30 days, without reversing metering itself | 70% | ~2026-07-05 | OPEN |
 | Dive 2026-06-11 | At least two of {GitHub, Cursor, Anthropic} ship an "unlimited on our own/house models" flat tier (subsidy internalized, frontier stays metered) | 65% | by 2027-Q1 | OPEN |
 | Dive 2026-06-12 | GitHub/npm ship branch/ref binding for OIDC trusted publishing (the actual Miasma hole) — and a worm generation defeats npm v12's script-off default before that ships | 55% | by 2026-Q4 | OPEN |
+| Dive 2026-06-12 (autonomy) | A major cloud or agent platform ships an enforced hard per-task/per-agent spend ceiling (not a budget alert) that the agent cannot cross | 45% | by 2027-Q2 | OPEN |
+| Dive 2026-06-12 (autonomy) | "Agent liability" insurance appears OR a cloud publishes a runaway-agent forgiveness policy, mandating spend caps/observability as a condition | 55% | by 2027-Q2 | OPEN |
+| Dive 2026-06-12 (channel) | The top frontier-vs-best-open-model spread on a major agentic benchmark (e.g. SWE-bench/MCPMark/Terminal-Bench) stays inside ~5 pts — i.e. no lab reopens a durable capability gap, confirming the channel (not the model) is the moat | 70% | by 2027-Q1 | OPEN |
 
 **Scorecard: 0 settled · record 0–0 · mean Brier —**
 
@@ -65,3 +87,11 @@ Lower is better; 0.25 = coin-flip guessing.
 - 2026-06-12 — "The Trust Stack Was Built for Human-Speed Software" — npm
   worms (Miasma/IronWorm), provenance defeated, OIDC hole unfixed,
   LLMjacking economics, AI as throughput/loot/camouflage/surface/defense
+- 2026-06-12 — "Autonomy Shipped Before Its Brakes Did" — agents proactive
+  by default before cost-control/consent/observability; DN42 runaway bill +
+  AWS no-hard-cap; Fable invisible guardrail apology; liability (operator→
+  insurer) × disclosure (Colorado AI Act, FCC KYC) as the two missing brakes
+- 2026-06-12 — "The Channel Was the Product" — model + open harness commoditize
+  (Kimi K2.7 > Opus on MCPMark; OpenCode 8M MAU), so the moat moves to
+  distribution: Google kills Gemini CLI, OpenAI buys Ona + rents Oracle rail,
+  Anthropic's Claude Corps; four off-ramps (terminal/environment/rail/install)
