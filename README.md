@@ -17,8 +17,16 @@ The Pragmatic Engineer's depth — short clear sentences carrying real
 reporting, numbers, and direct takes.
 
 **It compounds.** The agent maintains `reports/MEMORY.md` — running threads,
-a predictions ledger it scores itself against, and a coverage index. Issues
-link back to earlier issues and build on them instead of restarting.
+a predictions ledger with explicit confidences and a running **Brier
+scorecard** (the publication grades its own calls in public), and a coverage
+index. `reports/TASTE.md` accumulates the reader's preferences. Issues link
+back to earlier issues and build on them instead of restarting.
+
+**It listens.** A **daily scout** captures each day's signals — news *and*
+HN/Reddit/X discussions — into `signals/`, so the Monday editor works from
+seven days of live capture instead of what's still searchable. Comments you
+leave on the report issues get answered in the next issue's **Mailbag**
+section and folded into TASTE.md.
 
 Runs entirely on a **Claude Max subscription** via Claude Code — no API
 credits consumed.
@@ -31,9 +39,15 @@ credits consumed.
 - **`.claude/skills/deep-dive/SKILL.md`** — the deep-dive playbook: one
   topic researched deep (history, players, incentives, numbers, contrarian
   takes) → thesis-driven essay.
-- **`.github/workflows/weekly-news.yml`** — Monday 06:00 UTC cron runs
-  both skills in one session; deterministic steps then commit everything
-  and open one GitHub Issue per piece (`weekly-news` / `deep-dive` labels).
+- **`.claude/skills/daily-scout/SKILL.md`** — the scout playbook: 4–8 quick
+  searches/fetches over the last 24h (including the HN front page via the
+  Algolia API), 5–15 dated one-liners appended to `signals/<week>.md`.
+- **`.github/workflows/weekly-news.yml`** — Monday 06:00 UTC cron collects
+  reader comments from recent report issues, runs both skills in one
+  session, then deterministic steps commit everything and open one GitHub
+  Issue per piece (`weekly-news` / `deep-dive` labels).
+- **`.github/workflows/daily-scout.yml`** — daily 18:00 UTC cron runs the
+  scout and commits new signals.
 
 ## One-time setup
 
@@ -57,17 +71,21 @@ credits consumed.
 - **In any Claude Code session** in this repo:
   - `/weekly-news` — generate the weekly issue
   - `/deep-dive` or `/deep-dive <topic>` — generate a deep dive
+  - `/daily-scout` — capture today's signals
 
-  Interactive runs write files to `reports/` without committing — you decide.
+  Interactive runs write files without committing — you decide.
 
 ## Layout
 
 ```
 reports/
-  MEMORY.md            # agent's editorial memory (threads, predictions, index)
+  MEMORY.md            # editorial memory: threads, predictions + Brier scorecard, index
+  TASTE.md             # the reader's accumulated preferences
   2026-W23.md          # weekly issues, one per ISO week
   deep-dives/
-    2026-06-15-....md  # deep dives, dated
+    2026-06-12-....md  # deep dives, dated
+signals/
+  2026-W24.md          # daily scout capture, one file per ISO week
 ```
 
 Reports are also published as GitHub Issues:

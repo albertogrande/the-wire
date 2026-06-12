@@ -1,0 +1,41 @@
+name: Daily Scout
+
+on:
+  schedule:
+    # Daily 18:00 UTC — capture the day's signals while they're findable
+    - cron: "0 18 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  scout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Capture today's signals
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: >
+            Run the daily-scout skill (.claude/skills/daily-scout/SKILL.md):
+            capture the last 24h of signals across the beats and append them
+            to the current week's signals/ file exactly as the skill
+            instructs. Write the file only — do not commit or push.
+          claude_args: >-
+            --allowedTools "WebSearch,WebFetch,Read,Write,Edit,Glob,Grep,Bash(date *),Bash(ls *),Bash(mkdir *)"
+
+      - name: Commit signals
+        run: |
+          git add signals/
+          if git diff --cached --quiet; then
+            echo "No new signals captured."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "Scout: signals for $(date -u +%Y-%m-%d)"
+          git push

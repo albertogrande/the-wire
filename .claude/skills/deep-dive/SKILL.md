@@ -25,7 +25,8 @@ can disagree with productively.
 
 Always check MEMORY.md's coverage index first: don't repeat a past dive
 unless the story moved materially — and if it did, frame the piece as an
-update and link the original.
+update and link the original. Read `reports/TASTE.md` too — the piece must
+reflect the reader's accumulated preferences.
 
 ## Step 2 — Research the topic deep, not wide
 
@@ -35,6 +36,10 @@ This is a different research shape than the weekly sweep. For the one topic:
 - **Players and incentives**: who wins, who pays, who's bluffing?
 - **Numbers**: the 3–5 quantities the argument actually turns on — find
   primary figures, not commentary about figures.
+- **The discussion**: what practitioners actually argued — HN comment
+  threads (via the Algolia API), Reddit, X, GitHub issues of the repos
+  involved. The best context paragraph is often a comment, not an article;
+  quote it, linked and attributed to the thread.
 - **The other side**: actively search for the strongest contrarian take and
   steelman it before rebutting it.
 
@@ -72,7 +77,8 @@ length. Inline links on key claims; no sources section.>
 
 Update `reports/MEMORY.md`:
 - Append the dive to the **coverage index** (date, title, topic).
-- If the piece makes a falsifiable call, add it to the **predictions ledger**.
+- If the piece makes a falsifiable call, add it to the **predictions
+  ledger** — always with an explicit confidence percentage.
 - Keep the file under ~150 lines.
 
 ## Step 5 — Save

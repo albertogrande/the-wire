@@ -39,11 +39,16 @@ preserves everything).
 
 ## Predictions ledger
 
-| Made | Prediction | Due | Status |
-|---|---|---|---|
-| 2026-W23 | GitHub partially walks back Copilot pricing (extends promo credits past Aug, restores fallback model, or cuts Opus multiplier) within 30 days, without reversing metering itself | ~2026-07-05 | OPEN |
-| Dive 2026-06-11 | At least two of {GitHub, Cursor, Anthropic} ship an "unlimited on our own/house models" flat tier (subsidy internalized, frontier stays metered) | by 2027-Q1 | OPEN |
-| Dive 2026-06-12 | GitHub/npm ship branch/ref binding for OIDC trusted publishing (the actual Miasma hole) — and a worm generation defeats npm v12's script-off default before that ships | by 2026-Q4 | OPEN |
+Brier per prediction: (confidence − outcome)², outcome 1 if it happened.
+Lower is better; 0.25 = coin-flip guessing.
+
+| Made | Prediction | Conf. | Due | Status |
+|---|---|---|---|---|
+| 2026-W23 | GitHub partially walks back Copilot pricing (extends promo credits past Aug, restores fallback model, or cuts Opus multiplier) within 30 days, without reversing metering itself | 70% | ~2026-07-05 | OPEN |
+| Dive 2026-06-11 | At least two of {GitHub, Cursor, Anthropic} ship an "unlimited on our own/house models" flat tier (subsidy internalized, frontier stays metered) | 65% | by 2027-Q1 | OPEN |
+| Dive 2026-06-12 | GitHub/npm ship branch/ref binding for OIDC trusted publishing (the actual Miasma hole) — and a worm generation defeats npm v12's script-off default before that ships | 55% | by 2026-Q4 | OPEN |
+
+**Scorecard: 0 settled · record 0–0 · mean Brier —**
 
 ## Coverage index
 

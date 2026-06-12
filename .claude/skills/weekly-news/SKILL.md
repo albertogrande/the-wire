@@ -29,11 +29,20 @@ don't overwrite a published issue unless explicitly asked.
 
 ## Step 2 — Load memory (before any searching)
 
-1. Read `reports/MEMORY.md`: running threads, open predictions, coverage index.
-2. Skim the 2–3 most recent issues in `reports/` (and recent deep dives if a
-   thread points there).
-3. Note: which threads might advance this week? Which predictions come due?
-   What's already been said — so you extend it instead of repeating it?
+1. Read `reports/MEMORY.md`: running threads, the predictions ledger and
+   scorecard, coverage index.
+2. Read `reports/TASTE.md`: the reader's accumulated preferences. The issue
+   must reflect them.
+3. Read `signals/<WEEK_ID>.md` if it exists — the daily scout's capture for
+   the reporting window. Treat its lines as leads, not facts: they tell you
+   where to dig and what discussions flared, but everything still gets
+   verified before it's published.
+4. Read the reader-comments file if the run provides one (CI passes its
+   path in the prompt). These feed the Mailbag (Step 5) and TASTE.md.
+5. Skim the 2–3 most recent issues in `reports/` (and recent deep dives if
+   a thread points there).
+6. Note: which threads might advance this week? **Which predictions come
+   due?** What's already been said — so you extend it instead of repeating?
 
 This is what makes the publication compound. An issue that reads like the
 author has amnesia is a failed issue.
@@ -57,11 +66,26 @@ dates and discard out-of-window events):
 - **Economy** — macro that touches tech: rates, jobs, AI capex, markets
 - **Politics** — regulation, export controls, elections, geopolitics
 
+**Discussions are a first-class source, not garnish.** The reader's peers
+argue in threads, not articles — an issue that only cites journalism reads
+like an outsider wrote it. Sweep:
+
+- Hacker News via the Algolia API, including the *comments* on big threads
+  (`https://hn.algolia.com/api/v1/search?query=<terms>&tags=story` then
+  fetch the discussion) — the top dissenting comment is often the best
+  paragraph of context available anywhere.
+- Reddit (r/programming, r/ExperiencedDevs, r/LocalLLaMA and whatever fits
+  the story), X discourse, GitHub issues/discussions/changelogs of the
+  repos involved, arXiv for research-driven stories.
+- When a comment or thread captures the practitioner reaction better than
+  any article, quote or paraphrase it in the essay — linked, attributed to
+  the thread ("the top HN comment put it bluntly: …").
+
 Plus: whatever cross-beat connections this particular week suggests, and
-follow-ups on memory's running threads. Add or skip searches at your own
-judgment — coverage of the *story* beats coverage of the *list*. Typically
-12–20 searches. Then **WebFetch the 5–8 sources** that will anchor the
-essay; don't write off snippets.
+follow-ups on memory's running threads and the scout's signals. Add or skip
+searches at your own judgment — coverage of the *story* beats coverage of
+the *list*. Typically 12–20 searches. Then **WebFetch the 5–8 sources**
+that will anchor the essay; don't write off snippets.
 
 ## Step 4 — Edit
 
@@ -109,18 +133,28 @@ prose, a few subheads, whatever serves this week's argument.>
 <4–8 one-liners with inline links: things worth knowing that didn't earn
 essay space. One sentence each, still with a point of view.>
 
+## Mailbag
+
+<Only when there are reader comments since the last issue. Quote or
+paraphrase each (linked to the issue), then respond honestly: answer the
+question, concede the point, or push back. Skip the section entirely when
+there's nothing — never write "no mail this week".>
+
 ## One thing to watch
 
-<A falsifiable prediction or open question, scoreable next week.>
+<A falsifiable prediction with an explicit confidence, e.g. "Prediction
+(70% confident): …". Scoreable next week.>
 ```
 
 **Hard requirements:**
 - Every dated claim verified inside the window.
 - When continuing a thread, link previous issues with relative links, e.g.
   `as covered [two weeks ago](./2026-W23.md)`.
-- Score any prediction from MEMORY.md that came due: say what you predicted,
-  what happened, and whether you were right — in the essay or footer,
-  wherever it fits naturally.
+- **Settle every due prediction from the ledger** — say what was predicted
+  at what confidence, what happened, and the verdict — in the essay or
+  footer, wherever it fits naturally. The publication grades itself in
+  public; never let a due prediction slide.
+- New predictions always carry a confidence percentage.
 - Flag thinly-sourced claims inline ("reportedly", "per a single report").
 
 ## Step 6 — Pick the deep-dive topic
@@ -138,10 +172,17 @@ materially.
 Update `reports/MEMORY.md`:
 - Advance/add/retire **running threads** (keep 5–10 alive; delete dead ones —
   git history preserves them).
-- Add this issue's **prediction** to the ledger; mark scored ones
-  right/wrong.
+- Add this issue's **prediction** to the ledger with its confidence. Mark
+  settled ones RIGHT/WRONG and compute each one's Brier score:
+  `(confidence − outcome)²` with outcome 1 if it happened, 0 if not (e.g.
+  70% confident and right → 0.09; 70% and wrong → 0.49; lower is better).
+- Update the **scorecard** line: record (rights–wrongs) and mean Brier
+  across all settled predictions.
 - Append one line to the **coverage index** (week id, title, main topics).
 - Keep the whole file under ~150 lines; prune oldest detail first.
+
+Update `reports/TASTE.md` if reader comments expressed a preference (style,
+coverage, format). Keep it to durable preferences, not one-off reactions.
 
 ## Step 8 — Save
 

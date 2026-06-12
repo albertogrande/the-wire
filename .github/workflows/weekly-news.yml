@@ -29,6 +29,25 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Collect reader comments
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p /tmp/reader
+          : > /tmp/reader/comments.md
+          for LABEL in weekly-news deep-dive; do
+            for N in $(gh issue list --label "$LABEL" --state all --limit 4 --json number --jq '.[].number' 2>/dev/null); do
+              gh issue view "$N" --json number,title,comments --jq '
+                . as $i
+                | [$i.comments[] | select(.author.login | test("bot$") | not)]
+                | select(length > 0)
+                | "## Issue #\($i.number): \($i.title)\n"
+                  + (map("- \(.author.login) (\(.createdAt)):\n\(.body)\n") | join("\n"))
+              ' >> /tmp/reader/comments.md 2>/dev/null || true
+            done
+          done
+          echo "Collected $(wc -l < /tmp/reader/comments.md) lines of reader comments."
+
       - name: Compose prompt
         id: prompt
         env:
@@ -44,7 +63,7 @@ jobs:
             fi
             PROMPT="$PROMPT Write the dive to reports/deep-dives/ and update reports/MEMORY.md exactly as the skill instructs."
           else
-            PROMPT="First run the weekly-news skill (.claude/skills/weekly-news/SKILL.md): research the last completed Monday-Sunday week and write the issue to reports/<WEEK_ID>.md, ending with your deep-dive topic pick. Then run the deep-dive skill (.claude/skills/deep-dive/SKILL.md) on that pick, reusing this session's research, writing to reports/deep-dives/. Update reports/MEMORY.md as both skills instruct."
+            PROMPT="First run the weekly-news skill (.claude/skills/weekly-news/SKILL.md): research the last completed Monday-Sunday week and write the issue to reports/<WEEK_ID>.md, ending with your deep-dive topic pick. Reader comments (if any) are in /tmp/reader/comments.md. Then run the deep-dive skill (.claude/skills/deep-dive/SKILL.md) on that pick, reusing this session's research, writing to reports/deep-dives/. Update reports/MEMORY.md and reports/TASTE.md as both skills instruct."
           fi
           PROMPT="$PROMPT Write files only — do not commit, push, or open issues."
           echo "prompt=$PROMPT" >> "$GITHUB_OUTPUT"
