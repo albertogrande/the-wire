@@ -83,6 +83,8 @@ jobs:
 
       - name: Commit and push
         id: commit
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           NEW_REPORTS=$(git ls-files --others --exclude-standard reports/ | grep '\.md$' || true)
           git add reports/
@@ -102,7 +104,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git commit -m "Publish: $(echo "$NEW_REPORTS" | xargs -n1 basename | paste -sd ', ' -)"
-          git push
+          # claude-code-action rewrites the remote URL to its app token and
+          # revokes it when its step ends, so push with the workflow token.
+          git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:${GITHUB_REF_NAME}"
 
       - name: Open issues with the reports
         env:
