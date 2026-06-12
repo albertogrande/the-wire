@@ -1,0 +1,31 @@
+title: The Observer
+description: An agentic journal-magazine with a circulation of one.
+theme: minima
+
+# These four plugins (all on the GitHub Pages whitelist) let plain .md files
+# without frontmatter render as pages, with titles taken from their first
+# heading and relative .md links rewritten to .html.
+plugins:
+  - jekyll-optional-front-matter
+  - jekyll-default-layout
+  - jekyll-titles-from-headings
+  - jekyll-relative-links
+
+optional_front_matter:
+  remove_originals: true
+relative_links:
+  enabled: true
+titles_from_headings:
+  enabled: true
+  strip_title: true
+
+# The newsroom's internals stay off the site.
+exclude:
+  - README.md
+  - signals
+  - .claude
+  - .github
+
+# Minima: no social noise, just the archive.
+show_excerpts: false
+header_pages: []

@@ -1,93 +1,80 @@
-# Deep Research — Weekly News Agent
+# The Observer
 
-An autonomous editor-in-chief that publishes, every Monday:
+*An agentic journal-magazine with a circulation of one.*
 
-1. **A weekly issue** — ONE opinionated essay on what mattered most last
-   week (Monday→Sunday), connecting stories across topics and across
-   previous issues. Plus a short "Also this week" footer and a falsifiable
-   "One thing to watch."
-2. **A deep dive** — a ~2,000–3,500-word thesis-driven piece on the week's
-   most consequential story, picked by the agent.
+The Observer is written, edited, and fact-checked by AI agents for exactly
+one reader, covering his beats: AI, tech, Claude Code, devtools, DevRel,
+dev marketing, product engineering, economy, politics. It runs entirely on
+a **Claude Max subscription** via Claude Code — no API credits.
 
-**Beats** (where the agent looks — never how output is organized): AI, tech,
-Claude Code, devtools, DevRel, dev marketing, product engineering, economy,
-politics. The agent is the editor: it decides each week what's relevant,
-what gets cut, and what the essay argues. Voice: Lee Robinson's clarity ×
-The Pragmatic Engineer's depth — short clear sentences carrying real
-reporting, numbers, and direct takes.
+Full identity, desks, and editorial charter: [MASTHEAD.md](MASTHEAD.md).
 
-**It compounds.** The agent maintains `reports/MEMORY.md` — running threads,
-a predictions ledger with explicit confidences and a running **Brier
-scorecard** (the publication grades its own calls in public), and a coverage
-index. `reports/TASTE.md` accumulates the reader's preferences. Issues link
-back to earlier issues and build on them instead of restarting.
+## What it publishes
 
-**It listens.** A **daily scout** captures each day's signals — news *and*
-HN/Reddit/X discussions — into `signals/`, so the Monday editor works from
-seven days of live capture instead of what's still searchable. Comments you
-leave on the report issues get answered in the next issue's **Mailbag**
-section and folded into TASTE.md.
+- **The Week** (Mondays) — one opinionated essay on what mattered last
+  Monday→Sunday, connecting stories across beats and past issues. Plus a
+  short "Also this week" footer, a **Mailbag** answering reader comments,
+  and a confidence-tagged prediction.
+- **Deep Dive** (with The Week) — one subject taken seriously. The editor
+  may swap in a special when the week earns it: **The Debate** (both sides
+  steelmanned) or **The Obituary** (something died; honest retrospective).
+- **The Quarter** (every ~13 weeks, on demand) — retrospective from the
+  archive: thread arcs, the Brier scorecard reviewed honestly, then-vs-now.
+- **The Wire** (daily, internal) — the scout's raw signals in `signals/`,
+  capturing news and HN/Reddit/X discussions while they're findable.
 
-Runs entirely on a **Claude Max subscription** via Claude Code — no API
-credits consumed.
+**It compounds.** `reports/MEMORY.md` holds running threads, a predictions
+ledger with confidences and a running **Brier scorecard** (the publication
+grades its own calls in public), and a coverage index. `reports/TASTE.md`
+accumulates the reader's preferences. Comments on report issues get
+answered in the next Mailbag.
 
 ## How it works
 
-- **`.claude/skills/weekly-news/SKILL.md`** — the weekly playbook: load
-  memory → research fan-out across beats → edit (decide the week's
-  narrative) → write the essay → pick the deep-dive topic → update memory.
-- **`.claude/skills/deep-dive/SKILL.md`** — the deep-dive playbook: one
-  topic researched deep (history, players, incentives, numbers, contrarian
-  takes) → thesis-driven essay.
-- **`.claude/skills/daily-scout/SKILL.md`** — the scout playbook: 4–8 quick
-  searches/fetches over the last 24h (including the HN front page via the
-  Algolia API), 5–15 dated one-liners appended to `signals/<week>.md`.
-- **`.github/workflows/weekly-news.yml`** — Monday 06:00 UTC cron collects
-  reader comments from recent report issues, runs both skills in one
-  session, then deterministic steps commit everything and open one GitHub
-  Issue per piece (`weekly-news` / `deep-dive` labels).
-- **`.github/workflows/daily-scout.yml`** — daily 18:00 UTC cron runs the
-  scout and commits new signals.
+- `.claude/skills/weekly-news/` — The Week's playbook: load memory, taste,
+  signals, and reader comments → research fan-out (discussions are
+  first-class sources) → edit → write → commission the second piece →
+  update memory.
+- `.claude/skills/deep-dive/` — the columnist desk (standard dive, The
+  Debate, The Obituary).
+- `.claude/skills/the-quarter/` — the retrospective desk.
+- `.claude/skills/daily-scout/` — the wire desk.
+- `.github/workflows/weekly-news.yml` — Monday 06:00 UTC: collects reader
+  comments, runs The Week + the second piece in one session, commits, and
+  opens one GitHub Issue per piece (`weekly-news` / `deep-dive` /
+  `the-quarter` labels). `workflow_dispatch` modes: `weekly`,
+  `deep-dive-only` (+ optional `topic`), `quarter`.
+- `.github/workflows/daily-scout.yml` — daily 18:00 UTC, commits signals.
+- `_config.yml` + `index.md` — the magazine's face: a GitHub Pages site
+  rendering the archive (masthead, The Week, dives, quarters, newsroom).
 
 ## One-time setup
 
-1. On your own machine, logged into Claude Code with your Max account:
-
-   ```bash
-   claude setup-token
-   ```
-
-2. Add the printed token as a repo secret named `CLAUDE_CODE_OAUTH_TOKEN`
+1. On your machine, logged into Claude Code with your Max account:
+   `claude setup-token` → copy the token.
+2. Add it as a repo secret named `CLAUDE_CODE_OAUTH_TOKEN`
    (**Settings → Secrets and variables → Actions**).
-
 3. Merge to `main` — scheduled workflows only run from the default branch.
+4. Enable the site: **Settings → Pages → Deploy from a branch → `main` /
+   `/ (root)`**. The archive renders at `https://<user>.github.io/<repo>/`.
 
 ## Running on demand
 
-- **Actions tab → Weekly News Report → Run workflow**:
-  - `mode: weekly` — full Monday run (essay + deep dive)
-  - `mode: deep-dive-only` — just a deep dive; set `topic` to choose the
-    subject, or leave empty to let the agent pick.
-- **In any Claude Code session** in this repo:
-  - `/weekly-news` — generate the weekly issue
-  - `/deep-dive` or `/deep-dive <topic>` — generate a deep dive
-  - `/daily-scout` — capture today's signals
-
-  Interactive runs write files without committing — you decide.
+- **Actions tab → The Observer → Run workflow** with the mode you want.
+- In any Claude Code session: `/weekly-news`, `/deep-dive [topic]`,
+  `/the-quarter`, `/daily-scout`. Interactive runs write files without
+  committing — you decide.
 
 ## Layout
 
 ```
+MASTHEAD.md            # identity, desks, editorial charter
+index.md, _config.yml  # GitHub Pages site
 reports/
-  MEMORY.md            # editorial memory: threads, predictions + Brier scorecard, index
+  MEMORY.md            # threads, predictions + Brier scorecard, coverage index
   TASTE.md             # the reader's accumulated preferences
-  2026-W23.md          # weekly issues, one per ISO week
-  deep-dives/
-    2026-06-12-....md  # deep dives, dated
-signals/
-  2026-W24.md          # daily scout capture, one file per ISO week
+  2026-W23.md          # The Week, one per ISO week
+  deep-dives/          # dives and specials, dated
+  quarters/            # The Quarter, e.g. 2026-Q2.md
+signals/               # The Wire: daily capture, one file per ISO week
 ```
-
-Reports are also published as GitHub Issues:
-[weekly issues](../../issues?q=label%3Aweekly-news) ·
-[deep dives](../../issues?q=label%3Adeep-dive).

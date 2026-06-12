@@ -1,4 +1,4 @@
-name: Weekly News Report
+name: The Observer
 
 on:
   schedule:
@@ -7,11 +7,12 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "weekly = essay + deep dive; deep-dive-only = just a deep dive"
+        description: "weekly = essay + deep dive; deep-dive-only = just a deep dive; quarter = quarterly retrospective"
         type: choice
         options:
           - weekly
           - deep-dive-only
+          - quarter
         default: weekly
       topic:
         description: "Deep-dive topic (optional; agent picks if empty)"
@@ -54,7 +55,9 @@ jobs:
           MODE: ${{ github.event.inputs.mode || 'weekly' }}
           TOPIC: ${{ github.event.inputs.topic }}
         run: |
-          if [ "$MODE" = "deep-dive-only" ]; then
+          if [ "$MODE" = "quarter" ]; then
+            PROMPT="Run the-quarter skill (.claude/skills/the-quarter/SKILL.md): write The Observer's retrospective for the most recently completed calendar quarter to reports/quarters/ and update reports/MEMORY.md exactly as the skill instructs."
+          elif [ "$MODE" = "deep-dive-only" ]; then
             PROMPT="Run the deep-dive skill (.claude/skills/deep-dive/SKILL.md)"
             if [ -n "$TOPIC" ]; then
               PROMPT="$PROMPT with this topic: $TOPIC."
@@ -103,13 +106,15 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh label create weekly-news --color 1D76DB --description "Weekly news issues" 2>/dev/null || true
-          gh label create deep-dive --color 5319E7 --description "Deep dives" 2>/dev/null || true
+          gh label create weekly-news --color 1D76DB --description "The Week" 2>/dev/null || true
+          gh label create deep-dive --color 5319E7 --description "Deep dives & specials" 2>/dev/null || true
+          gh label create the-quarter --color 0E8A16 --description "Quarterly retrospectives" 2>/dev/null || true
           while IFS= read -r REPORT; do
             [ -z "$REPORT" ] && continue
             TITLE=$(grep -m1 '^# ' "$REPORT" | sed 's/^# //')
             case "$REPORT" in
               reports/deep-dives/*) LABEL=deep-dive; PREFIX="🔬" ;;
+              reports/quarters/*)   LABEL=the-quarter; PREFIX="📚" ;;
               *)                    LABEL=weekly-news; PREFIX="📰" ;;
             esac
             gh issue create \

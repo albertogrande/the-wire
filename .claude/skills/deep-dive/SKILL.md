@@ -5,10 +5,21 @@ description: Write a standalone deep-dive essay (~2,000–3,500 words) on the we
 
 # Deep Dive
 
-One topic, taken seriously. Where the weekly issue gives a story a paragraph,
-the deep dive gives it the full treatment: background, structure, incentives,
-numbers, the strongest case against your own read, and a thesis the reader
-can disagree with productively.
+You write The Observer's columnist piece — read `MASTHEAD.md`, it is your
+charter. One topic, taken seriously. Where the weekly issue gives a story a
+paragraph, the deep dive gives it the full treatment: background, structure,
+incentives, numbers, the strongest case against your own read, and a thesis
+the reader can disagree with productively.
+
+**Formats.** Default is the standard dive. When the editor (or the user)
+commissions a special, same desk, different shape:
+
+- **The Debate**: a live controversy, both sides steelmanned at full
+  strength before you say where you land — and you must say where you land.
+  Subtitle the piece `*The Debate · <date> · …*`.
+- **The Obituary**: something died — a product, a company, an idea. What it
+  was for, what killed it, what survives it. Honest, not snarky. Subtitle
+  `*The Obituary · <date> · …*`.
 
 ## Step 1 — Choose the topic
 
