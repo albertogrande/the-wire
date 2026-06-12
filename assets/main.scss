@@ -1,88 +1,140 @@
 ---
 ---
 
-// The Observer type spec (June 2026 research): Charter system serif,
-// 19px / 1.5, ~65 characters per line, #111 on #fff, black underlined links.
-// Overriding minima's defaults requires setting its variables before the import.
+// The Observer — "Terminal Wire" front page.
+// Charter serif for reading; system monospace for the masthead, ticker,
+// kickers and meta; one riso-blue accent. The page wears its machinery:
+// a live scorecard ticker sits under the nameplate on every page.
+// Minima's defaults are overridden by setting its variables before import.
 
 $base-font-family: Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
 $base-font-size:   19px;
-$base-line-height: 1.5;
-$text-color:       #111;
-$background-color: #fff;
-$brand-color:      #111;
-$content-width:    700px;
+$base-line-height: 1.6;
+$text-color:       #18181a;
+$background-color: #fcfcfb;
+$brand-color:      #18181a;
+$content-width:    760px;
 
 @import "minima";
 
-a {
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
-}
-a:hover { text-decoration-thickness: 2px; }
+$mono:   ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+$accent: #1f5fa5;
+$muted:  #6b6b66;
+$rule:   #e3e1d9;
 
-// Masthead: centered title over a double rule, no nav.
-.site-header {
-  border-top: none;
-  border-bottom: 3px double $text-color;
-  min-height: 0;
-  padding: 26px 0 14px;
-}
-.site-title, .site-title:visited {
-  float: none;
-  display: block;
-  text-align: center;
-  color: $text-color;
-  font-size: 34px;
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: 0;
-  text-decoration: none;
-}
+// We render our own masthead in _includes/header.html — drop minima's nav.
 .site-nav { display: none; }
 
-// Homepage: tagline centered, sections as quiet kickers, entries as meta + title.
-.page-heading { display: none; }
-.home > p:first-child {
-  text-align: center;
-  color: #555;
-  font-size: 16px;
+// ---- Masthead -------------------------------------------------------------
+.masthead { border-bottom: 1px solid $text-color; }
+.masthead-inner {
+  max-width: $content-width;
+  margin: 0 auto;
+  padding: 22px 18px 14px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px 18px;
 }
-.home h2 {
-  font-size: 14px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #555;
-  margin-top: 42px;
-}
-.entry { margin-bottom: 18px; }
-.entry-meta { font-size: 14px; color: #555; }
-a.entry-title {
-  font-size: 20px;
+.nameplate {
+  font-family: $mono;
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: 0.06em;
+  color: $text-color;
   text-decoration: none;
 }
-a.entry-title:hover { text-decoration: underline; text-decoration-thickness: 1px; }
+.masthead-tag { font-family: $mono; font-size: 12px; color: $muted; }
 
-// Article pages: restrained title, the opening italic line reads as a dek.
-h1, h2, h3 { line-height: 1.2; }
-.post-title { font-size: 30px; font-weight: 700; line-height: 1.2; }
+// ---- Scorecard ticker -----------------------------------------------------
+.ticker { background: $text-color; color: #f4f4f0; }
+.ticker-inner {
+  max-width: $content-width;
+  margin: 0 auto;
+  padding: 8px 18px;
+  display: flex;
+  gap: 22px;
+  font-family: $mono;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.ticker-item .k { color: #8fb6e0; margin-right: 5px; }
+.ticker-item .muted { color: #9a978f; }
+
+// ---- Front page -----------------------------------------------------------
+.frontpage {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr;
+  border: 1px solid $accent;
+  margin: 30px 0 8px;
+}
+.frontpage .lead { padding: 18px 20px; border-right: 1px solid $rule; }
+.frontpage .wire { padding: 18px 20px; }
+.kicker {
+  font-family: $mono;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $accent;
+  margin-bottom: 10px;
+}
+.lead-meta { font-family: $mono; font-size: 12px; color: $muted; margin-bottom: 6px; }
+.lead-title {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.14;
+  color: $text-color;
+  text-decoration: none;
+}
+.lead-title:hover { text-decoration: underline; }
+.wire-item {
+  display: block;
+  color: $text-color;
+  text-decoration: none;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid $rule;
+}
+.wire-item:last-child { border-bottom: 0; margin-bottom: 0; padding-bottom: 0; }
+.wire-date { display: block; font-family: $mono; font-size: 11px; color: $muted; }
+.wire-title { font-size: 15px; line-height: 1.2; }
+.wire-item:hover .wire-title { text-decoration: underline; }
+
+@media (max-width: 600px) {
+  .frontpage { grid-template-columns: 1fr; }
+  .frontpage .lead { border-right: 0; border-bottom: 1px solid $rule; }
+}
+
+// ---- Archive sections -----------------------------------------------------
+.home h2 {
+  font-family: $mono;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: $muted;
+  margin: 40px 0 14px;
+  border-bottom: 1px solid $rule;
+  padding-bottom: 6px;
+}
+.entry { margin-bottom: 14px; }
+.entry-meta { font-family: $mono; font-size: 12px; color: $muted; }
+.entry-title { font-size: 19px; color: $text-color; text-decoration: none; }
+.entry-title:hover { text-decoration: underline; }
+
+// ---- Article pages --------------------------------------------------------
+.post-title { font-size: 31px; font-weight: 700; line-height: 1.16; }
+.post-content { font-size: 19px; line-height: 1.6; }
 .post-content > p:first-child > em { color: #444; font-size: 18px; }
-
+.post-content a, .page-content a { color: $accent; text-underline-offset: 3px; }
 blockquote {
+  border-left: 2px solid $accent;
   color: #333;
-  border-left: 2px solid #ddd;
   font-style: normal;
   font-size: 18px;
-  letter-spacing: normal;
 }
-pre, code { background-color: #f7f7f7; border-color: #e2e2e2; }
-.footnotes {
-  margin-top: 42px;
-  border-top: 1px solid #ddd;
-  padding-top: 10px;
-  font-size: 15px;
-  color: #555;
-}
-
-.site-footer { border-top: 1px solid #e2e2e2; }
+pre, code { background-color: #f4f4f0; border-color: #e2e2dc; }
+.footnotes { margin-top: 42px; border-top: 1px solid $rule; padding-top: 10px; font-size: 15px; color: $muted; }
+.site-footer { border-top: 1px solid $rule; font-family: $mono; font-size: 12px; color: $muted; }
