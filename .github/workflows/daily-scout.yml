@@ -30,6 +30,19 @@ jobs:
           claude_args: >-
             --allowedTools "WebSearch,WebFetch,Read,Write,Edit,Glob,Grep,Bash(date *),Bash(ls *),Bash(mkdir *)"
 
+      # claude-code-action reports success even when Claude errors out on
+      # turn one (is_error: true in the result JSON), so assert the scout's
+      # contract instead: the skill always writes a "## <today>" heading,
+      # even on a quiet day.
+      - name: Verify the scout actually ran
+        run: |
+          TODAY=$(date -u +%Y-%m-%d)
+          WEEK_FILE="signals/$(date -u +%G-W%V).md"
+          if ! grep -q "^## $TODAY" "$WEEK_FILE" 2>/dev/null; then
+            echo "::error::No '## $TODAY' section in $WEEK_FILE — Claude wrote nothing (silent auth/API failure?). Check the Capture step transcript."
+            exit 1
+          fi
+
       - name: Commit signals
         run: |
           if [ -d signals ]; then git add signals/; fi
