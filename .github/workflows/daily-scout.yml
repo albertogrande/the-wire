@@ -2,8 +2,10 @@ name: Daily Scout
 
 on:
   schedule:
-    # Daily 18:00 UTC — capture the day's signals while they're findable
-    - cron: "0 18 * * *"
+    # Daily 22:00 UTC — Madrid sleep window (00:00 CEST / 23:00 CET), so CI
+    # never competes with interactive use for the Max quota; still captures
+    # the full day's signals.
+    - cron: "0 22 * * *"
   workflow_dispatch: {}
 
 permissions:
@@ -27,7 +29,11 @@ jobs:
             to the current week's signals/ file exactly as the skill
             instructs. Write the file only — do not commit or push.
           show_full_output: true
+          # Quota policy: the scout is a capture job, not the product —
+          # Sonnet at ~0.6x Opus token cost; max-turns caps runaway loops.
           claude_args: >-
+            --model claude-sonnet-4-6
+            --max-turns 30
             --allowedTools "WebSearch,WebFetch,Read,Write,Edit,Glob,Grep,Bash(date *),Bash(ls *),Bash(mkdir *)"
 
       # claude-code-action reports success even when Claude errors out on
