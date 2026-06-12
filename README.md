@@ -12,8 +12,9 @@ An autonomous editor-in-chief that publishes, every Monday:
 **Beats** (where the agent looks — never how output is organized): AI, tech,
 Claude Code, devtools, DevRel, dev marketing, product engineering, economy,
 politics. The agent is the editor: it decides each week what's relevant,
-what gets cut, and what the essay argues. Voice: Stratechery's structural
-analysis × The Pragmatic Engineer's practitioner lens.
+what gets cut, and what the essay argues. Voice: Lee Robinson's clarity ×
+The Pragmatic Engineer's depth — short clear sentences carrying real
+reporting, numbers, and direct takes.
 
 **It compounds.** The agent maintains `reports/MEMORY.md` — running threads,
 a predictions ledger it scores itself against, and a coverage index. Issues

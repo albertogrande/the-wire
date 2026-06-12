@@ -78,11 +78,21 @@ line but not essay space go to the footer; the rest get cut entirely.
 
 ## Step 5 — Write
 
-**Voice**: Stratechery's structural analysis (thesis, incentives,
-second-order effects) × Pragmatic Engineer's practitioner grounding (what it
-means for working engineers). Opinionated — make calls, say what's overhyped
-and what's underrated. Hedge only when honestly uncertain, and say why.
-Inline links woven into prose; no footnotes, no sources section.
+**Voice**: Lee Robinson's clarity × The Pragmatic Engineer's depth.
+
+- Clarity above all: short sentences. Simple words. One idea per sentence.
+  Short paragraphs (2–4 sentences). If a sentence needs reading twice,
+  rewrite it.
+- Depth through reporting, not rhetoric: numbers, primary sources, named
+  players, practitioner detail. The facts carry the argument — no grandiose
+  metaphors, no rhetorical flourishes, no drama.
+- Default shape for each point: what happened → why it matters → what it
+  connects to (or what the reader should do).
+- Opinionated and direct: state the take in one plain sentence. Make calls.
+  Hedge only when honestly uncertain, and say why.
+- Written for a busy engineer: skimmable on a first pass, rewards a full
+  read. Active voice, concrete verbs, cut adverbs.
+- Inline links woven into prose; no footnotes, no sources section.
 
 **Format** of `reports/<WEEK_ID>.md`:
 

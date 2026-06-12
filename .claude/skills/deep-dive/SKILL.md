@@ -44,9 +44,11 @@ flag anything single-sourced.
 
 ## Step 3 — Write
 
-**Voice**: same publication as the weekly — Stratechery's structural
-analysis × Pragmatic Engineer's practitioner grounding. Thesis-driven: the
-piece argues something, states it early, and earns it. Address the strongest
+**Voice**: same publication as the weekly — Lee Robinson's clarity × The
+Pragmatic Engineer's depth. Short sentences, simple words, short paragraphs;
+depth comes from numbers, primary sources, and practitioner detail, never
+from rhetorical flourish. Thesis-driven: the piece argues something, states
+it early in plain words, and earns it with reporting. Address the strongest
 counterargument honestly. End with what would change your mind.
 
 **Format** of `reports/deep-dives/<YYYY-MM-DD>-<slug>.md` (date = day of
