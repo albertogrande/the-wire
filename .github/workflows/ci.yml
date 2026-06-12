@@ -1,0 +1,50 @@
+name: CI
+
+# Guards the live site and the public scorecard. Nothing here calls Claude or
+# touches quota — it's a plain Jekyll build, a link check, and a Python script.
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  site:
+    name: Build site & check links
+    runs-on: ubuntu-latest
+    # A non-UTF-8 locale makes html-proofer fail to parse the pages and then
+    # "pass" while checking zero links — force UTF-8 so the check is real.
+    env:
+      LANG: C.UTF-8
+      LC_ALL: C.UTF-8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true
+      - name: Build the site
+        run: bundle exec jekyll build --trace
+      - name: Check internal links
+        # External links are flaky and rate-limited; the real risk is a dead
+        # relative cross-link between issues, which is internal. --swap-urls
+        # strips the /the-observer baseurl so links resolve to the _site root.
+        run: |
+          bundle exec htmlproofer ./_site \
+            --disable-external \
+            --allow-hash-href \
+            --swap-urls "^/the-observer/:/"
+
+  scorecard:
+    name: Scorecard integrity
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Assert scorecard.yml matches the ledger
+        run: python3 scripts/check_scorecard.py

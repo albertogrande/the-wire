@@ -99,6 +99,7 @@ If you build one, a ⭐ helps the next reader find the newsroom.
 ```
 MASTHEAD.md            # identity, desks, editorial charter
 index.md, _config.yml  # GitHub Pages site
+feed.xml               # Atom feed over weeklies + deep dives
 reports/
   MEMORY.md            # threads, predictions + Brier scorecard, coverage index
   TASTE.md             # the reader's accumulated preferences
@@ -106,7 +107,16 @@ reports/
   deep-dives/          # dives and specials, dated
   quarters/            # The Quarter, e.g. 2026-Q2.md
 signals/               # The Wire: daily capture, one file per ISO week
+usage/                 # ledger.csv — token/cost numbers from every CI run
+scripts/               # ledger parser, scorecard check, due-prediction watch
+_data/scorecard.yml    # the masthead ticker's source, mirrored from MEMORY.md
 ```
+
+CI keeps the publication honest without touching quota: every PR builds the
+site and link-checks it (`.github/workflows/ci.yml`), a script asserts the
+public scorecard matches the ledger (`scripts/check_scorecard.py`), and a
+daily watch opens an issue when a prediction's due date passes
+(`.github/workflows/prediction-watch.yml`).
 
 ## License
 

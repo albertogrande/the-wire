@@ -46,6 +46,8 @@ $rule:   #e3e1d9;
   text-decoration: none;
 }
 .masthead-tag { font-family: $mono; font-size: 12px; color: $muted; }
+.masthead-feed { color: $accent; text-decoration: none; }
+.masthead-feed:hover { text-decoration: underline; }
 
 // ---- Scorecard ticker -----------------------------------------------------
 .ticker { background: $text-color; color: #f4f4f0; }

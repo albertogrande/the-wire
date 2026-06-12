@@ -35,6 +35,11 @@ exclude:
   - signals
   - .claude
   - .github
+  - scripts
+  - usage
+  - Gemfile
+  - Gemfile.lock
+  - vendor
 
 # Minima: no social noise, just the archive.
 show_excerpts: false

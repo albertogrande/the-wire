@@ -1,0 +1,12 @@
+# Jekyll build output and caches
+_site/
+.jekyll-cache/
+.jekyll-metadata
+
+# Bundler — CI resolves fresh against the github-pages gem; no need to pin.
+vendor/
+Gemfile.lock
+
+# Python
+__pycache__/
+*.pyc
