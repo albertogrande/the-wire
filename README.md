@@ -1,13 +1,37 @@
-# The Observer
+<p align="center">
+  <a href="https://albertogrande.github.io/the-observer/"><img src="assets/masthead.svg" alt="The Observer — an agentic journal-magazine with a circulation of one, researched, written, edited, and fact-checked by AI agents" width="100%"></a>
+</p>
 
-*An agentic journal-magazine with a circulation of one.*
+<p align="center">
+  <a href="https://github.com/albertogrande/the-observer/actions/workflows/weekly-news.yml"><img src="https://github.com/albertogrande/the-observer/actions/workflows/weekly-news.yml/badge.svg" alt="The Week — weekly issue workflow"></a>
+  <a href="https://github.com/albertogrande/the-observer/actions/workflows/daily-scout.yml"><img src="https://github.com/albertogrande/the-observer/actions/workflows/daily-scout.yml/badge.svg" alt="The Wire — daily scout workflow"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT"></a>
+  <a href="https://claude.com/claude-code"><img src="https://img.shields.io/badge/built_with-Claude_Code-d97757.svg" alt="Built with Claude Code"></a>
+</p>
 
-The Observer is written, edited, and fact-checked by AI agents for exactly
-one reader, covering his beats: AI, tech, Claude Code, devtools, DevRel,
-dev marketing, product engineering, economy, politics. It runs entirely on
-a **Claude Max subscription** via Claude Code — no API credits.
+**The Observer** is an autonomous AI newsroom with a circulation of one.
+Every week, [Claude Code](https://claude.com/claude-code) agents research
+nine beats — AI, tech, Claude Code, devtools, DevRel, dev marketing,
+product engineering, economy, politics — decide what mattered, write and
+edit one opinionated essay, fact-check it, publish it to GitHub Pages,
+answer reader comments, and grade their own past predictions. It runs
+entirely on a **Claude Max subscription** via GitHub Actions — no API
+credits, no human in the byline.
+
+**📰 Read the live archive →
+[albertogrande.github.io/the-observer](https://albertogrande.github.io/the-observer/)**
 
 Full identity, desks, and editorial charter: [MASTHEAD.md](MASTHEAD.md).
+
+## Why it's interesting
+
+Most AI news agents summarize headlines. The Observer is built to
+**compound**: `reports/MEMORY.md` holds running threads, a predictions
+ledger with confidences, and a **Brier scorecard** — the publication
+grades its own calls in public. `reports/TASTE.md` accumulates what the
+reader actually wants. Comments left on report issues get answered in the
+next Mailbag. Every issue reads the archive before it writes, so the
+magazine gets sharper the longer it runs.
 
 ## What it publishes
 
@@ -23,13 +47,10 @@ Full identity, desks, and editorial charter: [MASTHEAD.md](MASTHEAD.md).
 - **The Wire** (daily, internal) — the scout's raw signals in `signals/`,
   capturing news and HN/Reddit/X discussions while they're findable.
 
-**It compounds.** `reports/MEMORY.md` holds running threads, a predictions
-ledger with confidences and a running **Brier scorecard** (the publication
-grades its own calls in public), and a coverage index. `reports/TASTE.md`
-accumulates the reader's preferences. Comments on report issues get
-answered in the next Mailbag.
+## How the newsroom works
 
-## How it works
+Each desk is a [Claude Code skill](.claude/skills/) — a playbook the agent
+follows end to end — scheduled by GitHub Actions:
 
 - `.claude/skills/weekly-news/` — The Week's playbook: load memory, taste,
   signals, and reader comments → research fan-out (discussions are
@@ -48,15 +69,23 @@ answered in the next Mailbag.
 - `_config.yml` + `index.md` — the magazine's face: a GitHub Pages site
   rendering the archive (masthead, The Week, dives, quarters, newsroom).
 
-## One-time setup
+## Run your own Observer
 
-1. On your machine, logged into Claude Code with your Max account:
+The newsroom is yours to fork: click **Use this template** (or fork), and
+you have an autonomous publication covering *your* beats.
+
+1. Edit the beats and charter in [MASTHEAD.md](MASTHEAD.md) and the skills
+   under `.claude/skills/`; empty out `reports/` and `signals/` — that's
+   this Observer's archive, yours starts fresh.
+2. On your machine, logged into Claude Code with your Max account:
    `claude setup-token` → copy the token.
-2. Add it as a repo secret named `CLAUDE_CODE_OAUTH_TOKEN`
+3. Add it as a repo secret named `CLAUDE_CODE_OAUTH_TOKEN`
    (**Settings → Secrets and variables → Actions**).
-3. Merge to `main` — scheduled workflows only run from the default branch.
-4. Enable the site: **Settings → Pages → Deploy from a branch → `main` /
+4. Merge to `main` — scheduled workflows only run from the default branch.
+5. Enable the site: **Settings → Pages → Deploy from a branch → `main` /
    `/ (root)`**. The archive renders at `https://<user>.github.io/<repo>/`.
+
+If you build one, a ⭐ helps the next reader find the newsroom.
 
 ## Running on demand
 
@@ -78,3 +107,10 @@ reports/
   quarters/            # The Quarter, e.g. 2026-Q2.md
 signals/               # The Wire: daily capture, one file per ISO week
 ```
+
+## License
+
+Code — the skills, workflows, and site config — is [MIT](LICENSE). The
+written content under `reports/` and `signals/` is
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/): quote the
+magazine, link the issue.

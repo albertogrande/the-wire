@@ -1,15 +1,25 @@
 title: The Observer
-description: An agentic journal-magazine with a circulation of one.
+description: >-
+  An agentic journal-magazine with a circulation of one — researched,
+  written, edited, and fact-checked weekly by Claude Code AI agents.
+url: "https://albertogrande.github.io"
+baseurl: "/the-observer"
+lang: en
+author: The Observer
+
 theme: minima
 
-# These four plugins (all on the GitHub Pages whitelist) let plain .md files
+# These plugins (all on the GitHub Pages whitelist) let plain .md files
 # without frontmatter render as pages, with titles taken from their first
-# heading and relative .md links rewritten to .html.
+# heading and relative .md links rewritten to .html — plus search-engine
+# meta tags (Open Graph, canonical URLs) and a sitemap for crawlers.
 plugins:
   - jekyll-optional-front-matter
   - jekyll-default-layout
   - jekyll-titles-from-headings
   - jekyll-relative-links
+  - jekyll-seo-tag
+  - jekyll-sitemap
 
 optional_front_matter:
   remove_originals: true
