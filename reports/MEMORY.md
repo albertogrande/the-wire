@@ -6,18 +6,21 @@ preserves everything).
 
 ## Running threads
 
-- **AI goes public / the repricing** — Anthropic filed S-1 (Jun 1, ~$965B,
+Each thread carries a momentum tag (`↑` gaining / `→` steady / `↓`
+stalling) and, when evidence cuts against it, a `Tension:` note inline.
+
+- **AI goes public / the repricing** `↑` — Anthropic filed S-1 (Jun 1, ~$965B,
   ~$47B run-rate); SpaceX–xAI roadshow; OpenAI S-1 expected/filed ~Jun 8.
   Market now punishes deceleration (Broadcom -15% on unraised guidance;
   Nasdaq -4% Jun 5). AI trade = macro variable. → [2026-W23](./2026-W23.md)
-- **The AI coding subsidy died** — Copilot token billing live Jun 1 (10–50x
+- **The AI coding subsidy died** `↑` — Copilot token billing live Jun 1 (10–50x
   bills, Opus multiplier 7.5x→27x, paid code review); Cursor seat split;
   Anthropic Agent SDK credit split lands Jun 15. Flat-rate AI tooling is
   ending industry-wide. Dive thesis: meter = boundary, not business; end
   state is vertical integration ("unlimited, on our models").
   → [2026-W23](./2026-W23.md),
   [dive 2026-06-11](./deep-dives/2026-06-11-ai-coding-honest-pricing.md)
-- **Supply chain vs. AI throughput** — Miasma (32 Red Hat npm pkgs, valid
+- **Supply chain vs. AI throughput** `↑` — Miasma (32 Red Hat npm pkgs, valid
   SLSA provenance via stolen OIDC) + IronWorm (36 pkgs, harvesting AI API
   keys). Provenance + install-script scanning both defeated. Review/trust
   infra is the bottleneck while AI code generation explodes (Anthropic: 80%
@@ -26,13 +29,13 @@ preserves everything).
   remains unfixed (npm v12 closes install scripts instead).
   → [2026-W23](./2026-W23.md),
   [dive 2026-06-12](./deep-dives/2026-06-12-trust-stack-human-speed.md)
-- **Who pays for AI's power** — PJM uncapped capacity auction imminent;
+- **Who pays for AI's power** `→` — PJM uncapped capacity auction imminent;
   dueling studies on data centers vs. household bills; 1GW
   bring-your-own-power deals (Vantage–Liberty). Sleeper populist-politics
   story. → [2026-W23](./2026-W23.md)
-- **Apple buys its frontier layer** — ~$1B/yr Gemini-for-Siri deal reported
+- **Apple buys its frontier layer** `→` — ~$1B/yr Gemini-for-Siri deal reported
   pre-WWDC; keynote Jun 8 (next window). → [2026-W23](./2026-W23.md)
-- **Washington vs. the labs** — bipartisan preemption draft (Obernolte–
+- **Washington vs. the labs** `→` — bipartisan preemption draft (Obernolte–
   Trahan, Jun 4: 3-yr state freeze for transparency); export controls go
   extraterritorial; DeepSeek's state-backed $7.4B raise as Beijing's answer;
   Trump floated govt equity stakes (thinly sourced). → [2026-W23](./2026-W23.md)

@@ -182,8 +182,17 @@ once a month, and only when the standard dive would be the weaker piece.
 ## Step 7 — Update memory
 
 Update `reports/MEMORY.md`:
-- Advance/add/retire **running threads** (keep 5–10 alive; delete dead ones —
-  git history preserves them).
+- Run the **thread maintenance pass** over running threads (keep 5–10 alive):
+  - **Triage** — any story or signal from this week that attaches to no
+    existing thread is a candidate new thread. Promote it or consciously
+    drop it; never leave it orphaned.
+  - **Momentum** — tag each thread with this week's evidence direction:
+    `↑` gaining, `→` steady, `↓` stalling.
+  - **Staleness** — a thread with no new evidence for 3 issues gets retired
+    (delete it; git history preserves it) or explicitly justified.
+  - **Tension** — log evidence *against* a thread inline, not just evidence
+    for it. A thread accumulating tension is either about to break (that's
+    a story) or wrong (that's the scorecard). Both matter.
 - Add this issue's **prediction** to the ledger with its confidence. Mark
   settled ones RIGHT/WRONG and compute each one's Brier score:
   `(confidence − outcome)²` with outcome 1 if it happened, 0 if not (e.g.
