@@ -2,8 +2,10 @@ name: The Observer
 
 on:
   schedule:
-    # Monday 06:00 UTC — covers the just-completed Monday→Sunday week
-    - cron: "0 6 * * 1"
+    # Monday 04:00 UTC — overnight in Madrid (06:00 CEST / 05:00 CET), on a
+    # fresh quota window; the issue is ready at breakfast. Covers the
+    # just-completed Monday→Sunday week.
+    - cron: "0 4 * * 1"
   workflow_dispatch:
     inputs:
       mode:
@@ -78,7 +80,12 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           prompt: ${{ steps.prompt.outputs.prompt }}
           show_full_output: true
+          # Quota policy: the weekly IS the product — Opus 4.8 (not Fable,
+          # which is 2x the cost); max-turns caps runaway loops while leaving
+          # room for the research fan-out + two pieces.
           claude_args: >-
+            --model claude-opus-4-8
+            --max-turns 200
             --allowedTools "WebSearch,WebFetch,Read,Write,Edit,Glob,Grep,Bash(date *),Bash(ls *),Bash(mkdir *)"
 
       - name: Commit and push
