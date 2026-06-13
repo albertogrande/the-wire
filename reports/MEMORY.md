@@ -72,6 +72,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-06-12 (autonomy) | A major cloud or agent platform ships an enforced hard per-task/per-agent spend ceiling (not a budget alert) that the agent cannot cross | 45% | by 2027-Q2 | OPEN |
 | Dive 2026-06-12 (autonomy) | "Agent liability" insurance appears OR a cloud publishes a runaway-agent forgiveness policy, mandating spend caps/observability as a condition | 55% | by 2027-Q2 | OPEN |
 | Dive 2026-06-12 (channel) | The top frontier-vs-best-open-model spread on a major agentic benchmark (e.g. SWE-bench/MCPMark/Terminal-Bench) stays inside ~5 pts — i.e. no lab reopens a durable capability gap, confirming the channel (not the model) is the moat | 70% | by 2027-Q1 | OPEN |
+| Dive 2026-06-13 (benchmark) | A contamination-resistant benchmark (SWE-bench Pro / SWE-rebench or successor) does NOT reproduce SWE-bench Verified's top-5 model ordering — decontamination changes rank, not just absolute scores | 65% | by 2027-Q1 | OPEN |
 
 **Scorecard: 0 settled · record 0–0 · mean Brier —**
 
@@ -95,3 +96,14 @@ Lower is better; 0.25 = coin-flip guessing.
   (Kimi K2.7 > Opus on MCPMark; OpenCode 8M MAU), so the moat moves to
   distribution: Google kills Gemini CLI, OpenAI buys Ona + rents Oracle rail,
   Anthropic's Claude Corps; four off-ramps (terminal/environment/rail/install)
+- 2026-06-13 — "The Benchmark Score Is Not the Capability" (Okafor) — coding
+  benchmarks measure harness+dataset+memorization, not your codebase; SWE-bench
+  Verified leakage (OpenAI disowns it: 59.4% of audited failures flawed; 32.67%
+  solution leakage; UTBoost reshuffles 24.4% of rank), Pro/rebench strip ~2/3
+  of score; Fable 5 peg (59.8% func / 19.0% sec, 38/200 cheats). Build a
+  private post-cutoff pass@1 eval. Format: what-every-engineer-should-know
+- 2026-06-13 — "Fan-Out Has a Token Bill, and You Sign It" (Vance) — nested
+  sub-agents (Claude Code v2.1.172, 5-deep) cost a fresh context window each;
+  Anthropic's 4×(agent)/15×(multi-agent) multipliers; 6,100→420-token
+  read-vs-return mechanic. Fan out for parallel breadth + small returns; stay
+  single-context for sequential/large-return work. Format: practical-guide

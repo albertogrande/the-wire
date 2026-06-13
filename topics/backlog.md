@@ -27,8 +27,6 @@ overtakes becomes a `news-to-framework` piece instead — that's fine.
   outputs (Analyst)
 - [x-vs-y] Open weights vs closed APIs: the real total cost once you price
   inference, ops, and eval (Analyst)
-- [what-every-engineer-should-know] What a benchmark number actually measures —
-  and how to read a model card without being fooled (Contrarian)
 - [how-it-works] Mixture-of-experts, explained from the routing up (Analyst)
 - [reference] What "agent" actually means in 2026, stripped of marketing (Contrarian)
 
@@ -36,8 +34,6 @@ overtakes becomes a `news-to-framework` piece instead — that's fine.
 
 - [how-it-works] How Claude Code's context compaction works, and when it costs
   you (Builder)
-- [practical-guide] Designing a subagent fan-out that doesn't blow your token
-  budget (Builder)
 - [how-it-works] Git worktrees under an agent: why isolation beats a shared
   checkout (Builder)
 - [architecture] The anatomy of an MCP server: transport, tool schemas, and
@@ -97,4 +93,9 @@ overtakes becomes a `news-to-framework` piece instead — that's fine.
 
 ## Used
 
-_(none yet — move topics here with `— YYYY-MM-DD, reports/deep-dives/<file>`)_
+- [what-every-engineer-should-know] What a benchmark number actually measures —
+  and how to read a model card without being fooled (Contrarian) — 2026-06-13,
+  reports/deep-dives/2026-06-13-reading-a-coding-benchmark.md
+- [practical-guide] Designing a subagent fan-out that doesn't blow your token
+  budget (Builder) — 2026-06-13,
+  reports/deep-dives/2026-06-13-subagent-fan-out-budget.md
