@@ -37,14 +37,14 @@ const s = scorecard;
       {
         predictions.map((p) => (
           <tr id={p.id}>
-            <td class="led-made">
+            <td class="led-made" data-label="Made">
               {p.made_link ? <a href={withBase(p.made_link)}>{p.made}</a> : p.made}
             </td>
-            <td class="led-text">{p.text}</td>
-            <td class="num">{p.confidence}%</td>
-            <td class="led-due">{p.due}</td>
-            <td><PredictionChip status={p.status} /></td>
-            <td class="num">{typeof p.brier === 'number' ? p.brier : <span class="muted-line">—</span>}</td>
+            <td class="led-text" data-label="Prediction">{p.text}</td>
+            <td class="num" data-label="Conf.">{p.confidence}%</td>
+            <td class="led-due" data-label="Due">{p.due}</td>
+            <td data-label="Status"><PredictionChip status={p.status} /></td>
+            <td class="num" data-label="Brier">{typeof p.brier === 'number' ? p.brier : <span class="muted-line">—</span>}</td>
           </tr>
         ))
       }

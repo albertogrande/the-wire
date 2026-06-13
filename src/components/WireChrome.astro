@@ -22,15 +22,16 @@ const here = Astro.url.pathname.replace(/\/$/, '') || '/';
 const isCurrent = (url: string) => (withBase(url).replace(/\/$/, '') || '/') === here;
 ---
 <div class="wire-chrome" style={`max-width:${max};margin:0 auto;`}>
-  <header style="display:flex;align-items:center;justify-content:space-between;padding:16px 26px 14px;border-bottom:1px solid var(--rule);">
-    <a href={withBase('/')} style="font-family:var(--font-mono);font-weight:700;font-size:23px;letter-spacing:.01em;color:var(--fg);text-decoration:none;">
+  <header class="wire-head">
+    <a href={withBase('/')} class="wire-nameplate">
       <span class="wf-prompt">$</span> the&nbsp;wire<span class="wf-cursor" aria-hidden="true">▌</span>
     </a>
-    <nav aria-label="Primary" style="font-family:var(--font-mono);font-size:13px;display:flex;gap:20px;align-items:center;color:var(--muted);">
+    <nav class="wire-nav" aria-label="Primary">
       {
         nav.map((n) => (
           <a
             href={withBase(n.url)}
+            class="wire-nav-link"
             aria-current={isCurrent(n.url) ? 'page' : undefined}
             style={`text-decoration:${isCurrent(n.url) ? 'underline' : 'none'};text-decoration-color:var(--accent);text-underline-offset:5px;color:${isCurrent(n.url) ? 'var(--fg)' : 'var(--muted)'};`}
           >
@@ -38,12 +39,11 @@ const isCurrent = (url: string) => (withBase(url).replace(/\/$/, '') || '/') ===
           </a>
         ))
       }
-      <button id="theme-toggle" type="button" aria-label="Toggle light or dark theme" aria-pressed="false"
-        style="font-family:var(--font-mono);font-size:13px;border:1px solid var(--rule-strong);border-radius:4px;padding:3px 9px;color:var(--muted);background:transparent;cursor:pointer;">◐ theme</button>
+      <button id="theme-toggle" class="wire-theme-toggle" type="button" aria-label="Toggle light or dark theme" aria-pressed="false">◐ theme</button>
     </nav>
   </header>
 
-  <div class="wf-bar" style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:9px 26px;font-size:12.5px;letter-spacing:.02em;">
+  <div class="wf-bar wire-strip">
     <span class="dim">VOL. I · EST. 2026 · CIRCULATION: ONE</span>
     <span class="sep">·</span>
     <span><span class="k">brier</span> {s.meanBrier !== null ? s.meanBrier.toFixed(2) : <span class="dim">—</span>}</span>

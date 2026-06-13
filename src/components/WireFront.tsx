@@ -107,8 +107,8 @@ export default function WireFront({ wire }: { wire: WireData }) {
 
   return (
     <div className="wire wire-front">
-      <div style={{ padding: '28px 26px 30px', display: 'flex', flexDirection: 'column', gap: 28, flex: 1 }}>
-        <div className="wf-cols" style={{ display: 'grid', gridTemplateColumns: '1.85fr 1fr', gap: 24, alignItems: 'start' }}>
+      <div className="wf-body">
+        <div className="wf-cols">
           <div style={{ display: 'flex', flexDirection: 'column', gap: 30 }}>
             <Field legend="█ THE WEEK" style={fieldBg}
               right={<span style={{ display: 'inline-flex', gap: 5 }}><Tab id="week">the week</Tab><Tab id="dive">latest dive</Tab></span>}>
@@ -117,7 +117,7 @@ export default function WireFront({ wire }: { wire: WireData }) {
                   <div className="wf-kicker" style={{ marginBottom: 12 }}>
                     <span className="wf-prompt">$</span> latest issue <span className="wf-kdot">░</span> № {wk.no} · Week {wk.weekNum} · {wk.weekId} <span className="wf-kdot">░</span> {wk.mins} min
                   </div>
-                  <a href={wk.href} className="wf-h-serif" style={{ fontSize: 36, marginBottom: 14, display: 'block', color: 'var(--fg)', textDecoration: 'none' }}>{wk.title}</a>
+                  <a href={wk.href} className="wf-h-serif wf-lead-h" style={{ marginBottom: 14, display: 'block', color: 'var(--fg)', textDecoration: 'none' }}>{wk.title}</a>
                   <p style={{ margin: 0, fontSize: 18, lineHeight: 1.5, color: 'var(--muted)', maxWidth: 640 }}>{wk.dek}</p>
                   <div style={{ ...mono, fontSize: 11.5, color: 'var(--faint)', marginTop: 16, letterSpacing: '.03em' }}>
                     {wk.weekRange} · published {wk.published} · unbylined house voice · <a href={wk.href} style={{ color: 'var(--accent-2)' }}>read →</a>
@@ -128,7 +128,7 @@ export default function WireFront({ wire }: { wire: WireData }) {
                   <div className="wf-kicker" style={{ marginBottom: 12 }}>
                     <span className="wf-prompt">$</span> deep dive <span className="wf-kdot">░</span> {dive0.date} <span className="wf-kdot">░</span> {dive0.desk}
                   </div>
-                  <a href={dive0.href} className="wf-h-serif" style={{ fontSize: 30, marginBottom: 12, display: 'block', color: 'var(--fg)', textDecoration: 'none' }}>{dive0.title}</a>
+                  <a href={dive0.href} className="wf-h-serif wf-lead-h wf-lead-h-sm" style={{ marginBottom: 12, display: 'block', color: 'var(--fg)', textDecoration: 'none' }}>{dive0.title}</a>
                   <p style={{ margin: 0, fontSize: 17, lineHeight: 1.5, color: 'var(--muted)', maxWidth: 640 }}>{dive0.dek}</p>
                   <div style={{ ...mono, fontSize: 11.5, color: 'var(--faint)', marginTop: 16, letterSpacing: '.03em' }}>
                     {dive0.author} · {dive0.mins} min · <a href={dive0.href} style={{ color: 'var(--accent-2)' }}>read →</a>
@@ -140,7 +140,7 @@ export default function WireFront({ wire }: { wire: WireData }) {
             <Field legend="DEEP DIVES & SPECIALS" right={String(wire.dives.length)} style={fieldBg}>
               <div>
                 {wire.dives.map((d, i) => (
-                  <div key={d.href} style={{ display: 'grid', gridTemplateColumns: '92px 1fr', gap: 14, padding: '12px 0', borderTop: i ? '1px solid var(--rule)' : 'none' }}>
+                  <div key={d.href} className="wf-dive-row" style={{ borderTop: i ? '1px solid var(--rule)' : 'none' }}>
                     <div style={{ ...mono, fontSize: 11.5, color: 'var(--faint)' }}>{d.date.slice(5)}</div>
                     <div>
                       <a href={d.href} className="wf-h-serif" style={{ fontSize: 19, lineHeight: 1.2, display: 'block', color: 'var(--fg)', textDecoration: 'none' }}>{d.title}</a>
@@ -217,7 +217,7 @@ export default function WireFront({ wire }: { wire: WireData }) {
           </div>
           <div>
             {feed.map((f, i) => (
-              <div key={i} style={{ display: 'grid', gridTemplateColumns: '62px 110px 1fr auto', gap: 12, alignItems: 'baseline', padding: '8px 0', borderTop: '1px solid var(--rule)' }}>
+              <div key={i} className="wf-feed-row">
                 <span style={{ ...mono, fontSize: 11.5, color: 'var(--faint)' }}>{f.date.slice(5)}</span>
                 <span><Chip kind="beat">{f.beat}</Chip></span>
                 {f.url
