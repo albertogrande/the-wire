@@ -169,6 +169,41 @@ a:hover { text-decoration-color: var(--accent); color: var(--accent-2); }
   font-size: 30px; line-height: 1.12; color: var(--fg); text-decoration: none; margin-top: 4px;
 }
 .lead-title:hover { color: var(--fg); text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 5px; }
+.lead-dek { font-family: var(--font-serif); font-size: 17px; line-height: 1.45; color: var(--muted); margin: 10px 0 0; max-width: var(--measure); }
+
+/* ---- streams: daily feed + on-demand ------------------------------------- */
+.band { margin: 0 0 40px; }
+.band-head { display: flex; align-items: baseline; gap: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); margin-bottom: 16px; }
+.band-head .kicker { padding: 0; border: 0; }
+.band-count { margin-left: auto; font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+.band-empty { font-family: var(--font-serif); font-size: 16px; line-height: 1.5; color: var(--muted); max-width: var(--measure); margin: 0; }
+
+/* pinned newest daily dive */
+.pin { display: block; background: var(--surface); border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: 4px; padding: 16px 18px; text-decoration: none; color: var(--fg); }
+.pin:hover { border-color: var(--rule-strong); border-left-color: var(--accent); }
+.pin-meta { font-family: var(--font-mono); font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+.pin-meta .kdot { color: var(--rule-strong); }
+.pin-title { font-family: var(--font-serif); font-weight: 700; font-size: 22px; line-height: 1.22; }
+.pin:hover .pin-title { text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 4px; }
+.pin-dek { font-family: var(--font-serif); font-size: 16px; line-height: 1.45; color: var(--muted); margin: 7px 0 0; }
+
+/* dated log of older daily dives */
+.dive-log { margin-top: 4px; }
+.dive-row { display: flex; align-items: baseline; gap: 10px; padding: 9px 2px; border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--fg); }
+.dive-row:last-child { border-bottom: 0; }
+.dive-date { font-family: var(--font-mono); font-size: 12px; color: var(--muted); min-width: 52px; white-space: nowrap; }
+.dive-row .kdot { color: var(--rule-strong); }
+.dive-row-title { font-family: var(--font-serif); font-size: 17px; line-height: 1.25; }
+.dive-row:hover .dive-row-title { text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; }
+
+/* on-demand card grid */
+.dive-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+.dive-card { display: flex; flex-direction: column; gap: 6px; background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; padding: 13px 15px; text-decoration: none; color: var(--fg); }
+.dive-card:hover { border-color: var(--rule-strong); }
+.dive-card-meta { font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+.dive-card-title { font-family: var(--font-serif); font-weight: 700; font-size: 17px; line-height: 1.24; }
+.dive-card:hover .dive-card-title { text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; }
+.dive-card-dek { font-family: var(--font-serif); font-size: 14px; line-height: 1.4; color: var(--muted); }
 
 .dash-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; margin: 0 0 44px; }
 .dash-col h2.kicker { display: flex; align-items: center; gap: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--rule); }
