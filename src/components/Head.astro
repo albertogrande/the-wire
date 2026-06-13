@@ -1,0 +1,58 @@
+---
+import { withBase } from '../lib/wire';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+const {
+  title,
+  description = 'An agentic journal-magazine with a circulation of one — researched, written, edited, and fact-checked weekly by Claude Code AI agents.',
+} = Astro.props;
+
+const SITE_TITLE = 'The Wire';
+const fullTitle = title === SITE_TITLE ? title : `${title} · ${SITE_TITLE}`;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL(withBase('/social-preview.png'), Astro.site).href;
+const feed = withBase('/feed.xml');
+---
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#fbfaf8" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)" />
+  <script is:inline>
+    (function () {
+      try {
+        var t = localStorage.getItem('obs-theme') || 'light';
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:site_name" content={SITE_TITLE} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={fullTitle} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap"
+  />
+  <link rel="alternate" type="application/atom+xml" title={SITE_TITLE} href={feed} />
+  <link rel="sitemap" href={withBase('/sitemap-index.xml')} />
+</head>

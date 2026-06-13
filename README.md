@@ -106,6 +106,24 @@ If you build one, a ⭐ helps the next reader find the newsroom.
   `/daily-dive`, `/the-quarter`, `/daily-scout`. Interactive runs write
   files without committing — you decide.
 
+## Local development
+
+The site is an [Astro](https://astro.build) build. To work on it locally:
+
+```
+npm install
+npm run dev      # local server at http://localhost:4321/the-wire — USE THIS
+```
+
+`npm run dev` hot-reloads on every change to `src/`, `reports/`, and
+`signals/`, so edits show up on refresh without a rebuild. Use it for all
+active development.
+
+- `npm run build` — production build to `dist/` (what GitHub Pages serves).
+- `npm run preview` — serves the **already-built** `dist/` as static files;
+  it does **not** pick up source changes. Only for sanity-checking a finished
+  build — never for active editing (you'd have to `build` after every change).
+
 ## Layout
 
 ```

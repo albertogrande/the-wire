@@ -1,0 +1,45 @@
+---
+import { getCollection, render } from 'astro:content';
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { deriveMeta } from '../../lib/wire';
+
+export async function getStaticPaths() {
+  const [weekly, dives, quarters, docs] = await Promise.all([
+    getCollection('weekly'),
+    getCollection('dives'),
+    getCollection('quarters'),
+    getCollection('docs'),
+  ]);
+  const all = [
+    ...weekly.map((entry) => ({ entry, path: entry.id, doc: false })),
+    ...dives.map((entry) => ({ entry, path: `deep-dives/${entry.id}`, doc: false })),
+    ...quarters.map((entry) => ({ entry, path: `quarters/${entry.id}`, doc: false })),
+    ...docs.map((entry) => ({ entry, path: entry.id, doc: true })),
+  ];
+  return all.map(({ entry, path, doc }) => ({ params: { path }, props: { entry, doc } }));
+}
+
+const { entry, doc } = Astro.props;
+const { Content } = await render(entry);
+const meta = doc ? null : deriveMeta(entry);
+const docTitle = doc ? (entry.body?.match(/^#\s+(.+?)\s*$/m)?.[1] ?? entry.id) : '';
+---
+{
+  doc ? (
+    <BaseLayout title={docTitle}>
+      <article class="article">
+        <header class="article-head">
+          <h1 class="article-title">{docTitle}</h1>
+        </header>
+        <div class="article-body prose">
+          <Content />
+        </div>
+      </article>
+    </BaseLayout>
+  ) : (
+    <ArticleLayout meta={meta!}>
+      <Content />
+    </ArticleLayout>
+  )
+}

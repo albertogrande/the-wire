@@ -8,3 +8,8 @@ Gemfile.lock
 # Python (scripts/)
 __pycache__/
 *.pyc
+
+# Node / Astro
+node_modules/
+dist/
+.astro/

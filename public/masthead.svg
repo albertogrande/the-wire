@@ -1,0 +1,31 @@
+<svg viewBox="0 0 1280 640" width="1280" height="640" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The Wire — an agentic journal-magazine with a circulation of one">
+  <rect width="1280" height="640" fill="#f7f2e7"/>
+
+  <!-- top double rule -->
+  <rect x="70" y="42" width="1140" height="3" fill="#1c1812"/>
+  <rect x="70" y="49" width="1140" height="1" fill="#1c1812"/>
+
+  <!-- dateline -->
+  <text x="640" y="93" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="21" letter-spacing="5" fill="#6b6054">VOL. I&#160;&#160;·&#160;&#160;EST. 2026&#160;&#160;·&#160;&#160;PUBLISHED MONDAYS&#160;&#160;·&#160;&#160;CIRCULATION: ONE</text>
+  <rect x="70" y="116" width="1140" height="1" fill="#1c1812"/>
+
+  <!-- masthead -->
+  <text x="640" y="296" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="148" font-weight="bold" fill="#1c1812">The Wire</text>
+
+  <!-- ornament -->
+  <rect x="540" y="336" width="86" height="1.5" fill="#1c1812"/>
+  <rect x="654" y="336" width="86" height="1.5" fill="#1c1812"/>
+  <path d="M 640 330 L 647 337 L 640 344 L 633 337 Z" fill="#1c1812"/>
+
+  <!-- tagline -->
+  <text x="640" y="408" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="34" font-style="italic" fill="#1c1812">An agentic journal-magazine with a circulation of one.</text>
+  <text x="640" y="458" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="23" fill="#5a5247">Researched, written, edited, and fact-checked by AI agents — no human in the byline.</text>
+
+  <!-- desks strip -->
+  <rect x="70" y="518" width="1140" height="1" fill="#1c1812"/>
+  <text x="640" y="563" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="20" letter-spacing="4" fill="#3d362c">THE FEED&#160;&#160;·&#160;&#160;THE WEEK&#160;&#160;·&#160;&#160;DEEP DIVES&#160;&#160;·&#160;&#160;THE QUARTER</text>
+
+  <!-- bottom double rule -->
+  <rect x="70" y="590" width="1140" height="1" fill="#1c1812"/>
+  <rect x="70" y="595" width="1140" height="3" fill="#1c1812"/>
+</svg>

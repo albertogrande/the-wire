@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PredictionChip from '../../components/PredictionChip.astro';
+import { predictions, scorecard } from '../../lib/data';
+import { withBase } from '../../lib/wire';
+const s = scorecard;
+---
+<BaseLayout title="Predictions">
+  <div class="page-head">
+    <div class="kicker"><span class="prompt" aria-hidden="true">$</span> keep score in public</div>
+    <h1 class="page-title">The predictions ledger</h1>
+    <p class="dek">
+      Every issue carries a falsifiable call with a stated confidence. Every due call gets settled,
+      right or wrong, and scored with <a href={`${withBase('/about/')}#brier`}>Brier</a> — lower is
+      better, 0.25 is a coin flip. Credibility is the product.
+    </p>
+  </div>
+
+  <div class="scorecard">
+    <div class="score-cell"><span class="score-n">{s.open}</span><span class="score-l">open</span></div>
+    <div class="score-cell">
+      <span class="score-n">{s.correct}–{s.incorrect}</span>
+      <span class="score-l">record{s.partial > 0 && ` (+${s.partial} partial)`}</span>
+    </div>
+    <div class="score-cell">
+      <span class="score-n">{s.meanBrier !== null ? s.meanBrier.toFixed(2) : '—'}</span>
+      <span class="score-l">mean Brier</span>
+    </div>
+    <div class="score-cell"><span class="score-n">{s.settled}</span><span class="score-l">settled</span></div>
+  </div>
+
+  <table class="ledger">
+    <thead>
+      <tr><th>Made</th><th>Prediction</th><th class="num">Conf.</th><th>Due</th><th>Status</th><th class="num">Brier</th></tr>
+    </thead>
+    <tbody>
+      {
+        predictions.map((p) => (
+          <tr id={p.id}>
+            <td class="led-made">
+              {p.made_link ? <a href={withBase(p.made_link)}>{p.made}</a> : p.made}
+            </td>
+            <td class="led-text">{p.text}</td>
+            <td class="num">{p.confidence}%</td>
+            <td class="led-due">{p.due}</td>
+            <td><PredictionChip status={p.status} /></td>
+            <td class="num">{typeof p.brier === 'number' ? p.brier : <span class="muted-line">—</span>}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+
+  <p class="ledger-note muted-line">
+    Source of truth:
+    <a href="https://github.com/albertogrande/the-wire/blob/main/_data/predictions.yml"><code>_data/predictions.yml</code></a>. Working memory:
+    <a href={withBase('/reports/MEMORY.html')}>editorial memory</a>.
+  </p>
+</BaseLayout>

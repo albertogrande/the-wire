@@ -1,0 +1,79 @@
+---
+// Shared Front-style chrome (direction A): masthead + dark status strip with a
+// live uptime clock + pulse. Used on every page so the header is consistent.
+// Width follows the page: wide (1180) for the Front, --wrap (940) for reading.
+import { scorecard } from '../lib/data';
+import { withBase } from '../lib/wire';
+
+interface Props {
+  wide?: boolean;
+}
+const { wide = false } = Astro.props;
+const max = wide ? '1180px' : 'var(--wrap)';
+const s = scorecard;
+
+const nav = [
+  { label: 'Front', url: '/' },
+  { label: 'Predictions', url: '/predictions/' },
+  { label: 'Threads', url: '/threads/' },
+  { label: 'About', url: '/about/' },
+];
+const here = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isCurrent = (url: string) => (withBase(url).replace(/\/$/, '') || '/') === here;
+---
+<div class="wire-chrome" style={`max-width:${max};margin:0 auto;`}>
+  <header style="display:flex;align-items:center;justify-content:space-between;padding:16px 26px 14px;border-bottom:1px solid var(--rule);">
+    <a href={withBase('/')} style="font-family:var(--font-mono);font-weight:700;font-size:23px;letter-spacing:.01em;color:var(--fg);text-decoration:none;">
+      <span class="wf-prompt">$</span> the&nbsp;wire<span class="wf-cursor" aria-hidden="true">▌</span>
+    </a>
+    <nav aria-label="Primary" style="font-family:var(--font-mono);font-size:13px;display:flex;gap:20px;align-items:center;color:var(--muted);">
+      {
+        nav.map((n) => (
+          <a
+            href={withBase(n.url)}
+            aria-current={isCurrent(n.url) ? 'page' : undefined}
+            style={`text-decoration:${isCurrent(n.url) ? 'underline' : 'none'};text-decoration-color:var(--accent);text-underline-offset:5px;color:${isCurrent(n.url) ? 'var(--fg)' : 'var(--muted)'};`}
+          >
+            {n.label}
+          </a>
+        ))
+      }
+      <button id="theme-toggle" type="button" aria-label="Toggle light or dark theme" aria-pressed="false"
+        style="font-family:var(--font-mono);font-size:13px;border:1px solid var(--rule-strong);border-radius:4px;padding:3px 9px;color:var(--muted);background:transparent;cursor:pointer;">◐ theme</button>
+    </nav>
+  </header>
+
+  <div class="wf-bar" style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:9px 26px;font-size:12.5px;letter-spacing:.02em;">
+    <span class="dim">VOL. I · EST. 2026 · CIRCULATION: ONE</span>
+    <span class="sep">·</span>
+    <span><span class="k">brier</span> {s.meanBrier !== null ? s.meanBrier.toFixed(2) : <span class="dim">—</span>}</span>
+    <span class="sep">·</span>
+    <span><span class="k">predictions</span> <a href={withBase('/predictions/')}>{s.open} open</a></span>
+    <span class="sep">·</span>
+    <span><span class="k">record</span> {s.correct}–{s.incorrect}{s.partial > 0 && <span class="dim"> (+{s.partial})</span>}</span>
+    {s.nextDue && (
+      <Fragment>
+        <span class="sep">·</span>
+        <span><span class="k">next&nbsp;due</span> {s.nextDue}</span>
+      </Fragment>
+    )}
+    <span style="margin-left:auto;display:inline-flex;gap:14px;align-items:center;">
+      <span><span class="k">uptime</span> <span id="wf-uptime">--:--:--</span></span>
+      <span class="wf-pulse-wrap"><span class="wf-pulse" aria-hidden="true"></span><span class="wf-pulse-label">live</span></span>
+    </span>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var el = document.getElementById('wf-uptime');
+    if (!el) return;
+    var p = function (n) { return String(n).padStart(2, '0'); };
+    function tick() {
+      var d = new Date();
+      el.textContent = p(d.getHours()) + ':' + p(d.getMinutes()) + ':' + p(d.getSeconds());
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+</script>

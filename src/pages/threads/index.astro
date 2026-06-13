@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { threads } from '../../lib/data';
+import { withBase } from '../../lib/wire';
+
+const arrow = (m: string) => (m === 'up' ? '↑' : m === 'down' ? '↓' : '→');
+const label = (m: string) => (m === 'up' ? 'gaining' : m === 'down' ? 'stalling' : 'steady');
+---
+<BaseLayout title="Threads">
+  <div class="page-head">
+    <div class="kicker"><span class="prompt" aria-hidden="true">$</span> connect, don't list</div>
+    <h1 class="page-title">Running threads</h1>
+    <p class="dek">
+      The publication's open storylines, carried across issues. Each tracks momentum —
+      <span class="mom mom-up">↑</span> gaining, <span class="mom mom-steady">→</span> steady,
+      <span class="mom mom-down">↓</span> stalling — and notes evidence that cuts against it.
+    </p>
+  </div>
+
+  <div class="threads">
+    {
+      threads.map((t) => (
+        <section class="thread" id={t.slug}>
+          <div class="thread-head">
+            <span class:list={['mom', `mom-${t.momentum}`]} aria-hidden="true">
+              {arrow(t.momentum)}
+            </span>
+            <h2 class="thread-title">{t.title}</h2>
+            <span class="thread-mom-label">{label(t.momentum)}</span>
+          </div>
+          <p class="thread-summary">{t.summary}</p>
+          {t.tension && (
+            <p class="thread-tension">
+              <span class="tension-k">Tension</span>
+              {t.tension}
+            </p>
+          )}
+          <div class="thread-issues">
+            {t.issues.map((i) => (
+              <a class="issue-tag" href={withBase(i.link)}>
+                {i.label}
+              </a>
+            ))}
+          </div>
+        </section>
+      ))
+    }
+  </div>
+</BaseLayout>

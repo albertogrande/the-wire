@@ -1,7 +1,7 @@
 name: CI
 
 # Guards the live site and the predictions data. Nothing here calls Claude or
-# touches quota — it's a plain Jekyll build, an internal link check, and a
+# touches quota — it's an Astro build, an internal link check, and a
 # standard-library Python validation of the scorecard's source of truth.
 on:
   pull_request:
@@ -23,18 +23,23 @@ jobs:
       LC_ALL: C.UTF-8
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - name: Build the site
+        run: npm run build
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.3"
-          bundler-cache: true
-      - name: Build the site
-        run: bundle exec jekyll build --trace
       - name: Check internal links
         # External links are flaky and rate-limited; the real risk is a dead
         # relative cross-link between issues, which is internal. --swap-urls
-        # strips the /the-wire baseurl so links resolve to the _site root.
+        # strips the /the-wire baseurl so links resolve to the dist root.
         run: |
-          bundle exec htmlproofer ./_site \
+          gem install html-proofer -v "~> 5.0"
+          htmlproofer ./dist \
             --disable-external \
             --allow-hash-href \
             --swap-urls "^/the-wire/:/"

@@ -1,0 +1,88 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import PredictionChip from '../components/PredictionChip.astro';
+import { predictionForUrl, threadsForUrl } from '../lib/data';
+import { fmtLong, weekParts, withBase, type Meta } from '../lib/wire';
+
+interface Props {
+  meta: Meta;
+}
+const { meta } = Astro.props;
+
+const desk =
+  meta.kind === 'weekly'
+    ? 'The Week'
+    : meta.kind === 'quarterly'
+      ? 'The Quarter'
+      : 'Deep Dive';
+
+let stamp = '';
+if (meta.kind === 'weekly') {
+  const { year, week } = weekParts(meta.id);
+  stamp = `Week ${week}, ${year}`;
+} else if (meta.kind === 'quarterly') {
+  const [year, q] = meta.id.split('-Q');
+  stamp = `Q${q} ${year}`;
+} else {
+  stamp = fmtLong(meta.date);
+}
+
+const mom = (m: string) => (m === 'up' ? '↑' : m === 'down' ? '↓' : '→');
+const pred = predictionForUrl(meta.urlPath);
+const advances = threadsForUrl(meta.urlPath);
+---
+<BaseLayout title={meta.title} description={meta.dek}>
+  <article class="article">
+    <header class="article-head">
+      <div class="kicker">
+        <span class="desk" set:html={desk} />
+        {stamp && <Fragment><span class="kdot">░</span>{stamp}</Fragment>}
+      </div>
+      <h1 class="article-title">{meta.title}</h1>
+    </header>
+
+    <div class="article-body">
+      <slot />
+    </div>
+
+    <footer class="article-foot">
+      {
+        pred && (
+          <div class="foot-block">
+            <div class="kicker">
+              <span class="prompt" aria-hidden="true">&gt;</span> this issue's call
+            </div>
+            <a class="foot-pred" href={`${withBase('/predictions/')}#${pred.id}`}>
+              <PredictionChip status={pred.status} />
+              <span class="foot-pred-text">
+                {pred.text.length > 130 ? pred.text.slice(0, 130) + '…' : pred.text}
+              </span>
+              <span class="foot-pred-conf">{pred.confidence}%</span>
+            </a>
+          </div>
+        )
+      }
+      {
+        advances.length > 0 && (
+          <div class="foot-block">
+            <div class="kicker">advances</div>
+            <ul class="foot-threads">
+              {advances.map((t) => (
+                <li>
+                  <a href={`${withBase('/threads/')}#${t.slug}`}>{t.title}</a>{' '}
+                  <span class:list={['mom', `mom-${t.momentum}`]} aria-hidden="true">
+                    {mom(t.momentum)}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      }
+      <div class="foot-block foot-nav">
+        <a href={withBase('/')}>← front page</a>
+        <a href={withBase('/predictions/')}>the ledger →</a>
+      </div>
+    </footer>
+  </article>
+</BaseLayout>

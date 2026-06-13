@@ -1,0 +1,15 @@
+---
+import type { PredStatus } from '../lib/data';
+interface Props {
+  status: PredStatus;
+}
+const { status } = Astro.props;
+const map: Record<PredStatus, { cls: string; label: string }> = {
+  correct: { cls: 'chip-correct', label: '✓ correct' },
+  incorrect: { cls: 'chip-incorrect', label: '✗ incorrect' },
+  partial: { cls: 'chip-partial', label: '~ partial' },
+  open: { cls: 'chip-open', label: '● open' },
+};
+const { cls, label } = map[status] ?? map.open;
+---
+<span class:list={['chip', cls]}>{label}</span>
