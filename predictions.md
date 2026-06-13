@@ -43,4 +43,4 @@ permalink: /predictions/
   </tbody>
 </table>
 
-<p class="ledger-note muted-line">Source of truth: <a href="https://github.com/albertogrande/the-observer/blob/main/_data/predictions.yml"><code>_data/predictions.yml</code></a>. Working memory: <a href="{{ '/reports/MEMORY.html' | relative_url }}">editorial memory</a>.</p>
+<p class="ledger-note muted-line">Source of truth: <a href="https://github.com/albertogrande/the-wire/blob/main/_data/predictions.yml"><code>_data/predictions.yml</code></a>. Working memory: <a href="{{ '/reports/MEMORY.html' | relative_url }}">editorial memory</a>.</p>

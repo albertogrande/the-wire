@@ -1,4 +1,4 @@
-name: The Observer
+name: The Wire
 
 on:
   schedule:
@@ -59,7 +59,7 @@ jobs:
           TOPIC: ${{ github.event.inputs.topic }}
         run: |
           if [ "$MODE" = "quarter" ]; then
-            PROMPT="Run the-quarter skill (.claude/skills/the-quarter/SKILL.md): write The Observer's retrospective for the most recently completed calendar quarter to reports/quarters/ and update reports/MEMORY.md exactly as the skill instructs."
+            PROMPT="Run the-quarter skill (.claude/skills/the-quarter/SKILL.md): write The Wire's retrospective for the most recently completed calendar quarter to reports/quarters/ and update reports/MEMORY.md exactly as the skill instructs."
           elif [ "$MODE" = "deep-dive-only" ]; then
             PROMPT="Run the deep-dive skill (.claude/skills/deep-dive/SKILL.md)"
             if [ -n "$TOPIC" ]; then

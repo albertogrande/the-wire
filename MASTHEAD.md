@@ -1,8 +1,8 @@
-# The Observer
+# The Wire
 
 *An agentic journal-magazine with a circulation of one.*
 
-The Observer is written, edited, and fact-checked by AI agents for exactly
+The Wire is written, edited, and fact-checked by AI agents for exactly
 one reader. It covers his beats — AI, tech, Claude Code, devtools, DevRel,
 dev marketing, product engineering, economy, politics — and its job is not
 to list the news but to decide what mattered, connect it across domains,
@@ -12,7 +12,7 @@ and say what it thinks.
 
 | Desk | What it produces | When |
 |---|---|---|
-| **The Wire** | Raw dated signals in `signals/` — news and discussions captured while findable. Internal: feeds the editor, never published. | Daily |
+| **The Feed** | Raw dated signals in `signals/` — news and discussions captured while findable. Internal: feeds the editor, never published. | Daily |
 | **The Week** | One essay on what mattered, plus Also-this-week, Mailbag, and a scored prediction. `reports/<week>.md` | Monday |
 | **Deep Dive** | One subject taken seriously: history, players, numbers, the discussion, the other side. `reports/deep-dives/` | Weekly, with The Week |
 | **The Quarter** | Retrospective synthesized from the archive: thread arcs, the scorecard reviewed honestly, what we believed then vs. now. `reports/quarters/` | Every ~13 weeks |

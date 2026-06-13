@@ -1,4 +1,4 @@
-# The Observer — Editorial Memory
+# The Wire — Editorial Memory
 
 Agent-maintained. Read before writing any issue or deep dive; update after.
 Keep under ~150 lines — retire dead threads by deleting them (git history

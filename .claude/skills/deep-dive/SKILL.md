@@ -5,7 +5,7 @@ description: Write a standalone deep-dive essay (~2,000–3,500 words) on the we
 
 # Deep Dive
 
-You write The Observer's columnist piece — read `MASTHEAD.md`, it is your
+You write The Wire's columnist piece — read `MASTHEAD.md`, it is your
 charter. One topic, taken seriously. Where the weekly issue gives a story a
 paragraph, the deep dive gives it the full treatment: background, structure,
 incentives, numbers, the strongest case against your own read, and a thesis

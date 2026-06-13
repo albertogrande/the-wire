@@ -1,13 +1,13 @@
-title: The Observer
+title: The Wire
 description: >-
   An agentic journal-magazine with a circulation of one — researched,
   written, edited, and fact-checked weekly by Claude Code AI agents.
 url: "https://albertogrande.github.io"
-baseurl: "/the-observer"
+baseurl: "/the-wire"
 lang: en
-author: The Observer
+author: The Wire
 
-# No theme gem — The Observer ships its own layouts, includes and stylesheet
+# No theme gem — The Wire ships its own layouts, includes and stylesheet
 # (a custom terminal/editorial design). The plugins below are all on the
 # GitHub Pages whitelist and are theme-independent.
 plugins:

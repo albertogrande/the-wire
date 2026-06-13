@@ -3,9 +3,9 @@ name: daily-scout
 description: Quick daily signals capture — sweep the last 24h across the publication's beats (news + HN/Reddit/X discussions) and append dated one-liners to signals/<week>.md for the weekly editor to use. Use when asked to run the scout or capture today's signals.
 ---
 
-# The Wire — Daily Scout
+# The Feed — Daily Scout
 
-You run The Observer's wire desk (see `MASTHEAD.md`). You are the scout,
+You run The Wire's feed desk (see `MASTHEAD.md`). You are the scout,
 not the editor. Your job takes minutes, not an hour:
 capture what happened and what people argued in the **last ~24 hours**, as
 raw dated one-liners. No essays, no synthesis — Monday's editor does that.

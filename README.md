@@ -1,15 +1,15 @@
 <p align="center">
-  <a href="https://albertogrande.github.io/the-observer/"><img src="assets/masthead.svg" alt="The Observer — an agentic journal-magazine with a circulation of one, researched, written, edited, and fact-checked by AI agents" width="100%"></a>
+  <a href="https://albertogrande.github.io/the-wire/"><img src="assets/masthead.svg" alt="The Wire — an agentic journal-magazine with a circulation of one, researched, written, edited, and fact-checked by AI agents" width="100%"></a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/albertogrande/the-observer/actions/workflows/weekly-news.yml"><img src="https://github.com/albertogrande/the-observer/actions/workflows/weekly-news.yml/badge.svg" alt="The Week — weekly issue workflow"></a>
-  <a href="https://github.com/albertogrande/the-observer/actions/workflows/daily-scout.yml"><img src="https://github.com/albertogrande/the-observer/actions/workflows/daily-scout.yml/badge.svg" alt="The Wire — daily scout workflow"></a>
+  <a href="https://github.com/albertogrande/the-wire/actions/workflows/weekly-news.yml"><img src="https://github.com/albertogrande/the-wire/actions/workflows/weekly-news.yml/badge.svg" alt="The Week — weekly issue workflow"></a>
+  <a href="https://github.com/albertogrande/the-wire/actions/workflows/daily-scout.yml"><img src="https://github.com/albertogrande/the-wire/actions/workflows/daily-scout.yml/badge.svg" alt="The Feed — daily scout workflow"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT"></a>
   <a href="https://claude.com/claude-code"><img src="https://img.shields.io/badge/built_with-Claude_Code-d97757.svg" alt="Built with Claude Code"></a>
 </p>
 
-**The Observer** is an autonomous AI newsroom with a circulation of one.
+**The Wire** is an autonomous AI newsroom with a circulation of one.
 Every week, [Claude Code](https://claude.com/claude-code) agents research
 nine beats — AI, tech, Claude Code, devtools, DevRel, dev marketing,
 product engineering, economy, politics — decide what mattered, write and
@@ -19,13 +19,13 @@ entirely on a **Claude Max subscription** via GitHub Actions — no API
 credits, no human in the byline.
 
 **📰 Read the live archive →
-[albertogrande.github.io/the-observer](https://albertogrande.github.io/the-observer/)**
+[albertogrande.github.io/the-wire](https://albertogrande.github.io/the-wire/)**
 
 Full identity, desks, and editorial charter: [MASTHEAD.md](MASTHEAD.md).
 
 ## Why it's interesting
 
-Most AI news agents summarize headlines. The Observer is built to
+Most AI news agents summarize headlines. The Wire is built to
 **compound**: `reports/MEMORY.md` holds running threads, a predictions
 ledger with confidences, and a **Brier scorecard** — the publication
 grades its own calls in public. `reports/TASTE.md` accumulates what the
@@ -44,7 +44,7 @@ magazine gets sharper the longer it runs.
   steelmanned) or **The Obituary** (something died; honest retrospective).
 - **The Quarter** (every ~13 weeks, on demand) — retrospective from the
   archive: thread arcs, the Brier scorecard reviewed honestly, then-vs-now.
-- **The Wire** (daily, internal) — the scout's raw signals in `signals/`,
+- **The Feed** (daily, internal) — the scout's raw signals in `signals/`,
   capturing news and HN/Reddit/X discussions while they're findable.
 
 ## How the newsroom works
@@ -59,7 +59,7 @@ follows end to end — scheduled by GitHub Actions:
 - `.claude/skills/deep-dive/` — the columnist desk (standard dive, The
   Debate, The Obituary).
 - `.claude/skills/the-quarter/` — the retrospective desk.
-- `.claude/skills/daily-scout/` — the wire desk.
+- `.claude/skills/daily-scout/` — the feed desk.
 - `.github/workflows/weekly-news.yml` — Monday 06:00 UTC: collects reader
   comments, runs The Week + the second piece in one session, commits, and
   opens one GitHub Issue per piece (`weekly-news` / `deep-dive` /
@@ -69,14 +69,14 @@ follows end to end — scheduled by GitHub Actions:
 - `_config.yml` + `index.md` — the magazine's face: a GitHub Pages site
   rendering the archive (masthead, The Week, dives, quarters, newsroom).
 
-## Run your own Observer
+## Run your own Wire
 
 The newsroom is yours to fork: click **Use this template** (or fork), and
 you have an autonomous publication covering *your* beats.
 
 1. Edit the beats and charter in [MASTHEAD.md](MASTHEAD.md) and the skills
    under `.claude/skills/`; empty out `reports/` and `signals/` — that's
-   this Observer's archive, yours starts fresh.
+   this Wire's archive, yours starts fresh.
 2. On your machine, logged into Claude Code with your Max account:
    `claude setup-token` → copy the token.
 3. Add it as a repo secret named `CLAUDE_CODE_OAUTH_TOKEN`
@@ -89,7 +89,7 @@ If you build one, a ⭐ helps the next reader find the newsroom.
 
 ## Running on demand
 
-- **Actions tab → The Observer → Run workflow** with the mode you want.
+- **Actions tab → The Wire → Run workflow** with the mode you want.
 - In any Claude Code session: `/weekly-news`, `/deep-dive [topic]`,
   `/the-quarter`, `/daily-scout`. Interactive runs write files without
   committing — you decide.
@@ -105,7 +105,7 @@ reports/
   2026-W23.md          # The Week, one per ISO week
   deep-dives/          # dives and specials, dated
   quarters/            # The Quarter, e.g. 2026-Q2.md
-signals/               # The Wire: daily capture, one file per ISO week
+signals/               # The Feed: daily capture, one file per ISO week
 ```
 
 ## License

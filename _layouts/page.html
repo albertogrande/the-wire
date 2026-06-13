@@ -13,7 +13,7 @@ layout: default
 <article class="article">
   <header class="article-head">
     <div class="kicker">
-      {%- if is_dive -%}<span class="desk">Deep&nbsp;Dive</span>{%- elsif is_week -%}<span class="desk">The&nbsp;Week</span>{%- else -%}<span class="desk">The&nbsp;Observer</span>{%- endif -%}
+      {%- if is_dive -%}<span class="desk">Deep&nbsp;Dive</span>{%- elsif is_week -%}<span class="desk">The&nbsp;Week</span>{%- else -%}<span class="desk">The&nbsp;Wire</span>{%- endif -%}
       {%- if is_week -%}{%- assign wp = fname | split: "-W" -%}<span class="kdot">░</span>Week {{ wp[1] }}, {{ wp[0] }}
       {%- elsif is_dive -%}{%- assign dstr = fname | slice: 0, 10 -%}<span class="kdot">░</span>{{ dstr | date: "%-d %B %Y" }}{%- endif -%}
     </div>

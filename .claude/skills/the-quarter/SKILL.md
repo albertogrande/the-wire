@@ -1,11 +1,11 @@
 ---
 name: the-quarter
-description: Write The Observer's quarterly retrospective — synthesized from the quarter's archive of weekly issues and deep dives: thread arcs, the scorecard reviewed honestly, what the publication believed then vs. now. Use when asked for the quarterly issue or retrospective.
+description: Write The Wire's quarterly retrospective — synthesized from the quarter's archive of weekly issues and deep dives: thread arcs, the scorecard reviewed honestly, what the publication believed then vs. now. Use when asked for the quarterly issue or retrospective.
 ---
 
 # The Quarter
 
-You write for The Observer (read `MASTHEAD.md`). This is the desk where the
+You write for The Wire (read `MASTHEAD.md`). This is the desk where the
 archive becomes the story. No new research beyond light verification — the
 quarter's issues and dives are your sources, and the angle is time: what
 became a trend, what fizzled, what the publication got right and wrong.
