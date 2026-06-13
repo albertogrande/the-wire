@@ -1,6 +1,7 @@
-// Lab A — "Monospace Grid". Mobile-first, light. IA is decided: the front is
-// ONE best read (The Week) + the latest dives. Everything else is a tap away.
-// The Monospace Web + Vercel: one mono typeface, rules not boxes, lots of air.
+// Lab A — "TUI". Mobile-first, light, lead-forward. Stark terminal: a command
+// prompt + blinking cursor, an ASCII-framed hero panel, a line-number gutter on
+// the latest list, syntax-ish amber accents, keyboard hints. Monospace Web +
+// Vercel contrast + IDE color. IA: The Week + latest dives; rest a tap away.
 import type { WireData } from '../../lib/frontData';
 import { withBase } from '../../lib/wire';
 
@@ -10,53 +11,64 @@ export interface Score {
 }
 
 const more = [
-  { label: 'Feed', href: withBase('/') },
-  { label: 'Threads', href: withBase('/threads/') },
-  { label: 'Predictions', href: withBase('/predictions/') },
-  { label: 'About', href: withBase('/about/') },
+  { label: 'feed', href: withBase('/') },
+  { label: 'threads', href: withBase('/threads/') },
+  { label: 'predictions', href: withBase('/predictions/') },
+  { label: 'about', href: withBase('/about/') },
 ];
+const Cur = () => <span className="la-cur" aria-hidden="true">▌</span>;
 
 export default function LabMono({ wire }: { wire: WireData; score: Score }) {
   const wk = wire.theWeek;
   return (
     <div className="la">
-      <header className="la-top">
-        <a className="la-mark" href="#">the&nbsp;wire</a>
-        <nav className="la-nav">{more.map((m) => <a key={m.label} href={m.href}>{m.label}</a>)}</nav>
+      <header className="la-bar">
+        <a href="#" className="la-mark"><span className="la-amber">$</span> the&nbsp;wire</a>
+        <nav className="la-nav">{more.map((m) => <a key={m.label} href={m.href}>--{m.label}</a>)}</nav>
       </header>
+
+      <div className="la-cmd"><span className="la-dim">~/the-wire</span> <span className="la-amber">$</span> wire read --this-week<Cur /></div>
 
       <main className="la-main">
         {wk && (
-          <a href={wk.href} className="la-hero">
-            <div className="la-kick">$ this week · week {wk.weekNum} · {wk.mins} min read</div>
-            <h1 className="la-hero-h">{wk.title}</h1>
-            <p className="la-hero-dek">{wk.dek}</p>
-            <span className="la-read">read the issue →</span>
+          <a href={wk.href} className="la-box">
+            <span className="la-legend">THE&nbsp;WEEK</span>
+            <div className="la-kick"><span className="la-amber"># </span>week {wk.weekNum} · {wk.mins} min · {wk.weekRange}</div>
+            <h1 className="la-h">{wk.title}</h1>
+            <p className="la-dek">{wk.dek}</p>
+            <span className="la-read"><span className="la-amber">→</span> read the issue</span>
           </a>
         )}
 
-        <div className="la-sec-head">
-          <span className="la-sec-label">LATEST</span>
+        <div className="la-sec">
+          <span className="la-amber">##</span><span className="la-sec-l">latest</span>
           <span className="la-rule" aria-hidden="true" />
-          <span className="la-sec-right">{wire.dives.length}</span>
+          <span className="la-dim">{String(wire.dives.length).padStart(2, '0')}</span>
         </div>
+
         <ul className="la-list">
-          {wire.dives.map((d) => (
+          {wire.dives.map((d, i) => (
             <li key={d.href} className="la-row">
-              <a href={d.href} className="la-row-t">{d.title}</a>
-              <p className="la-row-dek">{d.dek}</p>
-              <div className="la-row-m">
-                <span className="la-date">{d.date.slice(5)}</span>
-                <span>{d.desk}{d.author ? ` · ${d.author}` : ''}</span>
-                <span>{d.mins} min</span>
+              <span className="la-ln">{String(i + 1).padStart(2, '0')}</span>
+              <div className="la-rowmain">
+                <a href={d.href} className="la-row-t">{d.title}</a>
+                <p className="la-row-dek">{d.dek}</p>
+                <div className="la-row-m">
+                  <span className="la-amber">{d.date.slice(5)}</span>
+                  <span className="la-dim">·</span><span>{d.desk}</span>
+                  {d.author && <><span className="la-dim">·</span><span>{d.author}</span></>}
+                  <span className="la-dim">·</span><span>{d.mins}m</span>
+                </div>
               </div>
             </li>
           ))}
         </ul>
 
-        <footer className="la-foot">
-          <span className="la-foot-k">more →</span>
-          {more.map((m) => <a key={m.label} href={m.href}>{m.label}</a>)}
+        <footer className="la-keys">
+          <span><b>↑↓</b> browse</span>
+          <span><b>↵</b> open</span>
+          <span><b>/</b> search</span>
+          <span><b>g</b> feed</span>
         </footer>
       </main>
     </div>
