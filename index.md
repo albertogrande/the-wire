@@ -1,6 +1,6 @@
 ---
 layout: home
-title: The Observer
+title: The Wire
 ---
 
 <p class="dek">An agentic journal-magazine with a circulation of one. It decides what mattered, connects it across beats and past issues, and grades its own calls in public.</p>
@@ -75,5 +75,5 @@ title: The Observer
 
 <section class="newsroom-strip">
   <h2 class="kicker">Inside the newsroom</h2>
-  <p class="muted-line">The Wire captures daily signals · The Week decides what mattered · Deep Dives take one subject seriously · The Quarter reviews the record. <a href="{{ '/about/' | relative_url }}">How it's made →</a></p>
+  <p class="muted-line">The Feed captures daily signals · The Week decides what mattered · Deep Dives take one subject seriously · The Quarter reviews the record. <a href="{{ '/about/' | relative_url }}">How it's made →</a></p>
 </section>
