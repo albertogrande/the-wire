@@ -5,6 +5,7 @@
 <p align="center">
   <a href="https://github.com/albertogrande/the-wire/actions/workflows/weekly-news.yml"><img src="https://github.com/albertogrande/the-wire/actions/workflows/weekly-news.yml/badge.svg" alt="The Week — weekly issue workflow"></a>
   <a href="https://github.com/albertogrande/the-wire/actions/workflows/daily-scout.yml"><img src="https://github.com/albertogrande/the-wire/actions/workflows/daily-scout.yml/badge.svg" alt="The Feed — daily scout workflow"></a>
+  <a href="https://github.com/albertogrande/the-wire/actions/workflows/daily-dive.yml"><img src="https://github.com/albertogrande/the-wire/actions/workflows/daily-dive.yml/badge.svg" alt="The Daily Dive — daily columnist workflow"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT"></a>
   <a href="https://claude.com/claude-code"><img src="https://img.shields.io/badge/built_with-Claude_Code-d97757.svg" alt="Built with Claude Code"></a>
 </p>
@@ -42,6 +43,10 @@ magazine gets sharper the longer it runs.
 - **Deep Dive** (with The Week) — one subject taken seriously. The editor
   may swap in a special when the week earns it: **The Debate** (both sides
   steelmanned) or **The Obituary** (something died; honest retrospective).
+- **The Daily Dive** (Tue–Sun) — a shorter technical dive under a rotating
+  columnist byline ([AUTHORS.md](AUTHORS.md)): evergreen "how it works" by
+  default, the day's news only when it earns a durable explainer. Sundays
+  run a three-columnist **bakeoff** on one topic.
 - **The Quarter** (every ~13 weeks, on demand) — retrospective from the
   archive: thread arcs, the Brier scorecard reviewed honestly, then-vs-now.
 - **The Feed** (daily, internal) — the scout's raw signals in `signals/`,
@@ -56,16 +61,23 @@ follows end to end — scheduled by GitHub Actions:
   signals, and reader comments → research fan-out (discussions are
   first-class sources) → edit → write → commission the second piece →
   update memory.
-- `.claude/skills/deep-dive/` — the columnist desk (standard dive, The
-  Debate, The Obituary).
+- `.claude/skills/deep-dive/` — the weekly long-form dive (standard dive,
+  The Debate, The Obituary).
+- `.claude/skills/daily-dive/` — the daily columnist dive: a date-driven
+  author rotation over the roster in [AUTHORS.md](AUTHORS.md), picking
+  topics from the scout's signals or the evergreen `topics/backlog.md`.
 - `.claude/skills/the-quarter/` — the retrospective desk.
 - `.claude/skills/daily-scout/` — the feed desk.
-- `.github/workflows/weekly-news.yml` — Monday 06:00 UTC: collects reader
+- `.github/workflows/weekly-news.yml` — Monday 04:00 UTC: collects reader
   comments, runs The Week + the second piece in one session, commits, and
   opens one GitHub Issue per piece (`weekly-news` / `deep-dive` /
   `the-quarter` labels). `workflow_dispatch` modes: `weekly`,
   `deep-dive-only` (+ optional `topic`), `quarter`.
-- `.github/workflows/daily-scout.yml` — daily 18:00 UTC, commits signals.
+- `.github/workflows/daily-scout.yml` — daily 22:00 UTC, commits signals.
+- `.github/workflows/daily-dive.yml` — Tue–Sun 23:00 UTC (after the scout;
+  skips Monday's flagship), runs the daily dive and opens a `deep-dive`
+  issue per piece. `workflow_dispatch` inputs: `mode` (rotation/bakeoff),
+  `columnist`, `topic`.
 - `_config.yml` + `index.md` — the magazine's face: a GitHub Pages site
   rendering the archive (masthead, The Week, dives, quarters, newsroom).
 
@@ -91,13 +103,14 @@ If you build one, a ⭐ helps the next reader find the newsroom.
 
 - **Actions tab → The Wire → Run workflow** with the mode you want.
 - In any Claude Code session: `/weekly-news`, `/deep-dive [topic]`,
-  `/the-quarter`, `/daily-scout`. Interactive runs write files without
-  committing — you decide.
+  `/daily-dive`, `/the-quarter`, `/daily-scout`. Interactive runs write
+  files without committing — you decide.
 
 ## Layout
 
 ```
 MASTHEAD.md            # identity, desks, editorial charter
+AUTHORS.md             # the daily dive's rotating columnists
 index.md, _config.yml  # GitHub Pages site
 feed.xml               # Atom feed over weeklies + deep dives
 _data/predictions.yml  # scorecard source of truth (status bar + /predictions/)
@@ -105,9 +118,10 @@ reports/
   MEMORY.md            # threads, predictions + Brier scorecard, coverage index
   TASTE.md             # the reader's accumulated preferences
   2026-W23.md          # The Week, one per ISO week
-  deep-dives/          # dives and specials, dated
+  deep-dives/          # weekly + daily dives and specials, dated
   quarters/            # The Quarter, e.g. 2026-Q2.md
 signals/               # The Feed: daily capture, one file per ISO week
+topics/                # evergreen deep-dive backlog (internal, off-site)
 scripts/               # predictions validator + due-prediction watch (CI only)
 ```
 

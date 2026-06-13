@@ -12,6 +12,11 @@ raw dated one-liners. No essays, no synthesis — Monday's editor does that.
 The value is capture: discussions and signals that are easy to find today
 are often hard to find by Monday.
 
+Your capture has two readers now: the **weekly editor** on Monday, and the
+**daily dive** an hour after you run, which scans today's signals for a
+piece worth writing. So today's block earns its keep the same day — capture
+crisply.
+
 ## Step 1 — Where to write
 
 ```bash

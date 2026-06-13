@@ -21,6 +21,10 @@ feedback (in session or via issue comments); prune one-off reactions.
 - Short "Also this week" footer (4–8 one-liners) is wanted.
 - A deep dive every week alongside the essay; reader may also request
   topic-specific dives on demand.
+- A shorter daily dive (Tue–Sun) under a rotating columnist byline
+  (`AUTHORS.md`) — evergreen "how it works" by default, the day's news only
+  when it earns a durable explainer. Sundays run a three-columnist bakeoff;
+  record which voice the reader prefers here as the experiment settles.
 - Cross-domain connection (e.g. AI × energy × economy × politics) is the
   core value: "figure out which points of the week relate to another topic
   or broader trends — here is where you become opinionated."
