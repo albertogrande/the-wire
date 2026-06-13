@@ -2,10 +2,12 @@ name: The Wire
 
 on:
   schedule:
-    # Monday early morning in Madrid (06:00 CEST / 05:00 CET) — overnight, on a
-    # fresh quota window; the issue is ready at breakfast. Covers the
-    # just-completed Monday→Sunday week. Cron is UTC, hence 04:00.
-    - cron: "0 4 * * 1"
+    # Monday 02:00 in Madrid (02:00 CEST / 01:00 CET) — early enough that this
+    # big run finishes (~03:30) and its usage ages out of the ~5h rolling
+    # window before the 09:00 workday, so the reader starts Monday on fresh
+    # quota. Still ready at breakfast. Covers the just-completed Monday→Sunday
+    # week. Cron is UTC, hence 00:00.
+    - cron: "0 0 * * 1"
   workflow_dispatch:
     inputs:
       mode:
