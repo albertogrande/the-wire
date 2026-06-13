@@ -43,6 +43,20 @@
     - { label: "2026-W23", link: "/reports/2026-W23.html" }
     - { label: "Dive · The Trust Stack", link: "/reports/deep-dives/2026-06-12-trust-stack-human-speed.html" }
 
+- slug: platforms-eat-the-layer
+  title: "Platforms eat the layer"
+  momentum: up
+  summary: >-
+    The LLMOps tool layer (gateway, tracing, eval, prompt store) is being
+    absorbed from both ends. ClickHouse bought Langfuse (already built on
+    ClickHouse; 23.1M SDK installs/mo) to own the trace store; Datadog ships a
+    native AI gateway plus LLM-judge evals; model vendors expose traces and
+    evals natively. TensorZero archived its repo Jun 12 and returned ~half its
+    $7.3M seed despite Fortune-10 use and 11.6k stars. A wrapper around someone
+    else's durable asset is a feature, not a company.
+  issues:
+    - { label: "Dive · LLMOps Is a Feature", link: "/reports/deep-dives/2026-06-13-llmops-not-a-company.html" }
+
 - slug: who-pays-for-ai-power
   title: "Who pays for AI's power"
   momentum: steady

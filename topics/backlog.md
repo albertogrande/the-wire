@@ -59,6 +59,10 @@ overtakes becomes a `news-to-framework` piece instead — that's fine.
 - [what-every-engineer-should-know] Idempotency: the one property that saves
   every retry path (Builder)
 - [postmortem] The class of outage that's always DNS, and why (Analyst)
+- [how-it-works] What an LLM gateway actually does: proxying, failover, caching,
+  cost caps, and where the latency hides (Builder)
+- [architecture] Why LLM observability runs on a columnar database — the trace
+  store, not the dashboard, is the asset (Analyst)
 
 ## Live — DevRel, dev marketing, product engineering
 

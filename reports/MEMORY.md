@@ -48,6 +48,15 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   AI Act delayed to Jan 1 2027 but kept its disclosure core; FCC KYC FNPRM) =
   undisclosed automation becoming a regulated category.
   → [dive 2026-06-12-autonomy](./deep-dives/2026-06-12-autonomy-before-brakes.md)
+- **Platforms eat the layer** `↑` — the LLMOps tool layer (gateway, tracing,
+  eval, prompt store) is being absorbed from both ends: ClickHouse bought
+  Langfuse (Jan, already built on ClickHouse; 23.1M SDK installs/mo) to own the
+  trace store; Datadog ships a native AI gateway + LLM-judge evals; model
+  vendors expose traces/evals natively. TensorZero archived its repo Jun 12 and
+  returned ~half its $7.3M seed despite Fortune-10 use and 11.6k stars. Thesis:
+  a wrapper around someone else's durable asset (model endpoint / analytics DB)
+  is a feature, not a company. Third face of the channel/meter rule.
+  → [dive 2026-06-13 llmops](./deep-dives/2026-06-13-llmops-not-a-company.md)
 - **Who pays for AI's power** `→` — PJM uncapped capacity auction imminent;
   dueling studies on data centers vs. household bills; 1GW
   bring-your-own-power deals (Vantage–Liberty). Sleeper populist-politics
@@ -73,6 +82,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-06-12 (autonomy) | "Agent liability" insurance appears OR a cloud publishes a runaway-agent forgiveness policy, mandating spend caps/observability as a condition | 55% | by 2027-Q2 | OPEN |
 | Dive 2026-06-12 (channel) | The top frontier-vs-best-open-model spread on a major agentic benchmark (e.g. SWE-bench/MCPMark/Terminal-Bench) stays inside ~5 pts — i.e. no lab reopens a durable capability gap, confirming the channel (not the model) is the moat | 70% | by 2027-Q1 | OPEN |
 | Dive 2026-06-13 (benchmark) | A contamination-resistant benchmark (SWE-bench Pro / SWE-rebench or successor) does NOT reproduce SWE-bench Verified's top-5 model ordering — decontamination changes rank, not just absolute scores | 65% | by 2027-Q1 | OPEN |
+| Dive 2026-06-13 (llmops) | No venture-funded *independent* LLM gateway/observability/eval company reaches a standalone outcome (IPO or $1B+ while independent) — the next two notable outcomes in the space are absorptions by a model vendor / data-or-monitoring platform, or wind-downs | 65% | by 2027-Q2 | OPEN |
 
 **Scorecard: 0 settled · record 0–0 · mean Brier —**
 
@@ -107,3 +117,11 @@ Lower is better; 0.25 = coin-flip guessing.
   Anthropic's 4×(agent)/15×(multi-agent) multipliers; 6,100→420-token
   read-vs-return mechanic. Fan out for parallel breadth + small returns; stay
   single-context for sequential/large-return work. Format: practical-guide
+- 2026-06-13 — "LLMOps Is a Feature, Not a Company" (Okafor) — TensorZero
+  archived its repo Jun 12 (11.6k stars, returned ~half of $7.3M seed) after
+  ClickHouse bought Langfuse (Jan, 23.1M SDK installs/mo, already built on
+  ClickHouse) and Datadog shipped a native AI gateway + LLM-judge evals. The
+  gateway/tracer/eval layer is a wrapper; value accrues to the adjacent durable
+  asset (model endpoint or trace store), so LLMOps is a feature, not a market
+  for independents. Third face of the channel/meter rule. Format:
+  news-to-framework

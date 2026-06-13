@@ -81,3 +81,15 @@
   confidence: 65
   due: "2027-Q1"
   status: open
+
+- id: dive-2026-06-13-llmops-feature
+  made: "Dive · 2026-06-13"
+  made_link: "/reports/deep-dives/2026-06-13-llmops-not-a-company.html"
+  text: >-
+    No venture-funded independent LLM gateway/observability/eval company
+    reaches a standalone outcome (IPO or $1B+ while independent) — the next two
+    notable outcomes are absorptions by a model vendor or data/monitoring
+    platform, or wind-downs.
+  confidence: 65
+  due: "2027-Q2"
+  status: open
