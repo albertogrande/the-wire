@@ -44,20 +44,14 @@ const isCurrent = (url: string) => (withBase(url).replace(/\/$/, '') || '/') ===
   </header>
 
   <div class="wf-bar wire-strip">
-    <span class="dim">VOL. I · EST. 2026 · CIRCULATION: ONE</span>
-    <span class="sep">·</span>
-    <span><span class="k">brier</span> {s.meanBrier !== null ? s.meanBrier.toFixed(2) : <span class="dim">—</span>}</span>
-    <span class="sep">·</span>
-    <span><span class="k">predictions</span> <a href={withBase('/predictions/')}>{s.open} open</a></span>
-    <span class="sep">·</span>
-    <span><span class="k">record</span> {s.correct}–{s.incorrect}{s.partial > 0 && <span class="dim"> (+{s.partial})</span>}</span>
+    <span class="strip-item strip-deco dim">VOL. I · EST. 2026 · CIRCULATION: ONE</span>
+    <span class="strip-item"><span class="k">brier</span> {s.meanBrier !== null ? s.meanBrier.toFixed(2) : <span class="dim">—</span>}</span>
+    <span class="strip-item"><span class="k">predictions</span> <a href={withBase('/predictions/')}>{s.open} open</a></span>
+    <span class="strip-item"><span class="k">record</span> {s.correct}–{s.incorrect}{s.partial > 0 && <span class="dim"> (+{s.partial})</span>}</span>
     {s.nextDue && (
-      <Fragment>
-        <span class="sep">·</span>
-        <span><span class="k">next&nbsp;due</span> {s.nextDue}</span>
-      </Fragment>
+      <span class="strip-item"><span class="k">next&nbsp;due</span> {s.nextDue}</span>
     )}
-    <span style="margin-left:auto;display:inline-flex;gap:14px;align-items:center;">
+    <span class="strip-item strip-deco strip-right">
       <span><span class="k">uptime</span> <span id="wf-uptime">--:--:--</span></span>
       <span class="wf-pulse-wrap"><span class="wf-pulse" aria-hidden="true"></span><span class="wf-pulse-label">live</span></span>
     </span>

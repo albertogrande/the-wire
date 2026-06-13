@@ -92,8 +92,11 @@ export default function WireFront({ wire }: { wire: WireData }) {
   const [lead, setLead] = useState<'week' | 'dive'>('week');
   const [openThread, setOpenThread] = useState<string | null>(wire.threads[0]?.slug ?? null);
   const [beat, setBeat] = useState<string | null>(null);
+  const [showAllFeed, setShowAllFeed] = useState(false);
 
-  const feed = beat ? wire.feed.filter((f) => f.beat === beat) : wire.feed;
+  const FEED_CAP = 8;
+  const feedAll = beat ? wire.feed.filter((f) => f.beat === beat) : wire.feed;
+  const feed = showAllFeed ? feedAll : feedAll.slice(0, FEED_CAP);
   const dive0 = wire.dives[0];
   const wk = wire.theWeek;
   const fieldBg: CSSProperties = { background: 'transparent' };
@@ -115,7 +118,7 @@ export default function WireFront({ wire }: { wire: WireData }) {
               {lead === 'week' && wk ? (
                 <div>
                   <div className="wf-kicker" style={{ marginBottom: 12 }}>
-                    <span className="wf-prompt">$</span> latest issue <span className="wf-kdot">░</span> № {wk.no} · Week {wk.weekNum} · {wk.weekId} <span className="wf-kdot">░</span> {wk.mins} min
+                    <span className="wf-prompt">$</span> latest issue <span className="wf-kdot">░</span> <span className="wf-hide-sm">№ {wk.no} · </span>Week {wk.weekNum}<span className="wf-hide-sm"> · {wk.weekId}</span> <span className="wf-kdot">░</span> {wk.mins} min
                   </div>
                   <a href={wk.href} className="wf-h-serif wf-lead-h" style={{ marginBottom: 14, display: 'block', color: 'var(--fg)', textDecoration: 'none' }}>{wk.title}</a>
                   <p style={{ margin: 0, fontSize: 18, lineHeight: 1.5, color: 'var(--muted)', maxWidth: 640 }}>{wk.dek}</p>
@@ -211,7 +214,7 @@ export default function WireFront({ wire }: { wire: WireData }) {
         </div>
 
         <Field legend="THE FEED" style={fieldBg}
-          right={<span style={{ display: 'inline-flex', gap: 10, alignItems: 'center' }}><span>{feed.length} signals · {wire.feed[0]?.date.slice(5) ?? ''}</span><Pulse label="live" /></span>}>
+          right={<span style={{ display: 'inline-flex', gap: 10, alignItems: 'center' }}><span>{feedAll.length} signals · {wire.feed[0]?.date.slice(5) ?? ''}</span><Pulse label="live" /></span>}>
           <div style={{ marginBottom: 14 }}>
             <BeatFilter beats={wire.beats} value={beat} onChange={setBeat} />
           </div>
@@ -231,6 +234,11 @@ export default function WireFront({ wire }: { wire: WireData }) {
             ))}
             {feed.length === 0 && <div style={{ ...mono, fontSize: 13, color: 'var(--faint)', padding: '10px 0' }}>— no signals on this beat —</div>}
           </div>
+          {feedAll.length > FEED_CAP && (
+            <button className="wf-more-btn" onClick={() => setShowAllFeed((v) => !v)}>
+              {showAllFeed ? '▴ show fewer' : `▾ show all ${feedAll.length} signals`}
+            </button>
+          )}
         </Field>
       </div>
     </div>

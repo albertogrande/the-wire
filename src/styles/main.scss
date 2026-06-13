@@ -167,9 +167,15 @@ a:hover { text-decoration-color: var(--accent); color: var(--accent-2); }
 }
 .wire-theme-toggle:hover { color: var(--fg); border-color: var(--accent); }
 .wire-strip {
-  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 0;
   padding: 9px 26px; font-size: 12.5px; letter-spacing: .02em;
 }
+.wire-strip .strip-item { display: inline-flex; align-items: baseline; gap: 6px; }
+.wire-strip .strip-item + .strip-item::before {
+  content: "·"; color: var(--bar-muted); margin: 0 10px;
+}
+.wire-strip .strip-right { margin-left: auto; gap: 14px; align-items: center; }
+.wire-strip .strip-right::before { content: none; } /* no dot before the right-aligned cluster */
 
 /* ---- status bar (always dark) ------------------------------------------- */
 .statusbar { background: var(--bar-bg); color: var(--bar-fg); border-bottom: 1px solid var(--bar-rule); }
@@ -447,6 +453,14 @@ a:hover { text-decoration-color: var(--accent); color: var(--accent-2); }
 .wf-lead-h { font-size: 36px; }
 .wf-lead-h-sm { font-size: 30px; }
 
+/* "show all signals" toggle under the feed */
+.wf-more-btn {
+  display: inline-flex; align-items: center; gap: 6px; margin-top: 12px;
+  font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .04em;
+  color: var(--accent-2); background: transparent; border: 0; padding: 6px 0; cursor: pointer;
+}
+.wf-more-btn:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
 /* dark terminal strip */
 .wf-bar { background: var(--bar-bg); color: var(--bar-fg); font-family: var(--font-mono); }
 .wf-bar a { color: var(--bar-fg); }
@@ -528,6 +542,28 @@ a:hover { text-decoration-color: var(--accent); color: var(--accent-2); }
   .ledger .num { text-align: left; }
   .led-text { min-width: 0; }
   .desks td:last-child { white-space: normal; }
+
+  /* de-box the htop panels into quiet magazine bands: a top rule + label,
+     no nested borders. Keeps the mono typography, loses the dashboard clutter. */
+  .wf-field {
+    border: 0; border-top: 1px solid var(--rule-strong); padding-top: 13px;
+    display: grid; grid-template-columns: 1fr auto; align-items: baseline; column-gap: 12px;
+  }
+  .wf-field-legend, .wf-field-right {
+    position: static; top: auto; left: auto; right: auto; background: none; padding: 0;
+  }
+  .wf-field-legend { grid-column: 1; }
+  .wf-field-right { grid-column: 2; justify-self: end; }
+  .wf-field-body { grid-column: 1 / -1; padding: 12px 0 2px; }
+
+  /* let the lead headline breathe; trim redundant kicker metadata */
+  .wf-hide-sm { display: none; }
+
+  /* collapse the terminal strip to the substance (scorecard); drop the
+     decorative VOL/EST/uptime/live furniture and the dot separators */
+  .wire-strip { gap: 5px 16px; font-size: 12px; }
+  .wire-strip .strip-deco { display: none; }
+  .wire-strip .strip-item + .strip-item::before { content: none; }
 }
 
 @media (max-width: 460px) {
