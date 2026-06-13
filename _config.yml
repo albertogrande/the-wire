@@ -37,6 +37,9 @@ nav:
 exclude:
   - README.md
   - Gemfile
+  - Gemfile.lock
+  - vendor          # CI vendors gems here (bundler-cache); keep them off the site
   - signals
+  - scripts
   - .claude
   - .github

@@ -1,0 +1,56 @@
+---
+layout: null
+---
+<?xml version="1.0" encoding="utf-8"?>
+{%- comment -%}
+  Hand-written Atom feed. The weeklies and deep dives are plain front-matter-
+  less .md pages (jekyll-optional-front-matter), not Jekyll posts, so
+  jekyll-feed can't see them — this iterates site.pages instead, so the agents
+  keep writing flat markdown and the feed just works. Entry dates are derived
+  from the filename: deep dives carry a YYYY-MM-DD prefix; weeklies carry an
+  ISO week (YYYY-Wnn), mapped to that week's Monday for ordering.
+{%- endcomment -%}
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>{{ site.title | xml_escape }}</title>
+  <subtitle>{{ site.description | strip_newlines | xml_escape }}</subtitle>
+  <link href="{{ '/feed.xml' | absolute_url }}" rel="self" type="application/atom+xml"/>
+  <link href="{{ '/' | absolute_url }}" rel="alternate" type="text/html"/>
+  <updated>{{ site.time | date_to_xmlschema }}</updated>
+  <id>{{ '/' | absolute_url }}</id>
+  <author><name>{{ site.author | default: site.title | xml_escape }}</name></author>
+  <rights>CC BY 4.0</rights>
+
+  {%- assign weeklies = site.pages | where_exp: "p", "p.dir == '/reports/'" | sort: "path" | reverse -%}
+  {%- for p in weeklies -%}
+    {%- assign fname = p.path | split: "/" | last | split: "." | first -%}
+    {%- if fname contains "MEMORY" or fname contains "TASTE" -%}{%- continue -%}{%- endif -%}
+    {%- comment -%} Monday of the ISO week: Jan 4 is always in week 1, so
+      Monday(week 1) = Jan 4 − (isoweekday(Jan 4) − 1) days, then add the weeks. {%- endcomment -%}
+    {%- assign wparts = fname | split: "-W" -%}
+    {%- assign jan4 = wparts[0] | append: "-01-04T00:00:00Z" -%}
+    {%- assign wdoff = jan4 | date: "%u" | minus: 1 | times: 86400 -%}
+    {%- assign weekoff = wparts[1] | minus: 1 | times: 604800 -%}
+    {%- assign epoch = jan4 | date: "%s" | minus: wdoff | plus: weekoff -%}
+  <entry>
+    <title>{{ p.title | default: fname | xml_escape }}</title>
+    <link href="{{ p.url | absolute_url }}" rel="alternate" type="text/html"/>
+    <id>{{ p.url | absolute_url }}</id>
+    <updated>{{ epoch | date: "%Y-%m-%dT00:00:00Z" }}</updated>
+    <published>{{ epoch | date: "%Y-%m-%dT00:00:00Z" }}</published>
+    <category term="The Week"/>
+  </entry>
+  {%- endfor -%}
+
+  {%- assign dives = site.pages | where_exp: "p", "p.dir == '/reports/deep-dives/'" | sort: "path" | reverse -%}
+  {%- for p in dives -%}
+    {%- assign dstr = p.path | split: "/" | last | slice: 0, 10 -%}
+  <entry>
+    <title>{{ p.title | default: p.path | xml_escape }}</title>
+    <link href="{{ p.url | absolute_url }}" rel="alternate" type="text/html"/>
+    <id>{{ p.url | absolute_url }}</id>
+    <updated>{{ dstr | append: "T12:00:00Z" | date_to_xmlschema }}</updated>
+    <published>{{ dstr | append: "T12:00:00Z" | date_to_xmlschema }}</published>
+    <category term="Deep Dive"/>
+  </entry>
+  {%- endfor -%}
+</feed>

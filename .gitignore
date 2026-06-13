@@ -4,3 +4,7 @@ _site/
 vendor/
 .bundle/
 Gemfile.lock
+
+# Python (scripts/)
+__pycache__/
+*.pyc

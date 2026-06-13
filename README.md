@@ -99,6 +99,8 @@ If you build one, a ⭐ helps the next reader find the newsroom.
 ```
 MASTHEAD.md            # identity, desks, editorial charter
 index.md, _config.yml  # GitHub Pages site
+feed.xml               # Atom feed over weeklies + deep dives
+_data/predictions.yml  # scorecard source of truth (status bar + /predictions/)
 reports/
   MEMORY.md            # threads, predictions + Brier scorecard, coverage index
   TASTE.md             # the reader's accumulated preferences
@@ -106,7 +108,15 @@ reports/
   deep-dives/          # dives and specials, dated
   quarters/            # The Quarter, e.g. 2026-Q2.md
 signals/               # The Feed: daily capture, one file per ISO week
+scripts/               # predictions validator + due-prediction watch (CI only)
 ```
+
+CI keeps the publication honest without touching quota: every PR builds the
+site and link-checks it (`.github/workflows/ci.yml`), a script validates the
+scorecard's source of truth (`scripts/check_predictions.py`), and a daily
+watch opens an issue when an open prediction's due date passes
+(`.github/workflows/prediction-watch.yml`). The site is subscribable at
+[`/feed.xml`](feed.xml).
 
 ## License
 

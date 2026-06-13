@@ -1,0 +1,59 @@
+name: Prediction Watch
+
+# The publication grades itself in public — but only if a due prediction is
+# never forgotten. Each morning this checks _data/predictions.yml for OPEN
+# predictions whose due date has passed and, if any have, opens one issue so
+# the next weekly settles them (RIGHT/WRONG + Brier). No Claude, no quota.
+on:
+  schedule:
+    - cron: "0 7 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Install PyYAML
+        run: pip install --quiet pyyaml
+
+      - name: Find predictions due for grading
+        id: due
+        run: |
+          # Write to a file, never through the shell — prediction text can
+          # contain backticks and other characters bash would interpret.
+          python3 scripts/due_predictions.py > /tmp/due.md
+          if [ -s /tmp/due.md ]; then
+            echo "has_due=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_due=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Open a grading issue
+        if: steps.due.outputs.has_due == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create prediction-due --color D93F0B \
+            --description "An OPEN prediction has reached its due date" 2>/dev/null || true
+          # One standing issue at a time — don't reopen the nag every morning.
+          EXISTING=$(gh issue list --label prediction-due --state open --limit 1 --json number --jq '.[].number')
+          if [ -n "$EXISTING" ]; then
+            echo "Grading issue #$EXISTING is already open; nothing to do."
+            exit 0
+          fi
+          {
+            echo "These prediction(s) have reached their due date and are still **OPEN**. The next issue should settle each one — say what was predicted at what confidence, what happened, the RIGHT/WRONG/PARTIAL verdict, and its Brier score — then update the row in \`_data/predictions.yml\` (set \`status\`, add \`brier\`) and mirror it in \`reports/MEMORY.md\`."
+            echo
+            cat /tmp/due.md
+            echo
+            echo "_Opened automatically by the prediction-watch workflow. Close it once the predictions are graded._"
+          } > /tmp/body.md
+          gh issue create --title "⏰ Predictions due for grading" --label prediction-due --body-file /tmp/body.md
