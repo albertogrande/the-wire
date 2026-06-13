@@ -29,7 +29,7 @@ overwrite unless explicitly asked.
 2. Every weekly issue and deep dive dated inside the quarter — fully, not
    skimmed. Note each piece's main claims, takes, and predictions. This
    includes the **daily dives** in `reports/deep-dives/` (the bylined
-   columnist pieces and Sunday bakeoffs), not just the weekly long-form ones.
+   columnist pieces), not just the weekly long-form ones.
 3. The signals files are optional color (only if a point needs a date).
 
 Light verification only: if a thread's ending isn't in the archive (the

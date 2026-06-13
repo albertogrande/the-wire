@@ -45,8 +45,7 @@ magazine gets sharper the longer it runs.
   steelmanned) or **The Obituary** (something died; honest retrospective).
 - **The Daily Dive** (Tue–Sun) — a shorter technical dive under a rotating
   columnist byline ([AUTHORS.md](AUTHORS.md)): evergreen "how it works" by
-  default, the day's news only when it earns a durable explainer. Sundays
-  run a three-columnist **bakeoff** on one topic.
+  default, the day's news only when it earns a durable explainer.
 - **The Quarter** (every ~13 weeks, on demand) — retrospective from the
   archive: thread arcs, the Brier scorecard reviewed honestly, then-vs-now.
 - **The Feed** (daily, internal) — the scout's raw signals in `signals/`,
@@ -78,7 +77,7 @@ follows end to end — scheduled by GitHub Actions:
 - `.github/workflows/daily-dive.yml` — Tue–Sun 01:00 Madrid (00:00 CET in
   winter), an hour after the scout and skipping Monday's flagship; runs the
   daily dive and opens a `deep-dive` issue per piece. `workflow_dispatch`
-  inputs: `mode` (rotation/bakeoff), `columnist`, `topic`.
+  inputs: `columnist`, `topic`.
 - `_config.yml` + `index.md` — the magazine's face: a GitHub Pages site
   rendering the archive (masthead, The Week, dives, quarters, newsroom).
 

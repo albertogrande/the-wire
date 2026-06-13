@@ -18,13 +18,13 @@ engineering reality.
 
 ## Rotation
 
-- The daily dive (Tue–Sat) is written by **one** columnist, chosen by ISO
+- The daily dive (Tue–Sun) is written by **one** columnist, chosen by ISO
   date so it's deterministic and each gets ~equal slots:
   `author = roster[ (days since 1970-01-01 UTC) mod 3 ]`
   with `roster = [Marlow Quist, June Okafor, Theo Vance]`.
-- **Sunday is the bakeoff**: all three write the *same* topic; the reader
-  picks the winner. The pick is logged (see the daily-dive skill) so a
-  preference signal accumulates into `reports/TASTE.md`.
+- When the reader prefers one columnist's voice (in session or via issue
+  comments), that lesson is logged into `reports/TASTE.md` so the experiment
+  can settle over time.
 - The **Monday flagship** (The Week + its long dive) stays unbylined **house
   voice** — the columnists are a daily-dive device, not the masthead.
 
@@ -77,6 +77,3 @@ subtitle line, with the columnist's desk name:
 
 *Deep dive · Marlow Quist (The Analyst) · 2026-06-13 · <one-line frame>*
 ```
-
-For the Sunday bakeoff, the three entries share a date and topic and each
-carry their own byline; see the daily-dive skill for the file layout.

@@ -19,7 +19,7 @@ permalink: /about/
     <tr><td><strong>The Feed</strong></td><td>Raw dated signals — captured while findable. Internal; feeds the editor.</td><td>Daily</td></tr>
     <tr><td><strong>The Week</strong></td><td>One essay on what mattered, plus Also-this-week, Mailbag, and a scored prediction.</td><td>Monday</td></tr>
     <tr><td><strong>Deep Dive</strong></td><td>One subject taken seriously: history, players, numbers, the discussion, the other side.</td><td>Weekly</td></tr>
-    <tr><td><strong>The Daily Dive</strong></td><td>A shorter technical dive under a rotating columnist byline; evergreen "how it works" by default, the day's news when it earns it. A three-columnist bakeoff on Sundays.</td><td>Tue–Sun</td></tr>
+    <tr><td><strong>The Daily Dive</strong></td><td>A shorter technical dive under a rotating columnist byline; evergreen "how it works" by default, the day's news when it earns it.</td><td>Tue–Sun</td></tr>
     <tr><td><strong>The Quarter</strong></td><td>Retrospective from the archive: thread arcs, the scorecard reviewed honestly, then vs. now.</td><td>~13 weeks</td></tr>
     <tr><td><strong>Specials</strong></td><td>The Debate (both sides steelmanned) or The Obituary (something that died, given its due).</td><td>When earned</td></tr>
   </tbody>

@@ -1,6 +1,6 @@
 ---
 name: daily-dive
-description: Write The Wire's DAILY deep dive (~1,200–1,800 words) under a rotating columnist byline. Picks a topic from today's scout signals or the evergreen backlog (evergreen wins by default; news must earn its slot), writes it in the day's columnist voice, and saves to reports/deep-dives/. On Sundays, runs the three-author bakeoff on one shared topic. Use when asked to run the daily dive.
+description: Write The Wire's DAILY deep dive (~1,200–1,800 words) under a rotating columnist byline. Picks a topic from today's scout signals or the evergreen backlog (evergreen wins by default; news must earn its slot), writes it in the day's columnist voice, and saves to reports/deep-dives/. Use when asked to run the daily dive.
 ---
 
 # Daily Dive
@@ -33,14 +33,12 @@ IDX=$(( ( $(date -u +%s) / 86400 ) % 3 ))   # 0,1,2 → roster index
 
 - **Monday (`DOW=1`)**: do nothing — the weekly flagship owns Monday. Exit
   and say so.
-- **Tue–Sat (`DOW` 2–6)**: **rotation**. The columnist is
-  `roster[IDX]` where `roster = [Marlow Quist, June Okafor, Theo Vance]`
-  (the order in `AUTHORS.md`). One dive, that columnist's voice.
-- **Sunday (`DOW=7`)**: **bakeoff**. All three columnists write the *same*
-  topic. See "Bakeoff" below.
+- **Tue–Sun (`DOW` 2–7)**: the columnist is `roster[IDX]` where
+  `roster = [Marlow Quist, June Okafor, Theo Vance]` (the order in
+  `AUTHORS.md`). One dive, that columnist's voice.
 
-Honor explicit overrides when given (a named columnist, a named topic, or
-`mode=bakeoff` / `mode=rotation`) — they win over the date math.
+Honor explicit overrides when given (a named columnist or a named topic) —
+they win over the date math.
 
 ## Step 1 — Choose the topic
 
@@ -115,27 +113,10 @@ links on key claims; no sources section.>
 - Always land the "so what" for a working engineer: what to do, watch, or
   stop worrying about.
 
-### Bakeoff (Sunday)
-
-Same topic, three columnists, three files — a head-to-head the reader judges.
-
-- Pick **one** topic (Step 1) that suits all three lenses — something with a
-  measurable angle, a contestable consensus, *and* a practitioner angle.
-- Write three pieces, one per columnist, each a full ~1,200–1,800-word dive
-  in that columnist's voice, to:
-  `reports/deep-dives/<YYYY-MM-DD>-bakeoff-<slug>-<analyst|contrarian|builder>.md`
-- Each carries its own byline subtitle, with `· Bakeoff ·` in the frame so
-  it's clear they're a set, e.g.
-  `*Deep dive · June Okafor (The Contrarian) · Bakeoff · 2026-06-14 · …*`.
-- Do **not** declare a winner — that's the reader's call. The published
-  GitHub issues are the voting surface; record the reader's pick in
-  `reports/TASTE.md` when they make it (see Step 4).
-
 ## Step 4 — Update memory and the backlog
 
 `reports/MEMORY.md`:
 - Append to the **coverage index** (date, title, topic, columnist, format).
-  For a bakeoff, one line noting all three.
 - If a piece makes a falsifiable call, add it to the **predictions ledger**
   with an explicit confidence %.
 - Keep the file under ~150 lines.
@@ -150,9 +131,9 @@ Mirror into the site's data files (the published site reads these):
   `status: open`).
 - A piece advancing a running thread → update `_data/threads.yml`.
 
-If the reader has stated a bakeoff preference (in session or via issue
-comments), record the durable lesson in `reports/TASTE.md` — which voice
-landed and why — and prune one-off reactions.
+If the reader has stated a preference for one columnist's voice (in session
+or via issue comments), record the durable lesson in `reports/TASTE.md` —
+which voice landed and why — and prune one-off reactions.
 
 ## Step 5 — Save
 

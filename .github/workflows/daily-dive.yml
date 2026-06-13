@@ -10,15 +10,8 @@ on:
     - cron: "0 23 * * 0,2,3,4,5,6"
   workflow_dispatch:
     inputs:
-      mode:
-        description: "rotation = the day's columnist; bakeoff = all three on one topic"
-        type: choice
-        options:
-          - rotation
-          - bakeoff
-        default: rotation
       columnist:
-        description: "Override the rotating columnist (e.g. 'Theo Vance'; ignored for bakeoff)"
+        description: "Override the rotating columnist (e.g. 'Theo Vance')"
         type: string
         default: ""
       topic:
@@ -41,12 +34,10 @@ jobs:
       - name: Compose prompt
         id: prompt
         env:
-          MODE: ${{ github.event.inputs.mode }}
           COLUMNIST: ${{ github.event.inputs.columnist }}
           TOPIC: ${{ github.event.inputs.topic }}
         run: |
-          PROMPT="Run the daily-dive skill (.claude/skills/daily-dive/SKILL.md): write today's daily deep dive exactly as the skill instructs, choosing author and mode from the date unless overridden below."
-          if [ -n "$MODE" ];      then PROMPT="$PROMPT Mode override: $MODE."; fi
+          PROMPT="Run the daily-dive skill (.claude/skills/daily-dive/SKILL.md): write today's daily deep dive exactly as the skill instructs, choosing the columnist from the date unless overridden below."
           if [ -n "$COLUMNIST" ]; then PROMPT="$PROMPT Columnist override: $COLUMNIST."; fi
           if [ -n "$TOPIC" ];     then PROMPT="$PROMPT Topic override: $TOPIC."; fi
           PROMPT="$PROMPT Write files only — do not commit, push, or open issues."
@@ -60,8 +51,7 @@ jobs:
           prompt: ${{ steps.prompt.outputs.prompt }}
           show_full_output: true
           # Quota policy: the daily dive is a product surface — Opus 4.8, like
-          # the weekly. max-turns leaves room for research + (on Sundays) three
-          # bakeoff pieces in one run.
+          # the weekly. max-turns leaves room for the research fan-out.
           claude_args: >-
             --model claude-opus-4-8
             --max-turns 200
