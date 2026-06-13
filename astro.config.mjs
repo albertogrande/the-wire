@@ -14,7 +14,7 @@ export default defineConfig({
   base: '/the-wire',
   trailingSlash: 'ignore',
   build: { format: 'preserve' },
-  integrations: [react(), mdx(), sitemap({ filter: (page) => !page.includes('/lab') })],
+  integrations: [react(), mdx(), sitemap()],
   markdown: {
     remarkPlugins: [remarkStripH1, remarkRewriteMdLinks],
   },

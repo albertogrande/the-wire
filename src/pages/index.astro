@@ -1,10 +1,50 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import WireFront from '../components/WireFront.tsx';
 import { getFrontData } from '../lib/frontData';
-
+import { withBase } from '../lib/wire';
 const wire = await getFrontData();
+const wk = wire.theWeek;
 ---
 <BaseLayout title="The Wire" home>
-  <WireFront wire={wire} client:load />
+  <div class="fm">
+    {wk && (
+      <a href={wk.href} class="fm-box">
+        <span class="fm-legend">THE&nbsp;WEEK</span>
+        <div class="fm-kick"><span class="amber"># </span>week {wk.weekNum} · {wk.mins} min · {wk.weekRange}</div>
+        <h1 class="fm-h">{wk.title}</h1>
+        <p class="fm-dek">{wk.dek}</p>
+        <span class="fm-read"><span class="amber">→</span> read the issue</span>
+      </a>
+    )}
+
+    <div class="fm-sec">
+      <span class="amber">##</span><span class="fm-sec-l">latest</span>
+      <span class="fm-rule" aria-hidden="true"></span>
+      <span class="dim">{String(wire.dives.length).padStart(2, '0')}</span>
+    </div>
+    <ul class="fm-list">
+      {wire.dives.map((d, i) => (
+        <li class="fm-row">
+          <span class="fm-ln">{String(i + 1).padStart(2, '0')}</span>
+          <div class="fm-rowmain">
+            <a href={d.href} class="fm-row-t">{d.title}</a>
+            <p class="fm-row-dek">{d.dek}</p>
+            <div class="fm-row-m">
+              <span class="amber">{d.date.slice(5)}</span>
+              <span class="dim">·</span><span>{d.desk}</span>
+              {d.author && <Fragment><span class="dim">·</span><span>{d.author}</span></Fragment>}
+              <span class="dim">·</span><span>{d.mins}m</span>
+            </div>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <footer class="fm-keys">
+      <a href={withBase('/feed')}><b>g</b> feed</a>
+      <a href={withBase('/predictions/')}><b>p</b> predictions</a>
+      <a href={withBase('/threads/')}><b>t</b> threads</a>
+      <a href={withBase('/about/')}><b>?</b> about</a>
+    </footer>
+  </div>
 </BaseLayout>

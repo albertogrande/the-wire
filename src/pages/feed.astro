@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Feed from '../components/Feed.tsx';
+import { getFrontData } from '../lib/frontData';
+const { feed, beats } = await getFrontData();
+---
+<BaseLayout title="The Feed">
+  <div class="page-head">
+    <div class="kicker"><span class="prompt" aria-hidden="true">$</span> captured while findable</div>
+    <h1 class="page-title">The feed</h1>
+    <p class="dek">
+      Raw dated signals swept from across the beats — the live wire the weekly editor reads from.
+      Newest first; filter by beat.
+    </p>
+  </div>
+  <Feed feed={feed} beats={beats} client:load />
+</BaseLayout>
