@@ -40,6 +40,7 @@ exclude:
   - Gemfile.lock
   - vendor          # CI vendors gems here (bundler-cache); keep them off the site
   - signals
+  - topics
   - scripts
   - .claude
   - .github

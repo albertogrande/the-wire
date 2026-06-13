@@ -1,0 +1,146 @@
+name: Daily Dive
+
+on:
+  schedule:
+    # Tue–Sun 23:00 UTC — one hour after the scout (22:00) so today's signals
+    # are committed before the dive reads them. Madrid sleep window, fresh-ish
+    # quota. Monday is skipped: the weekly flagship (04:00 Mon) owns that day.
+    # cron day-of-week: 0=Sun … 6=Sat → Tue–Sun = 0,2,3,4,5,6 (no Monday).
+    - cron: "0 23 * * 0,2,3,4,5,6"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "rotation = the day's columnist; bakeoff = all three on one topic"
+        type: choice
+        options:
+          - rotation
+          - bakeoff
+        default: rotation
+      columnist:
+        description: "Override the rotating columnist (e.g. 'Theo Vance'; ignored for bakeoff)"
+        type: string
+        default: ""
+      topic:
+        description: "Deep-dive topic (optional; engine picks if empty)"
+        type: string
+        default: ""
+
+permissions:
+  contents: write
+  issues: write
+  id-token: write
+
+jobs:
+  dive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compose prompt
+        id: prompt
+        env:
+          MODE: ${{ github.event.inputs.mode }}
+          COLUMNIST: ${{ github.event.inputs.columnist }}
+          TOPIC: ${{ github.event.inputs.topic }}
+        run: |
+          PROMPT="Run the daily-dive skill (.claude/skills/daily-dive/SKILL.md): write today's daily deep dive exactly as the skill instructs, choosing author and mode from the date unless overridden below."
+          if [ -n "$MODE" ];      then PROMPT="$PROMPT Mode override: $MODE."; fi
+          if [ -n "$COLUMNIST" ]; then PROMPT="$PROMPT Columnist override: $COLUMNIST."; fi
+          if [ -n "$TOPIC" ];     then PROMPT="$PROMPT Topic override: $TOPIC."; fi
+          PROMPT="$PROMPT Write files only — do not commit, push, or open issues."
+          echo "prompt=$PROMPT" >> "$GITHUB_OUTPUT"
+
+      - name: Research and write
+        id: claude
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: ${{ steps.prompt.outputs.prompt }}
+          show_full_output: true
+          # Quota policy: the daily dive is a product surface — Opus 4.8, like
+          # the weekly. max-turns leaves room for research + (on Sundays) three
+          # bakeoff pieces in one run.
+          claude_args: >-
+            --model claude-opus-4-8
+            --max-turns 200
+            --allowedTools "WebSearch,WebFetch,Read,Write,Edit,Glob,Grep,Bash(date *),Bash(ls *),Bash(mkdir *)"
+
+      # claude-code-action reports success even when Claude errors on turn one,
+      # so assert the contract: a new dive file dated today must exist. (Monday
+      # legitimately produces nothing — the skill exits — but cron never fires
+      # Monday; a manual Monday run that writes nothing fails here by design.)
+      - name: Verify a dive was written
+        run: |
+          TODAY=$(date -u +%Y-%m-%d)
+          if ! git ls-files --others --exclude-standard reports/deep-dives/ | grep -q "^reports/deep-dives/${TODAY}-.*\.md$"; then
+            echo "::error::No new reports/deep-dives/${TODAY}-*.md file — Claude wrote nothing (silent auth/API failure, or a Monday no-op run). Check the Research step transcript."
+            exit 1
+          fi
+
+      - name: Commit and push
+        id: commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          NEW_DIVES=$(git ls-files --others --exclude-standard reports/deep-dives/ | grep '\.md$' || true)
+          git add reports/ topics/ _data/
+          if git diff --cached --quiet; then
+            echo "Nothing was generated." >&2
+            exit 1
+          fi
+          {
+            echo "new_dives<<EOF"
+            echo "$NEW_DIVES"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "Daily dive: $(echo "$NEW_DIVES" | xargs -n1 basename | paste -sd ', ' -)"
+          # claude-code-action revokes its app token at step end; push with the
+          # workflow token.
+          git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Open issues with the dives
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create deep-dive --color 5319E7 --description "Deep dives & specials" 2>/dev/null || true
+          while IFS= read -r DIVE; do
+            [ -z "$DIVE" ] && continue
+            TITLE=$(grep -m1 '^# ' "$DIVE" | sed 's/^# //')
+            gh issue create \
+              --title "🔬 $TITLE" \
+              --body-file "$DIVE" \
+              --label "deep-dive"
+          done <<< "${{ steps.commit.outputs.new_dives }}"
+
+      # Quota ledger: append this run's exact token/cost numbers, even on
+      # failure — failed runs have costs too.
+      - name: Record usage
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXEC_FILE: ${{ steps.claude.outputs.execution_file }}
+          MODEL: claude-opus-4-8
+        run: |
+          mkdir -p usage
+          [ -f usage/ledger.csv ] || echo "date_utc,workflow,run_id,result,model,turns,duration_ms,input_tokens,output_tokens,cache_read,cache_created,cost_usd" > usage/ledger.csv
+          if [ -n "$EXEC_FILE" ] && [ -f "$EXEC_FILE" ]; then
+            jq -r --arg d "$(date -u +%Y-%m-%dT%H:%MZ)" --arg w "$GITHUB_WORKFLOW" --arg r "$GITHUB_RUN_ID" --arg m "$MODEL" '
+              (last(.[] | select(.type=="result"))) as $res
+              | [$d, $w, $r, (if $res.is_error then "error" else "ok" end), $m,
+                 ($res.num_turns // 0), ($res.duration_ms // 0),
+                 ($res.usage.input_tokens // 0), ($res.usage.output_tokens // 0),
+                 ($res.usage.cache_read_input_tokens // 0), ($res.usage.cache_creation_input_tokens // 0),
+                 ($res.total_cost_usd // 0)] | @csv' "$EXEC_FILE" >> usage/ledger.csv || \
+              echo "$(date -u +%Y-%m-%dT%H:%MZ),$GITHUB_WORKFLOW,$GITHUB_RUN_ID,parse-failed,$MODEL,0,0,0,0,0,0,0" >> usage/ledger.csv
+          else
+            echo "$(date -u +%Y-%m-%dT%H:%MZ),$GITHUB_WORKFLOW,$GITHUB_RUN_ID,no-transcript,$MODEL,0,0,0,0,0,0,0" >> usage/ledger.csv
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add usage/ledger.csv
+          git commit -m "Usage: $GITHUB_WORKFLOW run $GITHUB_RUN_ID" || exit 0
+          git pull --rebase origin "$GITHUB_REF_NAME" || true
+          git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:${GITHUB_REF_NAME}"
