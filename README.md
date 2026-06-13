@@ -68,16 +68,17 @@ follows end to end — scheduled by GitHub Actions:
   topics from the scout's signals or the evergreen `topics/backlog.md`.
 - `.claude/skills/the-quarter/` — the retrospective desk.
 - `.claude/skills/daily-scout/` — the feed desk.
-- `.github/workflows/weekly-news.yml` — Monday 04:00 UTC: collects reader
-  comments, runs The Week + the second piece in one session, commits, and
-  opens one GitHub Issue per piece (`weekly-news` / `deep-dive` /
-  `the-quarter` labels). `workflow_dispatch` modes: `weekly`,
-  `deep-dive-only` (+ optional `topic`), `quarter`.
-- `.github/workflows/daily-scout.yml` — daily 22:00 UTC, commits signals.
-- `.github/workflows/daily-dive.yml` — Tue–Sun 23:00 UTC (after the scout;
-  skips Monday's flagship), runs the daily dive and opens a `deep-dive`
-  issue per piece. `workflow_dispatch` inputs: `mode` (rotation/bakeoff),
-  `columnist`, `topic`.
+- `.github/workflows/weekly-news.yml` — Monday early morning Madrid (06:00
+  CEST / 05:00 CET): collects reader comments, runs The Week + the second
+  piece in one session, commits, and opens one GitHub Issue per piece
+  (`weekly-news` / `deep-dive` / `the-quarter` labels). `workflow_dispatch`
+  modes: `weekly`, `deep-dive-only` (+ optional `topic`), `quarter`.
+- `.github/workflows/daily-scout.yml` — daily at midnight Madrid (00:00 CEST
+  / 23:00 CET), commits signals.
+- `.github/workflows/daily-dive.yml` — Tue–Sun 01:00 Madrid (00:00 CET in
+  winter), an hour after the scout and skipping Monday's flagship; runs the
+  daily dive and opens a `deep-dive` issue per piece. `workflow_dispatch`
+  inputs: `mode` (rotation/bakeoff), `columnist`, `topic`.
 - `_config.yml` + `index.md` — the magazine's face: a GitHub Pages site
   rendering the archive (masthead, The Week, dives, quarters, newsroom).
 

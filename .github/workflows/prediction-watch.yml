@@ -6,6 +6,7 @@ name: Prediction Watch
 # the next weekly settles them (RIGHT/WRONG + Brier). No Claude, no quota.
 on:
   schedule:
+    # Each morning in Madrid (09:00 CEST / 08:00 CET). Cron is UTC, hence 07:00.
     - cron: "0 7 * * *"
   workflow_dispatch: {}
 

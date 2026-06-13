@@ -2,9 +2,9 @@ name: The Wire
 
 on:
   schedule:
-    # Monday 04:00 UTC — overnight in Madrid (06:00 CEST / 05:00 CET), on a
+    # Monday early morning in Madrid (06:00 CEST / 05:00 CET) — overnight, on a
     # fresh quota window; the issue is ready at breakfast. Covers the
-    # just-completed Monday→Sunday week.
+    # just-completed Monday→Sunday week. Cron is UTC, hence 04:00.
     - cron: "0 4 * * 1"
   workflow_dispatch:
     inputs:

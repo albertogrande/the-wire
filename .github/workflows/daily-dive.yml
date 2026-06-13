@@ -2,9 +2,10 @@ name: Daily Dive
 
 on:
   schedule:
-    # Tue–Sun 23:00 UTC — one hour after the scout (22:00) so today's signals
-    # are committed before the dive reads them. Madrid sleep window, fresh-ish
-    # quota. Monday is skipped: the weekly flagship (04:00 Mon) owns that day.
+    # Tue–Sun 01:00 in Madrid (01:00 CEST / 00:00 CET) — one hour after the
+    # scout (midnight Madrid) so today's signals are committed before the dive
+    # reads them. Sleep window, fresh-ish quota. Monday is skipped: the weekly
+    # flagship (Mon morning Madrid) owns that day. Cron is UTC, hence 23:00.
     # cron day-of-week: 0=Sun … 6=Sat → Tue–Sun = 0,2,3,4,5,6 (no Monday).
     - cron: "0 23 * * 0,2,3,4,5,6"
   workflow_dispatch:
