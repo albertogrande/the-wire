@@ -1,0 +1,6 @@
+{%- case include.status -%}
+{%- when "correct" -%}<span class="chip chip-correct">✓ correct</span>
+{%- when "incorrect" -%}<span class="chip chip-incorrect">✗ incorrect</span>
+{%- when "partial" -%}<span class="chip chip-partial">~ partial</span>
+{%- else -%}<span class="chip chip-open">● open</span>
+{%- endcase -%}

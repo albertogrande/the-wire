@@ -199,10 +199,19 @@ Update `reports/MEMORY.md`:
   70% confident and right → 0.09; 70% and wrong → 0.49; lower is better).
 - Update the **scorecard** line: record (rights–wrongs) and mean Brier
   across all settled predictions.
-- Mirror the scorecard into `_data/scorecard.yml` so the site's masthead
-  ticker stays truthful: set `brier` (or `"—"` if none settled),
-  `brier_note`, `settled`, `record`, `open` (count of OPEN predictions),
-  and `next_due` (earliest OPEN prediction's due date).
+- Mirror every change into `_data/predictions.yml` — the **site's** source of
+  truth (the status bar, the front-page preview, and `/predictions/` all
+  derive the scorecard from it). For a new call append an entry
+  (`id`, `made`, `made_link: /reports/<file>.html`, `text`, `confidence`,
+  `due`, `status: open`). When settling, set `status` to
+  `correct`/`incorrect`/`partial`, add `settled_on` and the computed `brier`.
+  The site recomputes open count, record, mean Brier and next-due itself —
+  don't hand-maintain those.
+- Mirror thread changes into `_data/threads.yml` so `/threads/` and the
+  dashboard stay current: update each touched thread's `momentum`
+  (`up`/`steady`/`down`), refresh its `summary`, set or clear `tension`, and
+  append this issue to its `issues` list (`{ label, link: /reports/<file>.html }`).
+  Add a new thread block when a genuinely new storyline opens.
 - Append one line to the **coverage index** (week id, title, main topics).
 - Keep the whole file under ~150 lines; prune oldest detail first.
 

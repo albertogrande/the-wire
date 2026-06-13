@@ -7,19 +7,16 @@ baseurl: "/the-observer"
 lang: en
 author: The Observer
 
-theme: minima
-
-# These plugins (all on the GitHub Pages whitelist) let plain .md files
-# without frontmatter render as pages, with titles taken from their first
-# heading and relative .md links rewritten to .html — plus search-engine
-# meta tags (Open Graph, canonical URLs) and a sitemap for crawlers.
+# No theme gem — The Observer ships its own layouts, includes and stylesheet
+# (a custom terminal/editorial design). The plugins below are all on the
+# GitHub Pages whitelist and are theme-independent.
 plugins:
-  - jekyll-optional-front-matter
-  - jekyll-default-layout
-  - jekyll-titles-from-headings
-  - jekyll-relative-links
-  - jekyll-seo-tag
-  - jekyll-sitemap
+  - jekyll-optional-front-matter   # plain .md (no front matter) renders as a page
+  - jekyll-default-layout          # assigns the `page` layout to those pages
+  - jekyll-titles-from-headings    # page title taken from the first heading
+  - jekyll-relative-links          # rewrites relative .md links to .html
+  - jekyll-seo-tag                 # Open Graph / canonical / meta tags
+  - jekyll-sitemap                 # sitemap.xml for crawlers
 
 optional_front_matter:
   remove_originals: true
@@ -29,13 +26,17 @@ titles_from_headings:
   enabled: true
   strip_title: true
 
-# The newsroom's internals stay off the site.
+# Top-level navigation (rendered in the masthead).
+nav:
+  - { label: "Front",       url: "/" }
+  - { label: "Predictions", url: "/predictions/" }
+  - { label: "Threads",     url: "/threads/" }
+  - { label: "About",       url: "/about/" }
+
+# The newsroom's internals stay off the published site.
 exclude:
   - README.md
+  - Gemfile
   - signals
   - .claude
   - .github
-
-# Minima: no social noise, just the archive.
-show_excerpts: false
-header_pages: []

@@ -1,0 +1,53 @@
+---
+layout: default
+---
+{%- assign is_dive = false -%}
+{%- if page.url contains "/deep-dives/" -%}{%- assign is_dive = true -%}{%- endif -%}
+{%- assign fname = page.path | split: "/" | last | split: "." | first -%}
+{%- assign is_week = false -%}
+{%- if fname contains "-W" -%}{%- assign is_week = true -%}{%- endif -%}
+{%- assign mypred = site.data.predictions | where: "made_link", page.url | first -%}
+{%- assign mythreads = "" | split: "" -%}
+{%- for t in site.data.threads -%}{%- for i in t.issues -%}{%- if i.link == page.url -%}{%- assign mythreads = mythreads | push: t -%}{%- break -%}{%- endif -%}{%- endfor -%}{%- endfor -%}
+
+<article class="article">
+  <header class="article-head">
+    <div class="kicker">
+      {%- if is_dive -%}<span class="desk">Deep&nbsp;Dive</span>{%- elsif is_week -%}<span class="desk">The&nbsp;Week</span>{%- else -%}<span class="desk">The&nbsp;Observer</span>{%- endif -%}
+      {%- if is_week -%}{%- assign wp = fname | split: "-W" -%}<span class="kdot">░</span>Week {{ wp[1] }}, {{ wp[0] }}
+      {%- elsif is_dive -%}{%- assign dstr = fname | slice: 0, 10 -%}<span class="kdot">░</span>{{ dstr | date: "%-d %B %Y" }}{%- endif -%}
+    </div>
+    <h1 class="article-title">{{ page.title }}</h1>
+  </header>
+
+  <div class="article-body">
+    {{ content }}
+  </div>
+
+  <footer class="article-foot">
+    {%- if mypred -%}
+    <div class="foot-block">
+      <div class="kicker"><span class="prompt" aria-hidden="true">&gt;</span> this issue's call</div>
+      <a class="foot-pred" href="{{ '/predictions/' | relative_url }}#{{ mypred.id }}">
+        {% include prediction-chip.html status=mypred.status %}
+        <span class="foot-pred-text">{{ mypred.text | strip_html | truncate: 130 }}</span>
+        <span class="foot-pred-conf">{{ mypred.confidence }}%</span>
+      </a>
+    </div>
+    {%- endif -%}
+    {%- if mythreads.size > 0 -%}
+    <div class="foot-block">
+      <div class="kicker">advances</div>
+      <ul class="foot-threads">
+        {%- for t in mythreads -%}
+        <li><a href="{{ '/threads/' | relative_url }}#{{ t.slug }}">{{ t.title }}</a> <span class="mom mom-{{ t.momentum }}" aria-hidden="true">{% if t.momentum == 'up' %}↑{% elsif t.momentum == 'down' %}↓{% else %}→{% endif %}</span></li>
+        {%- endfor -%}
+      </ul>
+    </div>
+    {%- endif -%}
+    <div class="foot-block foot-nav">
+      <a href="{{ '/' | relative_url }}">← front page</a>
+      <a href="{{ '/predictions/' | relative_url }}">the ledger →</a>
+    </div>
+  </footer>
+</article>
