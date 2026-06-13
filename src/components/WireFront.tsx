@@ -2,41 +2,9 @@
 // are shared chrome rendered by the layout (WireChrome.astro); this island
 // owns the interactive panels: lead tabs, expandable threads, beat-filtered feed.
 import { useState, type CSSProperties, type ReactNode } from 'react';
-import type { FeedItem } from '../lib/signals';
+import type { WireData } from '../lib/frontData';
 
-export interface WireData {
-  theWeek: {
-    no: number;
-    weekNum: string;
-    weekId: string;
-    weekRange: string;
-    published: string;
-    title: string;
-    dek: string;
-    mins: number;
-    href: string;
-  } | null;
-  dives: {
-    date: string;
-    title: string;
-    dek: string;
-    author: string;
-    desk: string;
-    mins: number;
-    href: string;
-  }[];
-  threads: {
-    slug: string;
-    title: string;
-    momentum: 'up' | 'steady' | 'down';
-    summary: string;
-    tension?: string;
-    issues: { label: string; href: string | null }[];
-  }[];
-  predictions: { id: string; conf: number; due: string; text: string; href: string }[];
-  beats: string[];
-  feed: FeedItem[];
-}
+export type { WireData };
 
 const mono: CSSProperties = { fontFamily: 'var(--font-mono)' };
 const MOM: Record<string, string> = { up: '↑', steady: '→', down: '↓' };

@@ -1,0 +1,10 @@
+---
+import LabLayout from '../../layouts/LabLayout.astro';
+import LabMono from '../../components/lab/LabMono.tsx';
+import { getFrontData } from '../../lib/frontData';
+import { scorecard } from '../../lib/data';
+const wire = await getFrontData();
+---
+<LabLayout title="Lab A · Monospace Grid">
+  <LabMono wire={wire} score={scorecard} client:load />
+</LabLayout>

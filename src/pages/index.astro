@@ -1,75 +1,9 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import WireFront, { type WireData } from '../components/WireFront.tsx';
-import { threads, openPredictions } from '../lib/data';
-import { parseSignals } from '../lib/signals';
-import {
-  deriveMeta,
-  sortByDateDesc,
-  weekParts,
-  weekRange,
-  publishedOn,
-  withBase,
-  type Meta,
-} from '../lib/wire';
+import WireFront from '../components/WireFront.tsx';
+import { getFrontData } from '../lib/frontData';
 
-const [weeklyC, divesC, signalsC] = await Promise.all([
-  getCollection('weekly'),
-  getCollection('dives'),
-  getCollection('signals'),
-]);
-
-const weeklies: Meta[] = weeklyC.map(deriveMeta).sort(sortByDateDesc);
-const dives: Meta[] = divesC.map(deriveMeta).sort(sortByDateDesc);
-const lead = weeklies[0];
-
-const { items: feed, beats } = parseSignals(signalsC);
-
-const wire: WireData = {
-  theWeek: lead
-    ? {
-        no: weeklies.length,
-        weekNum: weekParts(lead.id).week,
-        weekId: lead.id,
-        weekRange: weekRange(lead.standfirst),
-        published: publishedOn(lead.date),
-        title: lead.title,
-        dek: lead.dek,
-        mins: lead.mins,
-        href: lead.href,
-      }
-    : null,
-  dives: dives.map((d) => ({
-    date: d.id.slice(0, 10),
-    title: d.title,
-    dek: d.dek,
-    author: d.byline ?? '',
-    desk: d.byline ? (d.desk ?? 'Deep Dive') : 'Deep Dive',
-    mins: d.mins,
-    href: d.href,
-  })),
-  threads: threads.map((t) => ({
-    slug: t.slug,
-    title: t.title,
-    momentum: t.momentum,
-    summary: t.summary,
-    tension: t.tension,
-    issues: (t.issues ?? []).map((i) => ({
-      label: i.label,
-      href: i.link ? withBase(i.link) : null,
-    })),
-  })),
-  predictions: openPredictions.map((p) => ({
-    id: p.id,
-    conf: p.confidence,
-    due: p.due,
-    text: p.text,
-    href: `${withBase('/predictions/')}#${p.id}`,
-  })),
-  beats,
-  feed,
-};
+const wire = await getFrontData();
 ---
 <BaseLayout title="The Wire" home>
   <WireFront wire={wire} client:load />

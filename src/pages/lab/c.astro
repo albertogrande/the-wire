@@ -1,0 +1,10 @@
+---
+import LabLayout from '../../layouts/LabLayout.astro';
+import LabLight from '../../components/lab/LabLight.tsx';
+import { getFrontData } from '../../lib/frontData';
+import { scorecard } from '../../lib/data';
+const wire = await getFrontData();
+---
+<LabLayout title="Lab C · Modern Cards">
+  <LabLight wire={wire} score={scorecard} client:load />
+</LabLayout>

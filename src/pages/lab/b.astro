@@ -1,0 +1,10 @@
+---
+import LabLayout from '../../layouts/LabLayout.astro';
+import LabNews from '../../components/lab/LabNews.tsx';
+import { getFrontData } from '../../lib/frontData';
+import { scorecard } from '../../lib/data';
+const wire = await getFrontData();
+---
+<LabLayout title="Lab B · Newswire">
+  <LabNews wire={wire} score={scorecard} client:load />
+</LabLayout>

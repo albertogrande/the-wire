@@ -1,0 +1,23 @@
+---
+// Minimal, light-only shell for the /lab design experiments. Imports the base
+// tokens (fonts, colors) + the lab stylesheet. noindex + unlinked: these are
+// throwaway prototypes, not part of the published site.
+import '../styles/main.scss';
+import '../styles/lab.scss';
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{title} · The Wire lab</title>
+  </head>
+  <body class="lab-body">
+    <slot />
+  </body>
+</html>
