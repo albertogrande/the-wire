@@ -1,0 +1,41 @@
+# The predictions ledger — the site's source of truth for the scorecard.
+# The status bar and /predictions/ derive everything (open count, record,
+# mean Brier, next due) from this file. The weekly + deep-dive desks keep it
+# in sync with reports/MEMORY.md every time a prediction is made or settled.
+#
+# status: open | correct | partial | incorrect
+# confidence: integer percent (the stated confidence)
+# brier: only on settled rows — (confidence/100 − outcome)², outcome 1 if it
+#        happened. Leave blank while open.
+
+- id: 2026-w23-copilot-walkback
+  made: "2026-W23"
+  made_link: "/reports/2026-W23.html"
+  text: >-
+    GitHub partially walks back Copilot pricing (extends promo credits past
+    Aug, restores fallback model, or cuts the Opus multiplier) within 30 days,
+    without reversing metering itself.
+  confidence: 70
+  due: "2026-07-05"
+  status: open
+
+- id: dive-2026-06-11-unlimited-house-tier
+  made: "Dive · 2026-06-11"
+  made_link: "/reports/deep-dives/2026-06-11-ai-coding-honest-pricing.html"
+  text: >-
+    At least two of {GitHub, Cursor, Anthropic} ship an "unlimited on our
+    own/house models" flat tier (subsidy internalized, frontier stays metered).
+  confidence: 65
+  due: "2027-Q1"
+  status: open
+
+- id: dive-2026-06-12-oidc-ref-binding
+  made: "Dive · 2026-06-12"
+  made_link: "/reports/deep-dives/2026-06-12-trust-stack-human-speed.html"
+  text: >-
+    GitHub/npm ship branch/ref binding for OIDC trusted publishing (the actual
+    Miasma hole) — and a worm generation defeats npm v12's script-off default
+    before that ships.
+  confidence: 55
+  due: "2026-Q4"
+  status: open

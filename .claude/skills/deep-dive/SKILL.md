@@ -92,6 +92,14 @@ Update `reports/MEMORY.md`:
   ledger** — always with an explicit confidence percentage.
 - Keep the file under ~150 lines.
 
+Then mirror into the site's data files (the published site reads these, not
+MEMORY.md):
+- If the dive made a call, append it to `_data/predictions.yml`
+  (`id`, `made: "Dive · <date>"`, `made_link: /reports/deep-dives/<file>.html`,
+  `text`, `confidence`, `due`, `status: open`).
+- If the dive advances or opens a running thread, update `_data/threads.yml`
+  (momentum, summary, append `{ label, link }` to that thread's `issues`).
+
 ## Step 5 — Save
 
 Write the dive and the MEMORY.md update. Do **not** commit, push, or open

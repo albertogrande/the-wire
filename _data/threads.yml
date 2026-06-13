@@ -1,0 +1,74 @@
+# Running threads — the publication's open storylines. Mirrors the threads
+# section of reports/MEMORY.md so /threads/ and the dashboard can render them
+# as a navigable map. The weekly desk updates momentum and appends issue links.
+#
+# momentum: up (gaining) | steady | down (stalling)
+# tension:  optional — evidence cutting against the thread
+
+- slug: ai-goes-public
+  title: "AI goes public / the repricing"
+  momentum: up
+  summary: >-
+    Anthropic filed its S-1 (Jun 1, ~$965B, ~$47B run-rate); SpaceX–xAI
+    roadshow; OpenAI S-1 ~Jun 8. The market now punishes deceleration
+    (Broadcom −15%, Nasdaq −4% Jun 5). The AI trade has become a macro variable.
+  issues:
+    - { label: "2026-W23", link: "/reports/2026-W23.html" }
+
+- slug: ai-coding-subsidy-died
+  title: "The AI coding subsidy died"
+  momentum: up
+  summary: >-
+    Copilot token billing went live Jun 1 (10–50× bills, Opus multiplier
+    7.5×→27×, paid code review); Cursor seat split; Anthropic Agent SDK credit
+    split Jun 15. Flat-rate AI tooling is ending industry-wide — the meter is a
+    boundary, not a business; the end state is vertical integration.
+  issues:
+    - { label: "2026-W23", link: "/reports/2026-W23.html" }
+    - { label: "Dive · The Meter Is the Confession", link: "/reports/deep-dives/2026-06-11-ai-coding-honest-pricing.html" }
+
+- slug: supply-chain-vs-throughput
+  title: "Supply chain vs. AI throughput"
+  momentum: up
+  summary: >-
+    Miasma (32 Red Hat npm packages, valid SLSA provenance via stolen OIDC)
+    plus IronWorm (36 packages harvesting AI API keys). Provenance and
+    install-script scanning both defeated. Review/trust infra is the
+    bottleneck while AI code generation explodes.
+  tension: >-
+    Defenses ship at institution speed, attacks at copy-paste speed; the
+    exploited OIDC ref-binding hole remains unfixed (npm v12 closes install
+    scripts instead).
+  issues:
+    - { label: "2026-W23", link: "/reports/2026-W23.html" }
+    - { label: "Dive · The Trust Stack", link: "/reports/deep-dives/2026-06-12-trust-stack-human-speed.html" }
+
+- slug: who-pays-for-ai-power
+  title: "Who pays for AI's power"
+  momentum: steady
+  summary: >-
+    PJM's uncapped capacity auction is imminent; dueling studies on data
+    centers vs. household bills; 1GW bring-your-own-power deals (Vantage–
+    Liberty). A sleeper populist-politics story.
+  issues:
+    - { label: "2026-W23", link: "/reports/2026-W23.html" }
+
+- slug: apple-buys-its-frontier
+  title: "Apple buys its frontier layer"
+  momentum: steady
+  summary: >-
+    A ~$1B/yr Gemini-for-Siri deal reported pre-WWDC; the keynote (Jun 8) is
+    the next window.
+  issues:
+    - { label: "2026-W23", link: "/reports/2026-W23.html" }
+
+- slug: washington-vs-labs
+  title: "Washington vs. the labs"
+  momentum: steady
+  summary: >-
+    A bipartisan preemption draft (Obernolte–Trahan, Jun 4: a 3-year state
+    freeze for transparency); export controls go extraterritorial; DeepSeek's
+    state-backed $7.4B raise as Beijing's answer; Trump floated government
+    equity stakes (thinly sourced).
+  issues:
+    - { label: "2026-W23", link: "/reports/2026-W23.html" }

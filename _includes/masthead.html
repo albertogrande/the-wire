@@ -1,0 +1,15 @@
+<header class="masthead" role="banner">
+  <div class="masthead-bar">
+    <a class="nameplate" href="{{ '/' | relative_url }}">
+      <span class="prompt" aria-hidden="true">$</span> the&nbsp;observer<span class="cursor" aria-hidden="true">▌</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      {% for item in site.nav %}
+      <a class="nav-link" href="{{ item.url | relative_url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.label }}</a>
+      {% endfor %}
+      <button id="theme-toggle" class="toggle" type="button" aria-label="Toggle light or dark theme" aria-pressed="false">
+        <span class="toggle-icon" aria-hidden="true">◐</span><span class="toggle-label">theme</span>
+      </button>
+    </nav>
+  </div>
+</header>
