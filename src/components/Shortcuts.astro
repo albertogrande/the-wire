@@ -1,0 +1,110 @@
+---
+// Global keyboard layer + client-side search (Pagefind). Makes the TUI key
+// hints real: `/` search, `j/k` move, `↵` open, `g` then h/a/f/p/t to jump,
+// `?` help, `esc` close. Search indexes the essays/dives (data-pagefind-body).
+import { withBase } from '../lib/wire';
+const base = withBase('/'); // e.g. "/the-wire/"
+---
+<div id="kbd-search" class="kbd-modal" data-base={base} hidden>
+  <div class="kbd-backdrop" data-close></div>
+  <div class="kbd-panel" role="dialog" aria-label="Search">
+    <div class="kbd-bar">
+      <span class="amber" aria-hidden="true">$</span>
+      <input id="kbd-input" type="search" placeholder="search the wire…" autocomplete="off" spellcheck="false" aria-label="Search the archive" />
+      <kbd>esc</kbd>
+    </div>
+    <div id="kbd-results" class="kbd-results" aria-live="polite"></div>
+  </div>
+</div>
+
+<div id="kbd-help" class="kbd-modal" hidden>
+  <div class="kbd-backdrop" data-close></div>
+  <div class="kbd-panel kbd-help" role="dialog" aria-label="Keyboard shortcuts">
+    <div class="kbd-help-h"><span class="amber">$</span> keyboard shortcuts</div>
+    <ul class="kbd-help-list">
+      <li><span><kbd>/</kbd></span> search</li>
+      <li><span><kbd>j</kbd> <kbd>k</kbd></span> move · <kbd>↵</kbd> open</li>
+      <li><span><kbd>g</kbd> <kbd>h</kbd></span> home</li>
+      <li><span><kbd>g</kbd> <kbd>a</kbd></span> archive</li>
+      <li><span><kbd>g</kbd> <kbd>f</kbd></span> feed</li>
+      <li><span><kbd>g</kbd> <kbd>p</kbd></span> predictions</li>
+      <li><span><kbd>g</kbd> <kbd>t</kbd></span> threads</li>
+      <li><span><kbd>?</kbd></span> this help · <kbd>esc</kbd> close</li>
+    </ul>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var root = document.getElementById('kbd-search');
+    if (!root) return;
+    var base = root.dataset.base || '/';
+    var search = root, help = document.getElementById('kbd-help');
+    var input = document.getElementById('kbd-input'), results = document.getElementById('kbd-results');
+    var pf = null, gPending = false, gTimer = null, navLinks = [], navIdx = -1, debounce;
+
+    function closeAll() { search.hidden = true; help.hidden = true; document.body.style.overflow = ''; }
+    function open(m) { closeAll(); m.hidden = false; document.body.style.overflow = 'hidden'; }
+    function openSearch() { open(search); input.value = ''; results.innerHTML = ''; input.focus(); }
+    function typing(e) { var t = e.target; return t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable); }
+    function go(path) { location.href = base.replace(/\/$/, '') + path; }
+
+    async function ensurePF() {
+      if (pf) return pf;
+      try { pf = await import(base + 'pagefind/pagefind.js'); } catch (e) { pf = 'ERR'; }
+      return pf;
+    }
+    function fixUrl(u) {
+      if (!u) return base;
+      if (u.indexOf(base) === 0) return u;
+      return base.replace(/\/$/, '') + (u.charAt(0) === '/' ? u : '/' + u);
+    }
+    function esc(s) { return (s || '').replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+    async function run(q) {
+      if (!q.trim()) { results.innerHTML = ''; return; }
+      var p = await ensurePF();
+      if (p === 'ERR') { results.innerHTML = '<div class="kbd-empty">— search index unavailable (build the site) —</div>'; return; }
+      var r = await p.search(q);
+      var items = await Promise.all(r.results.slice(0, 8).map(function (x) { return x.data(); }));
+      if (!items.length) { results.innerHTML = '<div class="kbd-empty">— no matches —</div>'; return; }
+      results.innerHTML = items.map(function (it) {
+        var url = fixUrl(it.url);
+        var title = esc((it.meta && it.meta.title) || 'untitled');
+        var desk = it.meta && it.meta.desk ? '<span class="kbd-r-desk">' + esc(it.meta.desk) + '</span>' : '';
+        return '<a class="kbd-result" href="' + url + '"><span class="kbd-r-top"><span class="kbd-r-title">' + title + '</span>' + desk + '</span><span class="kbd-r-ex">' + it.excerpt + '</span></a>';
+      }).join('');
+    }
+    if (input) input.addEventListener('input', function () { clearTimeout(debounce); debounce = setTimeout(function () { run(input.value); }, 120); });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { closeAll(); return; }
+      if (typing(e)) return;
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      if (gPending) {
+        gPending = false; clearTimeout(gTimer);
+        var map = { h: '/', a: '/archive', f: '/feed', p: '/predictions/', t: '/threads/', b: '/about/' };
+        if (map[e.key] !== undefined) { e.preventDefault(); go(map[e.key]); }
+        return;
+      }
+      if (e.key === '/') { e.preventDefault(); openSearch(); return; }
+      if (e.key === '?') { e.preventDefault(); help.hidden ? open(help) : closeAll(); return; }
+      if (e.key === 'g') { gPending = true; gTimer = setTimeout(function () { gPending = false; }, 1200); return; }
+      if (e.key === 'j' || e.key === 'k') {
+        e.preventDefault();
+        if (!navLinks.length) {
+          var main = document.getElementById('main') || document.body;
+          navLinks = Array.prototype.slice.call(main.querySelectorAll('a[href]')).filter(function (a) { return a.offsetParent !== null; });
+        }
+        if (!navLinks.length) return;
+        navIdx = e.key === 'j' ? Math.min(navIdx + 1, navLinks.length - 1) : Math.max(navIdx - 1, 0);
+        navLinks[navIdx].focus();
+      }
+    });
+
+    var btn = document.getElementById('open-search');
+    if (btn) btn.addEventListener('click', openSearch);
+    Array.prototype.forEach.call(document.querySelectorAll('[data-close]'), function (el) { el.addEventListener('click', closeAll); });
+    window.__wireSearch = openSearch;
+  })();
+</script>

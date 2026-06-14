@@ -29,6 +29,7 @@ const isCurrent = (url: string) => (withBase(url).replace(/\/$/, '') || '/') ===
       {nav.map((n) => (
         <a href={withBase(n.url)} class={isCurrent(n.url) ? 'is-here' : ''} aria-current={isCurrent(n.url) ? 'page' : undefined}>--{n.label}</a>
       ))}
+      <button id="open-search" class="chrome-toggle chrome-search" type="button" aria-label="Search">⌕</button>
       <button id="theme-toggle" class="chrome-toggle" type="button" aria-label="Toggle light or dark theme" aria-pressed="false">◐</button>
     </nav>
   </header>

@@ -32,10 +32,10 @@ const pred = predictionForUrl(meta.urlPath);
 const advances = threadsForUrl(meta.urlPath);
 ---
 <BaseLayout title={meta.title} description={meta.dek}>
-  <article class="article">
+  <article class="article" data-pagefind-body>
     <header class="article-head">
       <div class="kicker">
-        <span class="desk" set:html={desk} />
+        <span class="desk" data-pagefind-meta="desk" set:html={desk} />
         {stamp && <Fragment><span class="kdot">░</span>{stamp}</Fragment>}
       </div>
       <h1 class="article-title">{meta.title}</h1>

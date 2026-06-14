@@ -659,3 +659,29 @@ a.fd-t:hover { color: var(--accent); }
 .ar-title { font-family: var(--font-mono); font-weight: 700; font-size: 16px; line-height: 1.3; color: var(--fg); text-decoration: none; }
 .ar-title:hover { color: var(--accent); }
 .ar-meta { display: block; font-family: var(--font-mono); font-size: 11.5px; color: var(--muted); margin-top: 4px; }
+
+/* ---- keyboard layer: search + help overlays ---- */
+.kbd-modal { position: fixed; inset: 0; z-index: 50; display: flex; align-items: flex-start; justify-content: center; }
+.kbd-modal[hidden] { display: none; }
+.kbd-backdrop { position: absolute; inset: 0; background: rgba(17,17,17,.45); }
+.kbd-panel { position: relative; width: min(640px, 92vw); margin-top: 11vh; background: var(--bg); border: 1px solid var(--fg); box-shadow: 0 18px 50px rgba(0,0,0,.25); font-family: var(--font-mono); }
+.kbd-bar { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-bottom: 1px solid var(--rule-strong); }
+.kbd-bar .amber { font-weight: 700; }
+#kbd-input { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--fg); font-family: var(--font-mono); font-size: 15px; outline: none; }
+.kbd-results { max-height: 56vh; overflow-y: auto; }
+.kbd-result { display: block; padding: 11px 14px; border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--fg); }
+.kbd-result:last-child { border-bottom: 0; }
+.kbd-result:hover, .kbd-result:focus { background: var(--hl); outline: none; }
+.kbd-r-top { display: flex; align-items: baseline; gap: 10px; }
+.kbd-r-title { font-weight: 700; font-size: 14.5px; }
+.kbd-r-desk { font-size: 11px; color: var(--accent-2); white-space: nowrap; }
+.kbd-r-ex { display: block; font-family: var(--font-serif); font-size: 13.5px; line-height: 1.45; color: var(--muted); margin-top: 4px; }
+.kbd-r-ex mark { background: var(--hl); color: var(--accent); padding: 0 2px; }
+.kbd-empty { padding: 16px 14px; font-size: 13px; color: var(--faint); }
+.kbd-help { padding: 16px 18px; }
+.kbd-help-h { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+.kbd-help-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; font-size: 12.5px; color: var(--muted); }
+.kbd-help-list li { display: flex; align-items: baseline; gap: 10px; }
+.kbd-help-list li > span:first-child { flex: 0 0 84px; }
+kbd { font-family: var(--font-mono); font-size: 11px; background: var(--surface); border: 1px solid var(--rule-strong); border-bottom-width: 2px; border-radius: 3px; padding: 1px 5px; color: var(--fg); }
+.chrome-search { font-size: 16px; line-height: 1; }

@@ -3,6 +3,7 @@ import '../styles/main.scss';
 import Head from '../components/Head.astro';
 import WireChrome from '../components/WireChrome.astro';
 import Footer from '../components/Footer.astro';
+import Shortcuts from '../components/Shortcuts.astro';
 
 interface Props {
   title: string;
@@ -24,6 +25,7 @@ const { title, description, home = false } = Astro.props;
       )
     }
     <Footer />
+    <Shortcuts />
     <script is:inline>
       (function () {
         var btn = document.getElementById('theme-toggle');
