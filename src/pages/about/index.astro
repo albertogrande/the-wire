@@ -19,14 +19,42 @@ import { withBase } from '../../lib/wire';
     <table class="desks">
       <thead><tr><th>Desk</th><th>What it produces</th><th>When</th></tr></thead>
       <tbody>
-        <tr><td data-label="Desk"><strong>The Feed</strong></td><td data-label="What it produces">Raw dated signals — captured while findable. Published live on the front page; feeds the editor.</td><td data-label="When">Daily</td></tr>
-        <tr><td data-label="Desk"><strong>The Week</strong></td><td data-label="What it produces">One essay on what mattered, plus Also-this-week, Mailbag, and a scored prediction.</td><td data-label="When">Monday</td></tr>
+        <tr><td data-label="Desk"><strong>The Feed</strong></td><td data-label="What it produces">Raw dated signals — captured while findable. Published on its own page; feeds the editor.</td><td data-label="When">Daily</td></tr>
+        <tr><td data-label="Desk"><strong>The Week</strong></td><td data-label="What it produces">One essay on what mattered, plus Also-this-week, Mailbag, and a scored prediction.</td><td data-label="When">Weekly</td></tr>
         <tr><td data-label="Desk"><strong>Deep Dive</strong></td><td data-label="What it produces">One subject taken seriously: history, players, numbers, the discussion, the other side.</td><td data-label="When">Weekly</td></tr>
-        <tr><td data-label="Desk"><strong>The Daily Dive</strong></td><td data-label="What it produces">A shorter technical dive under a rotating columnist byline; evergreen "how it works" by default, the day's news when it earns it.</td><td data-label="When">Tue–Sun</td></tr>
-        <tr><td data-label="Desk"><strong>The Quarter</strong></td><td data-label="What it produces">Retrospective from the archive: thread arcs, the scorecard reviewed honestly, then vs. now.</td><td data-label="When">~13 weeks</td></tr>
+        <tr><td data-label="Desk"><strong>The Daily Dive</strong></td><td data-label="What it produces">A shorter technical dive under a rotating columnist byline; evergreen "how it works" by default, the day's news when it earns it.</td><td data-label="When">Daily</td></tr>
+        <tr><td data-label="Desk"><strong>The Quarter</strong></td><td data-label="What it produces">Retrospective from the archive: thread arcs, the scorecard reviewed honestly, then vs. now.</td><td data-label="When">Quarterly</td></tr>
         <tr><td data-label="Desk"><strong>Specials</strong></td><td data-label="What it produces">The Debate (both sides steelmanned) or The Obituary (something that died, given its due).</td><td data-label="When">When earned</td></tr>
       </tbody>
     </table>
+
+    <h2 class="kicker">The feed, the ledger &amp; the threads</h2>
+
+    <p>Three parts of the site live on their own rhythm, apart from the essays:</p>
+
+    <p>
+      <strong>The feed</strong> is the raw capture layer. A scout sweeps the beats every day — the
+      news, and the discussions practitioners are actually having — and files dated one-line
+      <a href={withBase('/feed')}>signals</a>. It's deliberately unfiltered; the point is to catch
+      things while they're findable. The editor reads from it, and so can you — newest first,
+      filterable by beat.
+    </p>
+
+    <p>
+      <strong>The ledger</strong> is where the publication keeps score. Most pieces carry one
+      falsifiable prediction — a specific claim, an explicit confidence, and a date it comes due.
+      Nothing is quietly dropped: predictions accumulate as pieces are written, and each is
+      <a href={withBase('/predictions/')}>settled in public</a> when it falls due — right or wrong,
+      then scored.
+    </p>
+
+    <p>
+      <strong>The threads</strong> are the open storylines, carried across issues so the publication
+      compounds instead of forgetting. Each tracks momentum — gaining, steady, or stalling — and
+      notes the evidence cutting against it. When a new piece moves a story forward, its
+      <a href={withBase('/threads/')}>thread</a> is updated. They're the connective tissue:
+      “connect, don't list” made visible.
+    </p>
 
     <h2 class="kicker">How it's made</h2>
 
