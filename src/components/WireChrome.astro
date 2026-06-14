@@ -1,7 +1,7 @@
 ---
 // Terminal chrome (mono-grid design). A `$ the wire` mark with a blinking
-// cursor, `--flag` nav, and a slim command-line context row that doubles as a
-// breadcrumb. Width follows the page: 760 for the front, --wrap for reading.
+// cursor and `--flag` nav. Width follows the page: 760 for the front,
+// --wrap for reading.
 import { withBase } from '../lib/wire';
 
 interface Props {
@@ -18,22 +18,6 @@ const nav = [
 ];
 const here = Astro.url.pathname.replace(/\/$/, '') || '/';
 const isCurrent = (url: string) => (withBase(url).replace(/\/$/, '') || '/') === here;
-
-const seg = here === (withBase('/').replace(/\/$/, '') || '/') ? '' : here.split('/').filter(Boolean).pop() ?? '';
-const cmd =
-  here === (withBase('/').replace(/\/$/, '') || '/')
-    ? 'wire read --latest'
-    : here.includes('/predictions')
-      ? 'wire score --ledger'
-      : here.includes('/threads')
-        ? 'wire threads --open'
-        : here.includes('/feed')
-          ? 'wire feed --live'
-          : here.includes('/about')
-            ? 'wire --about'
-            : here.includes('/reports')
-              ? `less ${seg}`
-              : 'wire';
 ---
 <div class="chrome" style={`max-width:${max}`}>
   <header class="chrome-head">
@@ -47,5 +31,4 @@ const cmd =
       <button id="theme-toggle" class="chrome-toggle" type="button" aria-label="Toggle light or dark theme" aria-pressed="false">◐</button>
     </nav>
   </header>
-  <div class="chrome-cmd"><span class="dim">~/the-wire</span> <span class="amber">$</span> {cmd}<span class="cur" aria-hidden="true">▌</span></div>
 </div>
