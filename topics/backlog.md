@@ -99,7 +99,7 @@ overtakes becomes a `news-to-framework` piece instead — that's fine.
 
 - [what-every-engineer-should-know] What a benchmark number actually measures —
   and how to read a model card without being fooled (Contrarian) — 2026-06-13,
-  reports/deep-dives/2026-06-13-reading-a-coding-benchmark.md
+  reports/deep-dives/2026-06-12-reading-a-coding-benchmark.md
 - [practical-guide] Designing a subagent fan-out that doesn't blow your token
   budget (Builder) — 2026-06-13,
   reports/deep-dives/2026-06-13-subagent-fan-out-budget.md

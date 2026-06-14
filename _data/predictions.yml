@@ -20,8 +20,8 @@
   status: open
 
 - id: dive-2026-06-11-unlimited-house-tier
-  made: "Dive · 2026-06-11"
-  made_link: "/reports/deep-dives/2026-06-11-ai-coding-honest-pricing.html"
+  made: "Dive · 2026-06-07"
+  made_link: "/reports/deep-dives/2026-06-07-ai-coding-honest-pricing.html"
   text: >-
     At least two of {GitHub, Cursor, Anthropic} ship an "unlimited on our
     own/house models" flat tier (subsidy internalized, frontier stays metered).
@@ -30,8 +30,8 @@
   status: open
 
 - id: dive-2026-06-12-oidc-ref-binding
-  made: "Dive · 2026-06-12"
-  made_link: "/reports/deep-dives/2026-06-12-trust-stack-human-speed.html"
+  made: "Dive · 2026-06-10"
+  made_link: "/reports/deep-dives/2026-06-10-trust-stack-human-speed.html"
   text: >-
     GitHub/npm ship branch/ref binding for OIDC trusted publishing (the actual
     Miasma hole) — and a worm generation defeats npm v12's script-off default
@@ -41,8 +41,8 @@
   status: open
 
 - id: dive-2026-06-12-hard-spend-ceiling
-  made: "Dive · 2026-06-12"
-  made_link: "/reports/deep-dives/2026-06-12-autonomy-before-brakes.html"
+  made: "Dive · 2026-06-08"
+  made_link: "/reports/deep-dives/2026-06-08-autonomy-before-brakes.html"
   text: >-
     A major cloud or agent platform ships an enforced hard per-task/per-agent
     spend ceiling (not a budget alert) that the agent cannot cross.
@@ -51,8 +51,8 @@
   status: open
 
 - id: dive-2026-06-12-agent-liability-insurance
-  made: "Dive · 2026-06-12"
-  made_link: "/reports/deep-dives/2026-06-12-autonomy-before-brakes.html"
+  made: "Dive · 2026-06-08"
+  made_link: "/reports/deep-dives/2026-06-08-autonomy-before-brakes.html"
   text: >-
     "Agent liability" insurance appears OR a cloud publishes a runaway-agent
     forgiveness policy, mandating spend caps/observability as a condition.
@@ -61,8 +61,8 @@
   status: open
 
 - id: dive-2026-06-12-benchmark-spread
-  made: "Dive · 2026-06-12"
-  made_link: "/reports/deep-dives/2026-06-12-channel-was-the-product.html"
+  made: "Dive · 2026-06-09"
+  made_link: "/reports/deep-dives/2026-06-09-channel-was-the-product.html"
   text: >-
     The top frontier-vs-best-open-model spread on a major agentic benchmark
     (SWE-bench/MCPMark/Terminal-Bench) stays inside ~5 pts — no lab reopens a
@@ -72,8 +72,8 @@
   status: open
 
 - id: dive-2026-06-13-benchmark-ranking
-  made: "Dive · 2026-06-13"
-  made_link: "/reports/deep-dives/2026-06-13-reading-a-coding-benchmark.html"
+  made: "Dive · 2026-06-12"
+  made_link: "/reports/deep-dives/2026-06-12-reading-a-coding-benchmark.html"
   text: >-
     A contamination-resistant benchmark (SWE-bench Pro / SWE-rebench or
     successor) does NOT reproduce SWE-bench Verified's top-5 model ordering —
@@ -83,8 +83,8 @@
   status: open
 
 - id: dive-2026-06-13-llmops-feature
-  made: "Dive · 2026-06-13"
-  made_link: "/reports/deep-dives/2026-06-13-llmops-not-a-company.html"
+  made: "Dive · 2026-06-11"
+  made_link: "/reports/deep-dives/2026-06-11-llmops-not-a-company.html"
   text: >-
     No venture-funded independent LLM gateway/observability/eval company
     reaches a standalone outcome (IPO or $1B+ while independent) — the next two

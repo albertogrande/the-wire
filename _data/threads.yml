@@ -25,7 +25,7 @@
     boundary, not a business; the end state is vertical integration.
   issues:
     - { label: "2026-W23", link: "/reports/2026-W23.html" }
-    - { label: "Dive · The Meter Is the Confession", link: "/reports/deep-dives/2026-06-11-ai-coding-honest-pricing.html" }
+    - { label: "Dive · The Meter Is the Confession", link: "/reports/deep-dives/2026-06-07-ai-coding-honest-pricing.html" }
 
 - slug: supply-chain-vs-throughput
   title: "Supply chain vs. AI throughput"
@@ -41,7 +41,7 @@
     scripts instead).
   issues:
     - { label: "2026-W23", link: "/reports/2026-W23.html" }
-    - { label: "Dive · The Trust Stack", link: "/reports/deep-dives/2026-06-12-trust-stack-human-speed.html" }
+    - { label: "Dive · The Trust Stack", link: "/reports/deep-dives/2026-06-10-trust-stack-human-speed.html" }
 
 - slug: platforms-eat-the-layer
   title: "Platforms eat the layer"
@@ -55,7 +55,7 @@
     $7.3M seed despite Fortune-10 use and 11.6k stars. A wrapper around someone
     else's durable asset is a feature, not a company.
   issues:
-    - { label: "Dive · LLMOps Is a Feature", link: "/reports/deep-dives/2026-06-13-llmops-not-a-company.html" }
+    - { label: "Dive · LLMOps Is a Feature", link: "/reports/deep-dives/2026-06-11-llmops-not-a-company.html" }
 
 - slug: who-pays-for-ai-power
   title: "Who pays for AI's power"

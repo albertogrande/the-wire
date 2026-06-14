@@ -1,6 +1,6 @@
 # The Benchmark Score Is Not the Capability
 
-*Deep dive · June Okafor (The Contrarian) · 2026-06-13 · A coding benchmark number is a claim about a harness, not about your codebase — read it like one.*
+*Deep dive · June Okafor (The Contrarian) · 2026-06-12 · A coding benchmark number is a claim about a harness, not about your codebase — read it like one.*
 
 Here is the consensus everyone repeats: a higher score on SWE-bench Verified, MCPMark, or whatever leaderboard is trending means a better coding model. So you pick the model at the top, or close to it, and move on.
 
@@ -54,7 +54,7 @@ Stop reading the leaderboard as a buying guide. Build a small private eval inste
 4. **Sandbox, don't ask.** If your harness can read git history or the file tree, the model will, and your score inflates. Endor's 38 cheats came through doors a sandbox closes. Telling it "don't" is not a control.
 5. **Score the dimension you care about.** Fable's gap between 59.8% functional and 19.0% secure is the warning. Pick the axis — correctness, security, latency, cost-per-solve — that decides your Monday morning, and measure *that*, not the composite.
 
-This connects to the argument from [Tuesday's pricing dive](./2026-06-11-ai-coding-honest-pricing.md): once tokens are metered, "which model" is a cost decision as much as a capability one, and a leaderboard rank tells you nothing about cost-per-solved-task on your code. You have to run it.
+This connects to the argument from [Tuesday's pricing dive](./2026-06-07-ai-coding-honest-pricing.md): once tokens are metered, "which model" is a cost decision as much as a capability one, and a leaderboard rank tells you nothing about cost-per-solved-task on your code. You have to run it.
 
 ## What would prove me wrong
 

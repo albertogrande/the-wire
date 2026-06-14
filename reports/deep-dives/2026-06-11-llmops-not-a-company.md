@@ -1,6 +1,6 @@
 # LLMOps Is a Feature, Not a Company
 
-*Deep dive · June Okafor (The Contrarian) · 2026-06-13 · A funded, adopted, well-built open-source LLMOps startup just gave its money back. The product worked. The position didn't.*
+*Deep dive · June Okafor (The Contrarian) · 2026-06-11 · A funded, adopted, well-built open-source LLMOps startup just gave its money back. The product worked. The position didn't.*
 
 Here is the sentence almost everyone in this space repeats: running LLMs in
 production is hard enough that the tools to do it — the gateway in front of the
@@ -105,9 +105,9 @@ endpoint or the trace store. The need is permanent; the independent vendor is
 not.
 
 This is the same shape we keep finding under different stories. The
-[channel dive](./2026-06-12-channel-was-the-product.md) argued the moat is the
+[channel dive](./2026-06-09-channel-was-the-product.md) argued the moat is the
 distribution surface, not the model weights. The [pricing
-dive](./2026-06-11-ai-coding-honest-pricing.md) argued the meter is a transition
+dive](./2026-06-07-ai-coding-honest-pricing.md) argued the meter is a transition
 to owning the whole stack. This is the third face of one rule: in this market,
 value accrues to whoever owns a durable asset *adjacent* to your product, not to
 the cleverest thing built on top. The model endpoint is durable. The analytics

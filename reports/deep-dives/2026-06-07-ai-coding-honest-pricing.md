@@ -1,6 +1,6 @@
 # The Meter Is the Confession
 
-*Deep dive · 2026-06-11 · Can AI coding tools survive honest pricing — and was the flat rate ever real?*
+*Deep dive · 2026-06-07 · Can AI coding tools survive honest pricing — and was the flat rate ever real?*
 
 On June 1, 2026, two documents went out that look unrelated and are not. GitHub flipped 4.7 million paid Copilot seats from flat-ish "premium requests" to [token-metered AI Credits](https://github.blog/news-insights/company-news/github-copilot-is-moving-to-usage-based-billing/), billed at published API rates down to the cached token. The same day, Anthropic [confidentially filed a draft S-1](https://www.anthropic.com/news/confidential-draft-s1-sec) with the SEC. One company turned on the meter; another asked the public markets to grade its margins. These are the same event. The week the AI industry started preparing prospectuses is the week it stopped being able to lie about what your coding agent costs — and the meter, wherever it appeared this month, is best read not as a pricing model but as a confession.
 

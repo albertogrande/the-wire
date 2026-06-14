@@ -19,7 +19,7 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   ending industry-wide. Dive thesis: meter = boundary, not business; end
   state is vertical integration ("unlimited, on our models").
   → [2026-W23](./2026-W23.md),
-  [dive 2026-06-11](./deep-dives/2026-06-11-ai-coding-honest-pricing.md)
+  [dive 2026-06-07](./deep-dives/2026-06-07-ai-coding-honest-pricing.md)
 - **The channel war / off-ramps** `↑` — model + open harness both commoditizing
   (Kimi K2.7-Code beats Opus 4.8 on MCPMark 81.1/76.4 at ~1/10 price; OpenCode
   8M MAU, MIT). So spend moved to distribution: Google kills Gemini CLI for
@@ -28,7 +28,7 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   seeds install base. Four off-ramps: terminal/environment/rail/install base
   (+political). Sequel to the pricing dive: meter made substitutes real, channel
   is the fight once they exist. Dive thesis: the moat is the channel, not weights.
-  → [dive 2026-06-12 channel](./deep-dives/2026-06-12-channel-was-the-product.md)
+  → [dive 2026-06-09 channel](./deep-dives/2026-06-09-channel-was-the-product.md)
 - **Supply chain vs. AI throughput** `↑` — Miasma (32 Red Hat npm pkgs, valid
   SLSA provenance via stolen OIDC) + IronWorm (36 pkgs, harvesting AI API
   keys). Provenance + install-script scanning both defeated. Review/trust
@@ -37,7 +37,7 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   speed, attacks at copy-paste speed; the exploited OIDC ref-binding hole
   remains unfixed (npm v12 closes install scripts instead).
   → [2026-W23](./2026-W23.md),
-  [dive 2026-06-12](./deep-dives/2026-06-12-trust-stack-human-speed.md)
+  [dive 2026-06-10](./deep-dives/2026-06-10-trust-stack-human-speed.md)
 - **Autonomy before its brakes** `↑` — Agents shipped proactive-by-default
   (Fable 5 "relentlessly proactive," Claude Code nested sub-agents 5-deep +
   doubled 5h limits, FablePool) before the cost-control/consent/observability
@@ -47,7 +47,7 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   AWS has no hard cap by design; insurer is end state) + disclosure (Colorado
   AI Act delayed to Jan 1 2027 but kept its disclosure core; FCC KYC FNPRM) =
   undisclosed automation becoming a regulated category.
-  → [dive 2026-06-12-autonomy](./deep-dives/2026-06-12-autonomy-before-brakes.md)
+  → [dive 2026-06-08-autonomy](./deep-dives/2026-06-08-autonomy-before-brakes.md)
 - **Platforms eat the layer** `↑` — the LLMOps tool layer (gateway, tracing,
   eval, prompt store) is being absorbed from both ends: ClickHouse bought
   Langfuse (Jan, already built on ClickHouse; 23.1M SDK installs/mo) to own the
@@ -56,7 +56,7 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   returned ~half its $7.3M seed despite Fortune-10 use and 11.6k stars. Thesis:
   a wrapper around someone else's durable asset (model endpoint / analytics DB)
   is a feature, not a company. Third face of the channel/meter rule.
-  → [dive 2026-06-13 llmops](./deep-dives/2026-06-13-llmops-not-a-company.md)
+  → [dive 2026-06-11 llmops](./deep-dives/2026-06-11-llmops-not-a-company.md)
 - **Who pays for AI's power** `→` — PJM uncapped capacity auction imminent;
   dueling studies on data centers vs. household bills; 1GW
   bring-your-own-power deals (Vantage–Liberty). Sleeper populist-politics
