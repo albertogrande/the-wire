@@ -1,11 +1,16 @@
 name: Deploy site
 
 # Builds the Astro site and publishes it to GitHub Pages. Runs on every push to
-# main — including the commits the newsroom workflows make — so new content goes
-# live automatically. Pages must be set to "GitHub Actions" as its source.
+# main, AND after the newsroom content workflows finish — their commits are made
+# with GITHUB_TOKEN, which by design does NOT trigger `push` workflows, so the
+# workflow_run trigger is what actually publishes scheduled scout/dive/weekly
+# content. Pages must be set to "GitHub Actions" as its source.
 on:
   push:
     branches: [main]
+  workflow_run:
+    workflows: ["Daily Scout", "Daily Dive", "The Wire", "Prediction Watch"]
+    types: [completed]
   workflow_dispatch: {}
 
 permissions:
