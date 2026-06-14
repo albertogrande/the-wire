@@ -24,7 +24,7 @@ const wk = wire.theWeek;
     </div>
     <ul class="fm-list">
       {wire.dives.map((d, i) => (
-        <li class="fm-row">
+        <li class="fm-row" data-date={d.date}>
           <span class="fm-ln">{String(i + 1).padStart(2, '0')}</span>
           <div class="fm-rowmain">
             <a href={d.href} class="fm-row-t">{d.title}</a>
@@ -48,4 +48,24 @@ const wk = wire.theWeek;
       <a href={withBase('/about/')}><b>?</b> about</a>
     </footer>
   </div>
+
+  <script is:inline>
+    // Mark dives published since your last visit. Baseline advances only here
+    // (the front), so it isn't consumed by visiting other pages.
+    (function () {
+      try {
+        var KEY = 'wire-seen';
+        var rows = [].slice.call(document.querySelectorAll('.fm-row[data-date]'));
+        if (!rows.length) return;
+        var prev = localStorage.getItem(KEY);
+        var max = prev || '';
+        rows.forEach(function (el) {
+          var d = el.getAttribute('data-date');
+          if (d > max) max = d;
+          if (prev && d > prev) el.classList.add('is-new');
+        });
+        localStorage.setItem(KEY, max);
+      } catch (e) {}
+    })();
+  </script>
 </BaseLayout>
