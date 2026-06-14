@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { deriveMeta, sortByDateDesc, weekParts, weekRange, fmtShort, type Meta } from '../lib/wire';
+
+const [weeklyC, divesC, quartersC] = await Promise.all([
+  getCollection('weekly'),
+  getCollection('dives'),
+  getCollection('quarters'),
+]);
+const weeklies: Meta[] = weeklyC.map(deriveMeta).sort(sortByDateDesc);
+const dives: Meta[] = divesC.map(deriveMeta).sort(sortByDateDesc);
+const quarters: Meta[] = quartersC.map(deriveMeta).sort(sortByDateDesc);
+const total = weeklies.length + dives.length + quarters.length;
+---
+<BaseLayout title="Archive">
+  <div class="page-head">
+    <div class="kicker"><span class="prompt" aria-hidden="true">$</span> ls -t reports/</div>
+    <h1 class="page-title">Archive</h1>
+    <p class="dek">Everything the publication has filed — {total} pieces, newest first.</p>
+  </div>
+
+  <section class="archive">
+    <h2 class="kicker">Weekly issues <span class="ar-count">{weeklies.length}</span></h2>
+    <ul class="ar-list">
+      {weeklies.map((w, i) => (
+        <li class="ar-row">
+          <span class="ar-date">№{weeklies.length - i}</span>
+          <span class="ar-main">
+            <a class="ar-title" href={w.href}>{w.title}</a>
+            <span class="ar-meta">Week {weekParts(w.id).week}{weekRange(w.standfirst) ? ` · ${weekRange(w.standfirst)}` : ''} · {w.mins} min</span>
+          </span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="archive">
+    <h2 class="kicker">Deep dives &amp; specials <span class="ar-count">{dives.length}</span></h2>
+    <ul class="ar-list">
+      {dives.map((d) => (
+        <li class="ar-row">
+          <span class="ar-date">{fmtShort(d.date)}</span>
+          <span class="ar-main">
+            <a class="ar-title" href={d.href}>{d.title}</a>
+            <span class="ar-meta">{d.desk}{d.byline ? ` · ${d.byline}` : ''} · {d.mins} min</span>
+          </span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  {quarters.length > 0 && (
+    <section class="archive">
+      <h2 class="kicker">Quarterly <span class="ar-count">{quarters.length}</span></h2>
+      <ul class="ar-list">
+        {quarters.map((q) => (
+          <li class="ar-row">
+            <span class="ar-date">{q.id}</span>
+            <span class="ar-main">
+              <a class="ar-title" href={q.href}>{q.title}</a>
+              <span class="ar-meta">{q.mins} min</span>
+            </span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+</BaseLayout>
