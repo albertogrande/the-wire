@@ -43,8 +43,8 @@ jobs:
       # even on a quiet day.
       - name: Verify the scout actually ran
         run: |
-          TODAY=$(date -u +%Y-%m-%d)
-          WEEK_FILE="signals/$(date -u +%G-W%V).md"
+          TODAY=$(TZ=Europe/Madrid date +%Y-%m-%d)
+          WEEK_FILE="signals/$(TZ=Europe/Madrid date +%G-W%V).md"
           if ! grep -q "^## $TODAY" "$WEEK_FILE" 2>/dev/null; then
             echo "::error::No '## $TODAY' section in $WEEK_FILE — Claude wrote nothing (silent auth/API failure?). Check the Capture step transcript."
             exit 1
@@ -61,7 +61,7 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git commit -m "Scout: signals for $(date -u +%Y-%m-%d)"
+          git commit -m "Scout: signals for $(TZ=Europe/Madrid date +%Y-%m-%d)"
           # claude-code-action rewrites the remote URL to its app token and
           # revokes it when its step ends, so push with the workflow token.
           git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:${GITHUB_REF_NAME}"

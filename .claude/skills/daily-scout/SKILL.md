@@ -20,8 +20,8 @@ crisply.
 ## Step 1 — Where to write
 
 ```bash
-TODAY=$(date -u +%Y-%m-%d)
-WEEK_FILE="signals/$(date -u +%G-W%V).md"   # current ISO week
+TODAY=$(TZ=Europe/Madrid date +%Y-%m-%d)                  # Madrid calendar date
+WEEK_FILE="signals/$(TZ=Europe/Madrid date +%G-W%V).md"   # current ISO week (Madrid)
 ```
 
 Create the file if missing, with the header:

@@ -2,12 +2,13 @@ name: Daily Dive
 
 on:
   schedule:
-    # Tue–Sun 01:00 in Madrid (01:00 CEST / 00:00 CET) — one hour after the
-    # scout (midnight Madrid) so today's signals are committed before the dive
-    # reads them. Sleep window, fresh-ish quota. Monday is skipped: the weekly
-    # flagship (Mon morning Madrid) owns that day. Cron is UTC, hence 23:00.
-    # cron day-of-week: 0=Sun … 6=Sat → Tue–Sun = 0,2,3,4,5,6 (no Monday).
-    - cron: "0 23 * * 0,2,3,4,5,6"
+    # Tue–Sun in Madrid (the publication clock). Fires 23:00 UTC Mon–Sat, which
+    # is 01:00 Madrid Tue–Sun (CEST) / 00:00 Madrid Tue–Sun (CET) — always the
+    # next Madrid day, so files date Tue–Sun (see SKILL.md, Europe/Madrid). One
+    # hour after the scout (midnight Madrid) so today's signals are committed
+    # first. Monday (Madrid) is skipped: the weekly flagship owns it. Cron is
+    # UTC; day-of-week 1–6 = Mon–Sat UTC → Tue–Sun Madrid (no Madrid Monday).
+    - cron: "0 23 * * 1,2,3,4,5,6"
   workflow_dispatch:
     inputs:
       columnist:
@@ -63,7 +64,7 @@ jobs:
       # Monday; a manual Monday run that writes nothing fails here by design.)
       - name: Verify a dive was written
         run: |
-          TODAY=$(date -u +%Y-%m-%d)
+          TODAY=$(TZ=Europe/Madrid date +%Y-%m-%d)
           if ! git ls-files --others --exclude-standard reports/deep-dives/ | grep -q "^reports/deep-dives/${TODAY}-.*\.md$"; then
             echo "::error::No new reports/deep-dives/${TODAY}-*.md file — Claude wrote nothing (silent auth/API failure, or a Monday no-op run). Check the Research step transcript."
             exit 1

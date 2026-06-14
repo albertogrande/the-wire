@@ -23,12 +23,12 @@ timeless explainer underneath it — never a hot take that expires in a week.
 
 ## Step 0 — Who's writing, and in what mode
 
-Compute the day (UTC) deterministically:
+Compute the day in **Europe/Madrid** (the publication's clock) deterministically:
 
 ```bash
-DOW=$(date -u +%u)                 # 1=Mon … 7=Sun
-TODAY=$(date -u +%Y-%m-%d)
-IDX=$(( ( $(date -u +%s) / 86400 ) % 3 ))   # 0,1,2 → roster index
+DOW=$(TZ=Europe/Madrid date +%u)                       # 1=Mon … 7=Sun (Madrid)
+TODAY=$(TZ=Europe/Madrid date +%Y-%m-%d)               # Madrid calendar date
+IDX=$(( ( $(date -u -d "$TODAY" +%s) / 86400 ) % 3 ))  # 0,1,2 → roster index
 ```
 
 - **Monday (`DOW=1`)**: do nothing — the weekly flagship owns Monday. Exit
@@ -44,8 +44,8 @@ they win over the date math.
 
 Two pools. **Evergreen wins by default**; news must out-argue it.
 
-**Pool A — News-pegged.** Read today's `## <TODAY>` block in
-`signals/$(date -u +%G-W%V).md` (the scout's capture). A signal qualifies
+**Pool A — News-pegged.** Read the latest `## <date>` block (the scout's most
+recent capture) in `signals/$(TZ=Europe/Madrid date +%G-W%V).md`. A signal qualifies
 only if it can become a *durable* explainer — a "how it works / why it
 matters in twelve months" piece — not a reaction.
 
