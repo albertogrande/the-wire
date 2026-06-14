@@ -685,3 +685,17 @@ a.fd-t:hover { color: var(--accent); }
 .kbd-help-list li > span:first-child { flex: 0 0 84px; }
 kbd { font-family: var(--font-mono); font-size: 11px; background: var(--surface); border: 1px solid var(--rule-strong); border-bottom-width: 2px; border-radius: 3px; padding: 1px 5px; color: var(--fg); }
 .chrome-search { font-size: 16px; line-height: 1; }
+
+/* ---- usage / cost page ---- */
+.usage-chart { width: 100%; height: auto; display: block; margin: 0 0 10px; }
+.usage-x { fill: var(--faint); font-size: 7px; font-family: var(--font-mono); }
+.usage-legend { display: flex; flex-wrap: wrap; gap: 14px; margin: 0 0 32px; font-family: var(--font-mono); font-size: 11.5px; color: var(--muted); }
+.usage-leg { display: inline-flex; align-items: center; gap: 6px; }
+.usage-sw { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+
+/* ---- calibration (predictions) ---- */
+.cal-note { font-family: var(--font-mono); font-size: 12.5px; color: var(--muted); margin: 0 0 14px; max-width: var(--measure); }
+.cal-bar { display: inline-flex; align-items: center; gap: 8px; }
+.cal-track { position: relative; width: 120px; max-width: 38vw; height: 7px; background: var(--rule); border-radius: 4px; }
+.cal-pred { position: absolute; top: -3px; width: 2px; height: 13px; background: var(--faint); }
+.cal-act { position: absolute; top: 0; height: 7px; border-radius: 4px; background: var(--accent); }

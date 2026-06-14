@@ -1,0 +1,102 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { loadUsage, groupBy } from '../lib/usage';
+
+const runs = loadUsage();
+const total = runs.reduce((s, r) => s + r.cost, 0);
+const totalTok = runs.reduce((s, r) => s + r.inTok + r.outTok, 0);
+const cacheRead = runs.reduce((s, r) => s + r.cacheRead, 0);
+const maxCost = Math.max(0.0001, ...runs.map((r) => r.cost));
+const byWf = groupBy(runs, 'workflow');
+const byModel = groupBy(runs, 'model');
+const range = runs.length ? `${runs[0].date.slice(0, 10)} → ${runs[runs.length - 1].date.slice(0, 10)}` : '—';
+
+const money = (n: number) => '$' + n.toFixed(2);
+const tok = (n: number) => (n >= 1e6 ? (n / 1e6).toFixed(1) + 'M' : n >= 1e3 ? Math.round(n / 1e3) + 'k' : String(n));
+const colors: Record<string, string> = {
+  'Daily Dive': '#b45309', 'Daily Scout': '#d97706', 'The Wire': '#92400e', 'Prediction Watch': '#a8a29e',
+};
+const color = (w: string) => colors[w] ?? '#b45309';
+const barW = 16, gap = 10, chartH = 110;
+---
+<BaseLayout title="What it costs">
+  <div class="page-head">
+    <div class="kicker"><span class="prompt" aria-hidden="true">$</span> cat usage/ledger.csv</div>
+    <h1 class="page-title">What it costs to run</h1>
+    <p class="dek">
+      The Wire runs on a Claude Max subscription via Claude Code and GitHub Actions. Every workflow
+      run appends its exact tokens and cost to a ledger — published here, in the build-in-public
+      spirit. {runs.length} run{runs.length === 1 ? '' : 's'} so far.
+    </p>
+  </div>
+
+  {runs.length === 0 ? (
+    <p class="muted-line">No runs recorded yet.</p>
+  ) : (
+    <>
+      <div class="scorecard">
+        <div class="score-cell"><span class="score-n">{money(total)}</span><span class="score-l">total spend</span></div>
+        <div class="score-cell"><span class="score-n">{runs.length}</span><span class="score-l">runs</span></div>
+        <div class="score-cell"><span class="score-n">{tok(totalTok)}</span><span class="score-l">tokens (in+out)</span></div>
+        <div class="score-cell"><span class="score-n">{money(total / runs.length)}</span><span class="score-l">avg / run</span></div>
+      </div>
+
+      <h2 class="kicker">Spend per run <span class="ar-count">{range}</span></h2>
+      <svg class="usage-chart" viewBox={`0 0 ${runs.length * (barW + gap)} ${chartH + 22}`} style={`max-width:${Math.max(280, runs.length * (barW + gap) * 1.4)}px`} role="img" aria-label="Cost per run">
+        <line x1="0" y1={chartH} x2={runs.length * (barW + gap)} y2={chartH} stroke="var(--rule-strong)" stroke-width="1" />
+        {runs.map((r, i) => {
+          const h = Math.max(1, (r.cost / maxCost) * (chartH - 6));
+          return (
+            <g>
+              <rect x={i * (barW + gap)} y={chartH - h} width={barW} height={h} fill={color(r.workflow)}>
+                <title>{r.workflow} · {r.date.slice(0, 10)} · {money(r.cost)}</title>
+              </rect>
+              <text x={i * (barW + gap) + barW / 2} y={chartH + 14} text-anchor="middle" class="usage-x">{r.date.slice(5, 10)}</text>
+            </g>
+          );
+        })}
+      </svg>
+
+      <div class="usage-legend">
+        {byWf.map((g) => (
+          <span class="usage-leg"><span class="usage-sw" style={`background:${color(g.key)}`}></span>{g.key}</span>
+        ))}
+      </div>
+
+      <h2 class="kicker">By desk</h2>
+      <table class="ledger">
+        <thead><tr><th>Workflow</th><th class="num">Runs</th><th class="num">Cost</th><th class="num">Share</th></tr></thead>
+        <tbody>
+          {byWf.map((g) => (
+            <tr>
+              <td data-label="Workflow">{g.key}</td>
+              <td class="num" data-label="Runs">{g.runs}</td>
+              <td class="num" data-label="Cost">{money(g.cost)}</td>
+              <td class="num" data-label="Share">{Math.round((g.cost / total) * 100)}%</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <h2 class="kicker">By model</h2>
+      <table class="ledger">
+        <thead><tr><th>Model</th><th class="num">Runs</th><th class="num">Cost</th></tr></thead>
+        <tbody>
+          {byModel.map((g) => (
+            <tr>
+              <td data-label="Model">{g.key}</td>
+              <td class="num" data-label="Runs">{g.runs}</td>
+              <td class="num" data-label="Cost">{money(g.cost)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <p class="ledger-note muted-line">
+        Cache reads: {tok(cacheRead)} tokens (prompt caching is most of the volume; the cost column
+        already reflects cached pricing). Source of truth:
+        <a href="https://github.com/albertogrande/the-wire/blob/main/usage/ledger.csv"><code>usage/ledger.csv</code></a>.
+      </p>
+    </>
+  )}
+</BaseLayout>

@@ -4,6 +4,21 @@ import PredictionChip from '../../components/PredictionChip.astro';
 import { predictions, scorecard } from '../../lib/data';
 import { withBase } from '../../lib/wire';
 const s = scorecard;
+
+// Reliability bands: how bold is the open book, and (as calls settle) does the
+// stated confidence match the real hit-rate?
+const settled = predictions.filter((p) => p.status !== 'open');
+const outcome = (st: string) => (st === 'correct' ? 1 : st === 'partial' ? 0.5 : 0);
+const edges = [40, 50, 60, 70, 80, 101];
+const cal = edges.slice(0, -1).map((lo, i) => {
+  const hi = edges[i + 1];
+  const inBand = (arr: typeof predictions) => arr.filter((p) => p.confidence >= lo && p.confidence < hi);
+  const open = inBand(predictions.filter((p) => p.status === 'open')).length;
+  const set = inBand(settled);
+  const pred = set.length ? set.reduce((a, p) => a + p.confidence, 0) / set.length : null;
+  const act = set.length ? (set.reduce((a, p) => a + outcome(p.status), 0) / set.length) * 100 : null;
+  return { lo, hi, open, n: set.length, pred, act };
+});
 ---
 <BaseLayout title="Predictions">
   <div class="page-head">
@@ -29,6 +44,39 @@ const s = scorecard;
     <div class="score-cell"><span class="score-n">{s.settled}</span><span class="score-l">settled</span></div>
   </div>
 
+  <h2 class="kicker">Calibration</h2>
+  <p class="cal-note">
+    The open book by confidence — and, as calls settle, whether the stated confidence matches the
+    real hit-rate (bar = actual, tick = claimed).
+  </p>
+  <table class="ledger">
+    <thead>
+      <tr><th>Confidence</th><th class="num">Open</th><th class="num">Settled</th><th>Actual vs claimed</th></tr>
+    </thead>
+    <tbody>
+      {cal.map((b) => (
+        <tr>
+          <td data-label="Confidence">{b.lo}–{b.hi === 101 ? 100 : b.hi}%</td>
+          <td class="num" data-label="Open">{b.open || <span class="muted-line">·</span>}</td>
+          <td class="num" data-label="Settled">{b.n || <span class="muted-line">·</span>}</td>
+          <td data-label="Actual vs claimed">
+            {b.n === 0 ? <span class="muted-line">—</span> : (
+              <span class="cal-bar">
+                <span class="cal-track">
+                  <span class="cal-act" style={`width:${b.act}%`}></span>
+                  <span class="cal-pred" style={`left:calc(${b.pred}% - 1px)`}></span>
+                </span>
+                <span class="muted-line">{Math.round(b.act!)}% / {Math.round(b.pred!)}%</span>
+              </span>
+            )}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  {settled.length === 0 && <p class="cal-note">— no calls settled yet · {s.open} open —</p>}
+
+  <h2 class="kicker">The ledger</h2>
   <table class="ledger">
     <thead>
       <tr><th>Made</th><th>Prediction</th><th class="num">Conf.</th><th>Due</th><th>Status</th><th class="num">Brier</th></tr>
