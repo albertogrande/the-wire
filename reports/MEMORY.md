@@ -10,9 +10,12 @@ Each thread carries a momentum tag (`↑` gaining / `→` steady / `↓`
 stalling) and, when evidence cuts against it, a `Tension:` note inline.
 
 - **AI goes public / the repricing** `↑` — Anthropic filed S-1 (Jun 1, ~$965B,
-  ~$47B run-rate); SpaceX–xAI roadshow; OpenAI S-1 expected/filed ~Jun 8.
-  Market now punishes deceleration (Broadcom -15% on unraised guidance;
-  Nasdaq -4% Jun 5). AI trade = macro variable. → [2026-W23](./2026-W23.md)
+  ~$47B run-rate); SpaceX–xAI roadshow; OpenAI confidential S-1 confirmed Jun
+  8–9 (~$1T target, Goldman+Morgan Stanley, listing late 2026). Market punishes
+  deceleration (Broadcom -15%; Nasdaq -4% Jun 5). AI trade = macro variable.
+  Tension: W24 added a new risk-factor line — a flagship model can be
+  administratively switched off overnight (Fable 5 export ban). → [2026-W23](./2026-W23.md),
+  [2026-W24](./2026-W24.md)
 - **The AI coding subsidy died** `↑` — Copilot token billing live Jun 1 (10–50x
   bills, Opus multiplier 7.5x→27x, paid code review); Cursor seat split;
   Anthropic Agent SDK credit split lands Jun 15. Flat-rate AI tooling is
@@ -28,7 +31,11 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   seeds install base. Four off-ramps: terminal/environment/rail/install base
   (+political). Sequel to the pricing dive: meter made substitutes real, channel
   is the fight once they exist. Dive thesis: the moat is the channel, not weights.
-  → [dive 2026-06-09 channel](./deep-dives/2026-06-09-channel-was-the-product.md)
+  W24: the political off-ramp went live — export controls hit the closed/legible
+  US leader (Anthropic) while open weights (Kimi/GLM/MiMo) walk free, confirming
+  the channel — not the weights — is what's actually contestable.
+  → [dive 2026-06-09 channel](./deep-dives/2026-06-09-channel-was-the-product.md),
+  [dive 2026-06-15](./deep-dives/2026-06-15-cannot-export-control-a-model.md)
 - **Supply chain vs. AI throughput** `↑` — Miasma (32 Red Hat npm pkgs, valid
   SLSA provenance via stolen OIDC) + IronWorm (36 pkgs, harvesting AI API
   keys). Provenance + install-script scanning both defeated. Review/trust
@@ -61,12 +68,31 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   dueling studies on data centers vs. household bills; 1GW
   bring-your-own-power deals (Vantage–Liberty). Sleeper populist-politics
   story. → [2026-W23](./2026-W23.md)
-- **Apple buys its frontier layer** `→` — ~$1B/yr Gemini-for-Siri deal reported
-  pre-WWDC; keynote Jun 8 (next window). → [2026-W23](./2026-W23.md)
-- **Washington vs. the labs** `→` — bipartisan preemption draft (Obernolte–
-  Trahan, Jun 4: 3-yr state freeze for transparency); export controls go
-  extraterritorial; DeepSeek's state-backed $7.4B raise as Beijing's answer;
-  Trump floated govt equity stakes (thinly sourced). → [2026-W23](./2026-W23.md)
+- **Apple buys its frontier layer** `→` RESOLVED — WWDC Jun 8 shipped a Siri
+  rebuilt on a custom 1.2T-param Gemini model (three-tier router: on-device →
+  Private Cloud Compute → Google Cloud/Blackwell); Cook's final keynote as CEO.
+  Apple rents the frontier layer rather than owning it. Retire next issue unless
+  it reopens. → [2026-W23](./2026-W23.md), [2026-W24](./2026-W24.md)
+- **Washington vs. the labs / safety as a weapon** `↑` — escalated hard in W24.
+  Amazon's Jassy (Anthropic's biggest investor *and* a model competitor) told
+  Treasury's Bessent that Fable 5 yields cyberattack info; Commerce export-banned
+  Fable 5 + Mythos 5 for ALL foreign nationals (incl. Anthropic's own foreign-born
+  staff) Jun 12 — first time the US switched off a public commercial model.
+  David Sacks (who's called Anthropic "fear-mongers") ran it; Amodei refused to
+  patch ("narrow, not a full jailbreak"); AWS took service impacts. The danger
+  narrative Anthropic authored became a weapon used against it. Tension: the ban
+  is theater — three open frontier coding models (Kimi K2.7, GLM 5.2, MiMo)
+  shipped the same week, so the capability is downloadable. Earlier context:
+  Obernolte–Trahan preemption draft; extraterritorial chip controls; DeepSeek's
+  $7.4B state-backed raise. → [2026-W23](./2026-W23.md), [2026-W24](./2026-W24.md),
+  [dive 2026-06-15](./deep-dives/2026-06-15-cannot-export-control-a-model.md)
+- **The maintainer revolt** `↑` (new) — open-source maintainers organizing
+  against AI-slop contributions: Grinberg's "I Am Not a Reverse Centaur"
+  (issue-first gate before reviewing agent PRs), tombedor's "demonstrate human
+  effort," "automating myself out of development." Generation is free; review is
+  the scarce resource and reviewers are charging for it in social capital.
+  OpenAI opened Codex to OSS maintainers the same week (tone-deaf timing).
+  → [2026-W24](./2026-W24.md)
 
 ## Predictions ledger
 
@@ -83,45 +109,45 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-06-12 (channel) | The top frontier-vs-best-open-model spread on a major agentic benchmark (e.g. SWE-bench/MCPMark/Terminal-Bench) stays inside ~5 pts — i.e. no lab reopens a durable capability gap, confirming the channel (not the model) is the moat | 70% | by 2027-Q1 | OPEN |
 | Dive 2026-06-13 (benchmark) | A contamination-resistant benchmark (SWE-bench Pro / SWE-rebench or successor) does NOT reproduce SWE-bench Verified's top-5 model ordering — decontamination changes rank, not just absolute scores | 65% | by 2027-Q1 | OPEN |
 | Dive 2026-06-13 (llmops) | No venture-funded *independent* LLM gateway/observability/eval company reaches a standalone outcome (IPO or $1B+ while independent) — the next two notable outcomes in the space are absorptions by a model vendor / data-or-monitoring platform, or wind-downs | 65% | by 2027-Q2 | OPEN |
+| 2026-W24 | The Fable 5/Mythos 5 foreign-national export restriction is materially narrowed or rescinded (carve-out for Anthropic's own US-based staff, or tightened definition) without the "jailbreak" being publicly resolved | 65% | ~2026-08-14 | OPEN |
+| Dive 2026-06-15 | By end of 2026, no US export-control action successfully restricts an *open-weight* model's distribution — controls stay confined to closed/hosted API models and to compute/chips | 75% | 2026-12-31 | OPEN |
 
 **Scorecard: 0 settled · record 0–0 · mean Brier —**
+(W23 Copilot-walkback call due ~Jul 5 — still open, no reversal yet; settle next issue.)
 
 ## Coverage index
 
 ### Weekly issues
 - 2026-W23 — "The Week the Bill Came Due" — AI IPOs (Anthropic S-1), chip
   selloff, Copilot metered billing, npm worms, grid politics, AI layoffs
+- 2026-W24 — "Safety Was the Moat. This Week It Became the Weapon." — Anthropic
+  ships Fable 5 (Jun 9) days after a "brake-pedal" plea; Amazon's Jassy triggers
+  a Commerce export ban on Fable 5/Mythos 5 for all foreign nationals (Jun 12);
+  open Chinese models (Kimi/GLM/MiMo) make the ban theater; OpenAI S-1 (~$1T);
+  WWDC Gemini Siri; maintainer revolt
 
 ### Deep dives
-- 2026-06-11 — "The Meter Is the Confession" — AI coding pricing: flat-rate
-  era ends, metering as transition to vertical integration (house models)
-- 2026-06-12 — "The Trust Stack Was Built for Human-Speed Software" — npm
-  worms (Miasma/IronWorm), provenance defeated, OIDC hole unfixed,
-  LLMjacking economics, AI as throughput/loot/camouflage/surface/defense
-- 2026-06-12 — "Autonomy Shipped Before Its Brakes Did" — agents proactive
-  by default before cost-control/consent/observability; DN42 runaway bill +
-  AWS no-hard-cap; Fable invisible guardrail apology; liability (operator→
-  insurer) × disclosure (Colorado AI Act, FCC KYC) as the two missing brakes
-- 2026-06-12 — "The Channel Was the Product" — model + open harness commoditize
-  (Kimi K2.7 > Opus on MCPMark; OpenCode 8M MAU), so the moat moves to
-  distribution: Google kills Gemini CLI, OpenAI buys Ona + rents Oracle rail,
-  Anthropic's Claude Corps; four off-ramps (terminal/environment/rail/install)
+- 2026-06-11 — "The Meter Is the Confession" — AI coding pricing; metering as
+  transition to vertical integration (house models)
+- 2026-06-12 — "The Trust Stack Was Built for Human-Speed Software" — npm worms
+  (Miasma/IronWorm), provenance defeated, OIDC hole unfixed, LLMjacking
+- 2026-06-12 — "Autonomy Shipped Before Its Brakes Did" — proactive agents before
+  cost-control/consent/observability; DN42 bill; liability × disclosure
+- 2026-06-12 — "The Channel Was the Product" — model+harness commoditize; moat
+  moves to distribution; four off-ramps (terminal/environment/rail/install)
 - 2026-06-13 — "The Benchmark Score Is Not the Capability" (Okafor) — coding
-  benchmarks measure harness+dataset+memorization, not your codebase; SWE-bench
-  Verified leakage (OpenAI disowns it: 59.4% of audited failures flawed; 32.67%
-  solution leakage; UTBoost reshuffles 24.4% of rank), Pro/rebench strip ~2/3
-  of score; Fable 5 peg (59.8% func / 19.0% sec, 38/200 cheats). Build a
-  private post-cutoff pass@1 eval. Format: what-every-engineer-should-know
+  benchmarks measure harness+dataset+memorization; SWE-bench Verified leakage;
+  build a private post-cutoff pass@1 eval
 - 2026-06-13 — "Fan-Out Has a Token Bill, and You Sign It" (Vance) — nested
-  sub-agents (Claude Code v2.1.172, 5-deep) cost a fresh context window each;
-  Anthropic's 4×(agent)/15×(multi-agent) multipliers; 6,100→420-token
-  read-vs-return mechanic. Fan out for parallel breadth + small returns; stay
-  single-context for sequential/large-return work. Format: practical-guide
-- 2026-06-13 — "LLMOps Is a Feature, Not a Company" (Okafor) — TensorZero
-  archived its repo Jun 12 (11.6k stars, returned ~half of $7.3M seed) after
-  ClickHouse bought Langfuse (Jan, 23.1M SDK installs/mo, already built on
-  ClickHouse) and Datadog shipped a native AI gateway + LLM-judge evals. The
-  gateway/tracer/eval layer is a wrapper; value accrues to the adjacent durable
-  asset (model endpoint or trace store), so LLMOps is a feature, not a market
-  for independents. Third face of the channel/meter rule. Format:
-  news-to-framework
+  sub-agents cost a fresh context each; 4×/15× multipliers; fan out for parallel
+  breadth + small returns, stay single-context for sequential/large-return work
+- 2026-06-13 — "LLMOps Is a Feature, Not a Company" (Okafor) — TensorZero archived
+  after ClickHouse–Langfuse + Datadog native gateway/evals; the layer is a
+  wrapper, value accrues to the adjacent durable asset. Third face of channel/meter
+- 2026-06-15 — "You Cannot Export-Control a Model" (house) — the Fable 5/Mythos 5
+  export ban is the 1990s crypto wars repeated: controlling the trained artifact
+  (weights = numbers) fails because the capability is open-weight (Kimi/GLM/MiMo)
+  and "code is speech" (Bernstein) is settled. Crypto controls' real legacy was
+  weakened "export-grade" ciphers → FREAK/Logjam 15 yrs later. The only AI lever
+  with teeth is compute/chips, upstream of the weights; model-level controls just
+  tax the honest closed US lab + its own foreign staff. Format: precedent-mapping
