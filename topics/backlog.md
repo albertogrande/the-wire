@@ -29,6 +29,10 @@ overtakes becomes a `news-to-framework` piece instead — that's fine.
   inference, ops, and eval (Analyst)
 - [how-it-works] Mixture-of-experts, explained from the routing up (Analyst)
 - [reference] What "agent" actually means in 2026, stripped of marketing (Contrarian)
+- [how-it-works] Model distillation: what training on another model's outputs
+  actually copies, and what the license lets you do with it (Analyst)
+- [news-to-framework] Why training data is the moat and the liability at once —
+  copyright exposure as the reason no frontier model ships its corpus (Contrarian)
 
 ## Live — Claude Code & agent engineering
 
@@ -93,7 +97,6 @@ overtakes becomes a `news-to-framework` piece instead — that's fine.
   an agent, in plain terms (Builder)
 - [news-to-framework] Provenance and attestation: what "signed software" can and
   can't promise (Analyst)
-- [contrarian] "Open source AI" — what the license actually grants you (Contrarian)
 
 ## Used
 
@@ -103,3 +106,6 @@ overtakes becomes a `news-to-framework` piece instead — that's fine.
 - [practical-guide] Designing a subagent fan-out that doesn't blow your token
   budget (Builder) — 2026-06-13,
   reports/deep-dives/2026-06-13-subagent-fan-out-budget.md
+- [contrarian] "Open source AI" — what the license actually grants you
+  (Contrarian) — 2026-06-16,
+  reports/deep-dives/2026-06-16-open-weights-is-not-open-source.md

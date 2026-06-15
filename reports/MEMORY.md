@@ -111,6 +111,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-06-13 (llmops) | No venture-funded *independent* LLM gateway/observability/eval company reaches a standalone outcome (IPO or $1B+ while independent) — the next two notable outcomes in the space are absorptions by a model vendor / data-or-monitoring platform, or wind-downs | 65% | by 2027-Q2 | OPEN |
 | 2026-W24 | The Fable 5/Mythos 5 foreign-national export restriction is materially narrowed or rescinded (carve-out for Anthropic's own US-based staff, or tightened definition) without the "jailbreak" being publicly resolved | 65% | ~2026-08-14 | OPEN |
 | Dive 2026-06-15 | By end of 2026, no US export-control action successfully restricts an *open-weight* model's distribution — controls stay confined to closed/hosted API models and to compute/chips | 75% | 2026-12-31 | OPEN |
+| Dive 2026-06-16 (open-source) | No top-tier agentic-benchmark model ships meeting OSAID 1.0 in full (weights + data information + complete training code under an OSI license); "open source AI" releases stay open-weight-only | 80% | by 2027-Q1 | OPEN |
 
 **Scorecard: 0 settled · record 0–0 · mean Brier —**
 (W23 Copilot-walkback call due ~Jul 5 — still open, no reversal yet; settle next issue.)
@@ -144,6 +145,13 @@ Lower is better; 0.25 = coin-flip guessing.
 - 2026-06-13 — "LLMOps Is a Feature, Not a Company" (Okafor) — TensorZero archived
   after ClickHouse–Langfuse + Datadog native gateway/evals; the layer is a
   wrapper, value accrues to the adjacent durable asset. Third face of channel/meter
+- 2026-06-16 — "The Open Model You're Running Is a Binary, Not a Source" (Okafor) —
+  "open source AI" is almost always open-*weight*; the license, not the word, decides
+  what you may do. Spectrum from Apache/MIT (Qwen3, DeepSeek-R1) → Kimi "Modified MIT"
+  (attribution above 100M MAU/$20M/mo) → Llama community license (700M-MAU cap + AUP +
+  EU limit, OSI: not open source). Even Apache weights aren't OSAID-complete: no data
+  info, no training recipe → a binary you can run, not a source you can rebuild/audit.
+  Format: contrarian / what-every-engineer-should-know
 - 2026-06-15 — "You Cannot Export-Control a Model" (house) — the Fable 5/Mythos 5
   export ban is the 1990s crypto wars repeated: controlling the trained artifact
   (weights = numbers) fails because the capability is open-weight (Kimi/GLM/MiMo)

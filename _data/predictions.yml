@@ -93,3 +93,15 @@
   confidence: 65
   due: "2027-Q2"
   status: open
+
+- id: dive-2026-06-16-osaid-frontier
+  made: "Dive · 2026-06-16"
+  made_link: "/reports/deep-dives/2026-06-16-open-weights-is-not-open-source.html"
+  text: >-
+    No model ranked in the top tier of a major agentic benchmark
+    (SWE-bench/MCPMark/Terminal-Bench or successor) ships meeting OSAID 1.0 in
+    full — weights, data information, and complete training code under an
+    OSI-approved license. "Open source AI" releases stay open-weight-only.
+  confidence: 80
+  due: "2027-Q1"
+  status: open
