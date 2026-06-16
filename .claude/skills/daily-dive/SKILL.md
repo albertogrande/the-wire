@@ -129,7 +129,10 @@ Mirror into the site's data files (the published site reads these):
 - A falsifiable call → append to `_data/predictions.yml` (`id`,
   `made: "Dive · <date>"`, `made_link`, `text`, `confidence`, `due`,
   `status: open`).
-- A piece advancing a running thread → update `_data/threads.yml`.
+- A piece advancing a running thread → update its entry in `_data/threads.yml`.
+  A piece **opening a new** thread → add a new block too (`slug`, `title`,
+  `momentum`, `summary`, optional `tension`, `issues`); every thread in
+  `reports/MEMORY.md` must have a matching entry in `_data/threads.yml`.
 
 If the reader has stated a preference for one columnist's voice (in session
 or via issue comments), record the durable lesson in `reports/TASTE.md` —

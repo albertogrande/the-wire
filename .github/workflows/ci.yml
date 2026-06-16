@@ -44,8 +44,8 @@ jobs:
             --allow-hash-href \
             --swap-urls "^/the-wire/:/"
 
-  predictions:
-    name: Predictions data integrity
+  data:
+    name: Site data integrity
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -56,3 +56,5 @@ jobs:
         run: pip install --quiet pyyaml
       - name: Validate _data/predictions.yml
         run: python3 scripts/check_predictions.py
+      - name: Check _data/threads.yml is in sync with MEMORY.md
+        run: python3 scripts/check_threads.py

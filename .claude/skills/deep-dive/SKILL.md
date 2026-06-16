@@ -97,8 +97,11 @@ MEMORY.md):
 - If the dive made a call, append it to `_data/predictions.yml`
   (`id`, `made: "Dive · <date>"`, `made_link: /reports/deep-dives/<file>.html`,
   `text`, `confidence`, `due`, `status: open`).
-- If the dive advances or opens a running thread, update `_data/threads.yml`
-  (momentum, summary, append `{ label, link }` to that thread's `issues`).
+- If the dive advances a running thread, update its entry in `_data/threads.yml`
+  (momentum, summary, append `{ label, link }` to that thread's `issues`). If the
+  dive **opens a new** thread, add a new block to `_data/threads.yml` too
+  (`slug`, `title`, `momentum`, `summary`, optional `tension`, `issues`) — every
+  thread in `reports/MEMORY.md` must have a matching entry here.
 
 ## Step 5 — Save
 
