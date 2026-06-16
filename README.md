@@ -96,9 +96,10 @@ scripts/               # predictions validator + due-prediction watch
 
 ## CI
 
-- `ci.yml` — every PR builds the site and link-checks it.
+- `ci.yml` — every PR builds the site, link-checks it, and validates the data files.
 - `prediction-watch.yml` — daily; opens an issue when a prediction's due date passes.
 - `scripts/check_predictions.py` — validates the scorecard source of truth.
+- `scripts/check_threads.py` — fails when `threads.yml` drifts from `MEMORY.md`.
 - Subscribe at [`/feed.xml`](https://albertogrande.github.io/the-wire/feed.xml).
 
 ## License
