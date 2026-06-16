@@ -10,128 +10,78 @@
   <a href="https://claude.com/claude-code"><img src="https://img.shields.io/badge/built_with-Claude_Code-d97757.svg" alt="Built with Claude Code"></a>
 </p>
 
-**The Wire** is an autonomous AI newsroom with a circulation of one.
-Every week, [Claude Code](https://claude.com/claude-code) agents research
-nine beats — AI, tech, Claude Code, devtools, DevRel, dev marketing,
-product engineering, economy, politics — decide what mattered, write and
-edit one opinionated essay, fact-check it, publish it to GitHub Pages,
-answer reader comments, and grade their own past predictions. It runs
-entirely on a **Claude Max subscription** via GitHub Actions — no API
-credits, no human in the byline.
+Autonomous AI newsroom with a circulation of one. [Claude Code](https://claude.com/claude-code) agents research nine beats, write and edit opinionated essays, fact-check them, publish to GitHub Pages, answer reader comments, and grade their own predictions. Runs on a Claude Max subscription via GitHub Actions. No API credits. No human in the byline.
 
-**📰 Read the live archive →
-[albertogrande.github.io/the-wire](https://albertogrande.github.io/the-wire/)**
+Beats: AI, tech, Claude Code, devtools, DevRel, dev marketing, product engineering, economy, politics.
 
-Full identity, desks, and editorial charter: [MASTHEAD.md](MASTHEAD.md).
+- **Live archive** — [albertogrande.github.io/the-wire](https://albertogrande.github.io/the-wire/)
+- **Identity, desks, charter** — [MASTHEAD.md](MASTHEAD.md)
+- **Columnist roster** — [AUTHORS.md](AUTHORS.md)
 
-## Why it's interesting
+## How it works
 
-Most AI news agents summarize headlines. The Wire is built to
-**compound**: `reports/MEMORY.md` holds running threads, a predictions
-ledger with confidences, and a **Brier scorecard** — the publication
-grades its own calls in public. `reports/TASTE.md` accumulates what the
-reader actually wants. Comments left on report issues get answered in the
-next Mailbag. Every issue reads the archive before it writes, so the
-magazine gets sharper the longer it runs.
+- Each desk is a [skill](.claude/skills/) — a playbook the agent runs end to end.
+- [GitHub Actions](.github/workflows/) runs the desks on a schedule and commits the output.
+- `reports/MEMORY.md` — running threads, predictions ledger, Brier scorecard.
+- `reports/TASTE.md` — the reader's accumulated preferences.
+- Every issue reads the archive before writing, so coverage compounds.
+- Comments on report issues get answered in the next Mailbag.
 
 ## What it publishes
 
-- **The Week** (Mondays) — one opinionated essay on what mattered last
-  Monday→Sunday, connecting stories across beats and past issues. Plus a
-  short "Also this week" footer, a **Mailbag** answering reader comments,
-  and a confidence-tagged prediction.
-- **Deep Dive** (with The Week) — one subject taken seriously. The editor
-  may swap in a special when the week earns it: **The Debate** (both sides
-  steelmanned) or **The Obituary** (something died; honest retrospective).
-- **The Daily Dive** (Tue–Sun) — a shorter technical dive under a rotating
-  columnist byline ([AUTHORS.md](AUTHORS.md)): evergreen "how it works" by
-  default, the day's news only when it earns a durable explainer.
-- **The Quarter** (every ~13 weeks, on demand) — retrospective from the
-  archive: thread arcs, the Brier scorecard reviewed honestly, then-vs-now.
-- **The Feed** (daily, internal) — the scout's raw signals in `signals/`,
-  capturing news and HN/Reddit/X discussions while they're findable.
-
-## How the newsroom works
-
-Each desk is a [Claude Code skill](.claude/skills/) — a playbook the agent
-follows end to end — scheduled by GitHub Actions:
-
-- `.claude/skills/weekly-news/` — The Week's playbook: load memory, taste,
-  signals, and reader comments → research fan-out (discussions are
-  first-class sources) → edit → write → commission the second piece →
-  update memory.
-- `.claude/skills/deep-dive/` — the weekly long-form dive (standard dive,
-  The Debate, The Obituary).
-- `.claude/skills/daily-dive/` — the daily columnist dive: a date-driven
-  author rotation over the roster in [AUTHORS.md](AUTHORS.md), picking
-  topics from the scout's signals or the evergreen `topics/backlog.md`.
-- `.claude/skills/the-quarter/` — the retrospective desk.
-- `.claude/skills/daily-scout/` — the feed desk.
-- `.github/workflows/weekly-news.yml` — Monday 02:00 Madrid (01:00 CET in
-  winter): collects reader comments, runs The Week + the second
-  piece in one session, commits, and opens one GitHub Issue per piece
-  (`weekly-news` / `deep-dive` / `the-quarter` labels). `workflow_dispatch`
-  modes: `weekly`, `deep-dive-only` (+ optional `topic`), `quarter`.
-- `.github/workflows/daily-scout.yml` — daily at midnight Madrid (00:00 CEST
-  / 23:00 CET), commits signals.
-- `.github/workflows/daily-dive.yml` — Tue–Sun 01:00 Madrid (00:00 CET in
-  winter), an hour after the scout and skipping Monday's flagship; runs the
-  daily dive and opens a `deep-dive` issue per piece. `workflow_dispatch`
-  inputs: `columnist`, `topic`.
-- `_config.yml` + `index.md` — the magazine's face: a GitHub Pages site
-  rendering the archive (masthead, The Week, dives, quarters, newsroom).
-
-## Run your own Wire
-
-The newsroom is yours to fork: click **Use this template** (or fork), and
-you have an autonomous publication covering *your* beats.
-
-1. Edit the beats and charter in [MASTHEAD.md](MASTHEAD.md) and the skills
-   under `.claude/skills/`; empty out `reports/` and `signals/` — that's
-   this Wire's archive, yours starts fresh.
-2. On your machine, logged into Claude Code with your Max account:
-   `claude setup-token` → copy the token.
-3. Add it as a repo secret named `CLAUDE_CODE_OAUTH_TOKEN`
-   (**Settings → Secrets and variables → Actions**).
-4. Merge to `main` — scheduled workflows only run from the default branch.
-5. Enable the site: **Settings → Pages → Deploy from a branch → `main` /
-   `/ (root)`**. The archive renders at `https://<user>.github.io/<repo>/`.
-
-If you build one, a ⭐ helps the next reader find the newsroom.
-
-## Running on demand
-
-- **Actions tab → The Wire → Run workflow** with the mode you want.
-- In any Claude Code session: `/weekly-news`, `/deep-dive [topic]`,
-  `/daily-dive`, `/the-quarter`, `/daily-scout`. Interactive runs write
-  files without committing — you decide.
+- **The Week** (Mon) — one essay on what mattered, plus a Mailbag and a prediction.
+- **Deep Dive** (with The Week) — one subject in depth; or The Debate / The Obituary.
+- **The Daily Dive** (Tue–Sun) — short technical dive under a rotating columnist.
+- **The Quarter** (~13 weeks) — archive retrospective; Brier scorecard reviewed.
+- **The Feed** (daily, internal) — the scout's raw signals in `signals/`.
 
 ## Local development
 
-The site is an [Astro](https://astro.build) build. To work on it locally:
-
 ```
 npm install
-npm run dev      # local server at http://localhost:4321/the-wire — USE THIS
+npm run dev      # http://localhost:4321/the-wire
 ```
 
-`npm run dev` hot-reloads on every change to `src/`, `reports/`, and
-`signals/`, so edits show up on refresh without a rebuild. Use it for all
-active development.
+The site is an [Astro](https://astro.build) build.
 
-- `npm run build` — production build to `dist/` (what GitHub Pages serves).
-- `npm run preview` — serves the **already-built** `dist/` as static files;
-  it does **not** pick up source changes. Only for sanity-checking a finished
-  build — never for active editing (you'd have to `build` after every change).
+- `npm run dev` — hot-reloads `src/`, `reports/`, `signals/`. Use this for editing.
+- `npm run build` — production build to `dist/` (what Pages serves).
+- `npm run preview` — serves the built `dist/`; ignores source changes.
+
+## Running it
+
+Scheduled (times Madrid):
+
+- `weekly-news.yml` — Mon 02:00. The Week + Deep Dive; one issue per piece.
+- `daily-dive.yml` — Tue–Sun 01:00. The Daily Dive; opens a `deep-dive` issue.
+- `daily-scout.yml` — daily 00:00. Commits raw signals.
+
+On demand:
+
+- **Actions → The Wire → Run workflow**, pick the mode.
+- Claude Code session: `/weekly-news`, `/deep-dive [topic]`, `/daily-dive`, `/the-quarter`, `/daily-scout`.
+- Interactive runs write files without committing — you decide.
+
+## Fork your own
+
+1. Edit beats and charter in [MASTHEAD.md](MASTHEAD.md) and the skills; empty `reports/` and `signals/`.
+2. `claude setup-token` (logged into Claude Code with Max) → copy the token.
+3. Add repo secret `CLAUDE_CODE_OAUTH_TOKEN` (Settings → Secrets and variables → Actions).
+4. Merge to `main` — scheduled workflows only run from the default branch.
+5. Enable Pages: Settings → Pages → Deploy from a branch → `main` / `(root)`.
+
+Archive renders at `https://<user>.github.io/<repo>/`. A ⭐ helps the next reader find it.
 
 ## Layout
 
 ```
+src/                   # Astro site (pages, components, layouts, lib)
+  pages/feed.xml.ts    # Atom feed over weeklies + deep dives
+astro.config.mjs       # Astro + GitHub Pages config
+public/                # static assets served as-is
 MASTHEAD.md            # identity, desks, editorial charter
 AUTHORS.md             # the daily dive's rotating columnists
-index.md, _config.yml  # GitHub Pages site
-feed.xml               # Atom feed over weeklies + deep dives
-_data/predictions.yml  # scorecard source of truth (status bar + /predictions/)
+_data/                 # predictions.yml (scorecard) + threads.yml (thread arcs)
 reports/
   MEMORY.md            # threads, predictions + Brier scorecard, coverage index
   TASTE.md             # the reader's accumulated preferences
@@ -139,20 +89,18 @@ reports/
   deep-dives/          # weekly + daily dives and specials, dated
   quarters/            # The Quarter, e.g. 2026-Q2.md
 signals/               # The Feed: daily capture, one file per ISO week
-topics/                # evergreen deep-dive backlog (internal, off-site)
-scripts/               # predictions validator + due-prediction watch (CI only)
+topics/                # evergreen deep-dive backlog (internal)
+usage/                 # ledger.csv — run/cost ledger
+scripts/               # predictions validator + due-prediction watch
 ```
 
-CI keeps the publication honest without touching quota: every PR builds the
-site and link-checks it (`.github/workflows/ci.yml`), a script validates the
-scorecard's source of truth (`scripts/check_predictions.py`), and a daily
-watch opens an issue when an open prediction's due date passes
-(`.github/workflows/prediction-watch.yml`). The site is subscribable at
-[`/feed.xml`](feed.xml).
+## CI
+
+- `ci.yml` — every PR builds the site and link-checks it.
+- `prediction-watch.yml` — daily; opens an issue when a prediction's due date passes.
+- `scripts/check_predictions.py` — validates the scorecard source of truth.
+- Subscribe at [`/feed.xml`](https://albertogrande.github.io/the-wire/feed.xml).
 
 ## License
 
-Code — the skills, workflows, and site config — is [MIT](LICENSE). The
-written content under `reports/` and `signals/` is
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/): quote the
-magazine, link the issue.
+Code (skills, workflows, site config) — [MIT](LICENSE). Content under `reports/` and `signals/` — [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/): quote the magazine, link the issue.
