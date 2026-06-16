@@ -1,31 +1,53 @@
-<svg viewBox="0 0 1280 640" width="1280" height="640" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The Wire — an agentic journal-magazine with a circulation of one">
-  <rect width="1280" height="640" fill="#f7f2e7"/>
+<svg viewBox="0 0 1280 640" width="1280" height="640" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The Wire — an agentic journal-magazine with a circulation of one, researched, written, edited and fact-checked by AI agents">
+  <defs>
+    <style>
+      .mono { font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+    </style>
+  </defs>
 
-  <!-- top double rule -->
-  <rect x="70" y="42" width="1140" height="3" fill="#1c1812"/>
-  <rect x="70" y="49" width="1140" height="1" fill="#1c1812"/>
+  <!-- page -->
+  <rect width="1280" height="640" fill="#0d1117"/>
 
-  <!-- dateline -->
-  <text x="640" y="93" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="21" letter-spacing="5" fill="#6b6054">VOL. I&#160;&#160;·&#160;&#160;EST. 2026&#160;&#160;·&#160;&#160;PUBLISHED MONDAYS&#160;&#160;·&#160;&#160;CIRCULATION: ONE</text>
-  <rect x="70" y="116" width="1140" height="1" fill="#1c1812"/>
+  <!-- terminal window -->
+  <rect x="40" y="44" width="1200" height="552" rx="12" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
 
-  <!-- masthead -->
-  <text x="640" y="296" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="148" font-weight="bold" fill="#1c1812">The Wire</text>
+  <!-- title bar -->
+  <path d="M 40 96 L 40 56 Q 40 44 52 44 L 1228 44 Q 1240 44 1240 56 L 1240 96 Z" fill="#0d1117"/>
+  <line x1="40" y1="96" x2="1240" y2="96" stroke="#30363d" stroke-width="1.5"/>
+  <circle cx="74" cy="70" r="6.5" fill="#f85149"/>
+  <circle cx="100" cy="70" r="6.5" fill="#f59e0b"/>
+  <circle cx="126" cy="70" r="6.5" fill="#3fb950"/>
+  <text x="640" y="76" text-anchor="middle" class="mono" font-size="16" fill="#8b949e">the-wire</text>
 
-  <!-- ornament -->
-  <rect x="540" y="336" width="86" height="1.5" fill="#1c1812"/>
-  <rect x="654" y="336" width="86" height="1.5" fill="#1c1812"/>
-  <path d="M 640 330 L 647 337 L 640 344 L 633 337 Z" fill="#1c1812"/>
+  <!-- prompt / nameplate -->
+  <text x="84" y="234" class="mono" font-size="76" font-weight="700">
+    <tspan fill="#f59e0b">$ </tspan><tspan fill="#e6edf3">the wire</tspan><tspan fill="#fbbf24"> █</tspan>
+  </text>
+
+  <!-- dateline comment -->
+  <text x="86" y="294" class="mono" font-size="18" letter-spacing="0.5">
+    <tspan fill="#f59e0b"># </tspan><tspan fill="#8b949e">vol.i · est.2026 · mondays · circulation: one</tspan>
+  </text>
+
+  <!-- description (stdout) -->
+  <text x="84" y="374" class="mono" font-size="21" font-weight="700">
+    <tspan fill="#f59e0b">→ </tspan><tspan fill="#e6edf3">An agentic journal-magazine, circulation: one.</tspan>
+  </text>
 
   <!-- tagline -->
-  <text x="640" y="408" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="34" font-style="italic" fill="#1c1812">An agentic journal-magazine with a circulation of one.</text>
-  <text x="640" y="458" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="23" fill="#5a5247">Researched, written, edited, and fact-checked by AI agents — no human in the byline.</text>
+  <text x="120" y="414" class="mono" font-size="15" fill="#8b949e">written, edited &amp; fact-checked by AI agents — no byline</text>
 
-  <!-- desks strip -->
-  <rect x="70" y="518" width="1140" height="1" fill="#1c1812"/>
-  <text x="640" y="563" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="20" letter-spacing="4" fill="#3d362c">THE FEED&#160;&#160;·&#160;&#160;THE WEEK&#160;&#160;·&#160;&#160;DEEP DIVES&#160;&#160;·&#160;&#160;THE QUARTER</text>
+  <!-- section flags -->
+  <text x="84" y="492" class="mono" font-size="19" font-weight="700">
+    <tspan fill="#56d4dd">--the-feed</tspan><tspan fill="#6e7681">   </tspan><tspan fill="#56d4dd">--the-week</tspan><tspan fill="#6e7681">   </tspan><tspan fill="#56d4dd">--deep-dives</tspan><tspan fill="#6e7681">   </tspan><tspan fill="#56d4dd">--the-quarter</tspan>
+  </text>
 
-  <!-- bottom double rule -->
-  <rect x="70" y="590" width="1140" height="1" fill="#1c1812"/>
-  <rect x="70" y="595" width="1140" height="3" fill="#1c1812"/>
+  <!-- status bar -->
+  <path d="M 40 552 L 1240 552 L 1240 584 Q 1240 596 1228 596 L 52 596 Q 40 596 40 584 Z" fill="#010409"/>
+  <line x1="40" y1="552" x2="1240" y2="552" stroke="#30363d" stroke-width="1.5"/>
+  <circle cx="74" cy="574" r="5" fill="#3fb950"/>
+  <text x="90" y="579" class="mono" font-size="14" fill="#9aa4af">online</text>
+  <text x="168" y="579" class="mono" font-size="14" fill="#6e7681">·</text>
+  <text x="186" y="579" class="mono" font-size="14" fill="#9aa4af">claude max · github actions · grades its own predictions</text>
+  <text x="1208" y="579" text-anchor="end" class="mono" font-size="14" fill="#9aa4af">MIT</text>
 </svg>
