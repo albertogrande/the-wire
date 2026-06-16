@@ -34,8 +34,12 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   W24: the political off-ramp went live — export controls hit the closed/legible
   US leader (Anthropic) while open weights (Kimi/GLM/MiMo) walk free, confirming
   the channel — not the weights — is what's actually contestable.
+  W25: the *user's* off-ramp examined hands-on — running a model locally escapes
+  the channel only if it fits your VRAM; the open models that rival the frontier
+  (~150GB) don't, so the channel still holds for serious work.
   → [dive 2026-06-09 channel](./deep-dives/2026-06-09-channel-was-the-product.md),
-  [dive 2026-06-15](./deep-dives/2026-06-15-cannot-export-control-a-model.md)
+  [dive 2026-06-15](./deep-dives/2026-06-15-cannot-export-control-a-model.md),
+  [dive 2026-06-17](./deep-dives/2026-06-17-local-coding-model-memory-budget.md)
 - **Supply chain vs. AI throughput** `↑` — Miasma (32 Red Hat npm pkgs, valid
   SLSA provenance via stolen OIDC) + IronWorm (36 pkgs, harvesting AI API
   keys). Provenance + install-script scanning both defeated. Review/trust
@@ -112,6 +116,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | 2026-W24 | The Fable 5/Mythos 5 foreign-national export restriction is materially narrowed or rescinded (carve-out for Anthropic's own US-based staff, or tightened definition) without the "jailbreak" being publicly resolved | 65% | ~2026-08-14 | OPEN |
 | Dive 2026-06-15 | By end of 2026, no US export-control action successfully restricts an *open-weight* model's distribution — controls stay confined to closed/hosted API models and to compute/chips | 75% | 2026-12-31 | OPEN |
 | Dive 2026-06-16 (open-source) | No top-tier agentic-benchmark model ships meeting OSAID 1.0 in full (weights + data information + complete training code under an OSI license); "open source AI" releases stay open-weight-only | 80% | by 2027-Q1 | OPEN |
+| Dive 2026-06-17 (local) | A sub-35B open-weight coding model fits a single 24GB card *with* usable 128K context AND lands within ~10 pts of that quarter's top frontier model on a contamination-resistant agentic bench (SWE-rebench/SWE-bench Pro) | 35% | by 2027-Q1 | OPEN |
 
 **Scorecard: 0 settled · record 0–0 · mean Brier —**
 (W23 Copilot-walkback call due ~Jul 5 — still open, no reversal yet; settle next issue.)
@@ -152,6 +157,15 @@ Lower is better; 0.25 = coin-flip guessing.
   EU limit, OSI: not open source). Even Apache weights aren't OSAID-complete: no data
   info, no training recipe → a binary you can run, not a source you can rebuild/audit.
   Format: contrarian / what-every-engineer-should-know
+- 2026-06-17 — "The Coding Model You Can Run Isn't the One That Wins" (Vance) —
+  local coding models; open-weight is a license, runnable is a memory budget. The
+  binding constraint is VRAM × KV cache, not the license: 4-bit dynamic quant ≈
+  bf16 (60.9 vs 61.8 Aider Polyglot), but context eats VRAM linearly (70B@128K =
+  ~40GB cache alone) and the open models that rival the frontier (DeepSeek-V3.2,
+  MiniMax M3 ~80%) need ~150GB, not your card. Runnable-and-trailing (~61%, 27pt
+  gap) vs competitive-and-unrunnable. Tool-calling no longer the wall (BFCL ~76%).
+  Format: practical-guide / news-to-framework. Sibling to the open-weights and
+  export-control dives.
 - 2026-06-15 — "You Cannot Export-Control a Model" (house) — the Fable 5/Mythos 5
   export ban is the 1990s crypto wars repeated: controlling the trained artifact
   (weights = numbers) fails because the capability is open-weight (Kimi/GLM/MiMo)

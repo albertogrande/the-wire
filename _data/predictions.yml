@@ -105,3 +105,16 @@
   confidence: 80
   due: "2027-Q1"
   status: open
+
+- id: dive-2026-06-17-local-runnable
+  made: "Dive · 2026-06-17"
+  made_link: "/reports/deep-dives/2026-06-17-local-coding-model-memory-budget.html"
+  text: >-
+    A sub-35B open-weight coding model fits a single 24GB card with a usable
+    128K context AND lands within ~10 points of that quarter's top frontier
+    model on a contamination-resistant agentic benchmark (SWE-rebench /
+    SWE-bench Pro) — i.e. the runnable-vs-competitive gap finally closes on
+    consumer hardware.
+  confidence: 35
+  due: "2027-Q1"
+  status: open

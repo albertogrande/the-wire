@@ -34,6 +34,11 @@ overtakes becomes a `news-to-framework` piece instead — that's fine.
 - [news-to-framework] Why training data is the moat and the liability at once —
   copyright exposure as the reason no frontier model ships its corpus (Contrarian)
 
+- [how-it-works] The KV cache: why context length, not parameter count,
+  decides what fits in your VRAM — with the linear-growth math (Builder)
+- [practical-guide] Quantization without tears: dynamic 4-bit, KV-cache
+  quantization, and what actually loses quality vs what doesn't (Analyst)
+
 ## Live — Claude Code & agent engineering
 
 - [how-it-works] How Claude Code's context compaction works, and when it costs
@@ -109,3 +114,6 @@ overtakes becomes a `news-to-framework` piece instead — that's fine.
 - [contrarian] "Open source AI" — what the license actually grants you
   (Contrarian) — 2026-06-16,
   reports/deep-dives/2026-06-16-open-weights-is-not-open-source.md
+- [news-to-framework] Can a local model do your daily coding? open-weight vs
+  runnable, the memory-budget chain (Builder) — 2026-06-17,
+  reports/deep-dives/2026-06-17-local-coding-model-memory-budget.md

@@ -48,6 +48,7 @@
   issues:
     - { label: "Dive · The Channel Was the Product", link: "/reports/deep-dives/2026-06-09-channel-was-the-product.html" }
     - { label: "Dive · You Cannot Export-Control a Model", link: "/reports/deep-dives/2026-06-15-cannot-export-control-a-model.html" }
+    - { label: "Dive · The Coding Model You Can Run", link: "/reports/deep-dives/2026-06-17-local-coding-model-memory-budget.html" }
 
 - slug: supply-chain-vs-throughput
   title: "Supply chain vs. AI throughput"
