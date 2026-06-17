@@ -28,10 +28,13 @@
     Copilot token billing went live Jun 1 (10–50× bills, Opus multiplier
     7.5×→27×, paid code review); Cursor seat split; Anthropic Agent SDK credit
     split Jun 15. Flat-rate AI tooling is ending industry-wide — the meter is a
-    boundary, not a business; the end state is vertical integration.
+    boundary, not a business; the end state is vertical integration. Once you're
+    metered, prompt caching is the biggest single lever on the bill — but the
+    advertised 90% read discount is a bet on hit rate, not a setting you flip.
   issues:
     - { label: "2026-W23", link: "/reports/2026-W23.html" }
     - { label: "Dive · The Meter Is the Confession", link: "/reports/deep-dives/2026-06-07-ai-coding-honest-pricing.html" }
+    - { label: "Dive · Prompt Caching Pays 90% Off", link: "/reports/deep-dives/2026-06-18-prompt-caching-hit-rate.html" }
 
 - slug: channel-war-offramps
   title: "The channel war / off-ramps"
@@ -105,18 +108,6 @@
     Liberty). A sleeper populist-politics story.
   issues:
     - { label: "2026-W23", link: "/reports/2026-W23.html" }
-
-- slug: apple-buys-its-frontier
-  title: "Apple buys its frontier layer"
-  momentum: steady
-  summary: >-
-    RESOLVED — WWDC (Jun 8) shipped a Siri rebuilt on a custom 1.2T-param
-    Gemini model (three-tier router: on-device → Private Cloud Compute →
-    Google Cloud/Blackwell); Cook's final keynote as CEO. Apple rents the
-    frontier layer rather than owning it. Retire next issue unless it reopens.
-  issues:
-    - { label: "2026-W23", link: "/reports/2026-W23.html" }
-    - { label: "2026-W24", link: "/reports/2026-W24.html" }
 
 - slug: washington-vs-labs
   title: "Washington vs. the labs / safety as a weapon"

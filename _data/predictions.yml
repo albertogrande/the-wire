@@ -118,3 +118,16 @@
   confidence: 35
   due: "2027-Q1"
   status: open
+
+- id: dive-2026-06-18-auto-caching
+  made: "Dive · 2026-06-18"
+  made_link: "/reports/deep-dives/2026-06-18-prompt-caching-hit-rate.html"
+  text: >-
+    Anthropic ships automatic/implicit prompt caching — a cache hit without a
+    manually placed breakpoint — on at least one default API path, converging
+    toward the zero-config model OpenAI, DeepSeek, and Gemini already use,
+    because the gap between the advertised 90% discount and the realized
+    hit rate is a cost-perception liability.
+  confidence: 55
+  due: "2027-Q1"
+  status: open

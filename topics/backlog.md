@@ -21,8 +21,6 @@ overtakes becomes a `news-to-framework` piece instead — that's fine.
 - [x-vs-y] Long-context vs RAG: when each wins, with real recall numbers (Analyst)
 - [how-it-works] What a tool call costs: tokens, latency, and round-trips in
   an agent loop (Builder)
-- [what-every-engineer-should-know] Prompt caching: what gets cached, the TTL,
-  and the cost math that makes or breaks an agent (Analyst)
 - [how-it-works] How speculative decoding makes models faster without changing
   outputs (Analyst)
 - [x-vs-y] Open weights vs closed APIs: the real total cost once you price
@@ -117,3 +115,6 @@ overtakes becomes a `news-to-framework` piece instead — that's fine.
 - [news-to-framework] Can a local model do your daily coding? open-weight vs
   runnable, the memory-budget chain (Builder) — 2026-06-17,
   reports/deep-dives/2026-06-17-local-coding-model-memory-budget.md
+- [what-every-engineer-should-know] Prompt caching: what gets cached, the TTL,
+  and the cost math that makes or breaks an agent (Analyst) — 2026-06-18,
+  reports/deep-dives/2026-06-18-prompt-caching-hit-rate.md

@@ -72,11 +72,6 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   dueling studies on data centers vs. household bills; 1GW
   bring-your-own-power deals (Vantage–Liberty). Sleeper populist-politics
   story. → [2026-W23](./2026-W23.md)
-- **Apple buys its frontier layer** `→` RESOLVED — WWDC Jun 8 shipped a Siri
-  rebuilt on a custom 1.2T-param Gemini model (three-tier router: on-device →
-  Private Cloud Compute → Google Cloud/Blackwell); Cook's final keynote as CEO.
-  Apple rents the frontier layer rather than owning it. Retire next issue unless
-  it reopens. → [2026-W23](./2026-W23.md), [2026-W24](./2026-W24.md)
 - **Washington vs. the labs / safety as a weapon** `↑` — escalated hard in W24.
   Amazon's Jassy (Anthropic's biggest investor *and* a model competitor) told
   Treasury's Bessent that Fable 5 yields cyberattack info; Commerce export-banned
@@ -117,6 +112,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-06-15 | By end of 2026, no US export-control action successfully restricts an *open-weight* model's distribution — controls stay confined to closed/hosted API models and to compute/chips | 75% | 2026-12-31 | OPEN |
 | Dive 2026-06-16 (open-source) | No top-tier agentic-benchmark model ships meeting OSAID 1.0 in full (weights + data information + complete training code under an OSI license); "open source AI" releases stay open-weight-only | 80% | by 2027-Q1 | OPEN |
 | Dive 2026-06-17 (local) | A sub-35B open-weight coding model fits a single 24GB card *with* usable 128K context AND lands within ~10 pts of that quarter's top frontier model on a contamination-resistant agentic bench (SWE-rebench/SWE-bench Pro) | 35% | by 2027-Q1 | OPEN |
+| Dive 2026-06-18 (caching) | Anthropic ships automatic/implicit prompt caching (a hit without a manually placed breakpoint) on at least one default API path, converging toward OpenAI/DeepSeek/Gemini's zero-config model — because the realized-vs-advertised hit-rate gap is a cost-perception liability | 55% | by 2027-Q1 | OPEN |
 
 **Scorecard: 0 settled · record 0–0 · mean Brier —**
 (W23 Copilot-walkback call due ~Jul 5 — still open, no reversal yet; settle next issue.)
@@ -166,6 +162,15 @@ Lower is better; 0.25 = coin-flip guessing.
   gap) vs competitive-and-unrunnable. Tool-calling no longer the wall (BFCL ~76%).
   Format: practical-guide / news-to-framework. Sibling to the open-weights and
   export-control dives.
+- 2026-06-18 — "Prompt Caching Pays 90% Off — If You Win the Bet" (Quist) — the
+  advertised discount (Anthropic 0.1x read; OpenAI/DeepSeek auto, −90/98%) is real
+  but rarely collected; the deciding quantity is hit rate. Cache stores positional
+  KV state for a byte-identical prefix, so one edit above the breakpoint voids
+  everything below, and a miss pays the 1.25x *write* price → a never-hitting cache
+  is +25% worse than none. Break-even reuse N≈1.28 (5-min)/2.1 (1-hr); real enemy is
+  invalidation × TTL eviction. Order prompts stable→dynamic; watch cache_read vs
+  cache_creation. Format: what-every-engineer-should-know/economics. Lever on the
+  metering thread.
 - 2026-06-15 — "You Cannot Export-Control a Model" (house) — the Fable 5/Mythos 5
   export ban is the 1990s crypto wars repeated: controlling the trained artifact
   (weights = numbers) fails because the capability is open-weight (Kimi/GLM/MiMo)
