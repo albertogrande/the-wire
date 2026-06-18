@@ -58,7 +58,12 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   AWS has no hard cap by design; insurer is end state) + disclosure (Colorado
   AI Act delayed to Jan 1 2027 but kept its disclosure core; FCC KYC FNPRM) =
   undisclosed automation becoming a regulated category.
-  → [dive 2026-06-08-autonomy](./deep-dives/2026-06-08-autonomy-before-brakes.md)
+  W25: the definitional angle — "agent" is a control-flow dial (model controls the
+  loop), not a product; agency's cost is exactly the brakes problem (nondeterminism,
+  per-step token re-read, blast radius). Market votes low-agency: MCP (tool rung)
+  adopted, A2A (multi-agent rung) enterprise-announced but developer-shrugged.
+  → [dive 2026-06-08-autonomy](./deep-dives/2026-06-08-autonomy-before-brakes.md),
+  [dive 2026-06-19](./deep-dives/2026-06-19-agent-is-a-control-flow-decision.md)
 - **Platforms eat the layer** `↑` — the LLMOps tool layer (gateway, tracing,
   eval, prompt store) is being absorbed from both ends: ClickHouse bought
   Langfuse (Jan, already built on ClickHouse; 23.1M SDK installs/mo) to own the
@@ -112,6 +117,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-06-15 | By end of 2026, no US export-control action successfully restricts an *open-weight* model's distribution — controls stay confined to closed/hosted API models and to compute/chips | 75% | 2026-12-31 | OPEN |
 | Dive 2026-06-16 (open-source) | No top-tier agentic-benchmark model ships meeting OSAID 1.0 in full (weights + data information + complete training code under an OSI license); "open source AI" releases stay open-weight-only | 80% | by 2027-Q1 | OPEN |
 | Dive 2026-06-17 (local) | A sub-35B open-weight coding model fits a single 24GB card *with* usable 128K context AND lands within ~10 pts of that quarter's top frontier model on a contamination-resistant agentic bench (SWE-rebench/SWE-bench Pro) | 35% | by 2027-Q1 | OPEN |
+| Dive 2026-06-19 (agent) | Multi-agent / A2A-style agent-to-agent coordination does NOT become the default shipped production-agent pattern; single-context loops + tool-calling (MCP rung) stay dominant, and A2A stays enterprise-announced rather than developer-used (no broad practitioner-usage signal) | 75% | by 2027-Q1 | OPEN |
 | Dive 2026-06-18 (caching) | Anthropic ships automatic/implicit prompt caching (a hit without a manually placed breakpoint) on at least one default API path, converging toward OpenAI/DeepSeek/Gemini's zero-config model — because the realized-vs-advertised hit-rate gap is a cost-perception liability | 55% | by 2027-Q1 | OPEN |
 
 **Scorecard: 0 settled · record 0–0 · mean Brier —**
@@ -178,3 +184,11 @@ Lower is better; 0.25 = coin-flip guessing.
   weakened "export-grade" ciphers → FREAK/Logjam 15 yrs later. The only AI lever
   with teeth is compute/chips, upstream of the weights; model-level controls just
   tax the honest closed US lab + its own foreign staff. Format: precedent-mapping
+- 2026-06-19 — "'Agent' Is a Control-Flow Decision, Not a Product" (Okafor) — strips
+  the marketing: an agent is one thing — the model controls the loop (Willison's
+  "tools in a loop," Sept 2025); everything else sold as an agent is a workflow with
+  an LLM in it. Agency is a 6-rung dial (smolagents), not a brand; vendors (Anthropic,
+  HF) say "keep it low." Market confirms: MCP (tool rung) adopted, A2A (multi-agent
+  rung) enterprise-announced / developer-shrugged (HN today 55pts). Each rung up sells
+  determinism, tokens, blast radius. Decompose by rung; climb slowly. Format:
+  reference / what-every-engineer-should-know. Lever on autonomy-before-brakes thread.
