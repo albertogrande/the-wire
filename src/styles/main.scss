@@ -686,6 +686,36 @@ a.fd-t:hover { color: var(--accent); }
 kbd { font-family: var(--font-mono); font-size: 11px; background: var(--surface); border: 1px solid var(--rule-strong); border-bottom-width: 2px; border-radius: 3px; padding: 1px 5px; color: var(--fg); }
 .chrome-search { font-size: 16px; line-height: 1; }
 
+/* ---- command palette (Linear-style) ---- */
+.kbd-panel { animation: kbd-pop .14s ease; }
+@keyframes kbd-pop { from { opacity: 0; transform: translateY(-6px) scale(.985); } to { opacity: 1; transform: none; } }
+.kbd-result { scroll-margin: 8px 0; cursor: pointer; }
+/* keyboard/active selection — stronger than hover, the "cool" Linear highlight */
+.kbd-result.is-sel { background: var(--hl); box-shadow: inset 2px 0 0 var(--accent); }
+.kbd-result.is-sel .kbd-r-title, .kbd-result.is-sel .kbd-cmd-l { color: var(--accent); }
+.kbd-sec { padding: 10px 14px 5px; font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
+.kbd-results > .kbd-sec:first-child { padding-top: 6px; }
+.kbd-cmd { display: flex; align-items: center; gap: 11px; }
+.kbd-cmd-ic { flex: 0 0 18px; text-align: center; font-size: 14px; color: var(--accent-2); }
+.kbd-cmd-l { flex: 1; min-width: 0; font-size: 13.5px; }
+.kbd-cmd-k { display: flex; gap: 4px; flex: 0 0 auto; opacity: .85; }
+.kbd-foot { display: flex; align-items: center; gap: 16px; padding: 9px 14px; border-top: 1px solid var(--rule); font-size: 11px; color: var(--faint); }
+.kbd-foot span { display: inline-flex; align-items: center; gap: 5px; }
+.kbd-foot kbd { font-size: 10px; padding: 0 4px; }
+.kbd-foot-sp { flex: 1; }
+.kbd-toast {
+  position: fixed; left: 50%; bottom: 30px; transform: translateX(-50%) translateY(8px);
+  z-index: 60; background: var(--fg); color: var(--bg);
+  font-family: var(--font-mono); font-size: 12.5px; padding: 8px 16px; border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.25); opacity: 0; pointer-events: none;
+  transition: opacity .16s ease, transform .16s ease;
+}
+.kbd-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .kbd-panel { animation: none; }
+  .kbd-toast { transition: opacity .16s ease; }
+}
+
 /* ---- usage / cost page ---- */
 .usage-chart { width: 100%; height: auto; display: block; margin: 0 0 10px; }
 .usage-x { fill: var(--faint); font-size: 7px; font-family: var(--font-mono); }
