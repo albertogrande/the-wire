@@ -144,3 +144,15 @@
   confidence: 75
   due: "2027-Q1"
   status: open
+
+- id: dive-2026-06-20-compaction-control
+  made: "Dive · 2026-06-20"
+  made_link: "/reports/deep-dives/2026-06-20-claude-code-compaction-save-point.html"
+  text: >-
+    Claude Code surfaces auto-compaction control as a documented, first-class
+    setting — a configurable threshold or a "manual / safe-point-only"
+    compaction mode in /config or the official docs — rather than today's
+    undocumented env var and reverse-engineered buffer numbers.
+  confidence: 55
+  due: "2027-Q1"
+  status: open

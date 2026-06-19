@@ -62,8 +62,13 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   loop), not a product; agency's cost is exactly the brakes problem (nondeterminism,
   per-step token re-read, blast radius). Market votes low-agency: MCP (tool rung)
   adopted, A2A (multi-agent rung) enterprise-announced but developer-shrugged.
+  W25 (builder lens): the hands-on brake is context compaction — Claude Code's
+  lossy auto-save fires on a hidden threshold; control when it fires / what it keeps
+  (/clear, /compact, CLAUDE.md preserve-rules) or it summarizes away your state and
+  re-bills the prompt cache each event.
   → [dive 2026-06-08-autonomy](./deep-dives/2026-06-08-autonomy-before-brakes.md),
-  [dive 2026-06-19](./deep-dives/2026-06-19-agent-is-a-control-flow-decision.md)
+  [dive 2026-06-19](./deep-dives/2026-06-19-agent-is-a-control-flow-decision.md),
+  [dive 2026-06-20](./deep-dives/2026-06-20-claude-code-compaction-save-point.md)
 - **Platforms eat the layer** `↑` — the LLMOps tool layer (gateway, tracing,
   eval, prompt store) is being absorbed from both ends: ClickHouse bought
   Langfuse (Jan, already built on ClickHouse; 23.1M SDK installs/mo) to own the
@@ -119,6 +124,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-06-17 (local) | A sub-35B open-weight coding model fits a single 24GB card *with* usable 128K context AND lands within ~10 pts of that quarter's top frontier model on a contamination-resistant agentic bench (SWE-rebench/SWE-bench Pro) | 35% | by 2027-Q1 | OPEN |
 | Dive 2026-06-19 (agent) | Multi-agent / A2A-style agent-to-agent coordination does NOT become the default shipped production-agent pattern; single-context loops + tool-calling (MCP rung) stay dominant, and A2A stays enterprise-announced rather than developer-used (no broad practitioner-usage signal) | 75% | by 2027-Q1 | OPEN |
 | Dive 2026-06-18 (caching) | Anthropic ships automatic/implicit prompt caching (a hit without a manually placed breakpoint) on at least one default API path, converging toward OpenAI/DeepSeek/Gemini's zero-config model — because the realized-vs-advertised hit-rate gap is a cost-perception liability | 55% | by 2027-Q1 | OPEN |
+| Dive 2026-06-20 (compaction) | Claude Code surfaces auto-compaction control as a documented, first-class setting (a configurable threshold or a "manual/safe-point-only" compaction mode in /config or official docs) rather than the current undocumented env-var + reverse-engineered buffer | 55% | by 2027-Q1 | OPEN |
 
 **Scorecard: 0 settled · record 0–0 · mean Brier —**
 (W23 Copilot-walkback call due ~Jul 5 — still open, no reversal yet; settle next issue.)
@@ -153,30 +159,24 @@ Lower is better; 0.25 = coin-flip guessing.
   after ClickHouse–Langfuse + Datadog native gateway/evals; the layer is a
   wrapper, value accrues to the adjacent durable asset. Third face of channel/meter
 - 2026-06-16 — "The Open Model You're Running Is a Binary, Not a Source" (Okafor) —
-  "open source AI" is almost always open-*weight*; the license, not the word, decides
-  what you may do. Spectrum from Apache/MIT (Qwen3, DeepSeek-R1) → Kimi "Modified MIT"
-  (attribution above 100M MAU/$20M/mo) → Llama community license (700M-MAU cap + AUP +
-  EU limit, OSI: not open source). Even Apache weights aren't OSAID-complete: no data
-  info, no training recipe → a binary you can run, not a source you can rebuild/audit.
-  Format: contrarian / what-every-engineer-should-know
+  "open source AI" is almost always open-*weight*; the license decides what you may do.
+  Spectrum: Apache/MIT (Qwen3, DeepSeek-R1) → Kimi "Modified MIT" (attribution >100M
+  MAU) → Llama community license (700M-MAU cap, OSI: not open source). Even Apache
+  weights aren't OSAID-complete (no data info / training recipe). contrarian/wee-sk
 - 2026-06-17 — "The Coding Model You Can Run Isn't the One That Wins" (Vance) —
-  local coding models; open-weight is a license, runnable is a memory budget. The
-  binding constraint is VRAM × KV cache, not the license: 4-bit dynamic quant ≈
-  bf16 (60.9 vs 61.8 Aider Polyglot), but context eats VRAM linearly (70B@128K =
-  ~40GB cache alone) and the open models that rival the frontier (DeepSeek-V3.2,
-  MiniMax M3 ~80%) need ~150GB, not your card. Runnable-and-trailing (~61%, 27pt
-  gap) vs competitive-and-unrunnable. Tool-calling no longer the wall (BFCL ~76%).
-  Format: practical-guide / news-to-framework. Sibling to the open-weights and
+  local coding; open-weight is a license, runnable is a memory budget. Binding
+  constraint is VRAM × KV cache: 4-bit quant ≈ bf16 (60.9 vs 61.8 Aider Polyglot),
+  but context eats VRAM linearly (70B@128K = ~40GB cache) and frontier-rivals
+  (DeepSeek-V3.2, MiniMax M3 ~80%) need ~150GB. Runnable-and-trailing (~61%, 27pt
+  gap) vs competitive-and-unrunnable. practical-guide. Sibling to open-weights +
   export-control dives.
 - 2026-06-18 — "Prompt Caching Pays 90% Off — If You Win the Bet" (Quist) — the
-  advertised discount (Anthropic 0.1x read; OpenAI/DeepSeek auto, −90/98%) is real
-  but rarely collected; the deciding quantity is hit rate. Cache stores positional
-  KV state for a byte-identical prefix, so one edit above the breakpoint voids
-  everything below, and a miss pays the 1.25x *write* price → a never-hitting cache
-  is +25% worse than none. Break-even reuse N≈1.28 (5-min)/2.1 (1-hr); real enemy is
-  invalidation × TTL eviction. Order prompts stable→dynamic; watch cache_read vs
-  cache_creation. Format: what-every-engineer-should-know/economics. Lever on the
-  metering thread.
+  advertised discount (Anthropic 0.1x read; OpenAI/DeepSeek auto) is real but rarely
+  collected; deciding quantity is hit rate. Cache needs a byte-identical prefix; one
+  edit above the breakpoint voids everything below, and a miss pays the 1.25x *write*
+  price → a never-hitting cache is +25% worse than none. Break-even N≈1.28 (5-min)/2.1
+  (1-hr); enemy is invalidation × TTL. Order prompts stable→dynamic. wee-sk/economics.
+  Lever on metering thread.
 - 2026-06-15 — "You Cannot Export-Control a Model" (house) — the Fable 5/Mythos 5
   export ban is the 1990s crypto wars repeated: controlling the trained artifact
   (weights = numbers) fails because the capability is open-weight (Kimi/GLM/MiMo)
@@ -184,6 +184,16 @@ Lower is better; 0.25 = coin-flip guessing.
   weakened "export-grade" ciphers → FREAK/Logjam 15 yrs later. The only AI lever
   with teeth is compute/chips, upstream of the weights; model-level controls just
   tax the honest closed US lab + its own foreign staff. Format: precedent-mapping
+- 2026-06-20 — "Compaction Is a Lossy Save. Choose When It Fires." (Vance) — how
+  Claude Code compaction works + how to control it. Microcompaction (lossless: "hot
+  tail" inline, older tool results parked to disk by reference) vs full compaction
+  (model call → structured-checklist summary replaces history; lossy). Hidden ceiling
+  <200K (community-measured ~33K reserve, fires ~83.5%, not officially documented).
+  Builder footnote: full compaction = total prefix change = guaranteed prompt-cache
+  miss + write tax. Levers: /clear, /compact <instr>, /rewind summarize, CLAUDE.md
+  preserve-rules, subagents+/btw, /context+status line. Tokens-saved is a vanity
+  metric — optimize for what survives. how-it-works/practical-guide. Lever on
+  autonomy-before-brakes; sibling to fan-out + caching dives.
 - 2026-06-19 — "'Agent' Is a Control-Flow Decision, Not a Product" (Okafor) — strips
   the marketing: an agent is one thing — the model controls the loop (Willison's
   "tools in a loop," Sept 2025); everything else sold as an agent is a workflow with

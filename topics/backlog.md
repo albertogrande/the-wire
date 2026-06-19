@@ -38,10 +38,12 @@ overtakes becomes a `news-to-framework` piece instead — that's fine.
 
 ## Live — Claude Code & agent engineering
 
-- [how-it-works] How Claude Code's context compaction works, and when it costs
-  you (Builder)
 - [how-it-works] Git worktrees under an agent: why isolation beats a shared
   checkout (Builder)
+- [practical-guide] Reading your context window: /context, the status line, and
+  what's actually eating your tokens (Builder)
+- [postmortem] When a compaction summary drops the thing you needed — designing
+  CLAUDE.md compaction rules and checkpoints that survive the save (Builder)
 - [architecture] The anatomy of an MCP server: transport, tool schemas, and
   what a call really costs (Builder)
 - [x-vs-y] MCP vs A2A: the tool rung vs the agent rung — what each protocol
@@ -126,3 +128,6 @@ overtakes becomes a `news-to-framework` piece instead — that's fine.
 - [reference] What "agent" actually means in 2026, stripped of marketing
   (Contrarian) — 2026-06-19,
   reports/deep-dives/2026-06-19-agent-is-a-control-flow-decision.md
+- [how-it-works] How Claude Code's context compaction works, and when it costs
+  you (Builder) — 2026-06-20,
+  reports/deep-dives/2026-06-20-claude-code-compaction-save-point.md

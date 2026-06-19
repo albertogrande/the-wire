@@ -1,0 +1,51 @@
+# Compaction Is a Lossy Save. Choose When It Fires.
+
+*Deep dive · Theo Vance (The Builder) · 2026-06-20 · how Claude Code's context compaction works, and how to stop it summarizing away the thing you needed.*
+
+Here's a moment you've had. You're forty minutes into a debugging session. Claude has read six files, run the test suite four times, and is one edit from the fix. Then the status line ticks over, a grey `Compacting conversation…` line appears, and a few seconds later the agent asks you which file it was supposed to be editing.
+
+It didn't crash. It saved. Compaction is Claude Code's save point — an automatic, lossy one — and most of the pain people blame on "the model getting dumber in long sessions" is really the save firing at a moment you didn't pick, keeping things you didn't choose. This week two signals put the topic back on the table: a `claude-devtools` observability tool launched to surface exactly this (token usage, subagent trees, the context window) by reading session logs, and a sharp practitioner post on the ["token compression illusion"](https://mroczek.dev/articles/the-token-compression-illusion-why-im-skeptical-of-rtk/) arguing that token-savings numbers are a vanity metric when nobody measures whether the task still succeeds. Both point at the same thing. So let's open the hood.
+
+## What's actually filling up
+
+The constraint is the context window — the standard 200K tokens that hold *the entire conversation*: every message, every file Claude read, every command's stdout. Anthropic's own [best-practices doc](https://code.claude.com/docs/en/best-practices) is blunt about why this matters: "LLM performance degrades as context fills. When the context window is getting full, Claude may start 'forgetting' earlier instructions or making more mistakes." This is the lost-in-the-middle effect — and it's why managing the window is, in their words, "the most important resource to manage."
+
+You don't get all 200K. Claude Code reserves a buffer for the model's output and for compaction's own working memory, then triggers compaction *before* the wall. The exact numbers aren't in the official changelog — they come from the community reverse-engineering the binary, so treat them as measured-not-documented: as of early 2026, roughly a [33K-token reserve (~16.5%)](https://claudefa.st/blog/guide/mechanics/context-buffer-management), with auto-compaction firing around 83.5% usage, leaving ~167K of usable space. Different write-ups quote different figures (you'll also see a 13K "auto-compact buffer" number floated). The precise threshold matters less than the shape: there is a hidden ceiling well under 200K, and you cross it faster than you think. One codebase exploration can spend tens of thousands of tokens.
+
+## Two kinds of compaction, and they're not the same
+
+There's a quiet one and a loud one, and conflating them is where people go wrong.
+
+**Microcompaction** is the quiet one, and it's the good kind. As tool outputs pile up, Claude Code keeps a "hot tail" — a small window of the most recent tool results stays inline so reasoning can continue — and moves older results out of the live context, [stored on disk and retrievable by path](https://decodeclaude.com/compaction-deep-dive/). That 90-line file you read 30 turns ago, the `npm test` dump from earlier — those get parked, with a reference left behind. It's lossless in the way that matters: the bytes still exist, the agent can re-fetch them, and no model call was needed to throw them out. This is also why a long session doesn't degrade linearly. The tool-result clutter gets swept; the conversation survives.
+
+**Full compaction** is the loud one — the `Compacting conversation…` event. When usage approaches the ceiling, Claude Code makes a model call that summarizes the entire history down to a structured digest, then *replaces* the conversation with that digest and keeps going. The summary isn't a freeform "here's what happened." Community deep-dives show it's a checklist the model is forced to fill: user intent, key technical decisions, files touched and why they matter, errors and their fixes, pending tasks, next steps. After the summary, it rehydrates — re-reads the few most recently touched files, restores the todo list and plan state, replays startup hooks — and is told to continue without asking you anything.
+
+That structure is the point. The checklist exists so the model "can't forget a bucket." But a digest is still lossy. The exact reproduction steps you discovered at minute ten, the dead end you ruled out, the specific reason you chose approach B — if it didn't land in a checklist slot, it's gone. The agent re-reading the files is not the same as the agent remembering what it concluded about them.
+
+## The part nobody mentions: compaction nukes your cache
+
+Here's a builder's footnote with real money attached. Prompt caching, [as we covered Thursday](./2026-06-18-prompt-caching-hit-rate.md), only pays off on a *byte-identical prefix* — change anything above the breakpoint and everything below it re-bills at full price. Full compaction rewrites the entire history into a new summary. By definition, that is a total prefix change. The turn right after a compaction is a guaranteed cache miss: you pay full input price on the whole rebuilt context, plus the summarization call itself. Microcompaction is engineered to dodge this — it edits the parked entries rather than re-sending unchanged content — but the loud kind can't. So an unattended agent that hits compaction three times in a run isn't just losing detail; it's paying the write-and-rebuild tax three times. If your bills spike on long autonomous sessions, count the compaction events first.
+
+## Control it: fire the save where it's safe
+
+The fix is the same instinct you have about garbage collection in a hot loop — don't let it pause you mid-write; trigger it yourself at a safe point. Claude Code gives you the levers; almost nobody uses them.
+
+**`/clear` is your most underused command.** Compaction summarizes; `/clear` deletes. Between two unrelated tasks, you don't want a digest of the first one bleeding into the second — you want a clean window. Anthropic's own failure-mode list names "the kitchen sink session" first, and the fix is one word: `/clear`. Same for the correction spiral — if you've corrected the agent twice on one thing, the context is now polluted with failed approaches. `/clear` and re-prompt with what you learned beats grinding the dirty session every time.
+
+**`/compact <instructions>` lets you aim the summary.** Don't wait for the auto-fire at 83%. At a natural seam — a refactor landed, a bug closed — run `/compact` yourself, and steer what survives: `/compact keep the full repro steps and the list of files we changed`. You're picking the checkpoint and weighting the checklist.
+
+**`/rewind` (or `Esc Esc`) does partial compaction.** Pick a message and choose *Summarize from here* (condense everything after, keep earlier context intact) or *Summarize up to here* (condense the early exploration, keep recent work in full). When the expensive part of your session is the last twenty minutes, summarize the first forty and protect the tail.
+
+**Make the default fire keep what you care about.** You can't always pre-empt the auto-compaction, but you can bias it. Put a line in `CLAUDE.md` — Anthropic documents this exactly: `"When compacting, always preserve the full list of modified files and any test commands."` Now even the unattended save keeps your load-bearing state.
+
+**Push the big reads out of your window entirely.** Investigation is what fills context — "the infinite exploration," in the failure list. Hand it to a subagent. It runs in a *separate* context window and reports back a summary, so the hundred files it read never touch your main session. (The flip side, [as we covered last week](./2026-06-13-subagent-fan-out-budget.md): each subagent spins up a fresh context, so you pay for that window — fan out for parallel breadth and small returns, not to dodge a single read.) For a throwaway question that doesn't need to live in history, `/btw` answers in an overlay that never enters context at all.
+
+**Watch the gauge.** Run `/context` to see what's actually eating the window — often it's one giant file or a chatty MCP server, not your conversation. Put context usage in your [status line](https://code.claude.com/docs/en/statusline) so you see the ceiling coming. This is where this week's `claude-devtools`-style observability earns its slot: the win isn't a prettier token graph. It's catching that you're at 80% *before* the save fires, so you can pick the checkpoint instead of getting one chosen for you.
+
+Which brings us back to the skeptic. The token-compression post is right about the trap, and it generalizes past the one tool it names: tokens-saved is a vanity number; the metric that matters is whether the task still succeeds after you compressed. Compaction is the same bet. A save that freed 100K tokens and dropped the one repro step you needed is not a win — it's a silent failure you'll discover three turns later when the agent confidently fixes the wrong thing. Optimize for what survives, not for what got cleared.
+
+## So what for Monday morning
+
+- **Do:** Treat `/clear` and `/compact` as part of your normal rhythm, not emergency buttons. Clear between unrelated tasks; compact-with-instructions at task seams so *you* pick the save point and weight the summary. Add the "preserve modified files + test commands" line to `CLAUDE.md` today — it's one line and it makes every automatic save safer.
+- **Watch:** Your context gauge and your compaction events. Surfacing the window (status line, `/context`, an observability tool) is the cheapest reliability upgrade available. And on long autonomous runs, count compactions as cache-busting cost events, not just memory events.
+- **Ignore:** The raw tokens-saved number, and the urge to fear long sessions wholesale. Microcompaction quietly handles the tool-result clutter that causes most bloat; sometimes letting context accumulate on one deep problem is exactly right. The thing to manage isn't session length — it's *when the lossy save fires and what it keeps.*

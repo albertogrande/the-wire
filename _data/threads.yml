@@ -85,10 +85,15 @@
     (the model owns the loop), not a product — and agency's cost IS the brakes
     problem (nondeterminism, per-step token re-read, blast radius). The market
     is already voting low-agency: MCP (tool rung) adopted, A2A (multi-agent
-    rung) enterprise-announced but developer-shrugged.
+    rung) enterprise-announced but developer-shrugged. The hands-on brake the
+    reader actually has: context compaction. Claude Code's auto-save is lossy
+    and fires on a hidden, undocumented threshold — control it (/clear,
+    /compact at safe points, CLAUDE.md preserve-rules) or it summarizes away the
+    state you needed, and silently re-bills the prompt cache each time.
   issues:
     - { label: "Dive · Autonomy Shipped Before Its Brakes Did", link: "/reports/deep-dives/2026-06-08-autonomy-before-brakes.html" }
     - { label: "Dive · 'Agent' Is a Control-Flow Decision, Not a Product", link: "/reports/deep-dives/2026-06-19-agent-is-a-control-flow-decision.html" }
+    - { label: "Dive · Compaction Is a Lossy Save", link: "/reports/deep-dives/2026-06-20-claude-code-compaction-save-point.html" }
 
 - slug: platforms-eat-the-layer
   title: "Platforms eat the layer"
