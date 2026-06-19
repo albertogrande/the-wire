@@ -124,7 +124,7 @@ jobs:
       - name: Install pandoc
         run: sudo apt-get update && sudo apt-get install -y pandoc
 
-      - name: Build EPUB
+      - name: Build document
         id: build
         run: |
           set -euo pipefail
@@ -132,12 +132,12 @@ jobs:
           if [ ! -f "$MD" ]; then
             echo "::error::Source markdown vanished from tip: $MD"; exit 1
           fi
-          OUT="reports/epub/$(basename "${MD%.md}").epub"
+          OUT="reports/epub/$(basename "${MD%.md}").docx"
           mkdir -p reports/epub
-          scripts/build-epub.sh "$MD" "$OUT"
+          scripts/build-docx.sh "$MD" "$OUT"
           TITLE="$(grep -m1 '^# ' "$MD" | sed 's/^# //')"
           {
-            echo "epub=$OUT"
+            echo "doc=$OUT"
             echo "title=${TITLE:-$(basename "${MD%.md}")}"
           } >> "$GITHUB_OUTPUT"
 
@@ -156,11 +156,11 @@ jobs:
             New from The Wire: "${{ steps.build.outputs.title }}"
             Source: ${{ matrix.file }}
             Trigger: ${{ github.event_name }} (run ${{ github.run_id }})
-          attachments: ${{ steps.build.outputs.epub }}
+          attachments: ${{ steps.build.outputs.doc }}
 
-      - name: Upload EPUB as workflow artifact
+      - name: Upload document as workflow artifact
         uses: actions/upload-artifact@v4
         with:
-          name: epub-${{ github.run_id }}-${{ strategy.job-index }}
-          path: ${{ steps.build.outputs.epub }}
+          name: doc-${{ github.run_id }}-${{ strategy.job-index }}
+          path: ${{ steps.build.outputs.doc }}
           retention-days: 14
