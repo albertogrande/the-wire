@@ -26,7 +26,6 @@ overtakes becomes a `news-to-framework` piece instead — that's fine.
 - [x-vs-y] Open weights vs closed APIs: the real total cost once you price
   inference, ops, and eval (Analyst)
 - [how-it-works] Mixture-of-experts, explained from the routing up (Analyst)
-- [reference] What "agent" actually means in 2026, stripped of marketing (Contrarian)
 - [how-it-works] Model distillation: what training on another model's outputs
   actually copies, and what the license lets you do with it (Analyst)
 - [news-to-framework] Why training data is the moat and the liability at once —
@@ -45,6 +44,12 @@ overtakes becomes a `news-to-framework` piece instead — that's fine.
   checkout (Builder)
 - [architecture] The anatomy of an MCP server: transport, tool schemas, and
   what a call really costs (Builder)
+- [x-vs-y] MCP vs A2A: the tool rung vs the agent rung — what each protocol
+  actually wires together, and why one got adopted and one got shrugged at (Builder)
+- [how-it-works] The ReAct loop, from the inside: reflection → action →
+  observation, the memory it needs, and what the framework actually adds (Builder)
+- [x-vs-y] JSON tool calls vs code actions: why writing actions as code composes
+  better than emitting tool-name-and-args JSON (Analyst)
 - [practical-guide] Writing a skill that triggers reliably — the description is
   the product (Builder)
 - [postmortem] Failure modes of agent loops: runaway turns, context rot, and
@@ -118,3 +123,6 @@ overtakes becomes a `news-to-framework` piece instead — that's fine.
 - [what-every-engineer-should-know] Prompt caching: what gets cached, the TTL,
   and the cost math that makes or breaks an agent (Analyst) — 2026-06-18,
   reports/deep-dives/2026-06-18-prompt-caching-hit-rate.md
+- [reference] What "agent" actually means in 2026, stripped of marketing
+  (Contrarian) — 2026-06-19,
+  reports/deep-dives/2026-06-19-agent-is-a-control-flow-decision.md

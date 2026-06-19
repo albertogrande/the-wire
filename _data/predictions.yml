@@ -131,3 +131,16 @@
   confidence: 55
   due: "2027-Q1"
   status: open
+
+- id: dive-2026-06-19-agent-dial
+  made: "Dive · 2026-06-19"
+  made_link: "/reports/deep-dives/2026-06-19-agent-is-a-control-flow-decision.html"
+  text: >-
+    Multi-agent / A2A-style agent-to-agent coordination does NOT become the
+    default shipped production-agent pattern; single-context loops plus
+    tool-calling (the MCP rung) stay dominant, and A2A stays
+    enterprise-announced rather than developer-used — no broad
+    practitioner-usage signal emerges.
+  confidence: 75
+  due: "2027-Q1"
+  status: open
