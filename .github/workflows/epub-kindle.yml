@@ -1,0 +1,166 @@
+name: EPUB to Kindle
+
+# Converts every newly published content piece (weekly issues, deep dives,
+# quarterly retrospectives) to EPUB and emails it — one email per piece — to a
+# Send-to-Kindle address so it lands on the device.
+#
+# Why workflow_run (not push): the newsroom workflows (Daily Dive, The Wire)
+# commit with GITHUB_TOKEN, which by GitHub design does NOT fire `on: push`.
+# deploy.yml works around this the same way. The `push` trigger below is only a
+# backstop for content merged by a human/PAT; workflow_dispatch is for manual
+# (re)sends and testing.
+#
+# This workflow is READ-ONLY on the repo (permissions: contents: read). It never
+# commits the generated epub back, which structurally prevents any retrigger loop.
+on:
+  workflow_run:
+    workflows: ["Daily Dive", "The Wire"]
+    types: [completed]
+  push:
+    branches: [main]
+    paths:
+      - "reports/**/*.md"
+      - "!reports/MEMORY.md"
+      - "!reports/TASTE.md"
+  workflow_dispatch:
+    inputs:
+      file:
+        description: "Path to a single markdown file to (re)send, e.g. reports/2026-W24.md"
+        type: string
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: epub-kindle-${{ github.event.workflow_run.id || github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  detect:
+    runs-on: ubuntu-latest
+    # Skip workflow_run completions that weren't successful; push/dispatch always run.
+    if: >-
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.conclusion == 'success'
+    outputs:
+      count: ${{ steps.pick.outputs.count }}
+      files_json: ${{ steps.pick.outputs.files_json }}
+    steps:
+      - name: Checkout (full history for diffing)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Determine newly published markdown
+        id: pick
+        env:
+          EVENT: ${{ github.event_name }}
+          WR_HEAD: ${{ github.event.workflow_run.head_sha }}
+          PUSH_BEFORE: ${{ github.event.before }}
+          PUSH_AFTER: ${{ github.event.after }}
+          DISPATCH_FILE: ${{ github.event.inputs.file }}
+        run: |
+          set -euo pipefail
+          git fetch --quiet origin main
+
+          # Allowlist: weekly (reports/YYYY-WXX.md), deep dives, quarters.
+          # Denylist: MEMORY.md, TASTE.md (internal, top-level).
+          filter() {
+            grep -E '^reports/(deep-dives|quarters)/.+\.md$|^reports/[0-9]{4}-W[0-9]{2}\.md$' \
+              | grep -vE '^reports/(MEMORY|TASTE)\.md$' || true
+          }
+
+          case "$EVENT" in
+            workflow_dispatch)
+              if [ ! -f "$DISPATCH_FILE" ]; then
+                echo "::error::File not found: $DISPATCH_FILE"; exit 1
+              fi
+              FILES="$DISPATCH_FILE"
+              ;;
+            workflow_run)
+              # head_sha is the tip from when the source run STARTED — before its
+              # content and usage pushes. Diff from there to the current tip and
+              # keep only newly ADDED content markdown (captures the weekly's two
+              # pieces; drops the usage CSV and any edits to existing files).
+              BEFORE="$WR_HEAD"
+              AFTER="$(git rev-parse origin/main)"
+              FILES="$(git diff --name-only --diff-filter=A "$BEFORE..$AFTER" -- 'reports/**/*.md' | filter)"
+              ;;
+            push)
+              FILES="$(git diff --name-only --diff-filter=A "$PUSH_BEFORE..$PUSH_AFTER" -- 'reports/**/*.md' | filter)"
+              ;;
+          esac
+
+          if [ -z "${FILES//[$'\n\r\t ']/}" ]; then
+            echo "No new content markdown to send."
+            echo "count=0" >> "$GITHUB_OUTPUT"
+            echo 'files_json=[]' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "Will convert:"; printf '%s\n' "$FILES"
+          COUNT="$(printf '%s\n' "$FILES" | grep -c .)"
+          JSON="$(printf '%s\n' "$FILES" | grep . | jq -R . | jq -cs .)"
+          echo "count=$COUNT" >> "$GITHUB_OUTPUT"
+          echo "files_json=$JSON" >> "$GITHUB_OUTPUT"
+
+  send:
+    needs: detect
+    if: needs.detect.outputs.count != '0'
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 1
+      fail-fast: false
+      matrix:
+        file: ${{ fromJSON(needs.detect.outputs.files_json) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Install pandoc
+        run: sudo apt-get update && sudo apt-get install -y pandoc
+
+      - name: Build EPUB
+        id: build
+        run: |
+          set -euo pipefail
+          MD="${{ matrix.file }}"
+          if [ ! -f "$MD" ]; then
+            echo "::error::Source markdown vanished from tip: $MD"; exit 1
+          fi
+          OUT="reports/epub/$(basename "${MD%.md}").epub"
+          mkdir -p reports/epub
+          scripts/build-epub.sh "$MD" "$OUT"
+          TITLE="$(grep -m1 '^# ' "$MD" | sed 's/^# //')"
+          {
+            echo "epub=$OUT"
+            echo "title=${TITLE:-$(basename "${MD%.md}")}"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Email EPUB to Kindle
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          from: The Wire <${{ secrets.MAIL_USERNAME }}>
+          to: ${{ secrets.MAIL_TO }}
+          subject: ${{ steps.build.outputs.title }}
+          body: |
+            New from The Wire: "${{ steps.build.outputs.title }}"
+            Source: ${{ matrix.file }}
+            Trigger: ${{ github.event_name }} (run ${{ github.run_id }})
+          attachments: ${{ steps.build.outputs.epub }}
+
+      - name: Upload EPUB as workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: epub-${{ github.run_id }}-${{ strategy.job-index }}
+          path: ${{ steps.build.outputs.epub }}
+          retention-days: 14
