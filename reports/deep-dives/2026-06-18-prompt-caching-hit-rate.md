@@ -132,7 +132,7 @@ discount headline.
 
 This connects straight to the bill the reader is now paying. When flat-rate AI
 tooling [ended industry-wide](./2026-06-07-ai-coding-honest-pricing.md) and the
-[June 15 subscription split](../2026-W25.md) moved programmatic usage to a
+June 15 subscription split moved programmatic usage to a
 metered pool, caching stopped being an optimization and became the largest
 single lever on what an agent costs you. A fan-out of sub-agents
 ([the token bill you sign](./2026-06-13-subagent-fan-out-budget.md)) multiplies
