@@ -156,3 +156,15 @@
   confidence: 55
   due: "2027-Q1"
   status: open
+
+- id: dive-2026-06-21-moe-activation-ratio
+  made: "Dive · 2026-06-21"
+  made_link: "/reports/deep-dives/2026-06-21-mixture-of-experts-active-parameters.html"
+  text: >-
+    The next frontier-tier open-weight model release (top ~5 on the
+    intelligence index) ships with an activation ratio at or below ~6%
+    (active ÷ total parameters), continuing the Mixtral 27.6% →
+    DeepSeek-V3 / GLM-5.2 ~5.4% sparsification trend; none re-ships above ~15%.
+  confidence: 70
+  due: "2027-Q1"
+  status: open

@@ -48,10 +48,15 @@
     terminal/environment/rail/install base (+political). The moat is the
     channel, not the weights. W24: the political off-ramp went live — export
     controls hit the closed/legible US leader while open weights walk free.
+    W25: the MoE angle reinforces it — sparsity (GLM-5.2 744B/40B, ~5.4% active)
+    makes open models cheap to serve at batch scale but inflates the
+    must-fit-in-VRAM number, so the architecture that cheapens the API is the
+    same one that keeps you renting it.
   issues:
     - { label: "Dive · The Channel Was the Product", link: "/reports/deep-dives/2026-06-09-channel-was-the-product.html" }
     - { label: "Dive · You Cannot Export-Control a Model", link: "/reports/deep-dives/2026-06-15-cannot-export-control-a-model.html" }
     - { label: "Dive · The Coding Model You Can Run", link: "/reports/deep-dives/2026-06-17-local-coding-model-memory-budget.html" }
+    - { label: "Dive · You Pay for 40 Billion", link: "/reports/deep-dives/2026-06-21-mixture-of-experts-active-parameters.html" }
 
 - slug: supply-chain-vs-throughput
   title: "Supply chain vs. AI throughput"

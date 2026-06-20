@@ -37,9 +37,14 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   W25: the *user's* off-ramp examined hands-on — running a model locally escapes
   the channel only if it fits your VRAM; the open models that rival the frontier
   (~150GB) don't, so the channel still holds for serious work.
+  W25: the MoE angle reinforces it — sparsity (GLM-5.2 744B/40B, ~5.4% active) makes
+  open models cheap to *serve at batch scale* (provider's economics) but inflates the
+  must-fit-in-VRAM number, so the architecture that cheapens the API is the same one
+  that keeps you renting it.
   → [dive 2026-06-09 channel](./deep-dives/2026-06-09-channel-was-the-product.md),
   [dive 2026-06-15](./deep-dives/2026-06-15-cannot-export-control-a-model.md),
-  [dive 2026-06-17](./deep-dives/2026-06-17-local-coding-model-memory-budget.md)
+  [dive 2026-06-17](./deep-dives/2026-06-17-local-coding-model-memory-budget.md),
+  [dive 2026-06-21](./deep-dives/2026-06-21-mixture-of-experts-active-parameters.md)
 - **Supply chain vs. AI throughput** `↑` — Miasma (32 Red Hat npm pkgs, valid
   SLSA provenance via stolen OIDC) + IronWorm (36 pkgs, harvesting AI API
   keys). Provenance + install-script scanning both defeated. Review/trust
@@ -125,6 +130,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-06-19 (agent) | Multi-agent / A2A-style agent-to-agent coordination does NOT become the default shipped production-agent pattern; single-context loops + tool-calling (MCP rung) stay dominant, and A2A stays enterprise-announced rather than developer-used (no broad practitioner-usage signal) | 75% | by 2027-Q1 | OPEN |
 | Dive 2026-06-18 (caching) | Anthropic ships automatic/implicit prompt caching (a hit without a manually placed breakpoint) on at least one default API path, converging toward OpenAI/DeepSeek/Gemini's zero-config model — because the realized-vs-advertised hit-rate gap is a cost-perception liability | 55% | by 2027-Q1 | OPEN |
 | Dive 2026-06-20 (compaction) | Claude Code surfaces auto-compaction control as a documented, first-class setting (a configurable threshold or a "manual/safe-point-only" compaction mode in /config or official docs) rather than the current undocumented env-var + reverse-engineered buffer | 55% | by 2027-Q1 | OPEN |
+| Dive 2026-06-21 (MoE) | The next frontier-tier open-weight model release (intelligence-index top ~5) ships with an activation ratio at or below ~6% (active ÷ total params), continuing the Mixtral 27.6% → DeepSeek/GLM ~5.4% sparsification trend; none re-ships above ~15% | 70% | by 2027-Q1 | OPEN |
 
 **Scorecard: 0 settled · record 0–0 · mean Brier —**
 (W23 Copilot-walkback call due ~Jul 5 — still open, no reversal yet; settle next issue.)
@@ -194,6 +200,14 @@ Lower is better; 0.25 = coin-flip guessing.
   preserve-rules, subagents+/btw, /context+status line. Tokens-saved is a vanity
   metric — optimize for what survives. how-it-works/practical-guide. Lever on
   autonomy-before-brakes; sibling to fan-out + caching dives.
+- 2026-06-21 — "The Model Has 744 Billion Parameters. You Pay for 40 Billion." (Quist)
+  — mixture-of-experts from the routing up, pegged to GLM-5.2 (744B total / 40B active,
+  MIT). Total params = memory/VRAM bill; active params = compute/per-token bill; MoE
+  decouples them. Activation ratio fell 27.6% (Mixtral 8x7B) → 5.5% (DeepSeek-V3, 256/8)
+  → 5.4% (GLM-5.2) over two years. Sparsity is a batch-economics play (cheap to serve at
+  scale, brutal to run locally) → sharpens channel thread; MoE inflates the must-fit-in-VRAM
+  number. Shazeer (→OpenAI this week) co-authored both founding MoE papers (2017, Switch).
+  how-it-works/economics. Sibling to local-model + caching dives; lever on channel thread.
 - 2026-06-19 — "'Agent' Is a Control-Flow Decision, Not a Product" (Okafor) — strips
   the marketing: an agent is one thing — the model controls the loop (Willison's
   "tools in a loop," Sept 2025); everything else sold as an agent is a workflow with

@@ -25,7 +25,6 @@ overtakes becomes a `news-to-framework` piece instead — that's fine.
   outputs (Analyst)
 - [x-vs-y] Open weights vs closed APIs: the real total cost once you price
   inference, ops, and eval (Analyst)
-- [how-it-works] Mixture-of-experts, explained from the routing up (Analyst)
 - [how-it-works] Model distillation: what training on another model's outputs
   actually copies, and what the license lets you do with it (Analyst)
 - [news-to-framework] Why training data is the moat and the liability at once —
@@ -131,3 +130,5 @@ overtakes becomes a `news-to-framework` piece instead — that's fine.
 - [how-it-works] How Claude Code's context compaction works, and when it costs
   you (Builder) — 2026-06-20,
   reports/deep-dives/2026-06-20-claude-code-compaction-save-point.md
+- [how-it-works] Mixture-of-experts, explained from the routing up (Analyst) —
+  2026-06-21, reports/deep-dives/2026-06-21-mixture-of-experts-active-parameters.md
