@@ -19,3 +19,4 @@ date_utc,workflow,run_id,result,model,turns,duration_ms,input_tokens,output_toke
 "2026-06-21T22:36Z","Daily Scout","27919616093","ok","claude-sonnet-4-6",12,133464,1797,5586,297725,25658,0.4300295000000001
 "2026-06-22T00:34Z","The Wire","27922524457","error","claude-opus-4-8",12,273746,4,3238,81565,15008,0.591145
 "2026-06-22T22:44Z","Daily Scout","27988872977","ok","claude-sonnet-4-6",16,240406,870,6567,233121,22363,0.4809133
+"2026-06-22T23:33Z","Daily Dive","27991078598","ok","claude-opus-4-8",35,275182,4605,17826,1446541,88614,2.1926725
