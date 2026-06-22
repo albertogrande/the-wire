@@ -62,8 +62,6 @@ Code Watch.*
   automation belongs (Operator)
 - [how-it-works] Driving Claude Code headless from CI: the unattended-agent
   workflow pattern (Operator)
-- [how-it-works] Git worktrees under an agent: why isolation beats a shared
-  checkout (Builder)
 - [practical-guide] Reading your context window: /context, the status line, and
   what's actually eating your tokens (Builder)
 - [postmortem] When a compaction summary drops the thing you needed — designing
@@ -157,3 +155,6 @@ Code Watch.*
   reports/deep-dives/2026-06-20-claude-code-compaction-save-point.md
 - [how-it-works] Mixture-of-experts, explained from the routing up (Analyst) —
   2026-06-21, reports/deep-dives/2026-06-21-mixture-of-experts-active-parameters.md
+- [how-it-works] Git worktrees under an agent: why isolation beats a shared
+  checkout (Builder) — 2026-06-23,
+  reports/deep-dives/2026-06-23-git-worktrees-agent-isolation.md

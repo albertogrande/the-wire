@@ -194,3 +194,16 @@
   confidence: 65
   due: "2027-Q1"
   status: open
+
+- id: dive-2026-06-23-worktrees
+  made: "Dive · 2026-06-23"
+  made_link: "/reports/deep-dives/2026-06-23-git-worktrees-agent-isolation.html"
+  text: >-
+    No agent-native version-control system (Oak, jj-style, or similar) displaces
+    git worktrees as the default file-isolation primitive for parallel coding
+    agents. The major agent harnesses (Claude Code, Cursor, and peers) keep
+    building parallel-session isolation on git worktrees — not a non-git store —
+    in their shipped defaults.
+  confidence: 80
+  due: "2027-Q1"
+  status: open

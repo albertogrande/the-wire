@@ -83,9 +83,16 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   lossy auto-save fires on a hidden threshold; control when it fires / what it keeps
   (/clear, /compact, CLAUDE.md preserve-rules) or it summarizes away your state and
   re-bills the prompt cache each event.
+  W26 (builder lens): the file-system brake for *parallel* agents is worktree
+  isolation — a shared checkout is global mutable state (one working dir/index/HEAD),
+  so concurrent agent writers silently corrupt each other; git worktrees give each
+  its own files + an enforced one-branch lock. Oak ("Git alternative for agents")
+  reframes it as a new-VCS problem, but isolation is already solved free in git;
+  the only open frontier is clone/hydrate time at fleet scale.
   → [dive 2026-06-08-autonomy](./deep-dives/2026-06-08-autonomy-before-brakes.md),
   [dive 2026-06-19](./deep-dives/2026-06-19-agent-is-a-control-flow-decision.md),
-  [dive 2026-06-20](./deep-dives/2026-06-20-claude-code-compaction-save-point.md)
+  [dive 2026-06-20](./deep-dives/2026-06-20-claude-code-compaction-save-point.md),
+  [dive 2026-06-23](./deep-dives/2026-06-23-git-worktrees-agent-isolation.md)
 - **Platforms eat the layer** `↑` — the LLMOps tool layer (gateway, tracing,
   eval, prompt store) is being absorbed from both ends: ClickHouse bought
   Langfuse (Jan, already built on ClickHouse; 23.1M SDK installs/mo) to own the
@@ -153,6 +160,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-06-21 (MoE) | The next frontier-tier open-weight model release (intelligence-index top ~5) ships with an activation ratio at or below ~6% (active ÷ total params), continuing the Mixtral 27.6% → DeepSeek/GLM ~5.4% sparsification trend; none re-ships above ~15% | 70% | by 2027-Q1 | OPEN |
 | 2026-W25 | At least one major commercial AI vendor (Anthropic/OpenAI/Google/Microsoft) ships or formally announces a customer-facing multi-provider / bring-your-own-model fallback in a first-party developer product — pricing in the switch-off risk the export ban made concrete | 60% | ~2026-09-20 | OPEN |
 | Dive 2026-06-22 (portability) | Prompt+tool portability stays a manual re-eval problem — no cross-provider standard or vendor feature lets a non-trivial agent's prompt+toolset move between two frontier providers and reproduce eval scores within a small margin without per-model retuning; gateways normalize API syntax, behavior still needs bespoke adaptation | 65% | by 2027-Q1 | OPEN |
+| Dive 2026-06-23 (worktrees) | No agent-native VCS (Oak/jj-style) displaces git+worktrees as the default file-isolation primitive for parallel coding agents — the major agent harnesses (Claude Code, Cursor, etc.) keep building isolation on git worktrees, not a non-git store, in their shipped defaults | 80% | by 2027-Q1 | OPEN |
 
 **Scorecard: 0 settled · record 0–0 · mean Brier —**
 (Nothing due in W25. W23 Copilot-walkback call due ~Jul 5 — still open, no reversal
@@ -246,6 +254,17 @@ yet. W24 export-ban-narrowing call due ~Aug 14. Settle in a later issue.)
   scale, brutal to run locally) → sharpens channel thread; MoE inflates the must-fit-in-VRAM
   number. Shazeer (→OpenAI this week) co-authored both founding MoE papers (2017, Switch).
   how-it-works/economics. Sibling to local-model + caching dives; lever on channel thread.
+- 2026-06-23 — "Your Agents Don't Need a New Git. They Need to Stop Sharing One
+  Checkout." (Vance) — git worktrees as the file-isolation primitive for parallel
+  coding agents. A checkout is global mutable state (one working dir / index / HEAD);
+  a worktree shares the object DB ($GIT_COMMON_DIR) but gets its own HEAD+index+files,
+  and git enforces one-branch-per-worktree (the missing file lock). Claude Code wiring:
+  `claude --worktree`, `isolation: worktree` subagent frontmatter, `.worktreeinclude`
+  (copies gitignored .env), auto-cleanup-by-emptiness + `git worktree lock` while running.
+  News peg: Oak ("Git alternative for agents," Show HN 128pts) — BLAKE3/lazy mounts solve
+  *clone time at fleet scale*, NOT isolation (already solved, free, git-compatible).
+  how-it-works/practical-guide. Sibling to fan-out dive; makes parallel writing safe,
+  not just parallel thinking. Lever on autonomy-before-brakes / agent-engineering.
 - 2026-06-19 — "'Agent' Is a Control-Flow Decision, Not a Product" (Okafor) — strips
   the marketing: an agent is one thing — the model controls the loop (Willison's
   "tools in a loop," Sept 2025); everything else sold as an agent is a workflow with
