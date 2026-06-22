@@ -8,6 +8,13 @@ on:
     # quota. Still ready at breakfast. Covers the just-completed Monday→Sunday
     # week. Cron is UTC, hence 00:00.
     - cron: "0 0 * * 1"
+    # Backup retries: the API can be transiently overloaded (529) at 00:00 and
+    # exhaust the action's retries (this happened 2026-06-22 — the weekly silently
+    # didn't publish). These reruns self-skip in the `guard` job the moment
+    # reports/<WEEK_ID>.md exists, so on a healthy week they cost nothing (no model
+    # call); they only do real work when the primary run failed to publish.
+    - cron: "0 3 * * 1"
+    - cron: "0 6 * * 1"
   workflow_dispatch:
     inputs:
       mode:
@@ -28,8 +35,43 @@ permissions:
   issues: write
   id-token: write
 
+# One weekly run at a time: a backup cron that fires while a run is still going
+# waits rather than double-publishing; its guard then skips if already done.
+concurrency:
+  group: the-wire-weekly
+  cancel-in-progress: false
+
 jobs:
+  # Idempotency guard: decide whether there's anything to do. In weekly mode, if
+  # this week's issue is already published, every (backup) run after the first
+  # becomes a ~10s no-op that never touches the model.
+  guard:
+    runs-on: ubuntu-latest
+    outputs:
+      should_run: ${{ steps.check.outputs.should_run }}
+      week_id: ${{ steps.check.outputs.week_id }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: check
+        env:
+          MODE: ${{ github.event.inputs.mode || 'weekly' }}
+        run: |
+          WEEK_ID=$(date -d "last sunday" +%G-W%V)
+          echo "week_id=$WEEK_ID" >> "$GITHUB_OUTPUT"
+          if [ "$MODE" != "weekly" ]; then
+            echo "Mode=$MODE (not weekly) — always run."
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+          elif [ -f "reports/${WEEK_ID}.md" ]; then
+            echo "reports/${WEEK_ID}.md already published — skipping this run."
+            echo "should_run=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "reports/${WEEK_ID}.md missing — running."
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+          fi
+
   report:
+    needs: guard
+    if: needs.guard.outputs.should_run == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
@@ -168,3 +210,35 @@ jobs:
           git commit -m "Usage: $GITHUB_WORKFLOW run $GITHUB_RUN_ID" || exit 0
           git pull --rebase origin "$GITHUB_REF_NAME" || true
           git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:${GITHUB_REF_NAME}"
+
+  # Alert on a real failure (not a guard-skip) so a silent Monday miss can't
+  # recur. Deduped per week: the first failed attempt opens an issue; later
+  # failed retries comment on it instead of spawning duplicates.
+  notify-failure:
+    needs: [guard, report]
+    if: always() && needs.report.result == 'failure'
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          WEEK_ID: ${{ needs.guard.outputs.week_id }}
+        run: |
+          RUN_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          gh label create ops-alert --color B60205 --description "Newsroom run failures" 2>/dev/null || true
+          EXISTING=$(gh issue list --label ops-alert --state open --json number,title \
+            --jq ".[] | select(.title | contains(\"$WEEK_ID\")) | .number" | head -1)
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --body "Another attempt failed: $RUN_URL"
+          else
+            BODY=$(printf '%s\n\n%s\n\n%s\n' \
+              "The scheduled weekly run for **$WEEK_ID** failed before publishing." \
+              "Run: $RUN_URL" \
+              "Backup crons at 03:00 and 06:00 UTC Monday retry automatically while reports/$WEEK_ID.md is missing. If all retries fail, run it by hand: Actions → The Wire → Run workflow (mode: weekly).")
+            gh issue create \
+              --title "⚠️ The Wire weekly run failed — $WEEK_ID" \
+              --label ops-alert \
+              --body "$BODY"
+          fi
