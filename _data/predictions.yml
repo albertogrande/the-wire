@@ -194,3 +194,15 @@
   confidence: 65
   due: "2027-Q1"
   status: open
+
+- id: dive-2026-06-22-claude-md-bloat-signal
+  made: "Dive · 2026-06-22"
+  made_link: "/reports/deep-dives/2026-06-22-claude-md-earns-its-tokens.html"
+  text: >-
+    Claude Code surfaces CLAUDE.md bloat as a first-class signal — a size
+    warning, a per-file token readout in /memory or /context, or a /doctor
+    check — moving the "keep it under 200 lines" guidance from a doc sentence
+    into something the tool shows you, rather than leaving it as prose advice.
+  confidence: 55
+  due: "2027-Q1"
+  status: open

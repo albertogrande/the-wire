@@ -153,6 +153,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-06-21 (MoE) | The next frontier-tier open-weight model release (intelligence-index top ~5) ships with an activation ratio at or below ~6% (active ÷ total params), continuing the Mixtral 27.6% → DeepSeek/GLM ~5.4% sparsification trend; none re-ships above ~15% | 70% | by 2027-Q1 | OPEN |
 | 2026-W25 | At least one major commercial AI vendor (Anthropic/OpenAI/Google/Microsoft) ships or formally announces a customer-facing multi-provider / bring-your-own-model fallback in a first-party developer product — pricing in the switch-off risk the export ban made concrete | 60% | ~2026-09-20 | OPEN |
 | Dive 2026-06-22 (portability) | Prompt+tool portability stays a manual re-eval problem — no cross-provider standard or vendor feature lets a non-trivial agent's prompt+toolset move between two frontier providers and reproduce eval scores within a small margin without per-model retuning; gateways normalize API syntax, behavior still needs bespoke adaptation | 65% | by 2027-Q1 | OPEN |
+| Dive 2026-06-22 (CLAUDE.md) | Claude Code surfaces CLAUDE.md bloat as a first-class signal — a size warning, per-file token readout in /memory or /context, or a /doctor check — moving the "under 200 lines" guidance from prose into something the tool shows you | 55% | by 2027-Q1 | OPEN |
 
 **Scorecard: 0 settled · record 0–0 · mean Brier —**
 (Nothing due in W25. W23 Copilot-walkback call due ~Jul 5 — still open, no reversal
@@ -246,6 +247,16 @@ yet. W24 export-ban-narrowing call due ~Aug 14. Settle in a later issue.)
   scale, brutal to run locally) → sharpens channel thread; MoE inflates the must-fit-in-VRAM
   number. Shazeer (→OpenAI this week) co-authored both founding MoE papers (2017, Switch).
   how-it-works/economics. Sibling to local-model + caching dives; lever on channel thread.
+- 2026-06-22 — "Your CLAUDE.md Is Loaded Every Turn. Most of It Shouldn't Be." (Sandoval)
+  — inaugural Operator / Claude Code-desk dive. CLAUDE.md is loaded in full into context
+  every session as recurring tokens (not docs-on-disk); past ~200 lines it *reduces*
+  adherence ("bloated CLAUDE.md files cause Claude to ignore your actual instructions").
+  It's advice (delivered as a user message after the system prompt), not enforcement, and
+  it survives compaction (re-injected) — which is why people overstuff it. Fix = four-tier
+  routing: CLAUDE.md (always-true behavior only) → .claude/rules/ path-scoped (conditional,
+  loads on demand) → skills (procedures, on demand) → HTML comments (human notes, stripped,
+  zero tokens); must-happens → hooks (deterministic). @imports DON'T cut context (load at
+  launch). practical-guide/how-it-works. Sibling to compaction (2026-06-20) + caching dives.
 - 2026-06-19 — "'Agent' Is a Control-Flow Decision, Not a Product" (Okafor) — strips
   the marketing: an agent is one thing — the model controls the loop (Willison's
   "tools in a loop," Sept 2025); everything else sold as an agent is a workflow with

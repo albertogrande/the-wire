@@ -44,8 +44,6 @@ Code Watch.*
 
 - [practical-guide] The daily-driver loop: structuring a Claude Code session
   so the agent finishes more before it derails (Operator)
-- [reference] A CLAUDE.md that earns its tokens: what to put in, what to cut,
-  for a large repo (Operator)
 - [practical-guide] The permission allowlist that stops the prompts without
   going full YOLO (Operator)
 - [how-it-works] Hooks that catch the agent's mistakes before they land —
@@ -157,3 +155,6 @@ Code Watch.*
   reports/deep-dives/2026-06-20-claude-code-compaction-save-point.md
 - [how-it-works] Mixture-of-experts, explained from the routing up (Analyst) —
   2026-06-21, reports/deep-dives/2026-06-21-mixture-of-experts-active-parameters.md
+- [reference] A CLAUDE.md that earns its tokens: what to put in, what to cut
+  (Operator) — 2026-06-22,
+  reports/deep-dives/2026-06-22-claude-md-earns-its-tokens.md
