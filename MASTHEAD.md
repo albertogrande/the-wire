@@ -12,10 +12,10 @@ and say what it thinks.
 
 | Desk | What it produces | When |
 |---|---|---|
-| **The Feed** | Raw dated signals in `signals/` — news and discussions captured while findable. Internal: feeds the editor, never published. | Daily |
+| **The Feed** | Raw dated signals in `signals/` — news and discussions captured while findable, plus a standing **Claude Code Watch** (features, workflows, tips). Internal: feeds the editor, never published. | Daily |
 | **The Week** | One essay on what mattered, plus Also-this-week, Mailbag, and a scored prediction. `reports/<week>.md` | Monday |
 | **Deep Dive** | One subject taken seriously: history, players, numbers, the discussion, the other side. `reports/deep-dives/` | Weekly, with The Week |
-| **The Daily Dive** | A shorter (~1,200–1,800w) technical dive under a rotating columnist byline (see `AUTHORS.md`). Evergreen "how X works" by default; today's news only when it earns a durable explainer. Topics from the scout's signals or `topics/backlog.md`. `reports/deep-dives/` | Tue–Sun |
+| **The Daily Dive** | A shorter (~1,200–1,800w) technical dive under a rotating columnist byline (see `AUTHORS.md`), with a weekly **Claude Code edition** (Thursdays, The Operator desk). Evergreen "how X works" by default; today's news only when it earns a durable explainer. Topics from the scout's signals or `topics/backlog.md`. `reports/deep-dives/` | Tue–Sun |
 | **The Quarter** | Retrospective synthesized from the archive: thread arcs, the scorecard reviewed honestly, what we believed then vs. now. `reports/quarters/` | Every ~13 weeks |
 | **Specials** | Event-triggered, editor's discretion, in place of a standard dive: **The Debate** (both sides of a live controversy, steelmanned) or **The Obituary** (a product, company, or idea that died, given the retrospective it deserves). | When the week earns it |
 
@@ -40,7 +40,8 @@ and say what it thinks.
    depth. Short sentences. Simple words. Numbers and primary sources carry
    the argument — never rhetorical flourish. The weekly flagship is
    unbylined house voice. The **daily dive** runs under a rotating
-   columnist byline (`AUTHORS.md`): three *methods*, one voice — the
+   columnist byline (`AUTHORS.md`): four *methods*, one voice — three
+   generalists plus **The Operator**, the standing Claude Code desk — the
    guardrails above bind all of them.
 
 ## The newsroom

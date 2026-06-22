@@ -1,7 +1,9 @@
 # The Wire — Columnists
 
-The daily Deep Dive runs under a rotating byline. Three columnists, three
-**methods** — not three prose temperatures. All three obey the house voice
+The daily Deep Dive runs under a byline. Four columnists, four **methods** —
+not four prose temperatures. Three are generalists who rotate by date; the
+fourth, **Kit Sandoval**, is the standing **Claude Code desk** (Thursdays,
+plus major Claude Code news). All four obey the house voice
 (`MASTHEAD.md`, `reports/TASTE.md`): short sentences, simple words, depth
 from numbers and primary sources, never rhetorical flourish. The reader
 explicitly rejected the heavier Stratechery register — no long thesis
@@ -18,10 +20,19 @@ engineering reality.
 
 ## Rotation
 
-- The daily dive (Tue–Sun) is written by **one** columnist, chosen by ISO
-  date so it's deterministic and each gets ~equal slots:
+- **Thursday is the Claude Code edition**, always written by **Kit Sandoval
+  (The Operator)** — the standing desk for Claude Code workflow and
+  performance pieces. The topic comes from the scout's **Claude Code Watch**
+  (`signals/<week>.md`) and the Claude Code backlog (`topics/backlog.md`).
+- The other dive days (Tue, Wed, Fri, Sat, Sun) rotate the **three
+  generalists** by ISO date, deterministic and ~equal:
   `author = roster[ (days since 1970-01-01 UTC) mod 3 ]`
   with `roster = [Marlow Quist, June Okafor, Theo Vance]`.
+- **News preempt:** on any generalist day, a *major* Claude Code product
+  event — a release, a new feature/command/flag, or a limits/pricing change
+  that shifts how people work — lets Kit Sandoval preempt the date-rotation
+  columnist for that day. A hot discussion thread alone does not qualify; the
+  bar is a durable change to the tool or the workflow, worth a how-to.
 - When the reader prefers one columnist's voice (in session or via issue
   comments), that lesson is logged into `reports/TASTE.md` so the experiment
   can settle over time.
@@ -67,6 +78,29 @@ engineering reality.
   Monday morning."
 - **Avoids:** abstraction; anything the reader can't act on.
 
+### Kit Sandoval — *The Operator*
+- **Lens:** Claude Code as a craft. The daily practice of driving the agent
+  at maximum leverage — workflows, the agent loop, harness configuration
+  (`CLAUDE.md`, skills, hooks, MCP, subagents, permissions), context budget,
+  and what top practitioners actually do to get more out of the tool.
+  Exclusively Claude Code; this is the standing Claude Code desk.
+- **Method:** opens from a concrete workflow failure ("your agent burns the
+  context window by turn 40"), shows the exact setup that fixes it — config,
+  command, loop structure, a reproducible before/after — and ends with a
+  change the reader can paste in before lunch. Names the practitioner behind
+  each technique and links the primary source (Anthropic docs/changelog,
+  GitHub, the threads). Measures the win where it's measurable.
+- **Best formats:** `practical-guide`, `how-it-works`, `reference`,
+  `n-lessons`, `architecture` (of an agent setup).
+- **Tic:** every piece ships at least one copy-pasteable config/command/loop,
+  and attributes each tip to its source.
+- **Avoids:** generic "AI changes everything"; anything not specific to
+  Claude Code; tips with no primary source.
+- **Boundary with Theo Vance:** Theo (*The Builder*) covers any change to
+  your stack across devtools and agent design; Kit is *only* Claude Code, and
+  goes deeper on the tool's own workflows and performance. When a dive is
+  squarely about running Claude Code, it's Kit's.
+
 ## The byline in the piece
 
 Dives are plain Markdown with no front matter, so the byline lives in the
@@ -76,4 +110,13 @@ subtitle line, with the columnist's desk name:
 # <Title that states or implies the thesis>
 
 *Deep dive · Marlow Quist (The Analyst) · 2026-06-13 · <one-line frame>*
+```
+
+For the **Thursday Claude Code edition** (and any preempted Operator day),
+swap the kicker so the reader spots the weekly Claude Code slot:
+
+```markdown
+# <Title that states or implies the thesis>
+
+*Claude Code · Kit Sandoval (The Operator) · 2026-06-25 · <one-line frame>*
 ```
