@@ -28,21 +28,42 @@ Compute the day in **Europe/Madrid** (the publication's clock) deterministically
 ```bash
 DOW=$(TZ=Europe/Madrid date +%u)                       # 1=Mon … 7=Sun (Madrid)
 TODAY=$(TZ=Europe/Madrid date +%Y-%m-%d)               # Madrid calendar date
-IDX=$(( ( $(date -u -d "$TODAY" +%s) / 86400 ) % 3 ))  # 0,1,2 → roster index
+IDX=$(( ( $(date -u -d "$TODAY" +%s) / 86400 ) % 3 ))  # 0,1,2 → generalist index
 ```
 
 - **Monday (`DOW=1`)**: do nothing — the weekly flagship owns Monday. Exit
   and say so.
-- **Tue–Sun (`DOW` 2–7)**: the columnist is `roster[IDX]` where
+- **Thursday (`DOW=4`)**: the **Claude Code edition**. Columnist is **Kit
+  Sandoval (The Operator)**, the standing Claude Code desk (`AUTHORS.md`).
+  Pick the topic from the Claude Code pool (Step 1, "Claude Code edition").
+- **Other dive days (`DOW` 2,3,5,6,7)**: the columnist is `roster[IDX]` where
   `roster = [Marlow Quist, June Okafor, Theo Vance]` (the order in
-  `AUTHORS.md`). One dive, that columnist's voice.
+  `AUTHORS.md`). One dive, that columnist's voice — **unless preempted** (next).
+- **News preempt:** before settling on a generalist, scan the latest
+  `### Claude Code Watch` block in this week's signals
+  (`signals/$(TZ=Europe/Madrid date +%G-W%V).md`). If it carries a *major*
+  Claude Code product event — a release, a new feature/command/flag, or a
+  limits/pricing change that shifts how people work (not merely a hot thread) —
+  hand the day to **Kit Sandoval** and write the Claude Code edition instead.
+  The bar is a durable change worth a workflow piece.
 
 Honor explicit overrides when given (a named columnist or a named topic) —
 they win over the date math.
 
 ## Step 1 — Choose the topic
 
-Two pools. **Evergreen wins by default**; news must out-argue it.
+**Claude Code edition (Thursday, or a preempt):** skip the A/B pools below and
+choose from the **Claude Code pool** instead — the latest `### Claude Code
+Watch` blocks in this week's signals plus the "Claude Code & agent
+engineering" section of `topics/backlog.md`. Bias toward what the reader
+asked for: **workflows, getting maximum performance, new features/commands,
+agent-loop patterns, and the practitioner tips** behind them. Evergreen still
+wins by default *within* Claude Code — a durable "how to run X / why this
+workflow wins" beats a changelog reaction — but a major Claude Code release
+can be the news peg when it yields a real how-to. Then go to Step 2.
+
+Otherwise (generalist day), use the two pools below. **Evergreen wins by
+default**; news must out-argue it.
 
 **Pool A — News-pegged.** Read the latest `## <date>` block (the scout's most
 recent capture) in `signals/$(TZ=Europe/Madrid date +%G-W%V).md`. A signal qualifies
@@ -107,6 +128,11 @@ subtitle line:
 <~1,200–1,800 words. Subheads fine but not required at this length. Inline
 links on key claims; no sources section.>
 ```
+
+For the **Claude Code edition**, swap the kicker to `Claude Code` so the
+reader spots the weekly slot:
+`*Claude Code · Kit Sandoval (The Operator) · <date> · <frame>*`. End on a
+copy-pasteable config/command/workflow, each tip attributed to its source.
 
 - Link back to issues/dives that touched the topic, e.g.
   `as noted in [W23](../2026-W23.md)`.

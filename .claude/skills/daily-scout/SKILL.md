@@ -17,6 +17,11 @@ Your capture has two readers now: the **weekly editor** on Monday, and the
 piece worth writing. So today's block earns its keep the same day — capture
 crisply.
 
+You also run a standing **Claude Code Watch** (Step 2b): a dedicated daily
+sweep for the tool the reader lives in. It feeds the daily dive's weekly
+**Claude Code edition** (Thursdays, written by The Operator), so it can't be
+left to dilute into the general beat sweep.
+
 ## Step 1 — Where to write
 
 ```bash
@@ -49,6 +54,32 @@ total**, not per beat.
 - If something big is clearly unfolding (outage, controversy, launch),
   one extra fetch to pin down what's actually claimed.
 
+## Step 2b — Claude Code Watch (always run)
+
+A dedicated, standing capture for **Claude Code** — separate from the beat
+sweep above, because the reader runs the tool daily and the daily dive has a
+weekly Claude Code edition (Thursdays) that feeds on this. Budget **2–4 extra
+searches/fetches** for this pass. Sweep a *fixed* source set (unlike the
+rotating beat queries):
+
+- Anthropic's Claude Code **docs / changelog / release notes** and the
+  `@anthropic-ai/claude-code` releases — new versions, features, commands,
+  flags, settings, hooks, model changes.
+- The **Claude Code GitHub repo** — recent releases, and issues/discussions
+  with traction.
+- **Practitioner channels** — r/ClaudeAI and r/ClaudeCode (Reddit), Hacker
+  News (Algolia query for `Claude Code`), and notable X/blog posts from power
+  users.
+
+Capture, in order of value to the reader:
+1. **Features / changes** — a command, flag, setting, hook, MCP, subagent, or
+   model change that alters how you work.
+2. **Workflows & max-performance** — how practitioners structure loops,
+   context budget, `CLAUDE.md`, skills, permissions, and multi-agent setups to
+   get more out of the tool.
+3. **Tips & recommendations** — concrete, reproducible practitioner advice.
+4. **Discussion** — what people argue about (gotchas, regressions, wins).
+
 ## Step 3 — Append
 
 Add **5–15 lines** under a `## <TODAY>` heading. Format, one line each:
@@ -67,6 +98,23 @@ Rules:
   scout ran.
 - No takes beyond a clause. No verification beyond the obvious — the weekly
   editor verifies before publishing.
+
+Then, **inside the same `## <TODAY>` block**, append the Claude Code Watch
+(Step 2b) as a dedicated subsection:
+
+```markdown
+### Claude Code Watch
+
+- [<headline or thread>](<url>) — <what + why it matters> (<feature|workflow|tip|discussion>)
+```
+
+Rules for the subsection:
+- **Always write the `### Claude Code Watch` heading**, even on a quiet day —
+  then a single `- (nothing notable)` line so the dive knows the watch ran.
+- 0–6 lines. Tag each with `feature`, `workflow`, `tip`, or `discussion`.
+- This subsection is for the **practice of the tool** — features, workflows,
+  tips, the practitioner discussion. Leave broad Claude Code business or
+  politics items (funding, export controls) up in the main list.
 
 ## Step 4 — Save
 

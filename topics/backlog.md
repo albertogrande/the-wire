@@ -7,7 +7,8 @@ backlog The Pragmatic Engineer keeps (~100 ideas, demand-tested over time).
 **Format tags** (the columnist picks one): `how-it-works` · `x-vs-y` ·
 `architecture` · `postmortem` · `what-every-engineer-should-know` ·
 `economics` · `news-to-framework` · `n-lessons` · `reference` ·
-`practical-guide`. Parenthetical = suggested columnist affinity, not a rule.
+`practical-guide`. Parenthetical = suggested columnist affinity, not a rule
+(Analyst · Contrarian · Builder · **Operator** = the Claude Code desk).
 
 **Workflow:** when a topic is written, move it under *Used* with its date and
 file. Add ideas freely (scout, weekly editor, or the reader). Keep the live
@@ -37,6 +38,30 @@ overtakes becomes a `news-to-framework` piece instead — that's fine.
 
 ## Live — Claude Code & agent engineering
 
+*The Operator's home pool — Claude Code workflows and max-performance. The
+weekly Claude Code edition (Thursdays) draws from here and the scout's Claude
+Code Watch.*
+
+- [practical-guide] The daily-driver loop: structuring a Claude Code session
+  so the agent finishes more before it derails (Operator)
+- [reference] A CLAUDE.md that earns its tokens: what to put in, what to cut,
+  for a large repo (Operator)
+- [practical-guide] The permission allowlist that stops the prompts without
+  going full YOLO (Operator)
+- [how-it-works] Hooks that catch the agent's mistakes before they land —
+  lint, test, and format gates as guardrails (Operator)
+- [practical-guide] Subagent orchestration that saves wall-clock time, not
+  just tokens (Operator)
+- [n-lessons] What the top Claude Code workflows have in common — patterns
+  lifted from power users (Operator)
+- [practical-guide] Context-budget hygiene: keeping a long session from
+  rotting before the task is done (Operator)
+- [reference] MCP servers worth wiring into Claude Code, and what each one
+  actually buys you (Operator)
+- [practical-guide] Skills vs slash commands vs CLAUDE.md: where each piece of
+  automation belongs (Operator)
+- [how-it-works] Driving Claude Code headless from CI: the unattended-agent
+  workflow pattern (Operator)
 - [how-it-works] Git worktrees under an agent: why isolation beats a shared
   checkout (Builder)
 - [practical-guide] Reading your context window: /context, the status line, and

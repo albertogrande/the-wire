@@ -31,7 +31,7 @@ Beats: AI, tech, Claude Code, devtools, DevRel, dev marketing, product engineeri
 
 - **The Week** (Mon) — one essay on what mattered, plus a Mailbag and a prediction.
 - **Deep Dive** (with The Week) — one subject in depth; or The Debate / The Obituary.
-- **The Daily Dive** (Tue–Sun) — short technical dive under a rotating columnist.
+- **The Daily Dive** (Tue–Sun) — short technical dive under a rotating columnist, with a weekly Claude Code edition (Thu, The Operator).
 - **The Quarter** (~13 weeks) — archive retrospective; Brier scorecard reviewed.
 - **The Feed** (daily, internal) — the scout's raw signals in `signals/`.
 
