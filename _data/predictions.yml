@@ -181,3 +181,16 @@
   confidence: 60
   due: "2026-09-20"
   status: open
+
+- id: dive-2026-06-22-prompt-portability
+  made: "Dive · 2026-06-22"
+  made_link: "/reports/deep-dives/2026-06-22-portability-is-not-a-purchase.html"
+  text: >-
+    Prompt-and-tool portability stays a manual re-eval problem — no
+    cross-provider standard or vendor feature lets a non-trivial agent's
+    prompt-plus-toolset move between two frontier providers and reproduce its
+    eval scores within a small margin without per-model retuning. Gateways keep
+    normalizing API syntax; behavior still requires bespoke adaptation.
+  confidence: 65
+  due: "2027-Q1"
+  status: open

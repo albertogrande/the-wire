@@ -152,6 +152,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-06-20 (compaction) | Claude Code surfaces auto-compaction control as a documented, first-class setting (a configurable threshold or a "manual/safe-point-only" compaction mode in /config or official docs) rather than the current undocumented env-var + reverse-engineered buffer | 55% | by 2027-Q1 | OPEN |
 | Dive 2026-06-21 (MoE) | The next frontier-tier open-weight model release (intelligence-index top ~5) ships with an activation ratio at or below ~6% (active ÷ total params), continuing the Mixtral 27.6% → DeepSeek/GLM ~5.4% sparsification trend; none re-ships above ~15% | 70% | by 2027-Q1 | OPEN |
 | 2026-W25 | At least one major commercial AI vendor (Anthropic/OpenAI/Google/Microsoft) ships or formally announces a customer-facing multi-provider / bring-your-own-model fallback in a first-party developer product — pricing in the switch-off risk the export ban made concrete | 60% | ~2026-09-20 | OPEN |
+| Dive 2026-06-22 (portability) | Prompt+tool portability stays a manual re-eval problem — no cross-provider standard or vendor feature lets a non-trivial agent's prompt+toolset move between two frontier providers and reproduce eval scores within a small margin without per-model retuning; gateways normalize API syntax, behavior still needs bespoke adaptation | 65% | by 2027-Q1 | OPEN |
 
 **Scorecard: 0 settled · record 0–0 · mean Brier —**
 (Nothing due in W25. W23 Copilot-walkback call due ~Jul 5 — still open, no reversal
@@ -167,6 +168,16 @@ yet. W24 export-ban-narrowing call due ~Aug 14. Settle in a later issue.)
   a Commerce export ban on Fable 5/Mythos 5 for all foreign nationals (Jun 12);
   open Chinese models (Kimi/GLM/MiMo) make the ban theater; OpenAI S-1 (~$1T);
   WWDC Gemini Siri; maintainer revolt
+- 2026-06-22 — "Portability Is Not a Purchase. It's an Eval Discipline." (house, Monday
+  long dive) — the buyer's counter-move to the switch-off. A gateway/model-agnostic
+  harness (OpenCode 75+ providers via AI SDK/Models.dev, ~172k stars) buys *syntactic*
+  portability (OpenAI-compatible base-URL swap); *semantic* portability doesn't transfer —
+  prompts re-tune ("no such thing as prompt portability"), tool-calling reliability varies
+  (same schema, Llama<GPT-5), warmed cache lost on switch. Real hedge = a continuously
+  *eval'd* fallback, not a wired one; tiered (lock-in on core, portable+eval'd on the
+  can't-go-dark slice). Counter: portability = lowest-common-denominator tax + you may
+  never switch — rebutted by the ban changing who controls the trigger. Lever on channel
+  thread; siblings: caching, local-model, export-control, benchmark dives.
 - 2026-W25 — "You Can Switch Off a Model. You Can't Switch Off the Capability." —
   ban fallout: Fable/Mythos stay dark; GLM-5.2 open-released MIT (top open-weight,
   level w/ GPT-5.5 on GDPval); Ask HN local-model surge; OpenCode passes Claude

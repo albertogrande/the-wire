@@ -61,13 +61,18 @@
     GLM-5.2 open-released MIT, an Ask HN local-model thread hit 540 points, and
     OpenCode passed Claude Code on stars (~172k/124k). The hedge users reach for
     is the model-agnostic harness, not the model; provider-portability became
-    risk management, not just cost and latency.
+    risk management, not just cost and latency. W25 (buyer's counter-move): the
+    hedge is real but only syntactic — a gateway/harness swaps the API in an
+    afternoon, but prompts, tool-calling reliability, and warmed caches don't
+    transfer, so true portability is a continuously *eval'd* fallback, not a
+    wired one (tiered: lock-in on core, portable on the can't-go-dark slice).
   issues:
     - { label: "Dive · The Channel Was the Product", link: "/reports/deep-dives/2026-06-09-channel-was-the-product.html" }
     - { label: "Dive · You Cannot Export-Control a Model", link: "/reports/deep-dives/2026-06-15-cannot-export-control-a-model.html" }
     - { label: "Dive · The Coding Model You Can Run", link: "/reports/deep-dives/2026-06-17-local-coding-model-memory-budget.html" }
     - { label: "Dive · You Pay for 40 Billion", link: "/reports/deep-dives/2026-06-21-mixture-of-experts-active-parameters.html" }
     - { label: "2026-W25", link: "/reports/2026-W25.html" }
+    - { label: "Dive · Portability Is Not a Purchase", link: "/reports/deep-dives/2026-06-22-portability-is-not-a-purchase.html" }
 
 - slug: supply-chain-vs-throughput
   title: "Supply chain vs. AI throughput"
