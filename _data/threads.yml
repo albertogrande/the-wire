@@ -13,13 +13,18 @@
     roadshow; OpenAI's confidential S-1 confirmed Jun 8–9 (~$1T target,
     Goldman + Morgan Stanley, listing late 2026). The market now punishes
     deceleration (Broadcom −15%, Nasdaq −4% Jun 5). The AI trade has become a
-    macro variable.
+    macro variable. W25: the economics tightened in the open — OpenAI's leaked
+    financials (per Fortune/Ars, unverified) show ~$21B operating loss on ~$13B
+    of 2025 revenue; the FT reported enterprises reining in AI spend; Anthropic's
+    subscription split (Jun 15) repriced programmatic usage. The frontier is sold
+    below cost while a free MIT substitute (GLM-5.2) ships.
   tension: >-
     W24 added a new risk-factor line — a flagship model can be administratively
     switched off overnight (the Fable 5 export ban).
   issues:
     - { label: "2026-W23", link: "/reports/2026-W23.html" }
     - { label: "2026-W24", link: "/reports/2026-W24.html" }
+    - { label: "2026-W25", link: "/reports/2026-W25.html" }
 
 - slug: ai-coding-subsidy-died
   title: "The AI coding subsidy died"
@@ -51,12 +56,23 @@
     W25: the MoE angle reinforces it — sparsity (GLM-5.2 744B/40B, ~5.4% active)
     makes open models cheap to serve at batch scale but inflates the
     must-fit-in-VRAM number, so the architecture that cheapens the API is the
-    same one that keeps you renting it.
+    same one that keeps you renting it. W25 (confirmed live): the state switched
+    off the legible closed leader and users routed to substitutes within days —
+    GLM-5.2 open-released MIT, an Ask HN local-model thread hit 540 points, and
+    OpenCode passed Claude Code on stars (~172k/124k). The hedge users reach for
+    is the model-agnostic harness, not the model; provider-portability became
+    risk management, not just cost and latency. W25 (buyer's counter-move): the
+    hedge is real but only syntactic — a gateway/harness swaps the API in an
+    afternoon, but prompts, tool-calling reliability, and warmed caches don't
+    transfer, so true portability is a continuously *eval'd* fallback, not a
+    wired one (tiered: lock-in on core, portable on the can't-go-dark slice).
   issues:
     - { label: "Dive · The Channel Was the Product", link: "/reports/deep-dives/2026-06-09-channel-was-the-product.html" }
     - { label: "Dive · You Cannot Export-Control a Model", link: "/reports/deep-dives/2026-06-15-cannot-export-control-a-model.html" }
     - { label: "Dive · The Coding Model You Can Run", link: "/reports/deep-dives/2026-06-17-local-coding-model-memory-budget.html" }
     - { label: "Dive · You Pay for 40 Billion", link: "/reports/deep-dives/2026-06-21-mixture-of-experts-active-parameters.html" }
+    - { label: "2026-W25", link: "/reports/2026-W25.html" }
+    - { label: "Dive · Portability Is Not a Purchase", link: "/reports/deep-dives/2026-06-22-portability-is-not-a-purchase.html" }
 
 - slug: supply-chain-vs-throughput
   title: "Supply chain vs. AI throughput"
@@ -135,13 +151,20 @@
     off a public commercial model. The danger narrative Anthropic authored
     became a weapon used against it. Earlier context: the Obernolte–Trahan
     preemption draft; extraterritorial chip controls; DeepSeek's $7.4B
-    state-backed raise.
+    state-backed raise. W25 (fallout consummated): the models stayed dark all
+    week while demand routed around the ban in real time — GLM-5.2 open-released
+    MIT (top open-weight, level w/ GPT-5.5 on GDPval), a local-model Ask HN
+    thread surged, and OpenCode passed Claude Code on stars. Commerce then punted
+    on blacklisting DeepSeek (100+ other firms added) — it can't aim at the open
+    artifact. Wired named SK Telecom's Mythos demo as the thin trigger. The ban
+    contained exactly one thing: Anthropic's own market.
   tension: >-
     The ban is theater — three open frontier coding models (Kimi K2.7, GLM 5.2,
     MiMo) shipped the same week, so the capability is downloadable.
   issues:
     - { label: "2026-W23", link: "/reports/2026-W23.html" }
     - { label: "2026-W24", link: "/reports/2026-W24.html" }
+    - { label: "2026-W25", link: "/reports/2026-W25.html" }
     - { label: "Dive · You Cannot Export-Control a Model", link: "/reports/deep-dives/2026-06-15-cannot-export-control-a-model.html" }
 
 - slug: maintainer-revolt
