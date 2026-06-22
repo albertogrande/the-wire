@@ -14,8 +14,14 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   8–9 (~$1T target, Goldman+Morgan Stanley, listing late 2026). Market punishes
   deceleration (Broadcom -15%; Nasdaq -4% Jun 5). AI trade = macro variable.
   Tension: W24 added a new risk-factor line — a flagship model can be
-  administratively switched off overnight (Fable 5 export ban). → [2026-W23](./2026-W23.md),
-  [2026-W24](./2026-W24.md)
+  administratively switched off overnight (Fable 5 export ban).
+  W25: the economics tightened in the open — OpenAI's leaked financials (per
+  Fortune/Ars, unverified) show ~$21B operating loss on ~$13B 2025 revenue; FT
+  reported enterprises reining in AI spend; Anthropic's subscription split (Jun
+  15) repriced programmatic usage. Frontier sold below cost while a free MIT
+  substitute (GLM-5.2) shipped — supply shock + cost squeeze on the legible US
+  leader in one week. → [2026-W23](./2026-W23.md),
+  [2026-W24](./2026-W24.md), [2026-W25](./2026-W25.md)
 - **The AI coding subsidy died** `↑` — Copilot token billing live Jun 1 (10–50x
   bills, Opus multiplier 7.5x→27x, paid code review); Cursor seat split;
   Anthropic Agent SDK credit split lands Jun 15. Flat-rate AI tooling is
@@ -41,7 +47,13 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   open models cheap to *serve at batch scale* (provider's economics) but inflates the
   must-fit-in-VRAM number, so the architecture that cheapens the API is the same one
   that keeps you renting it.
-  → [dive 2026-06-09 channel](./deep-dives/2026-06-09-channel-was-the-product.md),
+  W25 (confirmed live): the channel thesis got a real-world test — the state switched
+  off the legible closed leader and users routed to substitutes within days
+  (GLM-5.2 MIT, local-model Ask HN surge, OpenCode passing Claude Code on stars
+  ~172k/124k). The hedge users reach for is the *harness* (model-agnostic OpenCode),
+  not the model — provider-portability became risk management, not just cost/latency.
+  → [2026-W25](./2026-W25.md),
+  [dive 2026-06-09 channel](./deep-dives/2026-06-09-channel-was-the-product.md),
   [dive 2026-06-15](./deep-dives/2026-06-15-cannot-export-control-a-model.md),
   [dive 2026-06-17](./deep-dives/2026-06-17-local-coding-model-memory-budget.md),
   [dive 2026-06-21](./deep-dives/2026-06-21-mixture-of-experts-active-parameters.md)
@@ -96,9 +108,17 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   patch ("narrow, not a full jailbreak"); AWS took service impacts. The danger
   narrative Anthropic authored became a weapon used against it. Tension: the ban
   is theater — three open frontier coding models (Kimi K2.7, GLM 5.2, MiMo)
-  shipped the same week, so the capability is downloadable. Earlier context:
-  Obernolte–Trahan preemption draft; extraterritorial chip controls; DeepSeek's
-  $7.4B state-backed raise. → [2026-W23](./2026-W23.md), [2026-W24](./2026-W24.md),
+  shipped the same week, so the capability is downloadable.
+  W25 (fallout consummated): the models stayed dark all week while the demand
+  routed around the ban in real time — GLM-5.2 open-released MIT (Jun 16, top
+  open-weight on AA Index, level w/ GPT-5.5 on GDPval), an "Ask HN: replaced
+  Claude w/ a local model?" thread hit 540pts, and OpenCode passed Claude Code
+  on stars (~172k/124k). The ban contained exactly one thing: Anthropic's own
+  market. Commerce then punted on blacklisting DeepSeek (100+ other firms added)
+  — can't aim at the open artifact. Wired named SK Telecom's Mythos demo as the
+  thin trigger. Earlier context: Obernolte–Trahan preemption draft;
+  extraterritorial chip controls; DeepSeek's $7.4B state-backed raise.
+  → [2026-W23](./2026-W23.md), [2026-W24](./2026-W24.md), [2026-W25](./2026-W25.md),
   [dive 2026-06-15](./deep-dives/2026-06-15-cannot-export-control-a-model.md)
 - **The maintainer revolt** `↑` (new) — open-source maintainers organizing
   against AI-slop contributions: Grinberg's "I Am Not a Reverse Centaur"
@@ -131,9 +151,11 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-06-18 (caching) | Anthropic ships automatic/implicit prompt caching (a hit without a manually placed breakpoint) on at least one default API path, converging toward OpenAI/DeepSeek/Gemini's zero-config model — because the realized-vs-advertised hit-rate gap is a cost-perception liability | 55% | by 2027-Q1 | OPEN |
 | Dive 2026-06-20 (compaction) | Claude Code surfaces auto-compaction control as a documented, first-class setting (a configurable threshold or a "manual/safe-point-only" compaction mode in /config or official docs) rather than the current undocumented env-var + reverse-engineered buffer | 55% | by 2027-Q1 | OPEN |
 | Dive 2026-06-21 (MoE) | The next frontier-tier open-weight model release (intelligence-index top ~5) ships with an activation ratio at or below ~6% (active ÷ total params), continuing the Mixtral 27.6% → DeepSeek/GLM ~5.4% sparsification trend; none re-ships above ~15% | 70% | by 2027-Q1 | OPEN |
+| 2026-W25 | At least one major commercial AI vendor (Anthropic/OpenAI/Google/Microsoft) ships or formally announces a customer-facing multi-provider / bring-your-own-model fallback in a first-party developer product — pricing in the switch-off risk the export ban made concrete | 60% | ~2026-09-20 | OPEN |
 
 **Scorecard: 0 settled · record 0–0 · mean Brier —**
-(W23 Copilot-walkback call due ~Jul 5 — still open, no reversal yet; settle next issue.)
+(Nothing due in W25. W23 Copilot-walkback call due ~Jul 5 — still open, no reversal
+yet. W24 export-ban-narrowing call due ~Aug 14. Settle in a later issue.)
 
 ## Coverage index
 
@@ -145,6 +167,11 @@ Lower is better; 0.25 = coin-flip guessing.
   a Commerce export ban on Fable 5/Mythos 5 for all foreign nationals (Jun 12);
   open Chinese models (Kimi/GLM/MiMo) make the ban theater; OpenAI S-1 (~$1T);
   WWDC Gemini Siri; maintainer revolt
+- 2026-W25 — "You Can Switch Off a Model. You Can't Switch Off the Capability." —
+  ban fallout: Fable/Mythos stay dark; GLM-5.2 open-released MIT (top open-weight,
+  level w/ GPT-5.5 on GDPval); Ask HN local-model surge; OpenCode passes Claude
+  Code on stars; OpenAI leaked ~$21B loss; FT enterprise pullback; Anthropic
+  subscription split — capability relocates, channel thread confirmed live
 
 ### Deep dives
 - 2026-06-11 — "The Meter Is the Confession" — AI coding pricing; metering as

@@ -168,3 +168,16 @@
   confidence: 70
   due: "2027-Q1"
   status: open
+
+- id: 2026-w25-provider-portability
+  made: "2026-W25"
+  made_link: "/reports/2026-W25.html"
+  text: >-
+    At least one major commercial AI vendor (Anthropic, OpenAI, Google, or
+    Microsoft) ships or formally announces a customer-facing multi-provider /
+    bring-your-own-model fallback in a first-party developer product —
+    positioning provider-portability as resilience against the switch-off risk
+    the Fable 5 / Mythos 5 export ban made concrete.
+  confidence: 60
+  due: "2026-09-20"
+  status: open
