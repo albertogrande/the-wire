@@ -22,8 +22,6 @@ overtakes becomes a `news-to-framework` piece instead — that's fine.
 - [x-vs-y] Long-context vs RAG: when each wins, with real recall numbers (Analyst)
 - [how-it-works] What a tool call costs: tokens, latency, and round-trips in
   an agent loop (Builder)
-- [how-it-works] How speculative decoding makes models faster without changing
-  outputs (Analyst)
 - [x-vs-y] Open weights vs closed APIs: the real total cost once you price
   inference, ops, and eval (Analyst)
 - [how-it-works] Model distillation: what training on another model's outputs
@@ -158,3 +156,6 @@ Code Watch.*
 - [how-it-works] Git worktrees under an agent: why isolation beats a shared
   checkout (Builder) — 2026-06-23,
   reports/deep-dives/2026-06-23-git-worktrees-agent-isolation.md
+- [how-it-works] How speculative decoding makes models faster without changing
+  outputs (Analyst) — 2026-06-24,
+  reports/deep-dives/2026-06-24-speculative-decoding-idle-compute.md

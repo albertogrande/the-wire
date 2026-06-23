@@ -161,6 +161,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | 2026-W25 | At least one major commercial AI vendor (Anthropic/OpenAI/Google/Microsoft) ships or formally announces a customer-facing multi-provider / bring-your-own-model fallback in a first-party developer product — pricing in the switch-off risk the export ban made concrete | 60% | ~2026-09-20 | OPEN |
 | Dive 2026-06-22 (portability) | Prompt+tool portability stays a manual re-eval problem — no cross-provider standard or vendor feature lets a non-trivial agent's prompt+toolset move between two frontier providers and reproduce eval scores within a small margin without per-model retuning; gateways normalize API syntax, behavior still needs bespoke adaptation | 65% | by 2027-Q1 | OPEN |
 | Dive 2026-06-23 (worktrees) | No agent-native VCS (Oak/jj-style) displaces git+worktrees as the default file-isolation primitive for parallel coding agents — the major agent harnesses (Claude Code, Cursor, etc.) keep building isolation on git worktrees, not a non-git store, in their shipped defaults | 80% | by 2027-Q1 | OPEN |
+| Dive 2026-06-24 (spec-decoding) | Speculative decoding stays a single-stream/low-QPS latency trick — no widely-deployed variant delivers a >~1.5× throughput gain at high batch (≥64 concurrent) on a frontier-class model; at saturation, batching remains the dominant weight-read amortization and the high-batch multiple stays under ~1.5× | 70% | by 2027-Q1 | OPEN |
 
 **Scorecard: 0 settled · record 0–0 · mean Brier —**
 (Nothing due in W25. W23 Copilot-walkback call due ~Jul 5 — still open, no reversal
@@ -265,6 +266,17 @@ yet. W24 export-ban-narrowing call due ~Aug 14. Settle in a later issue.)
   *clone time at fleet scale*, NOT isolation (already solved, free, git-compatible).
   how-it-works/practical-guide. Sibling to fan-out dive; makes parallel writing safe,
   not just parallel thinking. Lever on autonomy-before-brakes / agent-engineering.
+- 2026-06-24 — "Same Model, Faster Tokens: The Arithmetic of Speculative Decoding"
+  (Quist) — why a model emits identical tokens faster. Batch-1 decoding is
+  memory-bandwidth bound (~70GB weight-read/token for a 70B FP8 model), so compute
+  sits idle; a cheap drafter proposes γ tokens, the target verifies all γ in one
+  parallel forward pass (one weight-read), and modified rejection sampling keeps the
+  output provably identical to plain sampling (Leviathan "identical outputs"; Chen
+  "preserves the target distribution"). Win set by α (acceptance) and γ via
+  E=(1−α^(γ+1))/(1−α); T5-XXL 2.3–3.4×, EAGLE-3 up to 6.5× single-stream. The catch:
+  it's a low-batch phenomenon — batching is the rival amortization, so at batch 64 the
+  GPU is compute-bound and EAGLE-3's 6.5× collapses to 1.38×. how-it-works/economics.
+  Sibling to local-model + caching + MoE dives (the inference-economics cluster).
 - 2026-06-19 — "'Agent' Is a Control-Flow Decision, Not a Product" (Okafor) — strips
   the marketing: an agent is one thing — the model controls the loop (Willison's
   "tools in a loop," Sept 2025); everything else sold as an agent is a workflow with

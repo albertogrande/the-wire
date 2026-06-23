@@ -207,3 +207,16 @@
   confidence: 80
   due: "2027-Q1"
   status: open
+
+- id: dive-2026-06-24-spec-decoding
+  made: "Dive · 2026-06-24"
+  made_link: "/reports/deep-dives/2026-06-24-speculative-decoding-idle-compute.html"
+  text: >-
+    Speculative decoding stays a single-stream / low-QPS latency trick. No
+    widely-deployed variant delivers a greater-than-~1.5× throughput gain at high
+    batch (≥64 concurrent requests) on a frontier-class model; at saturation,
+    batching remains the dominant amortization of the weight read and the
+    high-batch throughput multiple stays under roughly 1.5×.
+  confidence: 70
+  due: "2027-Q1"
+  status: open
