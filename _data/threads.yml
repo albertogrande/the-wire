@@ -115,12 +115,20 @@
     checkout is global mutable state, so concurrent agent writers silently
     corrupt each other; git worktrees give each its own files plus an enforced
     one-branch lock. Oak ("Git alternative for agents") reframes it as a new-VCS
-    problem, but isolation is already solved, free, in git.
+    problem, but isolation is already solved, free, in git. W26 (operator lens):
+    the brake before compaction even fires is the context *budget* — the usable
+    window is far smaller than the advertised one (NoLiMa: 11/12 models fell
+    below 50% short-context accuracy at 32K), so practitioners cap at ~60%, lower
+    the auto-compact trigger (env vars), and do the handoff by hand
+    (dump-to-markdown + /clear) rather than letting a degraded summarizer choose
+    what survives. v2.1.191's /rewind (resume from before /clear) finally makes
+    aggressive clearing recoverable.
   issues:
     - { label: "Dive · Autonomy Shipped Before Its Brakes Did", link: "/reports/deep-dives/2026-06-08-autonomy-before-brakes.html" }
     - { label: "Dive · 'Agent' Is a Control-Flow Decision, Not a Product", link: "/reports/deep-dives/2026-06-19-agent-is-a-control-flow-decision.html" }
     - { label: "Dive · Compaction Is a Lossy Save", link: "/reports/deep-dives/2026-06-20-claude-code-compaction-save-point.html" }
     - { label: "Dive · Your Agents Don't Need a New Git", link: "/reports/deep-dives/2026-06-23-git-worktrees-agent-isolation.html" }
+    - { label: "Dive · Your 200K Window Has a 120K Speed Limit", link: "/reports/deep-dives/2026-06-25-context-budget-sixty-percent.html" }
 
 - slug: platforms-eat-the-layer
   title: "Platforms eat the layer"

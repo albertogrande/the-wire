@@ -89,10 +89,18 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   its own files + an enforced one-branch lock. Oak ("Git alternative for agents")
   reframes it as a new-VCS problem, but isolation is already solved free in git;
   the only open frontier is clone/hydrate time at fleet scale.
+  W26 (operator lens): the brake *before* compaction even fires is the context budget.
+  Usable window ≪ advertised (NoLiMa: 11/12 models <50% short-context accuracy at 32K),
+  so practitioners cap at ~60% (120K of 200K), lower the auto-compact trigger
+  (CLAUDE_AUTOCOMPACT_PCT_OVERRIDE=70, CLAUDE_CODE_DISABLE_1M_CONTEXT=1), and do the
+  handoff by hand (dump-to-markdown + /clear beats /compact — you pick what survives,
+  not a degraded summarizer). CLAUDE.md ≤200 lines is now official (adherence drops past
+  it). v2.1.191 /rewind (resume from before /clear) makes aggressive clearing recoverable.
   → [dive 2026-06-08-autonomy](./deep-dives/2026-06-08-autonomy-before-brakes.md),
   [dive 2026-06-19](./deep-dives/2026-06-19-agent-is-a-control-flow-decision.md),
   [dive 2026-06-20](./deep-dives/2026-06-20-claude-code-compaction-save-point.md),
-  [dive 2026-06-23](./deep-dives/2026-06-23-git-worktrees-agent-isolation.md)
+  [dive 2026-06-23](./deep-dives/2026-06-23-git-worktrees-agent-isolation.md),
+  [dive 2026-06-25](./deep-dives/2026-06-25-context-budget-sixty-percent.md)
 - **Platforms eat the layer** `↑` — the LLMOps tool layer (gateway, tracing,
   eval, prompt store) is being absorbed from both ends: ClickHouse bought
   Langfuse (Jan, already built on ClickHouse; 23.1M SDK installs/mo) to own the
@@ -162,6 +170,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-06-22 (portability) | Prompt+tool portability stays a manual re-eval problem — no cross-provider standard or vendor feature lets a non-trivial agent's prompt+toolset move between two frontier providers and reproduce eval scores within a small margin without per-model retuning; gateways normalize API syntax, behavior still needs bespoke adaptation | 65% | by 2027-Q1 | OPEN |
 | Dive 2026-06-23 (worktrees) | No agent-native VCS (Oak/jj-style) displaces git+worktrees as the default file-isolation primitive for parallel coding agents — the major agent harnesses (Claude Code, Cursor, etc.) keep building isolation on git worktrees, not a non-git store, in their shipped defaults | 80% | by 2027-Q1 | OPEN |
 | Dive 2026-06-24 (spec-decoding) | Speculative decoding stays a single-stream/low-QPS latency trick — no widely-deployed variant delivers a >~1.5× throughput gain at high batch (≥64 concurrent) on a frontier-class model; at saturation, batching remains the dominant weight-read amortization and the high-batch multiple stays under ~1.5× | 70% | by 2027-Q1 | OPEN |
+| Dive 2026-06-25 (context-budget) | Claude Code does NOT ship a *lossless/auditable* auto-compaction — one that writes its kept-set to a user-inspectable file AND reliably preserves decision rationale (not just paths/names) — so manual dump-to-markdown + /clear stays the practitioner default for long multi-step tasks | 65% | by 2027-Q1 | OPEN |
 
 **Scorecard: 0 settled · record 0–0 · mean Brier —**
 (Nothing due in W25. W23 Copilot-walkback call due ~Jul 5 — still open, no reversal
@@ -285,3 +294,15 @@ yet. W24 export-ban-narrowing call due ~Aug 14. Settle in a later issue.)
   rung) enterprise-announced / developer-shrugged (HN today 55pts). Each rung up sells
   determinism, tokens, blast radius. Decompose by rung; climb slowly. Format:
   reference / what-every-engineer-should-know. Lever on autonomy-before-brakes thread.
+- 2026-06-25 — "Your 200K Window Has a 120K Speed Limit" (Sandoval, Claude Code edition)
+  — context-budget hygiene as Operator craft. Usable window ≪ advertised: context rot
+  (Anthropic) + NoLiMa (11/12 models <50% short-context accuracy at 32K, via Sikkema) →
+  practitioner ceiling ~60% (120K of 200K). Default auto-compaction fires ~75% (Matsuoka,
+  50K completion buffer) and summarizes an already-degraded view. Fixes: cap window +
+  lower trigger (CLAUDE_CODE_DISABLE_1M_CONTEXT=1, CLAUDE_AUTOCOMPACT_PCT_OVERRIDE=70,
+  Sikkema); handoff by hand (dump-to-markdown + /clear beats /compact — you pick what
+  survives); CLAUDE.md ≤200 lines (official, adherence drops past it) → runbooks to skills;
+  /context off dead MCP; delegate verbose ops to subagents (1–2K-token returns). v2.1.191
+  /rewind (resume from before /clear) makes aggressive clearing recoverable. Cost ~$3/turn
+  at 600K vs ~$0.70 at 140K. practical-guide. Lever on autonomy-before-brakes; sibling to
+  compaction (06-20) + fan-out (06-13) dives.

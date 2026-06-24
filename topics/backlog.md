@@ -52,8 +52,6 @@ Code Watch.*
   just tokens (Operator)
 - [n-lessons] What the top Claude Code workflows have in common — patterns
   lifted from power users (Operator)
-- [practical-guide] Context-budget hygiene: keeping a long session from
-  rotting before the task is done (Operator)
 - [reference] MCP servers worth wiring into Claude Code, and what each one
   actually buys you (Operator)
 - [practical-guide] Skills vs slash commands vs CLAUDE.md: where each piece of
@@ -80,6 +78,11 @@ Code Watch.*
   stops paying off (Analyst)
 - [n-lessons] What a week of letting an agent write 80% of the code actually
   taught us (Builder)
+- [reference] The Claude Code env vars that actually change behavior —
+  CLAUDE_CODE_DISABLE_1M_CONTEXT, CLAUDE_AUTOCOMPACT_PCT_OVERRIDE,
+  MAX_THINKING_TOKENS, and the rest, with what each one buys (Operator)
+- [practical-guide] Externalized memory across /clear: designing a PROGRESS.md
+  handoff file an agent can dump to and reload without losing the "why" (Operator)
 
 ## Live — devtools & systems
 
@@ -159,3 +162,6 @@ Code Watch.*
 - [how-it-works] How speculative decoding makes models faster without changing
   outputs (Analyst) — 2026-06-24,
   reports/deep-dives/2026-06-24-speculative-decoding-idle-compute.md
+- [practical-guide] Context-budget hygiene: keeping a long session from rotting
+  before the task is done (Operator) — 2026-06-25,
+  reports/deep-dives/2026-06-25-context-budget-sixty-percent.md

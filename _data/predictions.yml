@@ -220,3 +220,16 @@
   confidence: 70
   due: "2027-Q1"
   status: open
+
+- id: dive-2026-06-25-context-budget
+  made: "Dive · 2026-06-25"
+  made_link: "/reports/deep-dives/2026-06-25-context-budget-sixty-percent.html"
+  text: >-
+    Claude Code does not ship a lossless / auditable auto-compaction — one that
+    writes its kept-set to a user-inspectable file AND reliably preserves the
+    decision rationale (the "why," not just paths and names) — so the manual
+    dump-to-markdown + /clear handoff stays the practitioner default for long,
+    multi-step tasks.
+  confidence: 65
+  due: "2027-Q1"
+  status: open
