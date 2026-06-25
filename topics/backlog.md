@@ -93,8 +93,6 @@ Code Watch.*
   vocabulary every engineer keeps confusing (Builder)
 - [how-it-works] How a package registry serves a billion downloads a day (Analyst)
 - [architecture] How a fast build cache actually works (and why yours misses) (Builder)
-- [what-every-engineer-should-know] Idempotency: the one property that saves
-  every retry path (Builder)
 - [postmortem] The class of outage that's always DNS, and why (Analyst)
 - [how-it-works] What an LLM gateway actually does: proxying, failover, caching,
   cost caps, and where the latency hides (Builder)
@@ -165,3 +163,6 @@ Code Watch.*
 - [practical-guide] Context-budget hygiene: keeping a long session from rotting
   before the task is done (Operator) — 2026-06-25,
   reports/deep-dives/2026-06-25-context-budget-sixty-percent.md
+- [what-every-engineer-should-know] Idempotency: the one property that saves
+  every retry path (Builder) — 2026-06-26,
+  reports/deep-dives/2026-06-26-agent-retries-idempotent-writes.md

@@ -96,11 +96,20 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   handoff by hand (dump-to-markdown + /clear beats /compact — you pick what survives,
   not a degraded summarizer). CLAUDE.md ≤200 lines is now official (adherence drops past
   it). v2.1.191 /rewind (resume from before /clear) makes aggressive clearing recoverable.
+  W26 (builder lens): the brake on *side effects* is idempotency — three layers retry a
+  tool call unasked (SDK max_retries=2 on 408/409/429/5xx; Claude Code stream-stall retry
+  20s; the model re-calls on any result that reads like failure), and a dropped network
+  ACK can't distinguish never-ran from ran-and-lost-the-receipt → at-least-once, never
+  exactly-once. Fixes: idempotent method (RFC 9110: PUT/DELETE yes, POST no), content-derived
+  idempotency key minted in the wrapper (not the prompt — model re-randomizes it per turn),
+  or a unique-constraint upsert. v2.1.183 auto-mode blocking destructive git/terraform/
+  pulumi/cdk destroy = the harness conceding the point with a blunt instrument.
   → [dive 2026-06-08-autonomy](./deep-dives/2026-06-08-autonomy-before-brakes.md),
   [dive 2026-06-19](./deep-dives/2026-06-19-agent-is-a-control-flow-decision.md),
   [dive 2026-06-20](./deep-dives/2026-06-20-claude-code-compaction-save-point.md),
   [dive 2026-06-23](./deep-dives/2026-06-23-git-worktrees-agent-isolation.md),
-  [dive 2026-06-25](./deep-dives/2026-06-25-context-budget-sixty-percent.md)
+  [dive 2026-06-25](./deep-dives/2026-06-25-context-budget-sixty-percent.md),
+  [dive 2026-06-26](./deep-dives/2026-06-26-agent-retries-idempotent-writes.md)
 - **Platforms eat the layer** `↑` — the LLMOps tool layer (gateway, tracing,
   eval, prompt store) is being absorbed from both ends: ClickHouse bought
   Langfuse (Jan, already built on ClickHouse; 23.1M SDK installs/mo) to own the
@@ -171,6 +180,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-06-23 (worktrees) | No agent-native VCS (Oak/jj-style) displaces git+worktrees as the default file-isolation primitive for parallel coding agents — the major agent harnesses (Claude Code, Cursor, etc.) keep building isolation on git worktrees, not a non-git store, in their shipped defaults | 80% | by 2027-Q1 | OPEN |
 | Dive 2026-06-24 (spec-decoding) | Speculative decoding stays a single-stream/low-QPS latency trick — no widely-deployed variant delivers a >~1.5× throughput gain at high batch (≥64 concurrent) on a frontier-class model; at saturation, batching remains the dominant weight-read amortization and the high-batch multiple stays under ~1.5× | 70% | by 2027-Q1 | OPEN |
 | Dive 2026-06-25 (context-budget) | Claude Code does NOT ship a *lossless/auditable* auto-compaction — one that writes its kept-set to a user-inspectable file AND reliably preserves decision rationale (not just paths/names) — so manual dump-to-markdown + /clear stays the practitioner default for long multi-step tasks | 65% | by 2027-Q1 | OPEN |
+| Dive 2026-06-26 (idempotency) | No major agent harness (Claude Code/Cursor/Codex/etc.) ships automatic tool-call deduplication — collapsing identical repeated tool invocations within a session so a retried mutating call executes once — as a documented default; retry-safety stays the tool author's job via idempotency keys / unique constraints, and the harness's only built-in stays blunt refusal of destructive ops (v2.1.183-style) | 70% | by 2027-Q1 | OPEN |
 
 **Scorecard: 0 settled · record 0–0 · mean Brier —**
 (Nothing due in W25. W23 Copilot-walkback call due ~Jul 5 — still open, no reversal
@@ -306,3 +316,17 @@ yet. W24 export-ban-narrowing call due ~Aug 14. Settle in a later issue.)
   /rewind (resume from before /clear) makes aggressive clearing recoverable. Cost ~$3/turn
   at 600K vs ~$0.70 at 140K. practical-guide. Lever on autonomy-before-brakes; sibling to
   compaction (06-20) + fan-out (06-13) dives.
+- 2026-06-26 — "Your Agent Will Retry That Write. Make It Safe to Run Twice." (Vance) —
+  idempotency as the brake on *side effects* under agent retries. Three retriers wired in
+  already (SDK max_retries=2 on 408/409/429/5xx + conn errors; Claude Code stream-stall
+  retry, 20s; the model re-calls any result that reads like failure) → one logical action
+  hits a tool 2–6×. A dropped ACK can't tell never-ran from ran-and-lost-the-receipt
+  (Stripe's 3 failure cases) → at-least-once, never exactly-once; only idempotency makes it
+  safe. Three building blocks: idempotent HTTP method (RFC 9110 §9.2.2/9.3 — PUT/DELETE yes,
+  POST no); idempotency key (Stripe: POST-only, 24h retention, same key→same stored result
+  incl. 500s, param-mismatch errors) minted *deterministically in the tool wrapper* from
+  action content, NOT in the prompt (model re-randomizes per turn → defeats it); natural-key
+  upsert / ON CONFLICT. v2.1.183 auto-mode blocking destructive git/terraform/pulumi/cdk
+  destroy = harness conceding the point with a blunt tool. what-every-engineer-should-know.
+  Lever on autonomy-before-brakes; sibling to worktree-isolation (06-23, "make parallel
+  writes safe" vs "make a retried write safe").

@@ -122,13 +122,24 @@
     the auto-compact trigger (env vars), and do the handoff by hand
     (dump-to-markdown + /clear) rather than letting a degraded summarizer choose
     what survives. v2.1.191's /rewind (resume from before /clear) finally makes
-    aggressive clearing recoverable.
+    aggressive clearing recoverable. W26 (builder lens): the brake on *side
+    effects* is idempotency — three layers retry a tool call unasked (the SDK,
+    max_retries=2; Claude Code's stream-stall retry; the model itself re-calling
+    on any result that reads like failure), and a dropped network ACK can't tell
+    never-ran from ran-and-lost-the-receipt, so you get at-least-once, never
+    exactly-once. The fix is the old one, newly load-bearing: an idempotent method
+    (RFC 9110 — PUT/DELETE yes, POST no), a content-derived idempotency key minted
+    in the tool wrapper (not in the prompt, where the model re-randomizes it every
+    turn), or a unique-constraint upsert. v2.1.183's auto-mode block on destructive
+    git/terraform/pulumi/cdk destroy is the harness conceding the same point with a
+    blunt instrument.
   issues:
     - { label: "Dive · Autonomy Shipped Before Its Brakes Did", link: "/reports/deep-dives/2026-06-08-autonomy-before-brakes.html" }
     - { label: "Dive · 'Agent' Is a Control-Flow Decision, Not a Product", link: "/reports/deep-dives/2026-06-19-agent-is-a-control-flow-decision.html" }
     - { label: "Dive · Compaction Is a Lossy Save", link: "/reports/deep-dives/2026-06-20-claude-code-compaction-save-point.html" }
     - { label: "Dive · Your Agents Don't Need a New Git", link: "/reports/deep-dives/2026-06-23-git-worktrees-agent-isolation.html" }
     - { label: "Dive · Your 200K Window Has a 120K Speed Limit", link: "/reports/deep-dives/2026-06-25-context-budget-sixty-percent.html" }
+    - { label: "Dive · Your Agent Will Retry That Write", link: "/reports/deep-dives/2026-06-26-agent-retries-idempotent-writes.html" }
 
 - slug: platforms-eat-the-layer
   title: "Platforms eat the layer"

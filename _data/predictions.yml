@@ -233,3 +233,17 @@
   confidence: 65
   due: "2027-Q1"
   status: open
+
+- id: dive-2026-06-26-idempotency
+  made: "Dive · 2026-06-26"
+  made_link: "/reports/deep-dives/2026-06-26-agent-retries-idempotent-writes.html"
+  text: >-
+    No major agent harness (Claude Code, Cursor, Codex, or peers) ships
+    automatic tool-call deduplication — collapsing identical repeated tool
+    invocations within a session so a retried mutating call executes once — as a
+    documented default. Retry-safety stays the tool author's responsibility via
+    idempotency keys / unique constraints, and the harness's only built-in stays
+    blunt refusal of destructive operations (v2.1.183-style).
+  confidence: 70
+  due: "2027-Q1"
+  status: open
