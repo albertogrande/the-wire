@@ -52,11 +52,20 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   (GLM-5.2 MIT, local-model Ask HN surge, OpenCode passing Claude Code on stars
   ~172k/124k). The hedge users reach for is the *harness* (model-agnostic OpenCode),
   not the model — provider-portability became risk management, not just cost/latency.
+  W26 (analyst lens): the *distillation* pipe into the channel — capability leaks via
+  outputs, not weights. Anthropic told the Senate Alibaba/Qwen ran 28.8M Claude exchanges
+  (~25k fake accounts, Apr 22–Jun 5) to imitate SWE + agentic behavior. Because the API
+  exposes no soft targets (Anthropic: no logprobs; OpenAI: top-20), the copy is hard-sample
+  imitation → needs volume (the 28.8M is the tell); imitation ≈1:100 of pretraining, so terms
+  forbid but economics fund. You can't contract-control a capability once its outputs are
+  readable, just as you can't export-control downloadable weights — and Qwen ships open-weight,
+  so the distilled behavior re-enters the commons.
   → [2026-W25](./2026-W25.md),
   [dive 2026-06-09 channel](./deep-dives/2026-06-09-channel-was-the-product.md),
   [dive 2026-06-15](./deep-dives/2026-06-15-cannot-export-control-a-model.md),
   [dive 2026-06-17](./deep-dives/2026-06-17-local-coding-model-memory-budget.md),
-  [dive 2026-06-21](./deep-dives/2026-06-21-mixture-of-experts-active-parameters.md)
+  [dive 2026-06-21](./deep-dives/2026-06-21-mixture-of-experts-active-parameters.md),
+  [dive 2026-06-27](./deep-dives/2026-06-27-distillation-without-logits.md)
 - **Supply chain vs. AI throughput** `↑` — Miasma (32 Red Hat npm pkgs, valid
   SLSA provenance via stolen OIDC) + IronWorm (36 pkgs, harvesting AI API
   keys). Provenance + install-script scanning both defeated. Review/trust
@@ -180,6 +189,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-06-23 (worktrees) | No agent-native VCS (Oak/jj-style) displaces git+worktrees as the default file-isolation primitive for parallel coding agents — the major agent harnesses (Claude Code, Cursor, etc.) keep building isolation on git worktrees, not a non-git store, in their shipped defaults | 80% | by 2027-Q1 | OPEN |
 | Dive 2026-06-24 (spec-decoding) | Speculative decoding stays a single-stream/low-QPS latency trick — no widely-deployed variant delivers a >~1.5× throughput gain at high batch (≥64 concurrent) on a frontier-class model; at saturation, batching remains the dominant weight-read amortization and the high-batch multiple stays under ~1.5× | 70% | by 2027-Q1 | OPEN |
 | Dive 2026-06-25 (context-budget) | Claude Code does NOT ship a *lossless/auditable* auto-compaction — one that writes its kept-set to a user-inspectable file AND reliably preserves decision rationale (not just paths/names) — so manual dump-to-markdown + /clear stays the practitioner default for long multi-step tasks | 65% | by 2027-Q1 | OPEN |
+| Dive 2026-06-27 (distillation) | No closed frontier lab (Anthropic/OpenAI/Google) widens default-path logprob exposure beyond today's limits (Anthropic: none; OpenAI: top-20) for its flagship models — the dense soft-target leak stays closed, leaving black-box output imitation as the only available distillation route against closed frontier models | 75% | by 2027-Q1 | OPEN |
 | Dive 2026-06-26 (idempotency) | No major agent harness (Claude Code/Cursor/Codex/etc.) ships automatic tool-call deduplication — collapsing identical repeated tool invocations within a session so a retried mutating call executes once — as a documented default; retry-safety stays the tool author's job via idempotency keys / unique constraints, and the harness's only built-in stays blunt refusal of destructive ops (v2.1.183-style) | 70% | by 2027-Q1 | OPEN |
 
 **Scorecard: 0 settled · record 0–0 · mean Brier —**
@@ -330,3 +340,18 @@ yet. W24 export-ban-narrowing call due ~Aug 14. Settle in a later issue.)
   destroy = harness conceding the point with a blunt tool. what-every-engineer-should-know.
   Lever on autonomy-before-brakes; sibling to worktree-isolation (06-23, "make parallel
   writes safe" vs "make a retried write safe").
+- 2026-06-27 — "Distillation Without Logits: Why It Took 28.8 Million Queries" (Quist) —
+  how training on another model's outputs copies it, pegged to Anthropic's Senate testimony
+  (Alibaba/Qwen: 28.8M Claude exchanges via ~25k fake accounts, Apr 22–Jun 5, targeting SWE
+  + agentic reasoning). Two distillations: soft-target KD (Hinton 2015 — match full per-token
+  distribution, "dark knowledge," dense, needs logits) vs sequence-level/black-box (Kim & Rush
+  2016 — fit to sampled hard outputs, one collapsed path/query, needs volume). Load-bearing
+  fact: Anthropic exposes NO logprobs; OpenAI caps at top-20 → soft targets physically
+  unavailable via API, so the attack was hard-sample imitation; the 28.8M scale IS the receipt
+  for the missing logit (Monte-Carlo the distribution back one draw at a time). Economics:
+  imitation ≈ 1:100 of teacher pretraining (DeepSeek R1 ~$5.6M, disputed) → terms forbid,
+  economics fund. License: "you own the Outputs" but terms bar training competitors — contract
+  not copyright, no technical wall on hard samples; defense = detection + terms + sanctions
+  (Hagerty/Kim amendment). Deciding quantity = imitation:pretraining cost ratio. how-it-works/
+  news-to-framework. Levers on channel-war + Washington-vs-labs threads; sibling to
+  export-control (06-15) + open-weights (06-16) dives.

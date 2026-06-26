@@ -247,3 +247,16 @@
   confidence: 70
   due: "2027-Q1"
   status: open
+
+- id: dive-2026-06-27-distillation-logits
+  made: "Dive · 2026-06-27"
+  made_link: "/reports/deep-dives/2026-06-27-distillation-without-logits.html"
+  text: >-
+    No closed frontier lab (Anthropic, OpenAI, or Google) widens default-path
+    logprob exposure beyond today's limits (Anthropic: none; OpenAI: top-20) for
+    its flagship models — the dense soft-target leak stays closed, leaving
+    black-box output imitation as the only available distillation route against
+    closed frontier models.
+  confidence: 75
+  due: "2027-Q1"
+  status: open

@@ -66,6 +66,16 @@
     afternoon, but prompts, tool-calling reliability, and warmed caches don't
     transfer, so true portability is a continuously *eval'd* fallback, not a
     wired one (tiered: lock-in on core, portable on the can't-go-dark slice).
+    W26 (the distillation pipe): capability leaks via *outputs*, not weights.
+    Anthropic told the Senate that Alibaba's Qwen lab ran 28.8M Claude exchanges
+    through ~25k fake accounts (Apr 22–Jun 5) to imitate its software-engineering
+    and agentic behavior. Because the API exposes no soft targets (Anthropic: no
+    logprobs; OpenAI: top-20), the copy is hard-sample imitation — which is why it
+    took tens of millions of queries — and imitation runs ~1:100 of pretraining
+    cost, so terms forbid it but the economics fund it. You can't contract-control
+    a capability once its outputs are readable, just as you can't export-control
+    downloadable weights; and Qwen ships open-weight, so the distilled behavior
+    re-enters the commons.
   issues:
     - { label: "Dive · The Channel Was the Product", link: "/reports/deep-dives/2026-06-09-channel-was-the-product.html" }
     - { label: "Dive · You Cannot Export-Control a Model", link: "/reports/deep-dives/2026-06-15-cannot-export-control-a-model.html" }
@@ -73,6 +83,7 @@
     - { label: "Dive · You Pay for 40 Billion", link: "/reports/deep-dives/2026-06-21-mixture-of-experts-active-parameters.html" }
     - { label: "2026-W25", link: "/reports/2026-W25.html" }
     - { label: "Dive · Portability Is Not a Purchase", link: "/reports/deep-dives/2026-06-22-portability-is-not-a-purchase.html" }
+    - { label: "Dive · Distillation Without Logits", link: "/reports/deep-dives/2026-06-27-distillation-without-logits.html" }
 
 - slug: supply-chain-vs-throughput
   title: "Supply chain vs. AI throughput"
@@ -182,15 +193,23 @@
     thread surged, and OpenCode passed Claude Code on stars. Commerce then punted
     on blacklisting DeepSeek (100+ other firms added) — it can't aim at the open
     artifact. Wired named SK Telecom's Mythos demo as the thin trigger. The ban
-    contained exactly one thing: Anthropic's own market.
+    contained exactly one thing: Anthropic's own market. W26 (the new front):
+    Anthropic told the Senate that Alibaba's Qwen lab ran 28.8M Claude exchanges
+    via ~25k fake accounts (Apr 22–Jun 5) to distill its capabilities, and Sens.
+    Hagerty and Kim are drafting a defense-bill amendment to sanction firms that
+    misuse U.S. model outputs — the danger narrative pivoting from "the model is
+    dangerous" to "the model is being stolen."
   tension: >-
     The ban is theater — three open frontier coding models (Kimi K2.7, GLM 5.2,
-    MiMo) shipped the same week, so the capability is downloadable.
+    MiMo) shipped the same week, so the capability is downloadable. And distillation
+    is uncontractable: you own the outputs, there's no technical wall on a hard
+    sample, so enforcement is detection + terms + sanctions, not a barrier.
   issues:
     - { label: "2026-W23", link: "/reports/2026-W23.html" }
     - { label: "2026-W24", link: "/reports/2026-W24.html" }
     - { label: "2026-W25", link: "/reports/2026-W25.html" }
     - { label: "Dive · You Cannot Export-Control a Model", link: "/reports/deep-dives/2026-06-15-cannot-export-control-a-model.html" }
+    - { label: "Dive · Distillation Without Logits", link: "/reports/deep-dives/2026-06-27-distillation-without-logits.html" }
 
 - slug: maintainer-revolt
   title: "The maintainer revolt"

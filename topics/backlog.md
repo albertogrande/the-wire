@@ -24,8 +24,6 @@ overtakes becomes a `news-to-framework` piece instead — that's fine.
   an agent loop (Builder)
 - [x-vs-y] Open weights vs closed APIs: the real total cost once you price
   inference, ops, and eval (Analyst)
-- [how-it-works] Model distillation: what training on another model's outputs
-  actually copies, and what the license lets you do with it (Analyst)
 - [news-to-framework] Why training data is the moat and the liability at once —
   copyright exposure as the reason no frontier model ships its corpus (Contrarian)
 
@@ -166,3 +164,6 @@ Code Watch.*
 - [what-every-engineer-should-know] Idempotency: the one property that saves
   every retry path (Builder) — 2026-06-26,
   reports/deep-dives/2026-06-26-agent-retries-idempotent-writes.md
+- [how-it-works] Model distillation: what training on another model's outputs
+  actually copies, and what the license lets you do with it (Analyst) —
+  2026-06-27, reports/deep-dives/2026-06-27-distillation-without-logits.md
