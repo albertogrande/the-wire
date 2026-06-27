@@ -76,6 +76,14 @@
     a capability once its outputs are readable, just as you can't export-control
     downloadable weights; and Qwen ships open-weight, so the distilled behavior
     re-enters the commons.
+    W26 (the price floor): DeepSeek made its 75%-off V4-Pro cut permanent
+    (~$0.44/$0.87 per Mtok, ~11–34× under GPT-5.5 standard), and the cut reads as
+    commoditize-your-complement (Spolsky/Gwern) — inference is DeepSeek's
+    complement, not its product, so it prices the token at the floor to deny
+    margin to the labs for whom the token *is* the business. The floor is
+    structural, not promotional, because DeepSeek serves its own open weights: the
+    API can't hold a markup over an artifact anyone can host. The price itself is
+    now the commoditized layer.
   issues:
     - { label: "Dive · The Channel Was the Product", link: "/reports/deep-dives/2026-06-09-channel-was-the-product.html" }
     - { label: "Dive · You Cannot Export-Control a Model", link: "/reports/deep-dives/2026-06-15-cannot-export-control-a-model.html" }
@@ -84,6 +92,7 @@
     - { label: "2026-W25", link: "/reports/2026-W25.html" }
     - { label: "Dive · Portability Is Not a Purchase", link: "/reports/deep-dives/2026-06-22-portability-is-not-a-purchase.html" }
     - { label: "Dive · Distillation Without Logits", link: "/reports/deep-dives/2026-06-27-distillation-without-logits.html" }
+    - { label: "Dive · The Price Cut Wasn't For You", link: "/reports/deep-dives/2026-06-28-price-cut-is-a-weapon.html" }
 
 - slug: supply-chain-vs-throughput
   title: "Supply chain vs. AI throughput"

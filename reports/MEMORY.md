@@ -60,12 +60,20 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   forbid but economics fund. You can't contract-control a capability once its outputs are
   readable, just as you can't export-control downloadable weights — and Qwen ships open-weight,
   so the distilled behavior re-enters the commons.
+  W26 (contrarian lens): the *price* is now the commoditized layer. DeepSeek made its 75%-off
+  V4-Pro cut permanent (~$0.44/$0.87 per Mtok, ~11–34× under GPT-5.5 standard, ~5–17× under its
+  batch tier). Read via commoditize-your-complement (Spolsky/Gwern): inference is DeepSeek's
+  complement, not its product, so it prices the token at the floor to deny margin to the labs for
+  whom the token *is* the business. Floor is structural not promotional because DeepSeek serves its
+  own open weights — the API can't hold a markup over an artifact anyone can host. Test for any
+  "permanent" cut: is inference the seller's product or its complement?
   → [2026-W25](./2026-W25.md),
   [dive 2026-06-09 channel](./deep-dives/2026-06-09-channel-was-the-product.md),
   [dive 2026-06-15](./deep-dives/2026-06-15-cannot-export-control-a-model.md),
   [dive 2026-06-17](./deep-dives/2026-06-17-local-coding-model-memory-budget.md),
   [dive 2026-06-21](./deep-dives/2026-06-21-mixture-of-experts-active-parameters.md),
-  [dive 2026-06-27](./deep-dives/2026-06-27-distillation-without-logits.md)
+  [dive 2026-06-27](./deep-dives/2026-06-27-distillation-without-logits.md),
+  [dive 2026-06-28](./deep-dives/2026-06-28-price-cut-is-a-weapon.md)
 - **Supply chain vs. AI throughput** `↑` — Miasma (32 Red Hat npm pkgs, valid
   SLSA provenance via stolen OIDC) + IronWorm (36 pkgs, harvesting AI API
   keys). Provenance + install-script scanning both defeated. Review/trust
@@ -191,6 +199,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-06-25 (context-budget) | Claude Code does NOT ship a *lossless/auditable* auto-compaction — one that writes its kept-set to a user-inspectable file AND reliably preserves decision rationale (not just paths/names) — so manual dump-to-markdown + /clear stays the practitioner default for long multi-step tasks | 65% | by 2027-Q1 | OPEN |
 | Dive 2026-06-27 (distillation) | No closed frontier lab (Anthropic/OpenAI/Google) widens default-path logprob exposure beyond today's limits (Anthropic: none; OpenAI: top-20) for its flagship models — the dense soft-target leak stays closed, leaving black-box output imitation as the only available distillation route against closed frontier models | 75% | by 2027-Q1 | OPEN |
 | Dive 2026-06-26 (idempotency) | No major agent harness (Claude Code/Cursor/Codex/etc.) ships automatic tool-call deduplication — collapsing identical repeated tool invocations within a session so a retried mutating call executes once — as a documented default; retry-safety stays the tool author's job via idempotency keys / unique constraints, and the harness's only built-in stays blunt refusal of destructive ops (v2.1.183-style) | 70% | by 2027-Q1 | OPEN |
+| Dive 2026-06-28 (price floor) | DeepSeek's permanent V4-Pro floor (~$0.44/$0.87 per Mtok) does NOT ratchet up >25% (either leg) within two quarters — open-weight-pinned floor is structural, not promo — AND no closed lab (OpenAI/Anthropic) cuts flagship API price to within ~2× of it in that window; they hold the premium and segment to capability | 65% | by 2027-Q1 | OPEN |
 
 **Scorecard: 0 settled · record 0–0 · mean Brier —**
 (Nothing due in W25. W23 Copilot-walkback call due ~Jul 5 — still open, no reversal
@@ -355,3 +364,16 @@ yet. W24 export-ban-narrowing call due ~Aug 14. Settle in a later issue.)
   (Hagerty/Kim amendment). Deciding quantity = imitation:pretraining cost ratio. how-it-works/
   news-to-framework. Levers on channel-war + Washington-vs-labs threads; sibling to
   export-control (06-15) + open-weights (06-16) dives.
+- 2026-06-28 — "The Price Cut Wasn't For You" (Okafor) — reading a model price cut as a
+  strategic instrument, pegged to DeepSeek making its 75%-off V4-Pro cut permanent (~$0.44/$0.87
+  per Mtok; ~11–34× under GPT-5.5 standard $5/$30, ~5–17× under GPT-5.5 batch $2.50/$15). Consensus
+  ("great news for devs / race to the bottom / fire sale") inverted via commoditize-your-complement
+  (Spolsky 2002, Gwern): the test is whether inference is the seller's *product* or its *complement*.
+  For OpenAI/Anthropic the token IS the business (the meter dive) → a deep permanent cut is fragile.
+  For DeepSeek inference is a complement to strategic position → the cut is a weapon it holds
+  indefinitely, and the floor is structural because DeepSeek serves its own downloadable weights
+  (API can't markup over a free artifact; MoE 671B/37B keeps marginal serving cheap). So-what:
+  treat the open-weight floor as durable, a closed lab's matching cut as walkable; watch whether
+  incumbents fall to the floor (commoditization works) or hold-and-segment (capability premium).
+  news-to-framework. Levers on channel-war + repricing + coding-subsidy threads; sibling to meter
+  (06-11) + MoE (06-21) dives.

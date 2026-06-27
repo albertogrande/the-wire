@@ -260,3 +260,17 @@
   confidence: 75
   due: "2027-Q1"
   status: open
+
+- id: dive-2026-06-28-price-floor
+  made: "Dive · 2026-06-28"
+  made_link: "/reports/deep-dives/2026-06-28-price-cut-is-a-weapon.html"
+  text: >-
+    DeepSeek's permanent V4-Pro price floor (~$0.44 input / $0.87 output per
+    Mtok) does NOT ratchet materially back up (>25% on either leg) within two
+    quarters — the open-weight-pinned floor proves structural, not a promo —
+    AND no closed frontier lab (OpenAI/Anthropic) cuts its flagship API token
+    price to within ~2× of that floor over the same window; they hold a premium
+    and segment to capability instead.
+  confidence: 65
+  due: "2027-Q1"
+  status: open

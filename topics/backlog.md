@@ -113,8 +113,9 @@ Code Watch.*
 - [economics] The unit economics of an AI coding subscription, line by line (Analyst)
 - [economics] What an inference dollar buys in 2026, and where the margin sits (Analyst)
 - [economics] Reading an AI company's S-1: the three numbers that matter (Analyst)
-- [news-to-framework] When a model price cut is a moat move, not a gift (Contrarian)
 - [economics] The cost curve of training vs serving — which one is the business (Analyst)
+- [economics] What an inference token actually costs to serve, and how far above
+  marginal cost an API price really sits — the markup nobody publishes (Analyst)
 - [what-every-engineer-should-know] The capex behind the API: GPUs, power, and
   why the constraint is the grid (Analyst)
 
@@ -167,3 +168,6 @@ Code Watch.*
 - [how-it-works] Model distillation: what training on another model's outputs
   actually copies, and what the license lets you do with it (Analyst) —
   2026-06-27, reports/deep-dives/2026-06-27-distillation-without-logits.md
+- [news-to-framework] When a model price cut is a moat move, not a gift
+  (Contrarian) — 2026-06-28,
+  reports/deep-dives/2026-06-28-price-cut-is-a-weapon.md
