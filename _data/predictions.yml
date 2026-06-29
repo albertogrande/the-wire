@@ -274,3 +274,16 @@
   confidence: 65
   due: "2027-Q1"
   status: open
+
+- id: dive-2026-06-30-long-context-effective-gap
+  made: "Dive · 2026-06-30"
+  made_link: "/reports/deep-dives/2026-06-30-long-context-vs-rag.html"
+  text: >-
+    No frontier model closes the effective-context gap — none holds ≥90% of its
+    4K-baseline accuracy at its FULL advertised context length on a RULER-class
+    multi-needle test. "Just use long context" stays a cost/accuracy tradeoff,
+    not a free win, so retrieval and routing remain the cheaper default for
+    distinct-document workloads.
+  confidence: 75
+  due: "2027-Q1"
+  status: open

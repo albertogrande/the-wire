@@ -19,7 +19,6 @@ overtakes becomes a `news-to-framework` piece instead — that's fine.
 
 - [how-it-works] How a context window actually works: attention cost, the
   lost-in-the-middle effect, and where recall degrades (Analyst)
-- [x-vs-y] Long-context vs RAG: when each wins, with real recall numbers (Analyst)
 - [how-it-works] What a tool call costs: tokens, latency, and round-trips in
   an agent loop (Builder)
 - [x-vs-y] Open weights vs closed APIs: the real total cost once you price
@@ -171,3 +170,6 @@ Code Watch.*
 - [news-to-framework] When a model price cut is a moat move, not a gift
   (Contrarian) — 2026-06-28,
   reports/deep-dives/2026-06-28-price-cut-is-a-weapon.md
+- [x-vs-y] Long-context vs RAG: when each wins, with real recall numbers
+  (Analyst) — 2026-06-30,
+  reports/deep-dives/2026-06-30-long-context-vs-rag.md

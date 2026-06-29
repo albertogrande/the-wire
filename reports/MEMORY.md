@@ -238,6 +238,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-06-28 (price floor) | DeepSeek's permanent V4-Pro floor (~$0.44/$0.87 per Mtok) does NOT ratchet up >25% (either leg) within two quarters — open-weight-pinned floor is structural, not promo — AND no closed lab (OpenAI/Anthropic) cuts flagship API price to within ~2× of it in that window; they hold the premium and segment to capability | 65% | by 2027-Q1 | OPEN |
 | 2026-W26 | At least one more flagship launch from a major US lab (OpenAI/Anthropic/Google/xAI) ships under a govt-staggered or govt-approved access arrangement before GA — a second instance, confirming the Jun 2 EO's "voluntary" review hardened into a release gate (GPT-5.6 Sol not a one-off) | 60% | by 2027-Q1 | OPEN |
 | Dive 2026-06-29 (silicon) | OpenAI's Jalapeño does NOT hit its stated end-2026 target of production inference at gigawatt scale; first-gen custom silicon slips into 2027 before carrying meaningful production traffic | 65% | ~2027-01-31 | OPEN |
+| Dive 2026-06-30 (long-context) | No frontier model closes the effective-context gap — none holds ≥90% of its 4K-baseline accuracy at its FULL advertised context on a RULER-class multi-needle test; "just use long context" stays a cost/accuracy tradeoff, not a free win, so retrieval/routing remains the cheaper default for distinct-document workloads | 75% | by 2027-Q1 | OPEN |
 
 **Scorecard: 0 settled · record 0–0 · mean Brier —**
 (Nothing due in W26. W23 Copilot-walkback call due ~Jul 5 — imminent, still open,
@@ -433,3 +434,18 @@ NSA lost Mythos, Asian clones filling the gap, ban dragging). Settle in a later 
   So-what: token price falls structurally but the platform keeps the savings.
   how-it-works/economics. Deepest layer of the channel thread; sibling to MoE
   (06-21) + spec-decoding (06-24) + caching (06-18) inference-economics cluster.
+- 2026-06-30 — "The 128K Window You Bought Is a 64K Window. Plan Accordingly."
+  (Quist) — long context vs RAG, the x-vs-y. Effective context ≪ advertised
+  (RULER: GPT-4 128K→64K eff, 96.6%@4K→81.2%@128K; Command-R/Yi-34B→32K; pass mark
+  = Llama2-7B@4K 85.6). Accuracy: LC > RAG (DeepMind Self-Route, EMNLP'24 —
+  Gemini-1.5-Pro 49.70 vs 37.33; GPT-4O 48.67 vs 32.60) BUT a trivial router
+  (Self-Route) recovers ~LC accuracy at 38–61% of tokens because 63% of queries
+  return identical predictions (70% within 10pts). Cost: 200K context = $1.00/query
+  @ $5/Mtok vs RAG ~8K = $0.04 (25×); caching doesn't rescue it (distinct prefix
+  per query). Long context fails weirdly not gracefully (Databricks: Claude-3-sonnet
+  copyright refusals 3.7%→49.5% by 64K; DBRX summarizes-not-answers 5.2%→50.4% by
+  32K). Mechanism: Lost-in-the-Middle U-curve. Rule: default retrieval, route don't
+  choose, pay for full context only on the global-comprehension slice, budget to
+  effective not advertised window. Deciding quantity = cost per *correct* answer.
+  x-vs-y. Lever on context-budget thread; sibling to caching (06-18) + context-budget
+  (06-25) dives.
