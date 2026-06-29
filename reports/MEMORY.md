@@ -136,10 +136,14 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   a wrapper around someone else's durable asset (model endpoint / analytics DB)
   is a feature, not a company. Third face of the channel/meter rule.
   → [dive 2026-06-11 llmops](./deep-dives/2026-06-11-llmops-not-a-company.md)
-- **Who pays for AI's power** `→` — PJM uncapped capacity auction imminent;
+- **Who pays for AI's power** `↑` — PJM uncapped capacity auction imminent;
   dueling studies on data centers vs. household bills; 1GW
-  bring-your-own-power deals (Vantage–Liberty). Sleeper populist-politics
-  story. → [2026-W23](./2026-W23.md)
+  bring-your-own-power deals (Vantage–Liberty). W26: stopped being a sleeper —
+  data centers became a ballot issue. Utah Senate Pres. J. Stuart Adams lost his
+  primary (Jun 25) after backing a data-center project; a Box Elder commissioner
+  said the vote "cost me the election"; polling puts local opposition near 70%;
+  Chevron signed a 20-yr Microsoft power deal (Jun 22). Populist-politics story,
+  now live. → [2026-W23](./2026-W23.md), [2026-W26](./2026-W26.md)
 - **Washington vs. the labs / safety as a weapon** `↑` — escalated hard in W24.
   Amazon's Jassy (Anthropic's biggest investor *and* a model competitor) told
   Treasury's Bessent that Fable 5 yields cyberattack info; Commerce export-banned
@@ -159,7 +163,20 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   — can't aim at the open artifact. Wired named SK Telecom's Mythos demo as the
   thin trigger. Earlier context: Obernolte–Trahan preemption draft;
   extraterritorial chip controls; DeepSeek's $7.4B state-backed raise.
+  W26 (negative→positive control): the state stopped taking models away and
+  started deciding who *gets* them. OpenAI previewed GPT-5.6 Sol (Jun 26) to ~20
+  *government-approved* partners — the first US frontier model under a govt-managed
+  access list, and the first real test of Trump's Jun 2 EO ("voluntary" 30-day
+  pre-release review; NSA sets the cyber threshold). The EO disclaims mandatory
+  licensing; the implementation required per-customer sign-off (The Information).
+  Altman praised the EO Jun 2, then OpenAI said the vetting "shouldn't be the
+  long-term default" — voluntary-in-name regime tightening. Tension on the ban:
+  it's dragging, not narrowing — parts of NSA *lost* Mythos access (Jun, supply-
+  chain dispute; Warner's "broke into classified systems in hours" was a misread
+  *red-team* test), and Asian clones (Sakana Fugu, 360 Tulongfeng/Yitianzhen,
+  Jun 27) market straight into the gap → W24 narrowing-call trending WRONG.
   → [2026-W23](./2026-W23.md), [2026-W24](./2026-W24.md), [2026-W25](./2026-W25.md),
+  [2026-W26](./2026-W26.md),
   [dive 2026-06-15](./deep-dives/2026-06-15-cannot-export-control-a-model.md)
 - **The maintainer revolt** `↑` (new) — open-source maintainers organizing
   against AI-slop contributions: Grinberg's "I Am Not a Reverse Centaur"
@@ -168,6 +185,25 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   the scarce resource and reviewers are charging for it in social capital.
   OpenAI opened Codex to OSS maintainers the same week (tone-deaf timing).
   → [2026-W24](./2026-W24.md)
+- **Labs go vertical / own the silicon** `↑` (new) — the deepest layer of the
+  channel war: inference (not training) is now the spend, and Nvidia keeps ~70%
+  gross margin on it, so the labs build their own inference ASICs to claw that
+  margin back. OpenAI + Broadcom unveiled Jalapeño (Jun 24): custom LLM-inference
+  chip, 9-mo design, gigawatt by end-2026, Microsoft pre-buys 40%. Precedent:
+  Google TPU (prod 2015, born of the "data-center-doubling" voice-search calc;
+  >90% silicon utilization vs ~30% GPU; Anthropic runs up to 1M of them).
+  Economics: ASIC ~3–5× perf/watt, $300–500M NRE recouped <1yr at scale, Morgan
+  Stanley sees ASICs 25% of inference by 2026 (from <5% 2023); Broadcom is the
+  common arms dealer (TPU/MTIA/Maia/Jalapeño). Fork: OpenAI/Google *build*;
+  Anthropic *rents three* (TPU $40B/5GW + >1M Trainium2 + Nvidia) — multi-silicon
+  as the hardware version of provider-portability. Bear case: ASIC inflexibility
+  (a frozen bet the transformer workload is stable ~3yr out); Nvidia's real moat
+  is CUDA + NVLink networking ($10.98B/qtr, +263% YoY), not the GPU; only giants
+  with captive volume + their own compiler can play. So-what: token price falls
+  *structurally* (margin transfer, not promo), but the platform keeps the savings
+  (price-cut-wasn't-for-you). Cross-links channel-war + repricing; sibling to the
+  inference-economics dive cluster (MoE/spec-decoding/caching).
+  → [dive 2026-06-29](./deep-dives/2026-06-29-why-ai-labs-build-chips.md)
 
 ## Predictions ledger
 
@@ -200,10 +236,13 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-06-27 (distillation) | No closed frontier lab (Anthropic/OpenAI/Google) widens default-path logprob exposure beyond today's limits (Anthropic: none; OpenAI: top-20) for its flagship models — the dense soft-target leak stays closed, leaving black-box output imitation as the only available distillation route against closed frontier models | 75% | by 2027-Q1 | OPEN |
 | Dive 2026-06-26 (idempotency) | No major agent harness (Claude Code/Cursor/Codex/etc.) ships automatic tool-call deduplication — collapsing identical repeated tool invocations within a session so a retried mutating call executes once — as a documented default; retry-safety stays the tool author's job via idempotency keys / unique constraints, and the harness's only built-in stays blunt refusal of destructive ops (v2.1.183-style) | 70% | by 2027-Q1 | OPEN |
 | Dive 2026-06-28 (price floor) | DeepSeek's permanent V4-Pro floor (~$0.44/$0.87 per Mtok) does NOT ratchet up >25% (either leg) within two quarters — open-weight-pinned floor is structural, not promo — AND no closed lab (OpenAI/Anthropic) cuts flagship API price to within ~2× of it in that window; they hold the premium and segment to capability | 65% | by 2027-Q1 | OPEN |
+| 2026-W26 | At least one more flagship launch from a major US lab (OpenAI/Anthropic/Google/xAI) ships under a govt-staggered or govt-approved access arrangement before GA — a second instance, confirming the Jun 2 EO's "voluntary" review hardened into a release gate (GPT-5.6 Sol not a one-off) | 60% | by 2027-Q1 | OPEN |
+| Dive 2026-06-29 (silicon) | OpenAI's Jalapeño does NOT hit its stated end-2026 target of production inference at gigawatt scale; first-gen custom silicon slips into 2027 before carrying meaningful production traffic | 65% | ~2027-01-31 | OPEN |
 
 **Scorecard: 0 settled · record 0–0 · mean Brier —**
-(Nothing due in W25. W23 Copilot-walkback call due ~Jul 5 — still open, no reversal
-yet. W24 export-ban-narrowing call due ~Aug 14. Settle in a later issue.)
+(Nothing due in W26. W23 Copilot-walkback call due ~Jul 5 — imminent, still open,
+no reversal yet. W24 export-ban-narrowing call due ~Aug 14 — trending WRONG (W26:
+NSA lost Mythos, Asian clones filling the gap, ban dragging). Settle in a later issue.)
 
 ## Coverage index
 
@@ -230,6 +269,12 @@ yet. W24 export-ban-narrowing call due ~Aug 14. Settle in a later issue.)
   level w/ GPT-5.5 on GDPval); Ask HN local-model surge; OpenCode passes Claude
   Code on stars; OpenAI leaked ~$21B loss; FT enterprise pullback; Anthropic
   subscription split — capability relocates, channel thread confirmed live
+- 2026-W26 — "The Frontier Got a Guest List" — GPT-5.6 Sol ships to ~20
+  government-approved partners (first US frontier model under a govt-managed access
+  list); Jun 2 EO's "voluntary" review hardens into a release gate; NSA loses
+  Mythos access; Asian Mythos clones (Sakana Fugu, 360); OpenAI Jalapeño chip;
+  DeepMind→Anthropic talent exodus ($270B Alphabet wipe); data-center voter backlash.
+  Switch-off (W24) → access-list (W26): negative to positive state control
 
 ### Deep dives
 - 2026-06-11 — "The Meter Is the Confession" — AI coding pricing; metering as
@@ -377,3 +422,14 @@ yet. W24 export-ban-narrowing call due ~Aug 14. Settle in a later issue.)
   incumbents fall to the floor (commoditization works) or hold-and-segment (capability premium).
   news-to-framework. Levers on channel-war + repricing + coding-subsidy threads; sibling to meter
   (06-11) + MoE (06-21) dives.
+- 2026-06-29 — "Nvidia Keeps 70 Cents of Every Dollar. That's Why OpenAI Built a
+  Chip." (house) — labs going vertical into inference silicon, pegged to OpenAI's
+  Jalapeño (Broadcom, 9-mo design, gigawatt end-2026, MS pre-buys 40%). Inference
+  is the spend; Nvidia's ~70% gross margin is the tax; ASIC ~3–5× perf/watt,
+  $300–500M NRE <1yr payback, Morgan Stanley sees ASICs 25% of inference by 2026.
+  History: Google TPU (data-center-doubling, >90% utilization, Anthropic runs up to
+  1M). Fork: OpenAI/Google build vs Anthropic rents 3 silicons (TPU+Trainium+Nvidia).
+  Bear: ASIC inflexibility, CUDA+NVLink moat ($10.98B/qtr networking), giants-only.
+  So-what: token price falls structurally but the platform keeps the savings.
+  how-it-works/economics. Deepest layer of the channel thread; sibling to MoE
+  (06-21) + spec-decoding (06-24) + caching (06-18) inference-economics cluster.
