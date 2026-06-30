@@ -72,8 +72,18 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   [dive 2026-06-15](./deep-dives/2026-06-15-cannot-export-control-a-model.md),
   [dive 2026-06-17](./deep-dives/2026-06-17-local-coding-model-memory-budget.md),
   [dive 2026-06-21](./deep-dives/2026-06-21-mixture-of-experts-active-parameters.md),
-  [dive 2026-06-27](./deep-dives/2026-06-27-distillation-without-logits.md),
-  [dive 2026-06-28](./deep-dives/2026-06-28-price-cut-is-a-weapon.md)
+  W27 (contrarian lens): the *forensic* answer to distillation surfaced and got
+  misread as surveillance. An HN thread (1,207 pts) reverse-engineered Claude Code
+  embedding hidden markers (invisible Unicode + format shifts) carrying ~2 bits
+  (China timezone + reseller-hostname blacklist). It's an anti-distillation tripwire
+  so a reseller's leaked outputs carry a traceable tag — but the channel is the
+  weakest there is (known contiguous code-point range, deletable with one substitution,
+  gone after normalization), so it catches the lazy once and dies to `tr -d`. Same law
+  as export control and contract terms: you can't mark-control a capability whose
+  outputs are readable text.
+  → [dive 2026-06-27](./deep-dives/2026-06-27-distillation-without-logits.md),
+  [dive 2026-06-28](./deep-dives/2026-06-28-price-cut-is-a-weapon.md),
+  [dive 2026-07-01](./deep-dives/2026-07-01-invisible-marker-not-surveillance.md)
 - **Supply chain vs. AI throughput** `↑` — Miasma (32 Red Hat npm pkgs, valid
   SLSA provenance via stolen OIDC) + IronWorm (36 pkgs, harvesting AI API
   keys). Provenance + install-script scanning both defeated. Review/trust
@@ -239,6 +249,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | 2026-W26 | At least one more flagship launch from a major US lab (OpenAI/Anthropic/Google/xAI) ships under a govt-staggered or govt-approved access arrangement before GA — a second instance, confirming the Jun 2 EO's "voluntary" review hardened into a release gate (GPT-5.6 Sol not a one-off) | 60% | by 2027-Q1 | OPEN |
 | Dive 2026-06-29 (silicon) | OpenAI's Jalapeño does NOT hit its stated end-2026 target of production inference at gigawatt scale; first-gen custom silicon slips into 2027 before carrying meaningful production traffic | 65% | ~2027-01-31 | OPEN |
 | Dive 2026-06-30 (long-context) | No frontier model closes the effective-context gap — none holds ≥90% of its 4K-baseline accuracy at its FULL advertised context on a RULER-class multi-needle test; "just use long context" stays a cost/accuracy tradeoff, not a free win, so retrieval/routing remains the cheaper default for distinct-document workloads | 75% | by 2027-Q1 | OPEN |
+| Dive 2026-07-01 (marking) | No public analysis shows Claude Code's request-marking is all three of (a) high-entropy enough to uniquely identify an individual session, (b) survives normalization + paraphrase + a sanitizer copy-paste, and (c) keyed to individual end users not reseller/category infrastructure — it stays a low-bit, strippable anti-distillation tripwire, not per-user surveillance | 75% | by 2027-Q1 | OPEN |
 
 **Scorecard: 0 settled · record 0–0 · mean Brier —**
 (Nothing due in W26. W23 Copilot-walkback call due ~Jul 5 — imminent, still open,
@@ -449,3 +460,17 @@ NSA lost Mythos, Asian clones filling the gap, ban dragging). Settle in a later 
   effective not advertised window. Deciding quantity = cost per *correct* answer.
   x-vs-y. Lever on context-budget thread; sibling to caching (06-18) + context-budget
   (06-25) dives.
+- 2026-07-01 — "A Marker You Can Delete Is Not a Surveillance Backdoor" (Okafor) —
+  inverts the HN panic (1,207 pts) over Claude Code "steganographically marking"
+  requests. Consensus: covert invisible-Unicode fingerprinting = surveillance backdoor.
+  Broken: it's ~2 bits (China timezone + reseller-hostname blacklist, per IshKebab),
+  and invisible-Unicode marking is the *most fragile* tracking there is — visible
+  (dump code points), deletable in one pass (filter U+E0000–U+E007F + zero-width +
+  variation selectors; AWS guidance), destroyed by ordinary handling. The layer that
+  actually IDs you (API key/account/TLS) was never hidden and can't be stripped → the
+  marker isn't aimed at you; it's anti-distillation forensics aimed at resellers (links
+  06-27 Qwen 28.8M). Marker (beside the text, deletable) vs watermark (Kirchenbauer
+  green-list, in the token distribution, regex-proof but dies to paraphrase) — the panic
+  conflated them. So-what: strip invisibles as your prompt-injection defense; the marking
+  falls out free. news-to-framework. Levers on channel-war/distillation + autonomy-before-
+  brakes threads; sibling to distillation (06-27) + export-control (06-15) dives.

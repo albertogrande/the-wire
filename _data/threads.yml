@@ -84,6 +84,15 @@
     structural, not promotional, because DeepSeek serves its own open weights: the
     API can't hold a markup over an artifact anyone can host. The price itself is
     now the commoditized layer.
+    W27 (the forensic answer to distillation): an HN thread (1,207 pts) reverse-
+    engineered Claude Code embedding hidden markers — invisible Unicode plus
+    subtle format shifts — into requests, encoding ~2 bits (China timezone +
+    reseller-hostname blacklist). Framed as surveillance, it's really anti-
+    distillation forensics: a tripwire so a reseller's leaked outputs carry a
+    traceable tag. But the channel is the weakest possible — a known, contiguous
+    code-point range, deletable with one substitution, gone after normalization —
+    so it catches the lazy once and dies to `tr -d`. Confirms the thread: you
+    can't contract- or mark-control a capability whose outputs are readable text.
   issues:
     - { label: "Dive · The Channel Was the Product", link: "/reports/deep-dives/2026-06-09-channel-was-the-product.html" }
     - { label: "Dive · You Cannot Export-Control a Model", link: "/reports/deep-dives/2026-06-15-cannot-export-control-a-model.html" }
@@ -93,6 +102,7 @@
     - { label: "Dive · Portability Is Not a Purchase", link: "/reports/deep-dives/2026-06-22-portability-is-not-a-purchase.html" }
     - { label: "Dive · Distillation Without Logits", link: "/reports/deep-dives/2026-06-27-distillation-without-logits.html" }
     - { label: "Dive · The Price Cut Wasn't For You", link: "/reports/deep-dives/2026-06-28-price-cut-is-a-weapon.html" }
+    - { label: "Dive · A Marker You Can Delete", link: "/reports/deep-dives/2026-07-01-invisible-marker-not-surveillance.html" }
 
 - slug: supply-chain-vs-throughput
   title: "Supply chain vs. AI throughput"

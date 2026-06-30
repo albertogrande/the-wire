@@ -287,3 +287,18 @@
   confidence: 75
   due: "2027-Q1"
   status: open
+
+- id: dive-2026-07-01-marking-stays-tripwire
+  made: "Dive · 2026-07-01"
+  made_link: "/reports/deep-dives/2026-07-01-invisible-marker-not-surveillance.html"
+  text: >-
+    No public analysis demonstrates that Claude Code's request-marking is all
+    three of: (a) high-entropy enough to uniquely single out an individual
+    session rather than a coarse category; (b) able to survive Unicode
+    normalization, a paraphrase, AND a copy-paste through a sanitizer; and (c)
+    keyed to individual end users rather than reseller/category infrastructure.
+    It stays a low-bit, strippable anti-distillation tripwire, not per-user
+    surveillance.
+  confidence: 75
+  due: "2027-Q1"
+  status: open
