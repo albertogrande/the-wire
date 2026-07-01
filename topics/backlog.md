@@ -46,8 +46,11 @@ Code Watch.*
   for a large repo (Operator)
 - [practical-guide] The permission allowlist that stops the prompts without
   going full YOLO (Operator)
-- [how-it-works] Hooks that catch the agent's mistakes before they land —
-  lint, test, and format gates as guardrails (Operator)
+- [how-it-works] PostToolUse hooks as *quality* gates — lint, test, and format
+  the agent's output before it lands (distinct from the PreToolUse security
+  veto covered 2026-07-02) (Operator)
+- [reference] Sandbox mode: OS-level filesystem/network isolation for Bash and
+  its children, and when it beats a permission rule you can subvert (Operator)
 - [practical-guide] Subagent orchestration that saves wall-clock time, not
   just tokens (Operator)
 - [n-lessons] What the top Claude Code workflows have in common — patterns
@@ -176,3 +179,6 @@ Code Watch.*
 - [x-vs-y] Long-context vs RAG: when each wins, with real recall numbers
   (Analyst) — 2026-06-30,
   reports/deep-dives/2026-06-30-long-context-vs-rag.md
+- [practical-guide] PreToolUse hooks as the security boundary that permission
+  patterns can't be (Operator) — 2026-07-02,
+  reports/deep-dives/2026-07-02-hooks-are-the-real-guardrail.md

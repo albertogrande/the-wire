@@ -302,3 +302,17 @@
   confidence: 75
   due: "2027-Q1"
   status: open
+
+- id: dive-2026-07-02-hooks-real-guardrail
+  made: "Dive · 2026-07-02"
+  made_link: "/reports/deep-dives/2026-07-02-hooks-are-the-real-guardrail.html"
+  text: >-
+    Claude Code does NOT ship a permission-rule grammar that natively enforces
+    intent-level Bash constraints — e.g. "curl only to an allowlisted host"
+    holding through wrappers, redirects, and variables. Argument-constraining
+    deny patterns stay documented-fragile, and a PreToolUse hook (plus the
+    sandbox) remains Anthropic's own recommended enforcement path for a real
+    boundary.
+  confidence: 80
+  due: "2027-Q1"
+  status: open

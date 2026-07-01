@@ -131,12 +131,24 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   idempotency key minted in the wrapper (not the prompt — model re-randomizes it per turn),
   or a unique-constraint upsert. v2.1.183 auto-mode blocking destructive git/terraform/
   pulumi/cdk destroy = the harness conceding the point with a blunt instrument.
+  W27 (operator lens): the *permission* brake is a string match, and strings can't read
+  intent. A deny rule like `Bash(curl github.com *)` is defeated by `-X`, `https`, `-L`
+  redirect, a `$URL` variable, or a double space (Anthropic's own fragility warning); Adversa
+  proved the structural version — >50 `&&`-chained subcommands made Claude Code skip deny
+  enforcement and fall back to "ask" (ticket CC-643 capped subcommand analysis at 50; patched
+  with a tree-sitter parser ~v2.1.90). The guardrail that holds is a PreToolUse hook: real
+  code reading `.tool_input.command`, vetoing via exit 2 or `permissionDecision:"deny"`,
+  evaluated before permission rules so it beats an allow. Design: allow `Bash`, deny
+  curl/wget in the hook, route web via `WebFetch(domain:...)`, sandbox for the OS layer.
+  Gotcha: v2.1.195 made hook matchers exact-match — hyphenated MCP matchers
+  (`mcp__brave-search`) silently stopped firing; use `mcp__brave-search__.*`.
   → [dive 2026-06-08-autonomy](./deep-dives/2026-06-08-autonomy-before-brakes.md),
   [dive 2026-06-19](./deep-dives/2026-06-19-agent-is-a-control-flow-decision.md),
   [dive 2026-06-20](./deep-dives/2026-06-20-claude-code-compaction-save-point.md),
   [dive 2026-06-23](./deep-dives/2026-06-23-git-worktrees-agent-isolation.md),
   [dive 2026-06-25](./deep-dives/2026-06-25-context-budget-sixty-percent.md),
-  [dive 2026-06-26](./deep-dives/2026-06-26-agent-retries-idempotent-writes.md)
+  [dive 2026-06-26](./deep-dives/2026-06-26-agent-retries-idempotent-writes.md),
+  [dive 2026-07-02](./deep-dives/2026-07-02-hooks-are-the-real-guardrail.md)
 - **Platforms eat the layer** `↑` — the LLMOps tool layer (gateway, tracing,
   eval, prompt store) is being absorbed from both ends: ClickHouse bought
   Langfuse (Jan, already built on ClickHouse; 23.1M SDK installs/mo) to own the
@@ -250,6 +262,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-06-29 (silicon) | OpenAI's Jalapeño does NOT hit its stated end-2026 target of production inference at gigawatt scale; first-gen custom silicon slips into 2027 before carrying meaningful production traffic | 65% | ~2027-01-31 | OPEN |
 | Dive 2026-06-30 (long-context) | No frontier model closes the effective-context gap — none holds ≥90% of its 4K-baseline accuracy at its FULL advertised context on a RULER-class multi-needle test; "just use long context" stays a cost/accuracy tradeoff, not a free win, so retrieval/routing remains the cheaper default for distinct-document workloads | 75% | by 2027-Q1 | OPEN |
 | Dive 2026-07-01 (marking) | No public analysis shows Claude Code's request-marking is all three of (a) high-entropy enough to uniquely identify an individual session, (b) survives normalization + paraphrase + a sanitizer copy-paste, and (c) keyed to individual end users not reseller/category infrastructure — it stays a low-bit, strippable anti-distillation tripwire, not per-user surveillance | 75% | by 2027-Q1 | OPEN |
+| Dive 2026-07-02 (hooks) | Claude Code does NOT ship a permission-rule grammar that natively enforces intent-level Bash constraints (e.g. "curl only to an allowlisted host" holding through wrappers, redirects, and variables) — argument-constraining deny patterns stay documented-fragile and a PreToolUse hook / sandbox remains Anthropic's own recommended enforcement path for a real boundary | 80% | by 2027-Q1 | OPEN |
 
 **Scorecard: 0 settled · record 0–0 · mean Brier —**
 (Nothing due in W26. W23 Copilot-walkback call due ~Jul 5 — imminent, still open,
@@ -460,6 +473,20 @@ NSA lost Mythos, Asian clones filling the gap, ban dragging). Settle in a later 
   effective not advertised window. Deciding quantity = cost per *correct* answer.
   x-vs-y. Lever on context-budget thread; sibling to caching (06-18) + context-budget
   (06-25) dives.
+- 2026-07-02 — "Your Deny Rules Match Strings. Your Real Guardrail Is a Hook." (Sandoval,
+  Claude Code edition) — permission deny rules are string patterns and can't encode intent;
+  Anthropic's own docs call argument-constraining Bash rules "fragile" (defeated by `-X`,
+  `https`, `-L` redirect, `$URL`, double-space), and Adversa's >50-subcommand bypass (ticket
+  CC-643, capped analysis at 50 → fall back to "ask"; patched with tree-sitter ~v2.1.90) is the
+  structural proof. The fence that holds is a PreToolUse hook: real code reading
+  `.tool_input.command`, vetoing via exit 2 or `permissionDecision:"deny"`, evaluated before
+  permission rules (beats an allow). Recommended design (Anthropic's own): allow `Bash`, deny
+  curl/wget in the hook, route web via `WebFetch(domain:...)`, sandbox for OS-level.
+  News peg: v2.1.195 made hook matchers exact-match (was substring) — hyphenated MCP matchers
+  (`mcp__brave-search`) silently stopped firing; fix is `mcp__brave-search__.*`. Matcher = tool-name
+  filter; `if` = content filter using the same fragile grammar (fails open) — filter decides when
+  to look, code decides what to allow. practical-guide/how-it-works. Lever on autonomy-before-brakes;
+  sibling to context-budget (06-25) + idempotency (06-26) dives.
 - 2026-07-01 — "A Marker You Can Delete Is Not a Surveillance Backdoor" (Okafor) —
   inverts the HN panic (1,207 pts) over Claude Code "steganographically marking"
   requests. Consensus: covert invisible-Unicode fingerprinting = surveillance backdoor.
