@@ -25,10 +25,6 @@ overtakes becomes a `news-to-framework` piece instead — that's fine.
   inference, ops, and eval (Analyst)
 - [news-to-framework] Why training data is the moat and the liability at once —
   copyright exposure as the reason no frontier model ships its corpus (Contrarian)
-- [how-it-works] How statistical LLM watermarking actually works: the green/red-list
-  logit bias (Kirchenbauer), why a detector sees it but a reader can't, and why
-  paraphrase quietly washes it out (Analyst)
-
 - [how-it-works] The KV cache: why context length, not parameter count,
   decides what fits in your VRAM — with the linear-growth math (Builder)
 - [practical-guide] Quantization without tears: dynamic 4-bit, KV-cache
@@ -182,3 +178,7 @@ Code Watch.*
 - [practical-guide] PreToolUse hooks as the security boundary that permission
   patterns can't be (Operator) — 2026-07-02,
   reports/deep-dives/2026-07-02-hooks-are-the-real-guardrail.md
+- [how-it-works] How statistical LLM watermarking actually works: green/red-list
+  logit bias (Kirchenbauer), the z-test a detector reads, and why paraphrase
+  washes it out (Analyst) — 2026-07-03,
+  reports/deep-dives/2026-07-03-llm-watermark-paraphrase-ceiling.md

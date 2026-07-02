@@ -93,6 +93,13 @@
     code-point range, deletable with one substitution, gone after normalization —
     so it catches the lazy once and dies to `tr -d`. Confirms the thread: you
     can't contract- or mark-control a capability whose outputs are readable text.
+    W27 (the watermark half, quantified): a statistical text watermark — a green-list
+    logit bias read back with a z-test — is the strongest provenance marking (no symbol
+    to grep), but its signal is token-count × entropy, so paraphrase nulls it: soft-
+    watermark TPR 99%→15% after five recursive rewrites (Sadasivan), SynthID scrubbed
+    >90% by baseline paraphrase (ETH SRI Lab). The best-possible detector is capped at
+    AUROC ≤ ½ + TV − TV²/2, and laundering pushes TV→0 → coin flip. Same law again:
+    you can't provenance-control a capability whose outputs are readable text.
   issues:
     - { label: "Dive · The Channel Was the Product", link: "/reports/deep-dives/2026-06-09-channel-was-the-product.html" }
     - { label: "Dive · You Cannot Export-Control a Model", link: "/reports/deep-dives/2026-06-15-cannot-export-control-a-model.html" }
@@ -103,6 +110,7 @@
     - { label: "Dive · Distillation Without Logits", link: "/reports/deep-dives/2026-06-27-distillation-without-logits.html" }
     - { label: "Dive · The Price Cut Wasn't For You", link: "/reports/deep-dives/2026-06-28-price-cut-is-a-weapon.html" }
     - { label: "Dive · A Marker You Can Delete", link: "/reports/deep-dives/2026-07-01-invisible-marker-not-surveillance.html" }
+    - { label: "Dive · Watermark Washes Out With a Paraphrase", link: "/reports/deep-dives/2026-07-03-llm-watermark-paraphrase-ceiling.html" }
 
 - slug: supply-chain-vs-throughput
   title: "Supply chain vs. AI throughput"

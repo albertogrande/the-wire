@@ -84,6 +84,15 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   → [dive 2026-06-27](./deep-dives/2026-06-27-distillation-without-logits.md),
   [dive 2026-06-28](./deep-dives/2026-06-28-price-cut-is-a-weapon.md),
   [dive 2026-07-01](./deep-dives/2026-07-01-invisible-marker-not-surveillance.md)
+  W27 (analyst lens): the *watermark* half of the marker/watermark split, quantified. A
+  statistical text watermark (green-list logit bias, read back with a z-test) is the strongest
+  of the provenance markings — no symbol to grep — but its signal is a function of token count
+  × entropy, so paraphrase nulls it (soft-watermark TPR 99%→15% after 5 recursive rewrites;
+  SynthID scrubbed >90% by baseline paraphrase). Same law as export control / contract terms /
+  invisible markers: you can't provenance-control a capability whose outputs are readable text,
+  and the theoretical detector ceiling (AUROC ≤ ½+TV−TV²/2) shrinks to a coin flip as the
+  laundering pushes TV→0. Watermarks catch volume + good faith, not the short adversarial case.
+  → [dive 2026-07-03](./deep-dives/2026-07-03-llm-watermark-paraphrase-ceiling.md)
 - **Supply chain vs. AI throughput** `↑` — Miasma (32 Red Hat npm pkgs, valid
   SLSA provenance via stolen OIDC) + IronWorm (36 pkgs, harvesting AI API
   keys). Provenance + install-script scanning both defeated. Review/trust
@@ -263,6 +272,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-06-30 (long-context) | No frontier model closes the effective-context gap — none holds ≥90% of its 4K-baseline accuracy at its FULL advertised context on a RULER-class multi-needle test; "just use long context" stays a cost/accuracy tradeoff, not a free win, so retrieval/routing remains the cheaper default for distinct-document workloads | 75% | by 2027-Q1 | OPEN |
 | Dive 2026-07-01 (marking) | No public analysis shows Claude Code's request-marking is all three of (a) high-entropy enough to uniquely identify an individual session, (b) survives normalization + paraphrase + a sanitizer copy-paste, and (c) keyed to individual end users not reseller/category infrastructure — it stays a low-bit, strippable anti-distillation tripwire, not per-user surveillance | 75% | by 2027-Q1 | OPEN |
 | Dive 2026-07-02 (hooks) | Claude Code does NOT ship a permission-rule grammar that natively enforces intent-level Bash constraints (e.g. "curl only to an allowlisted host" holding through wrappers, redirects, and variables) — argument-constraining deny patterns stay documented-fragile and a PreToolUse hook / sandbox remains Anthropic's own recommended enforcement path for a real boundary | 80% | by 2027-Q1 | OPEN |
+| Dive 2026-07-03 (watermark) | No published or production text watermark demonstrates AUROC ≥ 0.9 (or TPR ≥ 0.9 at 1% FPR) on sub-200-token model outputs after a full recursive-paraphrase attack — statistical watermarking stays a length-and-good-faith provenance signal, defeated on the short/adversarial case, and no scheme escapes the paraphrase floor | 80% | by 2027-Q1 | OPEN |
 
 **Scorecard: 0 settled · record 0–0 · mean Brier —**
 (Nothing due in W26. W23 Copilot-walkback call due ~Jul 5 — imminent, still open,
@@ -501,3 +511,19 @@ NSA lost Mythos, Asian clones filling the gap, ban dragging). Settle in a later 
   conflated them. So-what: strip invisibles as your prompt-injection defense; the marking
   falls out free. news-to-framework. Levers on channel-war/distillation + autonomy-before-
   brakes threads; sibling to distillation (06-27) + export-control (06-15) dives.
+- 2026-07-03 — "A Watermark You Read With a Z-Test Washes Out With a Paraphrase" (Quist) —
+  the mechanism the 07-01 marker dive deferred: statistical LLM watermarking. Generation
+  seeds a PRNG on the previous token, splits the vocab into a green list (fraction γ) + red,
+  and adds δ to green logits (soft watermark; hard = forbid red, wrecks low-entropy text).
+  Detection is a one-proportion z-test, no model needed: z=(|s|ᴳ−γT)/√(Tγ(1−γ)); z>4 → FPR
+  3×10⁻⁵ (Kirchenbauer, 28 green vs 9 expected → p≈6×10⁻¹⁴). Two structural limits: needs
+  entropy (can't watermark deterministic tokens/code) and length (z∝√T, short outputs carry
+  no signal). Paraphrase strips it: Sadasivan et al. — soft watermark 97%→80% (PEGASUS) →57%
+  (T5), recursive 5-round TPR 99%→15% at 1% FPR / AUROC 99.8%→67.9%. SynthID-Text (Nature,
+  Tournament sampling, ~20M live Gemini responses, quality unchanged) is scrubbed >90% by
+  baseline paraphrase / near-100% with param-stealing (ETH SRI Lab probe, single-source).
+  Reliability paper's defense (still detectable after human paraphrase at ~800 tokens, FPR
+  1e-5) concedes a 2-order tax + fails on short/adversarial. Deciding quantity = z that
+  survives the launder step; theory caps it: AUROC ≤ ½ + TV(M,H) − TV(M,H)²/2 → paraphrase
+  pushes TV down → coin flip. how-it-works. Levers on channel-war/distillation thread;
+  sibling to marker (07-01) + distillation (06-27) dives.

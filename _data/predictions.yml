@@ -316,3 +316,16 @@
   confidence: 80
   due: "2027-Q1"
   status: open
+
+- id: dive-2026-07-03-watermark-paraphrase-floor
+  made: "Dive · 2026-07-03"
+  made_link: "/reports/deep-dives/2026-07-03-llm-watermark-paraphrase-ceiling.html"
+  text: >-
+    No published or production text watermark demonstrates AUROC ≥ 0.9 (or a
+    true-positive rate ≥ 0.9 at 1% false-positive rate) on sub-200-token model
+    outputs after a full recursive-paraphrase attack. Statistical watermarking
+    stays a length-and-good-faith provenance signal — defeated on the short and
+    adversarial case, with no scheme escaping the paraphrase floor.
+  confidence: 80
+  due: "2027-Q1"
+  status: open
