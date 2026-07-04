@@ -135,6 +135,47 @@ Code Watch.*
 - [news-to-framework] Provenance and attestation: what "signed software" can and
   can't promise (Analyst)
 
+## Live — cross-domain / investigative (when the story pulls there, 2026-07-04)
+
+*Angles that naturally travel across beats — AI × economy × energy × politics ×
+geopolitics — in the mold of the 2026-06-29 silicon dive. Use one when a live
+story genuinely leads here; the reader warned against **forcing** the crossover
+(especially AI-plus-politics). Pick these because they're the best story that
+day, not to hit a cross-domain quota. For the standing devtools / dev-marketing
+weekly slot, draw from the "devtools & systems" and "DevRel, dev marketing,
+product engineering" pools above.*
+
+- [news-to-framework] Data centers became a ballot issue: the Utah primary
+  upset, ~70% local opposition, and the mechanism nobody explains — how a
+  hyperscaler load actually lands on a household electric bill (capacity
+  markets, interconnection queues, ratepayer cost allocation). AI × energy ×
+  local politics × economy (Contrarian/Analyst)
+- [economics] The AI trade as a macro variable: how the S-1 wave (Anthropic,
+  OpenAI ~$1T) made frontier-model deceleration a thing that moves the Nasdaq —
+  what actually transmits from a lab's run-rate to an index (Analyst)
+- [news-to-framework] The frontier's guest list: GPT-5.6 Sol shipping to ~20
+  government-approved partners as the first real test of state-managed model
+  access — the EO mechanism, who's on the list, and what China's clones do to
+  the logic (AI × politics × geopolitics) (Contrarian)
+- [economics] Bring-your-own-power: why hyperscalers are signing 20-year deals
+  with oil majors (Chevron–Microsoft) and 1GW BYOP deals (Vantage–Liberty) —
+  the grid is the constraint on inference, and the workaround reshapes energy
+  markets (Analyst)
+- [news-to-framework] The export-control boomerang: the Fable 5/Mythos ban as a
+  case study in a control that taxes the honest domestic lab while the
+  capability walks free as open weights — the geopolitics of a leaky border
+  (Contrarian)
+- [economics] What an inference dollar pays for once you trace it to the
+  physical world: chip margin → power contract → water → local tax abatement →
+  the ratepayer. Follow one token to the grid (Analyst)
+- [news-to-framework] The maintainer revolt meets the labor question: AI-slop
+  PRs, review as the scarce resource, and what "generation is free, review is
+  charged in social capital" says about who captures the productivity gain
+  (Contrarian)
+- [news-to-framework] Talent as the real moat: the DeepMind→Anthropic exodus
+  ($270B Alphabet wipe) and what a frontier lab's hiring flows reveal about
+  where the capability actually lives — people, not weights (Contrarian)
+
 ## Used
 
 - [what-every-engineer-should-know] What a benchmark number actually measures —

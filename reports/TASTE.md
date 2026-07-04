@@ -22,12 +22,32 @@ feedback (in session or via issue comments); prune one-off reactions.
 - A deep dive every week alongside the essay; reader may also request
   topic-specific dives on demand.
 - A shorter daily dive (Tue–Sun) under a rotating columnist byline
-  (`AUTHORS.md`) — evergreen "how it works" by default, the day's news only
-  when it earns a durable explainer. Record which columnist's voice the
-  reader prefers here as the experiment settles.
-- Cross-domain connection (e.g. AI × energy × economy × politics) is the
-  core value: "figure out which points of the week relate to another topic
-  or broader trends — here is where you become opinionated."
+  (`AUTHORS.md`). Record which columnist's voice the reader prefers here as
+  the experiment settles.
+- **Natural topic first; extend only when the story asks** (2026-07-04, two
+  rounds of feedback). The most important thing is picking the genuinely best
+  story of the day and writing *that*. Cross-domain context — "figure out which
+  points relate to another topic or broader trends; here is where you become
+  opinionated" — is the payoff you earn *when the story pulls there*, in the
+  mold of the 2026-06-29 Nvidia→OpenAI→silicon→energy→China dive. It is **not a
+  formula**. The reader explicitly warned against **forcing** it, especially
+  the reflex of bolting a political angle onto everything AI: "don't always
+  force AI-plus-politics — the context isn't forced, the story asks for it." A
+  clean single-subject dive is better than a padded crossover.
+- **Cover the devtools & dev-marketing space, not just AI** (2026-07-04). The
+  reader wants The Wire to report the devtools / DevRel / dev-marketing world —
+  new tools, releases, workflows, evergreen "how this part of the stack works,"
+  and the business of developer products. **Goal: at least one dive per week is
+  squarely devtools/dev-marketing** (the Thursday Claude Code edition doesn't
+  count — that's the tool itself, not the broader space).
+- **What bores the reader** (2026-07-04, said explicitly — he stopped finishing
+  the dailies): (a) single-mechanism "how X works" explainers that read as
+  narrow, samey guides; (b) pieces reverse-engineered from a Hacker News thread
+  of the day ("something shows up on HN and an article is invented from it");
+  (c) a run of dives all orbiting the same thesis. The fix is **better topic
+  selection and natural extension**, not tone. Evergreen mechanism pieces still
+  run — just not several in a row, and not when a live, more interesting story
+  is going uncovered.
 
 ## Coverage
 

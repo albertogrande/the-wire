@@ -17,9 +17,27 @@ words**, under a named columnist's byline. Same publication, smaller canvas,
 distinct voice.
 
 The governing rule, learned from the best technical newsletters: **news is
-the hook, an evergreen concept is the subject.** Default to a durable "how X
-works" piece. A news peg only takes the slot when it lets you write the
-timeless explainer underneath it — never a hot take that expires in a week.
+the hook, an evergreen concept is the subject.**
+
+**Start with the best story of the day, honestly.** The reader's durable
+feedback (`reports/TASTE.md`, 2026-07-04) is: pick the genuinely most
+interesting/important topic first — across *all* the beats, not just AI — and
+write *that*. Then **extend into adjacent domains only when the story asks for
+it.** Cross-domain context (tech × economics / energy / politics /
+geopolitics) is a payoff you earn when the reporting naturally pulls there —
+the way the 2026-06-29 silicon piece did (Nvidia margin → OpenAI's chip →
+power → China) — **not a quota to hit.** Do not bolt "…and here's the
+political angle" onto a story that doesn't have one; a forced cross-domain
+piece is worse than a clean single-subject one. The reader called this out
+explicitly: **don't force AI-plus-politics; let the story decide how far it
+travels.**
+
+What the reader *did* reject: a week of narrow single-mechanism "how X works"
+explainers that read as samey, and dives reverse-engineered from a Hacker News
+thread of the day. A hot HN thread is only ever the **hook** — never the
+subject; if it doesn't open onto a larger force the piece can actually report
+out, it doesn't run. The fix is **better topic selection and natural
+extension**, not a formula.
 
 ## Step 0 — Who's writing, and in what mode
 
@@ -75,14 +93,45 @@ matters in twelve months" piece — not a reaction.
 and the reader's taste.
 
 **Selection rule:**
-1. Default to evergreen. A news peg takes the slot only if it clears a high
-   bar *and* yields a durable explainer.
-2. Score candidates on: **uniqueness** (can the reader get this synthesis in
-   one place elsewhere? — highest weight) × **durability** (useful in 12
-   months?) × **reader-fit** (`TASTE.md`) × **fit to today's columnist's
-   lens** (`AUTHORS.md`).
-3. **Never repeat** a piece in MEMORY.md's coverage index unless the story
-   moved materially — if it did, frame as an update and link the original.
+1. **Best story of the day first.** Pick the single most interesting/important
+   topic on offer, judged on its own merit — the thing you'd most want to read
+   today. It can be a clean single-subject piece. Cross-domain reach is a
+   tie-breaker and a bonus, **not** an entry requirement: when two candidates
+   are close, prefer the one whose story naturally travels across beats — but
+   never manufacture a crossover the story doesn't have. Do **not** default to
+   "AI + politics."
+2. **Extend only as far as the story pulls.** Once the topic is chosen, add
+   adjacent context (who pays, who benefits, the energy / market / policy /
+   China angle) *if and only if* the reporting genuinely leads there. A tight
+   one-domain dive beats a padded one.
+3. **A Hacker News thread is a hook, not a subject.** Do not build a dive
+   whose whole reason to exist is "a thread trended and here's why it's
+   wrong/right." A thread earns the slot only when it opens onto a larger
+   force — an incentive, a policy move, a structural shift — that the piece
+   actually reports out.
+4. Score candidates on: **interest/importance today** (highest weight) ×
+   **uniqueness** (can the reader get this synthesis in one place elsewhere?) ×
+   **durability** (useful in 12 months?) × **reader-fit** (`TASTE.md`) × **fit
+   to today's columnist's lens** (`AUTHORS.md`). Natural cross-domain reach
+   raises the score; a forced one lowers it.
+5. **Don't re-run the same idea in new clothes.** Before committing, scan the
+   last ~7 entries in MEMORY.md's coverage index: if three of them already
+   orbit one thesis (e.g. the 06-27→07-04 "you can't control a readable-output
+   capability" cluster), pick a candidate that opens a *different* front.
+   Never repeat a piece unless the story moved materially — if it did, frame
+   as an update and link the original.
+
+**Beat balance — the devtools / dev-marketing guarantee.** The reader wants
+The Wire to *cover the devtools and dev-marketing space*, not just AI and its
+crossovers. **At least one dive per calendar week (Tue–Sun) must be squarely a
+devtools or dev-marketing / DevRel piece** — a new tool or release, a
+practitioner workflow, an evergreen "how this part of the stack works," or the
+business of developer products (adoption, docs, distribution). Before starting,
+check this week's dives in MEMORY.md's coverage index: if none has filled the
+devtools/dev-marketing slot and the week is running out of days, this slot wins
+today. (Thursday's Claude Code edition is adjacent but does **not** discharge
+this guarantee — it's the tool itself, not the broader devtools/dev-marketing
+space.)
 
 **Pick a format** for the piece (tag it for the backlog/memory):
 `how-it-works` · `x-vs-y` · `architecture` (how [company] built X — the
@@ -97,10 +146,16 @@ Lighter than the weekly sweep, same standards. For the one topic:
 - **The mechanism / the numbers**: the 2–4 quantities or technical facts the
   argument turns on. Find primaries — model cards, docs, benchmarks, filings,
   source — not commentary about them.
+- **Follow it across domains**: the point of the piece is the connective
+  tissue. Chase the fact into a second and third domain — who pays, who
+  benefits, what it does to energy / the market / policy / China — and get a
+  primary source in *each* domain, not just the technical one. This is what
+  makes the piece feel reported rather than explained.
 - **History** when it matters: how did we get here?
 - **The discussion**: what practitioners actually argued — HN (Algolia API),
   Reddit, X, GitHub issues. Quote the dissenting comment, linked.
-- **The other side**: find the strongest counter and engage it.
+- **The other side**: find the strongest counter *for each angle* — the piece
+  carries several points of view, not one verdict — and engage them.
 
 WebFetch **at least 3 primary sources** and read them properly. Verify every
 load-bearing number; flag anything single-sourced inline. This is a
