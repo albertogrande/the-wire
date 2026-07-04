@@ -36,10 +36,16 @@
     boundary, not a business; the end state is vertical integration. Once you're
     metered, prompt caching is the biggest single lever on the bill — but the
     advertised 90% read discount is a bet on hit rate, not a setting you flip.
+    W27: users are now routing around the bill itself — pxpipe renders source as
+    PNGs to ride optical compression under text-token pricing (claims 59–74% off
+    Fable 5), but image tokens cost the same per token and the "discount" is a
+    17.8× compression ratio that lands in the lossy fall-off, so it trades
+    cost/token for silent errors on code — the meter's own logic, turned on the user.
   issues:
     - { label: "2026-W23", link: "/reports/2026-W23.html" }
     - { label: "Dive · The Meter Is the Confession", link: "/reports/deep-dives/2026-06-07-ai-coding-honest-pricing.html" }
     - { label: "Dive · Prompt Caching Pays 90% Off", link: "/reports/deep-dives/2026-06-18-prompt-caching-hit-rate.html" }
+    - { label: "Dive · Imaging Your Code Is a Lossy Bet", link: "/reports/deep-dives/2026-07-04-code-as-image-token-tax.html" }
 
 - slug: channel-war-offramps
   title: "The channel war / off-ramps"

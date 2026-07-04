@@ -29,6 +29,12 @@ overtakes becomes a `news-to-framework` piece instead — that's fine.
   decides what fits in your VRAM — with the linear-growth math (Builder)
 - [practical-guide] Quantization without tears: dynamic 4-bit, KV-cache
   quantization, and what actually loses quality vs what doesn't (Analyst)
+- [how-it-works] How a vision model tokenizes an image: patches as visual
+  tokens, the ⌈w/28⌉×⌈h/28⌉ cost, resolution tiers, and why a picture of text
+  is priced like a picture (Analyst)
+- [how-it-works] Optical context compression: DeepSeek-OCR's premise that a page
+  carries fewer tokens than its character count — the compression-vs-fidelity
+  curve, and where near-lossless recovery stops (Analyst)
 
 ## Live — Claude Code & agent engineering
 

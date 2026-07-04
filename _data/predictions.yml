@@ -329,3 +329,17 @@
   confidence: 80
   due: "2027-Q1"
   status: open
+
+- id: dive-2026-07-04-code-as-image-fidelity-floor
+  made: "Dive · 2026-07-04"
+  made_link: "/reports/deep-dives/2026-07-04-code-as-image-token-tax.html"
+  text: >-
+    No client-side text-as-image compression tool demonstrates ≥99% exact-string
+    recall on code (identifiers, hashes, literals — not prose) while still cutting
+    input tokens more than 50%. The compression-fidelity curve holds, so imaging
+    source stays a lossy bet that corrupts high-entropy strings — AND no major
+    provider prices a text-in-image path below its text-token rate, so it never
+    becomes a genuine pricing arbitrage rather than a compression bet.
+  confidence: 80
+  due: "2027-Q1"
+  status: open

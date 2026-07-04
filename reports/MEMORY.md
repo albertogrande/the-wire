@@ -27,8 +27,17 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   Anthropic Agent SDK credit split lands Jun 15. Flat-rate AI tooling is
   ending industry-wide. Dive thesis: meter = boundary, not business; end
   state is vertical integration ("unlimited, on our models").
+  W27 (contrarian lens): the *user's* workaround to the token bill surfaced — pxpipe
+  (215pts) renders source as PNGs to ride optical compression under text-token pricing,
+  claiming 59–74% off Fable 5. But image tokens aren't priced cheaper (same per-token
+  rate; the "discount" is a 17.8× compression ratio), and the ratio that saves 60% is
+  the one where OCR fidelity falls off (DeepSeek-OCR ~97%@10× → ~60%@20×), so it's a
+  discount on cost/token that costs you cost/correct-answer — silent confab on code's
+  exact strings. Same shape as the meter itself: routing around a price by degrading
+  fidelity moves cost from a visible line item to an invisible error rate.
   → [2026-W23](./2026-W23.md),
-  [dive 2026-06-07](./deep-dives/2026-06-07-ai-coding-honest-pricing.md)
+  [dive 2026-06-07](./deep-dives/2026-06-07-ai-coding-honest-pricing.md),
+  [dive 2026-07-04](./deep-dives/2026-07-04-code-as-image-token-tax.md)
 - **The channel war / off-ramps** `↑` — model + open harness both commoditizing
   (Kimi K2.7-Code beats Opus 4.8 on MCPMark 81.1/76.4 at ~1/10 price; OpenCode
   8M MAU, MIT). So spend moved to distribution: Google kills Gemini CLI for
@@ -273,6 +282,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-07-01 (marking) | No public analysis shows Claude Code's request-marking is all three of (a) high-entropy enough to uniquely identify an individual session, (b) survives normalization + paraphrase + a sanitizer copy-paste, and (c) keyed to individual end users not reseller/category infrastructure — it stays a low-bit, strippable anti-distillation tripwire, not per-user surveillance | 75% | by 2027-Q1 | OPEN |
 | Dive 2026-07-02 (hooks) | Claude Code does NOT ship a permission-rule grammar that natively enforces intent-level Bash constraints (e.g. "curl only to an allowlisted host" holding through wrappers, redirects, and variables) — argument-constraining deny patterns stay documented-fragile and a PreToolUse hook / sandbox remains Anthropic's own recommended enforcement path for a real boundary | 80% | by 2027-Q1 | OPEN |
 | Dive 2026-07-03 (watermark) | No published or production text watermark demonstrates AUROC ≥ 0.9 (or TPR ≥ 0.9 at 1% FPR) on sub-200-token model outputs after a full recursive-paraphrase attack — statistical watermarking stays a length-and-good-faith provenance signal, defeated on the short/adversarial case, and no scheme escapes the paraphrase floor | 80% | by 2027-Q1 | OPEN |
+| Dive 2026-07-04 (code-as-image) | No client-side text-as-image compression tool demonstrates ≥99% exact-string recall on *code* (identifiers/hashes/literals, not prose) while still cutting input tokens >50% — the compression-fidelity curve holds, so imaging source stays a lossy bet that corrupts high-entropy strings; AND no major provider prices a text-in-image path below its text-token rate (turning compression into a real pricing arbitrage) | 80% | by 2027-Q1 | OPEN |
 
 **Scorecard: 0 settled · record 0–0 · mean Brier —**
 (Nothing due in W26. W23 Copilot-walkback call due ~Jul 5 — imminent, still open,
@@ -527,3 +537,17 @@ NSA lost Mythos, Asian clones filling the gap, ban dragging). Settle in a later 
   survives the launder step; theory caps it: AUROC ≤ ½ + TV(M,H) − TV(M,H)²/2 → paraphrase
   pushes TV down → coin flip. how-it-works. Levers on channel-war/distillation thread;
   sibling to marker (07-01) + distillation (06-27) dives.
+- 2026-07-04 — "The 60% Discount for Imaging Your Code Is a Lossy Compression Bet" (Okafor)
+  — inverts the HN "render code as PNGs to dodge text-token pricing" hack (pxpipe, 215pts,
+  claims 59–74% off Fable 5). Consensus: image tokens are billed cheaper → arbitrage.
+  Broken: Anthropic charges the SAME per-token rate for visual tokens (28×28 patches,
+  cost=⌈w/28⌉×⌈h/28⌉, high-res cap 4784/img) — the "discount" is a compression ratio, not
+  a price gap. pxpipe's ~48K text-tok → ~2,691 img-tok (a 1920×1080 image, verified vs
+  Anthropic's own cost table) = 17.8× compression, landing in DeepSeek-OCR's lossy fall-off
+  (Fox: ~97% @10× → ~60% @20×). Loss mode is silent confabulation on high-entropy strings
+  (pxpipe's own README: exact 12-char hex 0/15 Opus, 13/15 Fable; "keep IDs/hashes/secrets
+  as text" repeals the pitch for code). Prose error-corrects, code doesn't (user_idx≠user_id).
+  Counter-thesis: imaging source is a discount on the wrong axis — cost/token vs cost/correct
+  answer move opposite for code. So-what: optical-compress bulk reference prose near ~10×;
+  keep every exact string as text. news-to-framework. Levers on repricing/coding-subsidy;
+  sibling to long-context-vs-RAG (06-30) + caching (06-18) + context-budget (06-25).
