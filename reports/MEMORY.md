@@ -283,6 +283,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-07-02 (hooks) | Claude Code does NOT ship a permission-rule grammar that natively enforces intent-level Bash constraints (e.g. "curl only to an allowlisted host" holding through wrappers, redirects, and variables) — argument-constraining deny patterns stay documented-fragile and a PreToolUse hook / sandbox remains Anthropic's own recommended enforcement path for a real boundary | 80% | by 2027-Q1 | OPEN |
 | Dive 2026-07-03 (watermark) | No published or production text watermark demonstrates AUROC ≥ 0.9 (or TPR ≥ 0.9 at 1% FPR) on sub-200-token model outputs after a full recursive-paraphrase attack — statistical watermarking stays a length-and-good-faith provenance signal, defeated on the short/adversarial case, and no scheme escapes the paraphrase floor | 80% | by 2027-Q1 | OPEN |
 | Dive 2026-07-04 (code-as-image) | No client-side text-as-image compression tool demonstrates ≥99% exact-string recall on *code* (identifiers/hashes/literals, not prose) while still cutting input tokens >50% — the compression-fidelity curve holds, so imaging source stays a lossy bet that corrupts high-entropy strings; AND no major provider prices a text-in-image path below its text-token rate (turning compression into a real pricing arbitrage) | 80% | by 2027-Q1 | OPEN |
+| Dive 2026-07-04 (docs-for-agents) | No frontier lab (Anthropic/OpenAI/Google) publicly confirms consuming llms.txt at crawl or inference time, AND MCP (callable endpoints) stays the dominant agent-distribution surface for developer tools over any passive-file standard (measured by SDK downloads / active-server count, not sites publishing a file) | 75% | by 2027-Q1 | OPEN |
 
 **Scorecard: 0 settled · record 0–0 · mean Brier —**
 (Nothing due in W26. W23 Copilot-walkback call due ~Jul 5 — imminent, still open,
@@ -551,3 +552,18 @@ NSA lost Mythos, Asian clones filling the gap, ban dragging). Settle in a later 
   answer move opposite for code. So-what: optical-compress bulk reference prose near ~10×;
   keep every exact string as text. news-to-framework. Levers on repricing/coding-subsidy;
   sibling to long-context-vs-RAG (06-30) + caching (06-18) + context-budget (06-25).
+- 2026-07-04 — "The Agent Reading Your Docs Won't Scroll. Ship the Endpoint, Not
+  the Magic File." (Vance) — devtools/dev-marketing: developer documentation became
+  an agent distribution channel. Two competing bets. Passive: llms.txt (Jeremy Howard/
+  Answer.AI, Sept 2024; ~844k sites, mostly via Mintlify auto-gen Nov 2024) — but no
+  frontier lab confirms consuming it (Google's Mueller: "no AI system currently uses
+  llms.txt"; Google likens it to the keywords meta tag), server logs show no fetch /
+  no citation lift. Active: MCP (Anthropic, Nov 2024) — 97M SDK downloads in yr 1, 10k+
+  active servers, AGENTS.md on 60k+ projects; "if you're not in the index you don't
+  exist for that workflow" (Gupta). Steelman for llms.txt = read-time token efficiency
+  (Mintlify: ~half the tokens, 1.5× faster; Anthropic asked for llms-full.txt). Vance
+  do/watch/ignore: ship the MCP server, generate llms.txt only if free, watch for a lab
+  confirming llms.txt use. Deciding quantity = agent calls to your endpoint, not files
+  published. devtools/dev-marketing. First piece under the new weekly devtools/dev-
+  marketing beat guarantee; marketing angle = discovery shifts from SEO/HN to being
+  callable by the agent.

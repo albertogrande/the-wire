@@ -343,3 +343,16 @@
   confidence: 80
   due: "2027-Q1"
   status: open
+
+- id: dive-2026-07-04-llms-txt-vs-mcp
+  made: "Dive · 2026-07-04"
+  made_link: "/reports/deep-dives/2026-07-04-docs-for-agents-distribution.html"
+  text: >-
+    No frontier lab (Anthropic, OpenAI, Google) publicly confirms consuming
+    llms.txt at crawl or inference time, AND MCP (callable endpoints) stays the
+    dominant agent-distribution surface for developer tools over any passive-file
+    standard — measured by SDK downloads and active-server count, not by how many
+    sites publish a file.
+  confidence: 75
+  due: "2027-Q1"
+  status: open
