@@ -12,6 +12,14 @@ feedback (in session or via issue comments); prune one-off reactions.
   dramatic constructions like "Sit with the symmetry"). The reader "didn't
   fully connect" with it.
 - Approved sample of the target voice: the 2026-06-12 trust-stack dive.
+- **Strongly approved (2026-07-04):** the Theo Vance (Builder) devtools/dev-
+  marketing dive "The Agent Reading Your Docs Won't Scroll" (docs as an agent
+  distribution channel, llms.txt vs MCP). The reader said he liked it a lot.
+  What landed: a genuine devtools/dev-marketing topic chosen on its own merit,
+  the natural (unforced) extension into the distribution/marketing angle, and
+  the concrete do/watch/ignore close. The columnist experiment is tilting
+  toward **Vance/Builder for the devtools & dev-marketing beat**. Make more
+  like this.
 
 ## Format
 
