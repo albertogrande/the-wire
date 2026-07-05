@@ -195,6 +195,18 @@
     that just bit people: v2.1.195 made hook matchers exact-match instead of substring, so a
     hyphenated MCP matcher like `mcp__brave-search` silently stopped firing — it needs
     `mcp__brave-search__.*`.
+    W27 (builder lens): the brake on the *tool call itself* is grammar-constrained emission.
+    A model-version bump silently re-tunes the schema *prior* — Opus 4.8 and Sonnet 5 (defaulting
+    under users on Jul 1) invented keys in a nested edit tool's `edits[]` (`requireUnique`, `oldText2`,
+    `matchCase`…) about 20% of calls, while the load-bearing `oldText`/`newText` stayed byte-correct:
+    a shape error, not a capability drop, because the prior was trained on Claude Code's flat,
+    key-forgiving harness and a strict nested schema is off-distribution. Fix in order: `strict:true`
+    (grammar-constrained sampling makes an undeclared key un-samplable — OpenAI's same technique took
+    schema adherence from under 40% to 100%) → flatten the schema toward the trained shape → a tolerant
+    executor that drops and logs unknown keys. The catch: constrain the emission, not the reasoning —
+    JSON-mode wrecks chain-of-thought (Claude-3-Haiku fell 86.5%→23.4% on GSM8K under format restriction),
+    so reason in prose and emit under grammar. An upgrade is a portability event: re-eval your tool calls
+    on every model bump.
   issues:
     - { label: "Dive · Autonomy Shipped Before Its Brakes Did", link: "/reports/deep-dives/2026-06-08-autonomy-before-brakes.html" }
     - { label: "Dive · 'Agent' Is a Control-Flow Decision, Not a Product", link: "/reports/deep-dives/2026-06-19-agent-is-a-control-flow-decision.html" }
@@ -204,6 +216,7 @@
     - { label: "Dive · Your Agent Will Retry That Write", link: "/reports/deep-dives/2026-06-26-agent-retries-idempotent-writes.html" }
     - { label: "Dive · The 128K Window You Bought Is a 64K Window", link: "/reports/deep-dives/2026-06-30-long-context-vs-rag.html" }
     - { label: "Dive · Your Real Guardrail Is a Hook", link: "/reports/deep-dives/2026-07-02-hooks-are-the-real-guardrail.html" }
+    - { label: "Dive · Your Tool Calls Broke on the Upgrade", link: "/reports/deep-dives/2026-07-05-tool-schema-off-distribution.html" }
 
 - slug: platforms-eat-the-layer
   title: "Platforms eat the layer"

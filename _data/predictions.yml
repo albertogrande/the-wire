@@ -356,3 +356,17 @@
   confidence: 75
   due: "2027-Q1"
   status: open
+
+- id: dive-2026-07-05-tool-schema-strict-optin
+  made: "Dive · 2026-07-05"
+  made_link: "/reports/deep-dives/2026-07-05-tool-schema-off-distribution.html"
+  text: >-
+    Grammar-constrained / strict tool use stays opt-in per tool (not default-on)
+    in the major agent APIs (Anthropic, OpenAI), AND at least one further frontier
+    model release exhibits a documented tool-call schema-adherence regression on a
+    non-strict path (invented or renamed keys, or type drift) — confirming the
+    model's schema prior stays version-sensitive and tool-call reliability is not
+    portable across versions without re-eval.
+  confidence: 70
+  due: "2027-Q1"
+  status: open

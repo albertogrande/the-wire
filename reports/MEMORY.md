@@ -160,13 +160,26 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   curl/wget in the hook, route web via `WebFetch(domain:...)`, sandbox for the OS layer.
   Gotcha: v2.1.195 made hook matchers exact-match — hyphenated MCP matchers
   (`mcp__brave-search`) silently stopped firing; use `mcp__brave-search__.*`.
+  W27 (builder lens): the brake on the *tool call itself* is grammar-constrained emission.
+  A model-version bump (Opus 4.7→4.8, or Sonnet 5 defaulting under you Jul 1) silently re-tuned
+  the schema *prior*: Opus 4.8/Sonnet 5 invented keys in a nested edit tool's `edits[]`
+  (`requireUnique`, `oldText2`, `matchCase`…) ~20% of calls (Ronacher, Jul 4) — while `oldText`/
+  `newText` stayed byte-correct, so it's a shape error, not a capability drop (prior shaped on
+  Claude Code's flat, key-forgiving harness; a strict nested schema is off-distribution). Fix in
+  order: `strict:true` (grammar-constrained sampling, model *can't* sample an undeclared key —
+  OpenAI's same technique: <40%→100% adherence; eliminated Ronacher's failures) → flatten the
+  schema toward the trained shape → tolerant executor (drop-and-log unknown keys, like the harness).
+  Catch: constrain the *emission*, not the *reasoning* — JSON-mode wrecks CoT (Let-Me-Speak-Freely
+  GSM8K: Claude-3-Haiku 86.5%→23.4%), so reason in prose then emit under grammar (Ronacher: removing
+  thinking blocks halved failures). An upgrade is a portability event (re-eval tool calls on every bump).
   → [dive 2026-06-08-autonomy](./deep-dives/2026-06-08-autonomy-before-brakes.md),
   [dive 2026-06-19](./deep-dives/2026-06-19-agent-is-a-control-flow-decision.md),
   [dive 2026-06-20](./deep-dives/2026-06-20-claude-code-compaction-save-point.md),
   [dive 2026-06-23](./deep-dives/2026-06-23-git-worktrees-agent-isolation.md),
   [dive 2026-06-25](./deep-dives/2026-06-25-context-budget-sixty-percent.md),
   [dive 2026-06-26](./deep-dives/2026-06-26-agent-retries-idempotent-writes.md),
-  [dive 2026-07-02](./deep-dives/2026-07-02-hooks-are-the-real-guardrail.md)
+  [dive 2026-07-02](./deep-dives/2026-07-02-hooks-are-the-real-guardrail.md),
+  [dive 2026-07-05](./deep-dives/2026-07-05-tool-schema-off-distribution.md)
 - **Platforms eat the layer** `↑` — the LLMOps tool layer (gateway, tracing,
   eval, prompt store) is being absorbed from both ends: ClickHouse bought
   Langfuse (Jan, already built on ClickHouse; 23.1M SDK installs/mo) to own the
@@ -284,6 +297,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-07-03 (watermark) | No published or production text watermark demonstrates AUROC ≥ 0.9 (or TPR ≥ 0.9 at 1% FPR) on sub-200-token model outputs after a full recursive-paraphrase attack — statistical watermarking stays a length-and-good-faith provenance signal, defeated on the short/adversarial case, and no scheme escapes the paraphrase floor | 80% | by 2027-Q1 | OPEN |
 | Dive 2026-07-04 (code-as-image) | No client-side text-as-image compression tool demonstrates ≥99% exact-string recall on *code* (identifiers/hashes/literals, not prose) while still cutting input tokens >50% — the compression-fidelity curve holds, so imaging source stays a lossy bet that corrupts high-entropy strings; AND no major provider prices a text-in-image path below its text-token rate (turning compression into a real pricing arbitrage) | 80% | by 2027-Q1 | OPEN |
 | Dive 2026-07-04 (docs-for-agents) | No frontier lab (Anthropic/OpenAI/Google) publicly confirms consuming llms.txt at crawl or inference time, AND MCP (callable endpoints) stays the dominant agent-distribution surface for developer tools over any passive-file standard (measured by SDK downloads / active-server count, not sites publishing a file) | 75% | by 2027-Q1 | OPEN |
+| Dive 2026-07-05 (tool-schema) | Grammar-constrained / strict tool use stays OPT-IN per-tool (not default-on) in the major agent APIs (Anthropic/OpenAI), AND at least one further frontier model release exhibits a documented tool-call schema-adherence regression on a non-strict path (invented/renamed keys, or type drift), confirming the model's schema prior stays version-sensitive and tool-call reliability is not portable across versions without re-eval | 70% | by 2027-Q1 | OPEN |
 
 **Scorecard: 0 settled · record 0–0 · mean Brier —**
 (Nothing due in W26. W23 Copilot-walkback call due ~Jul 5 — imminent, still open,
@@ -567,3 +581,17 @@ NSA lost Mythos, Asian clones filling the gap, ban dragging). Settle in a later 
   published. devtools/dev-marketing. First piece under the new weekly devtools/dev-
   marketing beat guarantee; marketing angle = discovery shifts from SEO/HN to being
   callable by the agent.
+- 2026-07-05 — "Your Tool Calls Broke on the Upgrade. It's the Schema, Not the Model."
+  (Vance) — tool-call schema fidelity as a builder problem. A model-version bump (Opus 4.7→4.8,
+  Sonnet 5 defaulting Jul 1) silently re-tunes the schema prior: Opus 4.8/Sonnet 5 invent keys in a
+  nested edit tool's `edits[]` (`requireUnique`, `oldText2`…) ~20% of calls (Ronacher, Jul 4) while
+  `oldText`/`newText` stay byte-correct → shape error, not capability drop (prior shaped on Claude
+  Code's flat, key-forgiving harness). A tool call = model sampling JSON toward a learned prior;
+  BFCL: schema quality > model choice (+10–20pts). Fix in order: `strict:true` (grammar-constrained
+  sampling, undeclared key un-samplable; OpenAI Structured Outputs <40%→100%; eliminated Ronacher's
+  failures) → flatten schema toward trained shape → tolerant executor (drop-and-log unknown keys).
+  Catch: constrain the emission, NOT the reasoning — JSON-mode wrecks CoT (Let-Me-Speak-Freely GSM8K
+  Claude-3-Haiku 86.5%→23.4%); reason in prose, emit under grammar (Ronacher: dropping thinking blocks
+  halved failures). Frame: an upgrade is a portability event; re-eval tool calls on every bump.
+  how-it-works/practical-guide. Lever on autonomy-before-brakes; sibling to idempotency (06-26) +
+  hooks (07-02) + portability (06-22) + agent-control-flow (06-19).

@@ -88,6 +88,11 @@ Code Watch.*
   MAX_THINKING_TOKENS, and the rest, with what each one buys (Operator)
 - [practical-guide] Externalized memory across /clear: designing a PROGRESS.md
   handoff file an agent can dump to and reload without losing the "why" (Operator)
+- [practical-guide] A tool-call reliability eval: the small fixed harness you run
+  on every model bump to catch schema-adherence regressions before prod (Builder)
+- [how-it-works] Grammar-constrained / strict decoding from the inside: how a JSON
+  Schema becomes a token mask, the reasoning tax it can charge, and the supported
+  subset that trips people up (Analyst)
 
 ## Live — devtools & systems
 
