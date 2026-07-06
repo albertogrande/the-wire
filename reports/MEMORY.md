@@ -14,7 +14,12 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   8–9 (~$1T target, Goldman+Morgan Stanley, listing late 2026). Market punishes
   deceleration (Broadcom -15%; Nasdaq -4% Jun 5). AI trade = macro variable.
   Tension: W24 added a new risk-factor line — a flagship model can be
-  administratively switched off overnight (Fable 5 export ban).
+  administratively switched off overnight (Fable 5 export ban); W27 defused it —
+  the switch-off proved reversible (19 days) and survivable, so the priced risk
+  shifts from withdrawal (loud, reversible) to access-gating (quiet, structural).
+  W27: Sonnet 5 shipped near-Opus-4.8 at $2/$10 intro (then $3/$15), default in
+  Claude Code — but a new tokenizer (1.0–1.35× tokens) makes "cost-neutral" the
+  meter finding its level; DeepSeek floor held; Grok 4.3 on Bedrock $1.25/$2.50.
   W25: the economics tightened in the open — OpenAI's leaked financials (per
   Fortune/Ars, unverified) show ~$21B operating loss on ~$13B 2025 revenue; FT
   reported enterprises reining in AI spend; Anthropic's subscription split (Jun
@@ -223,21 +228,35 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   pre-release review; NSA sets the cyber threshold). The EO disclaims mandatory
   licensing; the implementation required per-customer sign-off (The Information).
   Altman praised the EO Jun 2, then OpenAI said the vetting "shouldn't be the
-  long-term default" — voluntary-in-name regime tightening. Tension on the ban:
-  it's dragging, not narrowing — parts of NSA *lost* Mythos access (Jun, supply-
-  chain dispute; Warner's "broke into classified systems in hours" was a misread
-  *red-team* test), and Asian clones (Sakana Fugu, 360 Tulongfeng/Yitianzhen,
-  Jun 27) market straight into the gap → W24 narrowing-call trending WRONG.
+  long-term default" — voluntary-in-name regime tightening.
+  W27 (the kill switch reversed): Commerce rescinded the ban Jun 30; Fable 5 back
+  globally Jul 1 after 19 days. Anthropic never patched the model — trained a new
+  classifier that blocks the reported behavior >99% + "defense in depth," never
+  conceded a jailbreak → W24 call resolves RIGHT (rescinded, not resolved; Brier
+  0.12). Premise collapsed in public: Semgrep showed GLM-5.2 (free, open) beat
+  Claude Code on IDOR cyber (39/32 F1, 1/6 cost) — the "yields cyberattack info"
+  justification points at a capability the ban can't touch. Control relocated, not
+  retreated: same week OpenAI shipped GPT-5.6 Sol/Terra/Luna government-gated (~20
+  orgs, EO 30-day review) — the guest list is the durable form (no capability to
+  route around). Kill switch (brittle, 19d, reversed) → guest list (quiet, sticky).
   → [2026-W23](./2026-W23.md), [2026-W24](./2026-W24.md), [2026-W25](./2026-W25.md),
-  [2026-W26](./2026-W26.md),
+  [2026-W26](./2026-W26.md), [2026-W27](./2026-W27.md),
   [dive 2026-06-15](./deep-dives/2026-06-15-cannot-export-control-a-model.md)
-- **The maintainer revolt** `↑` (new) — open-source maintainers organizing
-  against AI-slop contributions: Grinberg's "I Am Not a Reverse Centaur"
-  (issue-first gate before reviewing agent PRs), tombedor's "demonstrate human
-  effort," "automating myself out of development." Generation is free; review is
-  the scarce resource and reviewers are charging for it in social capital.
-  OpenAI opened Codex to OSS maintainers the same week (tone-deaf timing).
-  → [2026-W24](./2026-W24.md)
+- **The machine buyer / agent-native economy** `↑` (new W27) — the web is
+  growing a native payment layer for machine buyers. HTTP 402 (reserved since
+  1997) revived: Cloudflare's Monetization Gateway + AWS/CloudFront charge agents
+  per request (page/API/dataset/MCP tool) via x402 (Coinbase, May 2025; ~$600M
+  annualized Mar 2026, zero protocol fees; Foundation → Linux Foundation w/ Google,
+  Visa, Stripe, AWS, Circle, Anthropic). Thesis: micropayments died 25 yrs on
+  Shirky/Szabo "mental transaction costs" (humans hate valuing a penny); agents
+  have none → new market, not a retry. Two stacks — machine-buys-for-itself (x402)
+  vs agent-buys-for-human (ACP/AP2 card rails, MS $385B by 2030). Devtools side =
+  stack one; compose with docs-as-distribution (be callable AND payable per call).
+  Tension: tiny volume, stablecoin/regulatory/CDN-lock-in friction; could stall in
+  the Flattr gap. The tell that it's real = a wallet shipped inside an agent runtime.
+  Levers on meter/repricing + channel threads.
+  → [dive 2026-07-06](./deep-dives/2026-07-06-agent-with-a-wallet.md),
+  [dive 2026-07-04 docs](./deep-dives/2026-07-04-docs-for-agents-distribution.md)
 - **Labs go vertical / own the silicon** `↑` (new) — the deepest layer of the
   channel war: inference (not training) is now the spend, and Nvidia keeps ~70%
   gross margin on it, so the labs build their own inference ASICs to claw that
@@ -265,7 +284,7 @@ Lower is better; 0.25 = coin-flip guessing.
 
 | Made | Prediction | Conf. | Due | Status |
 |---|---|---|---|---|
-| 2026-W23 | GitHub partially walks back Copilot pricing (extends promo credits past Aug, restores fallback model, or cuts Opus multiplier) within 30 days, without reversing metering itself | 70% | ~2026-07-05 | OPEN |
+| 2026-W23 | GitHub partially walks back Copilot pricing (extends promo credits past Aug, restores fallback model, or cuts Opus multiplier) within 30 days, without reversing metering itself | 70% | ~2026-07-05 | **WRONG** (W27: no walkback — GitHub went the other way: fallback model removed, Opus pulled from Pro, multipliers rose to 27×, credits still expire end-Aug). Brier 0.49 |
 | Dive 2026-06-11 | At least two of {GitHub, Cursor, Anthropic} ship an "unlimited on our own/house models" flat tier (subsidy internalized, frontier stays metered) | 65% | by 2027-Q1 | OPEN |
 | Dive 2026-06-12 | GitHub/npm ship branch/ref binding for OIDC trusted publishing (the actual Miasma hole) — and a worm generation defeats npm v12's script-off default before that ships | 55% | by 2026-Q4 | OPEN |
 | Dive 2026-06-12 (autonomy) | A major cloud or agent platform ships an enforced hard per-task/per-agent spend ceiling (not a budget alert) that the agent cannot cross | 45% | by 2027-Q2 | OPEN |
@@ -273,7 +292,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-06-12 (channel) | The top frontier-vs-best-open-model spread on a major agentic benchmark (e.g. SWE-bench/MCPMark/Terminal-Bench) stays inside ~5 pts — i.e. no lab reopens a durable capability gap, confirming the channel (not the model) is the moat | 70% | by 2027-Q1 | OPEN |
 | Dive 2026-06-13 (benchmark) | A contamination-resistant benchmark (SWE-bench Pro / SWE-rebench or successor) does NOT reproduce SWE-bench Verified's top-5 model ordering — decontamination changes rank, not just absolute scores | 65% | by 2027-Q1 | OPEN |
 | Dive 2026-06-13 (llmops) | No venture-funded *independent* LLM gateway/observability/eval company reaches a standalone outcome (IPO or $1B+ while independent) — the next two notable outcomes in the space are absorptions by a model vendor / data-or-monitoring platform, or wind-downs | 65% | by 2027-Q2 | OPEN |
-| 2026-W24 | The Fable 5/Mythos 5 foreign-national export restriction is materially narrowed or rescinded (carve-out for Anthropic's own US-based staff, or tightened definition) without the "jailbreak" being publicly resolved | 65% | ~2026-08-14 | OPEN |
+| 2026-W24 | The Fable 5/Mythos 5 foreign-national export restriction is materially narrowed or rescinded (carve-out for Anthropic's own US-based staff, or tightened definition) without the "jailbreak" being publicly resolved | 65% | ~2026-08-14 | **RIGHT** (W27: fully rescinded Jun 30/Jul 1 after 19 days; Anthropic added a new safety classifier >99%, never conceded a jailbreak — rescinded, not resolved). Brier 0.12 |
 | Dive 2026-06-15 | By end of 2026, no US export-control action successfully restricts an *open-weight* model's distribution — controls stay confined to closed/hosted API models and to compute/chips | 75% | 2026-12-31 | OPEN |
 | Dive 2026-06-16 (open-source) | No top-tier agentic-benchmark model ships meeting OSAID 1.0 in full (weights + data information + complete training code under an OSI license); "open source AI" releases stay open-weight-only | 80% | by 2027-Q1 | OPEN |
 | Dive 2026-06-17 (local) | A sub-35B open-weight coding model fits a single 24GB card *with* usable 128K context AND lands within ~10 pts of that quarter's top frontier model on a contamination-resistant agentic bench (SWE-rebench/SWE-bench Pro) | 35% | by 2027-Q1 | OPEN |
@@ -298,11 +317,13 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-07-04 (code-as-image) | No client-side text-as-image compression tool demonstrates ≥99% exact-string recall on *code* (identifiers/hashes/literals, not prose) while still cutting input tokens >50% — the compression-fidelity curve holds, so imaging source stays a lossy bet that corrupts high-entropy strings; AND no major provider prices a text-in-image path below its text-token rate (turning compression into a real pricing arbitrage) | 80% | by 2027-Q1 | OPEN |
 | Dive 2026-07-04 (docs-for-agents) | No frontier lab (Anthropic/OpenAI/Google) publicly confirms consuming llms.txt at crawl or inference time, AND MCP (callable endpoints) stays the dominant agent-distribution surface for developer tools over any passive-file standard (measured by SDK downloads / active-server count, not sites publishing a file) | 75% | by 2027-Q1 | OPEN |
 | Dive 2026-07-05 (tool-schema) | Grammar-constrained / strict tool use stays OPT-IN per-tool (not default-on) in the major agent APIs (Anthropic/OpenAI), AND at least one further frontier model release exhibits a documented tool-call schema-adherence regression on a non-strict path (invented/renamed keys, or type drift), confirming the model's schema prior stays version-sensitive and tool-call reliability is not portable across versions without re-eval | 70% | by 2027-Q1 | OPEN |
+| 2026-W27 | No public US commercial AI model has its access *withdrawn* by the government again in 2026 (the kill switch, having cost 19 days and reversed, is not re-applied to a shipped model); model-level state intervention stays on the *granting* side (access lists / pre-release vetting), not the *withdrawal* side | 70% | 2026-12-31 | OPEN |
+| Dive 2026-07-06 (agent-payments) | Agent-initiated machine payments (x402 / `402` pay-per-call) stay an opt-in edge-and-crypto integration (Cloudflare/AWS/Coinbase wired by hand), NOT a runtime default — no frontier lab (Anthropic/OpenAI/Google) ships a built-in, on-by-default wallet in its first-party agent runtime that pays arbitrary `402` endpoints without per-transaction human approval | 70% | by 2027-Q1 | OPEN |
 
-**Scorecard: 0 settled · record 0–0 · mean Brier —**
-(Nothing due in W26. W23 Copilot-walkback call due ~Jul 5 — imminent, still open,
-no reversal yet. W24 export-ban-narrowing call due ~Aug 14 — trending WRONG (W26:
-NSA lost Mythos, Asian clones filling the gap, ban dragging). Settle in a later issue.)
+**Scorecard: 2 settled · record 1–1 · mean Brier 0.31**
+(W27 settled two: W24 export-ban call RIGHT — fully rescinded Jul 1, Brier 0.12;
+W23 Copilot-walkback call WRONG — no walkback, GitHub tightened, Brier 0.49. The
+Copilot miss is the honest one: we bet the meter would blink and it didn't.)
 
 ## Coverage index
 
@@ -335,6 +356,14 @@ NSA lost Mythos, Asian clones filling the gap, ban dragging). Settle in a later 
   Mythos access; Asian Mythos clones (Sakana Fugu, 360); OpenAI Jalapeño chip;
   DeepMind→Anthropic talent exodus ($270B Alphabet wipe); data-center voter backlash.
   Switch-off (W24) → access-list (W26): negative to positive state control
+- 2026-W27 — "The Kill Switch Lasted 19 Days. The Guest List Is Forever." — Commerce
+  rescinded the Fable 5/Mythos 5 export ban Jun 30 (19 days; Anthropic added a >99%
+  classifier, never conceded a jailbreak → W24 call RIGHT); GLM-5.2 beat Claude Code
+  on Semgrep's IDOR cyber bench (39/32 F1, 1/6 cost) as the ban's premise collapsed;
+  same week OpenAI shipped GPT-5.6 Sol/Terra/Luna government-gated (guest list hardens);
+  Sonnet 5 default in Claude Code ($2/$10 intro, new tokenizer 1.0–1.35× "cost-neutral").
+  Kill switch (brittle, reversed) vs guest list (quiet, sticky) — control relocated.
+  W23 Copilot-walkback call settled WRONG
 
 ### Deep dives
 - 2026-06-11 — "The Meter Is the Confession" — AI coding pricing; metering as
@@ -355,41 +384,25 @@ NSA lost Mythos, Asian clones filling the gap, ban dragging). Settle in a later 
   after ClickHouse–Langfuse + Datadog native gateway/evals; the layer is a
   wrapper, value accrues to the adjacent durable asset. Third face of channel/meter
 - 2026-06-16 — "The Open Model You're Running Is a Binary, Not a Source" (Okafor) —
-  "open source AI" is almost always open-*weight*; the license decides what you may do.
-  Spectrum: Apache/MIT (Qwen3, DeepSeek-R1) → Kimi "Modified MIT" (attribution >100M
-  MAU) → Llama community license (700M-MAU cap, OSI: not open source). Even Apache
-  weights aren't OSAID-complete (no data info / training recipe). contrarian/wee-sk
-- 2026-06-17 — "The Coding Model You Can Run Isn't the One That Wins" (Vance) —
-  local coding; open-weight is a license, runnable is a memory budget. Binding
-  constraint is VRAM × KV cache: 4-bit quant ≈ bf16 (60.9 vs 61.8 Aider Polyglot),
-  but context eats VRAM linearly (70B@128K = ~40GB cache) and frontier-rivals
-  (DeepSeek-V3.2, MiniMax M3 ~80%) need ~150GB. Runnable-and-trailing (~61%, 27pt
-  gap) vs competitive-and-unrunnable. practical-guide. Sibling to open-weights +
-  export-control dives.
+  "open source AI" is almost always open-*weight*; the license decides use. Spectrum
+  Apache/MIT → Kimi Modified-MIT → Llama community-cap (OSI: not open); even Apache
+  isn't OSAID-complete (no data/recipe). contrarian
+- 2026-06-17 — "The Coding Model You Can Run Isn't the One That Wins" (Vance) — local
+  coding: open-weight is a license, runnable is a memory budget. 4-bit ≈ bf16, but KV
+  cache eats VRAM linearly and frontier-rivals need ~150GB → runnable-and-trailing
+  (~61%, 27pt gap) vs competitive-and-unrunnable. practical-guide
 - 2026-06-18 — "Prompt Caching Pays 90% Off — If You Win the Bet" (Quist) — the
-  advertised discount (Anthropic 0.1x read; OpenAI/DeepSeek auto) is real but rarely
-  collected; deciding quantity is hit rate. Cache needs a byte-identical prefix; one
-  edit above the breakpoint voids everything below, and a miss pays the 1.25x *write*
-  price → a never-hitting cache is +25% worse than none. Break-even N≈1.28 (5-min)/2.1
-  (1-hr); enemy is invalidation × TTL. Order prompts stable→dynamic. wee-sk/economics.
-  Lever on metering thread.
-- 2026-06-15 — "You Cannot Export-Control a Model" (house) — the Fable 5/Mythos 5
-  export ban is the 1990s crypto wars repeated: controlling the trained artifact
-  (weights = numbers) fails because the capability is open-weight (Kimi/GLM/MiMo)
-  and "code is speech" (Bernstein) is settled. Crypto controls' real legacy was
-  weakened "export-grade" ciphers → FREAK/Logjam 15 yrs later. The only AI lever
-  with teeth is compute/chips, upstream of the weights; model-level controls just
-  tax the honest closed US lab + its own foreign staff. Format: precedent-mapping
-- 2026-06-20 — "Compaction Is a Lossy Save. Choose When It Fires." (Vance) — how
-  Claude Code compaction works + how to control it. Microcompaction (lossless: "hot
-  tail" inline, older tool results parked to disk by reference) vs full compaction
-  (model call → structured-checklist summary replaces history; lossy). Hidden ceiling
-  <200K (community-measured ~33K reserve, fires ~83.5%, not officially documented).
-  Builder footnote: full compaction = total prefix change = guaranteed prompt-cache
-  miss + write tax. Levers: /clear, /compact <instr>, /rewind summarize, CLAUDE.md
-  preserve-rules, subagents+/btw, /context+status line. Tokens-saved is a vanity
-  metric — optimize for what survives. how-it-works/practical-guide. Lever on
-  autonomy-before-brakes; sibling to fan-out + caching dives.
+  discount is real but rarely collected; deciding quantity is hit rate. Byte-identical
+  prefix or it voids; a miss pays 1.25× write → never-hitting cache is +25% worse than
+  none. Order prompts stable→dynamic. economics; lever on metering
+- 2026-06-15 — "You Cannot Export-Control a Model" (house) — the Fable 5/Mythos 5 ban
+  is the 1990s crypto wars repeated: controlling the trained artifact fails (weights =
+  open numbers; "code is speech" settled). The only lever with teeth is compute/chips;
+  model-level controls just tax the honest closed US lab. precedent-mapping [W27: ban rescinded]
+- 2026-06-20 — "Compaction Is a Lossy Save. Choose When It Fires." (Vance) — Claude
+  Code compaction: microcompaction (lossless, tail inline + park older to disk) vs
+  full compaction (model summary replaces history; lossy). Hidden ceiling <200K, fires
+  ~83.5%. Levers /clear, /compact, /rewind, CLAUDE.md preserve-rules. practical-guide
 - 2026-06-21 — "The Model Has 744 Billion Parameters. You Pay for 40 Billion." (Quist)
   — mixture-of-experts from the routing up, pegged to GLM-5.2 (744B total / 40B active,
   MIT). Total params = memory/VRAM bill; active params = compute/per-token bill; MoE
@@ -399,61 +412,27 @@ NSA lost Mythos, Asian clones filling the gap, ban dragging). Settle in a later 
   number. Shazeer (→OpenAI this week) co-authored both founding MoE papers (2017, Switch).
   how-it-works/economics. Sibling to local-model + caching dives; lever on channel thread.
 - 2026-06-23 — "Your Agents Don't Need a New Git. They Need to Stop Sharing One
-  Checkout." (Vance) — git worktrees as the file-isolation primitive for parallel
-  coding agents. A checkout is global mutable state (one working dir / index / HEAD);
-  a worktree shares the object DB ($GIT_COMMON_DIR) but gets its own HEAD+index+files,
-  and git enforces one-branch-per-worktree (the missing file lock). Claude Code wiring:
-  `claude --worktree`, `isolation: worktree` subagent frontmatter, `.worktreeinclude`
-  (copies gitignored .env), auto-cleanup-by-emptiness + `git worktree lock` while running.
-  News peg: Oak ("Git alternative for agents," Show HN 128pts) — BLAKE3/lazy mounts solve
-  *clone time at fleet scale*, NOT isolation (already solved, free, git-compatible).
-  how-it-works/practical-guide. Sibling to fan-out dive; makes parallel writing safe,
-  not just parallel thinking. Lever on autonomy-before-brakes / agent-engineering.
+  Checkout." (Vance) — git worktrees as the file-isolation primitive for parallel agents:
+  a checkout is global mutable state; a worktree shares the object DB but gets its own
+  HEAD+index+files + a one-branch lock. Claude Code: `--worktree`, `isolation: worktree`.
+  Oak ("Git alternative for agents") solves clone-time at fleet scale, NOT isolation. practical-guide
 - 2026-06-24 — "Same Model, Faster Tokens: The Arithmetic of Speculative Decoding"
-  (Quist) — why a model emits identical tokens faster. Batch-1 decoding is
-  memory-bandwidth bound (~70GB weight-read/token for a 70B FP8 model), so compute
-  sits idle; a cheap drafter proposes γ tokens, the target verifies all γ in one
-  parallel forward pass (one weight-read), and modified rejection sampling keeps the
-  output provably identical to plain sampling (Leviathan "identical outputs"; Chen
-  "preserves the target distribution"). Win set by α (acceptance) and γ via
-  E=(1−α^(γ+1))/(1−α); T5-XXL 2.3–3.4×, EAGLE-3 up to 6.5× single-stream. The catch:
-  it's a low-batch phenomenon — batching is the rival amortization, so at batch 64 the
-  GPU is compute-bound and EAGLE-3's 6.5× collapses to 1.38×. how-it-works/economics.
-  Sibling to local-model + caching + MoE dives (the inference-economics cluster).
-- 2026-06-19 — "'Agent' Is a Control-Flow Decision, Not a Product" (Okafor) — strips
-  the marketing: an agent is one thing — the model controls the loop (Willison's
-  "tools in a loop," Sept 2025); everything else sold as an agent is a workflow with
-  an LLM in it. Agency is a 6-rung dial (smolagents), not a brand; vendors (Anthropic,
-  HF) say "keep it low." Market confirms: MCP (tool rung) adopted, A2A (multi-agent
-  rung) enterprise-announced / developer-shrugged (HN today 55pts). Each rung up sells
-  determinism, tokens, blast radius. Decompose by rung; climb slowly. Format:
-  reference / what-every-engineer-should-know. Lever on autonomy-before-brakes thread.
-- 2026-06-25 — "Your 200K Window Has a 120K Speed Limit" (Sandoval, Claude Code edition)
-  — context-budget hygiene as Operator craft. Usable window ≪ advertised: context rot
-  (Anthropic) + NoLiMa (11/12 models <50% short-context accuracy at 32K, via Sikkema) →
-  practitioner ceiling ~60% (120K of 200K). Default auto-compaction fires ~75% (Matsuoka,
-  50K completion buffer) and summarizes an already-degraded view. Fixes: cap window +
-  lower trigger (CLAUDE_CODE_DISABLE_1M_CONTEXT=1, CLAUDE_AUTOCOMPACT_PCT_OVERRIDE=70,
-  Sikkema); handoff by hand (dump-to-markdown + /clear beats /compact — you pick what
-  survives); CLAUDE.md ≤200 lines (official, adherence drops past it) → runbooks to skills;
-  /context off dead MCP; delegate verbose ops to subagents (1–2K-token returns). v2.1.191
-  /rewind (resume from before /clear) makes aggressive clearing recoverable. Cost ~$3/turn
-  at 600K vs ~$0.70 at 140K. practical-guide. Lever on autonomy-before-brakes; sibling to
-  compaction (06-20) + fan-out (06-13) dives.
+  (Quist) — batch-1 decode is bandwidth-bound; a drafter proposes γ tokens, target
+  verifies all in one pass, output provably identical (Leviathan/Chen). But it's a
+  low-batch trick — at batch 64 EAGLE-3's 6.5× collapses to 1.38×. inference-economics cluster
+- 2026-06-19 — "'Agent' Is a Control-Flow Decision, Not a Product" (Okafor) — an agent is
+  one thing: the model controls the loop (Willison); everything else is a workflow with an
+  LLM in it. Agency is a 6-rung dial (smolagents), not a brand; MCP (tool rung) adopted,
+  A2A (multi-agent) developer-shrugged. Climb slowly. reference; lever on autonomy-brakes
+- 2026-06-25 — "Your 200K Window Has a 120K Speed Limit" (Sandoval, Claude Code) —
+  usable window ≪ advertised (context rot + NoLiMa) → ceiling ~60%. Auto-compaction fires
+  ~75% on an already-degraded view. Fixes: cap window, lower trigger, hand-off by markdown
+  + /clear (beats /compact), CLAUDE.md ≤200 lines. practical-guide; lever on autonomy-brakes
 - 2026-06-26 — "Your Agent Will Retry That Write. Make It Safe to Run Twice." (Vance) —
-  idempotency as the brake on *side effects* under agent retries. Three retriers wired in
-  already (SDK max_retries=2 on 408/409/429/5xx + conn errors; Claude Code stream-stall
-  retry, 20s; the model re-calls any result that reads like failure) → one logical action
-  hits a tool 2–6×. A dropped ACK can't tell never-ran from ran-and-lost-the-receipt
-  (Stripe's 3 failure cases) → at-least-once, never exactly-once; only idempotency makes it
-  safe. Three building blocks: idempotent HTTP method (RFC 9110 §9.2.2/9.3 — PUT/DELETE yes,
-  POST no); idempotency key (Stripe: POST-only, 24h retention, same key→same stored result
-  incl. 500s, param-mismatch errors) minted *deterministically in the tool wrapper* from
-  action content, NOT in the prompt (model re-randomizes per turn → defeats it); natural-key
-  upsert / ON CONFLICT. v2.1.183 auto-mode blocking destructive git/terraform/pulumi/cdk
-  destroy = harness conceding the point with a blunt tool. what-every-engineer-should-know.
-  Lever on autonomy-before-brakes; sibling to worktree-isolation (06-23, "make parallel
-  writes safe" vs "make a retried write safe").
+  idempotency as the brake on side effects: three retriers (SDK, stream-stall, model
+  re-call) hit a tool 2–6×; a dropped ACK can't tell never-ran from lost-receipt →
+  at-least-once. Fixes: idempotent method, content-derived idempotency key minted in the
+  wrapper (not the prompt), natural-key upsert. what-every-engineer-should-know; sibling to worktrees
 - 2026-06-27 — "Distillation Without Logits: Why It Took 28.8 Million Queries" (Quist) —
   how training on another model's outputs copies it, pegged to Anthropic's Senate testimony
   (Alibaba/Qwen: 28.8M Claude exchanges via ~25k fake accounts, Apr 22–Jun 5, targeting SWE
@@ -595,3 +574,18 @@ NSA lost Mythos, Asian clones filling the gap, ban dragging). Settle in a later 
   halved failures). Frame: an upgrade is a portability event; re-eval tool calls on every bump.
   how-it-works/practical-guide. Lever on autonomy-before-brakes; sibling to idempotency (06-26) +
   hooks (07-02) + portability (06-22) + agent-control-flow (06-19).
+- 2026-07-06 — "Your Next Customer Is an Agent With a Wallet" (house, weekly dive) —
+  agent-native payments as a devtools/dev-marketing shift. HTTP 402 ("Payment Required,"
+  reserved since 1997) revived by Cloudflare's Monetization Gateway + AWS/CloudFront (both
+  June/July) via x402 (Coinbase, open-sourced May 2025; ~$600M annualized by Mar 2026, zero
+  protocol fees; Foundation → Linux Foundation w/ Google/Visa/Stripe/AWS/Circle/Anthropic).
+  Thesis: micropayments failed for 25 yrs on Shirky's "mental transaction costs" (Szabo) —
+  humans hate valuing a penny; below a threshold the mental cost RISES. Agents have no mental
+  transaction cost → the friction that killed the human case is exactly what the machine buyer
+  lacks, so it's a new market, not a retry. Two stacks: machine-buys-for-itself (x402, resources/
+  APIs/tools) vs agent-buys-for-human (ACP/AP2/Stripe/Visa/MC card rails, $385B by 2030 MS).
+  Devtools buyer = stack one. Other side: crypto-payments-always-fail (rebutted: buyer changed),
+  regulatory/wallet/CDN-lock-in, tiny volume. So-what: build a metered no-signup endpoint; be
+  callable (MCP) AND payable per call; the tell is a wallet shipped inside an agent runtime.
+  news-to-framework/devtools-dev-marketing. Composes with docs-as-distribution (07-04); levers
+  on repricing/meter + channel threads. Opens the machine-buyer thread.
