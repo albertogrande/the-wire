@@ -108,6 +108,18 @@ Code Watch.*
   cost caps, and where the latency hides (Builder)
 - [architecture] Why LLM observability runs on a columnar database — the trace
   store, not the dashboard, is the asset (Analyst)
+- [how-it-works] The kill chain, step by step: what an LLM agent can and can't
+  automate in a real intrusion — where autonomy holds (chaining a known CVE,
+  self-correcting an error) and where it collapses (novel initial access,
+  evasion, hallucinated access) (Contrarian/Analyst)
+- [news-to-framework] The attacker's marginal cost: how cheap agent labor
+  changes the *volume and targeting distribution* of attacks, not the capability
+  ceiling — and why that makes it a defense-and-hygiene problem, not a superhacker
+  one (Contrarian)
+- [what-every-engineer-should-know] The exposed-and-default surface agents
+  harvest first: internet-facing known-CVE services, default credentials
+  (minioadmin:minioadmin), unrotated signing keys — and the boring hardening that
+  actually blunts an agentic attacker (Builder/Analyst)
 
 ## Live — DevRel, dev marketing, product engineering
 

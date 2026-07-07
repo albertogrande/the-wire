@@ -370,3 +370,32 @@
   confidence: 70
   due: "2027-Q1"
   status: open
+
+- id: dive-2026-07-06-agent-payments
+  made: "Dive · 2026-07-06"
+  made_link: "/reports/deep-dives/2026-07-06-agent-with-a-wallet.html"
+  text: >-
+    Agent-initiated machine payments (x402 / HTTP 402 pay-per-call) stay an
+    opt-in edge-and-crypto integration wired by hand (Cloudflare / AWS /
+    Coinbase), NOT a runtime default — no frontier lab (Anthropic, OpenAI,
+    Google) ships a built-in, on-by-default wallet in its first-party agent
+    runtime that pays arbitrary 402 endpoints without per-transaction human
+    approval.
+  confidence: 70
+  due: "2027-Q1"
+  status: open
+
+- id: dive-2026-07-07-agent-attacks-ceiling
+  made: "Dive · 2026-07-07"
+  made_link: "/reports/deep-dives/2026-07-07-autonomous-ransomware-known-cve.html"
+  text: >-
+    No documented real-world case shows an LLM agent gaining initial access to a
+    patched / hardened / non-default target via a vulnerability it discovered
+    itself (a true zero-day — not a known-class web bug fed to a team-of-agents
+    lab harness) with no human decision gate. Agentic intrusions stay confined to
+    known-CVE / default-credential / exposed surfaces with a human at the
+    strategic gates, and the published autonomous find-and-exploit rate WITHOUT a
+    CVE description stays well under ~50% on hardened real-world targets.
+  confidence: 75
+  due: "2027-Q1"
+  status: open

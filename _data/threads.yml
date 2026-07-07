@@ -127,6 +127,23 @@
     install-script scanning both defeated. Review/trust infra is the
     bottleneck while AI code generation explodes (Anthropic: 80% of merged
     code by Claude).
+    W28 (contrarian lens): the offensive version of the same imbalance. JADEPUFFER
+    (Sysdig, Jul 1) — the first documented end-to-end LLM-run ransomware — got in
+    through a *known* Langflow RCE (CVE-2025-3248) on an internet-exposed instance,
+    moved on default credentials (minioadmin:minioadmin) and a second known CVE
+    (Nacos CVE-2021-29441, default JWT key), and reached the target on root database
+    credentials whose origin Sysdig couldn't even find (human-handed, off-camera).
+    The agent's real skill was the automatable *middle* of the kill chain —
+    enumerate, sweep for keys, chain a published CVE, self-correct a subprocess PATH
+    bug in 31 seconds, encrypt — all commodity since Metasploit. The research says the
+    ends are still hard: Fang's GPT-4 exploits 87% of one-days *with* the CVE
+    description but 7% *without* (0% for Metasploit/ZAP), at ~$8.80 an exploit (2.8×
+    cheaper than a human); Anthropic's GTG-1002 ran 80–90% autonomously but stayed
+    human-gated, and "Claude's hallucinations… made a fully autonomous cyberattack not
+    likely for now." So agents didn't raise the capability ceiling — they dropped the
+    marginal cost of the already-possible attack, shifting the threat to volume and
+    lower-skill operators against the exposed/unpatched/default surface. A
+    defense-and-hygiene problem, not a superhacker.
   tension: >-
     Defenses ship at institution speed, attacks at copy-paste speed; the
     exploited OIDC ref-binding hole remains unfixed (npm v12 closes install
@@ -134,6 +151,7 @@
   issues:
     - { label: "2026-W23", link: "/reports/2026-W23.html" }
     - { label: "Dive · The Trust Stack", link: "/reports/deep-dives/2026-06-10-trust-stack-human-speed.html" }
+    - { label: "Dive · The AI Ran the Ransomware", link: "/reports/deep-dives/2026-07-07-autonomous-ransomware-known-cve.html" }
 
 - slug: autonomy-before-brakes
   title: "Autonomy before its brakes"
@@ -289,3 +307,29 @@
     opened Codex to OSS maintainers the same week (tone-deaf timing).
   issues:
     - { label: "2026-W24", link: "/reports/2026-W24.html" }
+
+- slug: machine-buyer
+  title: "The machine buyer / agent-native economy"
+  momentum: up
+  summary: >-
+    The web is growing a native payment layer for machine buyers. HTTP 402
+    ("Payment Required," reserved since 1997) has been revived: Cloudflare's
+    Monetization Gateway plus AWS/CloudFront now charge agents per request
+    (page/API/dataset/MCP tool) via x402 (Coinbase, open-sourced May 2025;
+    ~$600M annualized by Mar 2026, zero protocol fees; the Foundation moved to
+    the Linux Foundation with Google, Visa, Stripe, AWS, Circle, Anthropic).
+    Thesis: micropayments died 25 years on Shirky/Szabo "mental transaction
+    costs" — humans hate valuing a penny — but agents have none, so the friction
+    that killed the human case is exactly what the machine buyer lacks: a new
+    market, not a retry. Two stacks — machine-buys-for-itself (x402) vs
+    agent-buys-for-human (ACP/AP2 card rails). Composes with docs-as-distribution:
+    be callable (MCP) AND payable per call.
+  tension: >-
+    Tiny volume; stablecoin, regulatory, and CDN-lock-in friction; it could
+    stall in the Flattr gap. The tell that it's real is a wallet shipped inside
+    an agent runtime. W28 gave the dark-mirror version: a ransomware agent swept
+    hosts for provider API keys and crypto wallets — the credentials are the
+    fuel and the payment rail at once.
+  issues:
+    - { label: "Dive · Your Next Customer Is an Agent With a Wallet", link: "/reports/deep-dives/2026-07-06-agent-with-a-wallet.html" }
+    - { label: "Dive · The Agent Reading Your Docs Won't Scroll", link: "/reports/deep-dives/2026-07-04-docs-for-agents-distribution.html" }

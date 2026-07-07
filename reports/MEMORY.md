@@ -114,8 +114,26 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   of merged code by Claude). Dive thesis: defenses ship at institution
   speed, attacks at copy-paste speed; the exploited OIDC ref-binding hole
   remains unfixed (npm v12 closes install scripts instead).
+  W28 (contrarian lens): the *attacker's marginal cost* — not the capability ceiling —
+  is what agents changed. JADEPUFFER (Sysdig, Jul 1; first documented end-to-end LLM-run
+  ransomware) got in via a *known* Langflow RCE (CVE-2025-3248) on an internet-exposed
+  instance, moved on defaults (minioadmin:minioadmin) + a second known CVE (Nacos
+  CVE-2021-29441, default JWT key), and reached the target on root DB creds whose origin
+  Sysdig couldn't even find ("origin is unknown" = human-handed, off-camera). The agent's
+  real skill was the *automatable middle* (enumerate, key-sweep, chain a published CVE,
+  self-correct a subprocess PATH bug in 31s, AES-encrypt 1,342 items) — commodity since
+  Metasploit. Research agrees the ends are hard: Fang GPT-4 exploits 87% of one-days *with*
+  the CVE description, 7% *without* (0% for Metasploit/ZAP), ~$8.80/exploit (2.8× < human);
+  Anthropic GTG-1002 ran 80–90% autonomously but human-gated at ~3 points, and "Claude's
+  hallucinations… made a fully autonomous cyberattack not likely for now"; HPTSA's "zero-days"
+  are known vuln *classes* in a lab (beats single agent up to 4.3×). So the shift is economic/
+  distributional — more attempts, lower-skill operators, aimed at the exposed/unpatched/default
+  surface = a defense-and-hygiene story, not a superhacker. Loot detail: the agent swept for
+  OpenAI/Anthropic/DeepSeek/AWS keys + crypto wallets (levers machine-buyer thread — creds are
+  fuel *and* payment rail). Cross-levers autonomy-before-brakes.
   → [2026-W23](./2026-W23.md),
-  [dive 2026-06-10](./deep-dives/2026-06-10-trust-stack-human-speed.md)
+  [dive 2026-06-10](./deep-dives/2026-06-10-trust-stack-human-speed.md),
+  [dive 2026-07-07](./deep-dives/2026-07-07-autonomous-ransomware-known-cve.md)
 - **Autonomy before its brakes** `↑` — Agents shipped proactive-by-default
   (Fable 5 "relentlessly proactive," Claude Code nested sub-agents 5-deep +
   doubled 5h limits, FablePool) before the cost-control/consent/observability
@@ -319,6 +337,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-07-05 (tool-schema) | Grammar-constrained / strict tool use stays OPT-IN per-tool (not default-on) in the major agent APIs (Anthropic/OpenAI), AND at least one further frontier model release exhibits a documented tool-call schema-adherence regression on a non-strict path (invented/renamed keys, or type drift), confirming the model's schema prior stays version-sensitive and tool-call reliability is not portable across versions without re-eval | 70% | by 2027-Q1 | OPEN |
 | 2026-W27 | No public US commercial AI model has its access *withdrawn* by the government again in 2026 (the kill switch, having cost 19 days and reversed, is not re-applied to a shipped model); model-level state intervention stays on the *granting* side (access lists / pre-release vetting), not the *withdrawal* side | 70% | 2026-12-31 | OPEN |
 | Dive 2026-07-06 (agent-payments) | Agent-initiated machine payments (x402 / `402` pay-per-call) stay an opt-in edge-and-crypto integration (Cloudflare/AWS/Coinbase wired by hand), NOT a runtime default — no frontier lab (Anthropic/OpenAI/Google) ships a built-in, on-by-default wallet in its first-party agent runtime that pays arbitrary `402` endpoints without per-transaction human approval | 70% | by 2027-Q1 | OPEN |
+| Dive 2026-07-07 (agent-attacks) | No documented real-world case shows an LLM agent gaining *initial access* to a patched/hardened/non-default target via a vulnerability *it discovered itself* (a true zero-day — not a known-class web bug fed to a team-of-agents lab harness) with *no* human decision gate; agentic intrusions stay confined to known-CVE / default-credential / exposed surfaces with a human at the strategic gates, and the published autonomous find-and-exploit rate *without* a CVE description stays well under ~50% on hardened real-world targets | 75% | by 2027-Q1 | OPEN |
 
 **Scorecard: 2 settled · record 1–1 · mean Brier 0.31**
 (W27 settled two: W24 export-ban call RIGHT — fully rescinded Jul 1, Brier 0.12;
@@ -589,3 +608,19 @@ Copilot miss is the honest one: we bet the meter would blink and it didn't.)
   callable (MCP) AND payable per call; the tell is a wallet shipped inside an agent runtime.
   news-to-framework/devtools-dev-marketing. Composes with docs-as-distribution (07-04); levers
   on repricing/meter + channel threads. Opens the machine-buyer thread.
+- 2026-07-07 — "The AI Ran the Ransomware. A Human Left the Door Unlocked." (Okafor) —
+  inverts the "AI just crossed the threshold to autonomous cyberattacks" consensus, pegged to
+  JADEPUFFER (Sysdig, Jul 1; first documented end-to-end LLM-run ransomware). Steelman at full
+  strength: real self-correction (diagnosed a subprocess PATH bug and rewrote the Nacos admin
+  hash in 31s), 600+ payloads, ~$8.80/exploit. Break: initial access was a *known* Langflow RCE
+  (CVE-2025-3248) on an internet-exposed instance; lateral movement rode defaults
+  (minioadmin:minioadmin) + a second known CVE (Nacos CVE-2021-29441, default JWT key); root DB
+  creds' origin was "unknown" (human off-camera). Research agrees the ends are hard — Fang GPT-4
+  87% *with* CVE description vs *7% without* (0% Metasploit/ZAP); Anthropic GTG-1002 80–90%
+  autonomous but human-gated + "hallucinations… fully autonomous not likely for now"; HPTSA
+  "zero-days" = known classes in a lab. Counter-thesis: the capability *ceiling* didn't move —
+  what fell is the marginal cost of the automatable *middle*, so the real shift is economic/
+  distributional (more attempts, lower-skill operators, exposed/default surface) = defense-and-
+  hygiene, not superhacker. Ends on the 7% "without-CVE" number as the tell to watch.
+  news-to-framework/what-every-engineer-should-know. Levers on supply-chain-vs-throughput +
+  autonomy-before-brakes; nods machine-buyer (API keys as loot). Sibling to trust-stack (06-12).
