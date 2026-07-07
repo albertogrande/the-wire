@@ -108,6 +108,14 @@ Code Watch.*
   cost caps, and where the latency hides (Builder)
 - [architecture] Why LLM observability runs on a columnar database — the trace
   store, not the dashboard, is the asset (Analyst)
+- [how-it-works] The OpenTelemetry GenAI semantic conventions, from the inside:
+  invoke_agent/execute_tool spans, the gen_ai.* attribute set, and why they're
+  still "Development" status — what you can and can't build a durable dashboard
+  on (Builder/Analyst)
+- [what-every-engineer-should-know] Tamper-evident logs for machine actors:
+  hash-chained append-only records (Merkle/RFC 8785), the external-witness
+  trick, and why "trust me" telemetry stops being evidence when the actor is an
+  agent (Analyst)
 - [how-it-works] The kill chain, step by step: what an LLM agent can and can't
   automate in a real intrusion — where autonomy holds (chaining a known CVE,
   self-correcting an error) and where it collapses (novel initial access,

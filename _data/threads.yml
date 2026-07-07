@@ -225,6 +225,22 @@
     JSON-mode wrecks chain-of-thought (Claude-3-Haiku fell 86.5%→23.4% on GSM8K under format restriction),
     so reason in prose and emit under grammar. An upgrade is a portability event: re-eval your tool calls
     on every model bump.
+    W28 (builder lens): the brake once the agent *acts unattended* is the audit trail. Claude Code
+    flipped three defaults in a week — v2.1.198 (Jul 1) made background subagents auto-commit, push, and
+    open a draft PR "instead of stopping to ask"; v2.1.200 (Jul 3) changed the default permission mode to
+    Manual and stopped AskUserQuestion auto-continuing; v2.1.202 (Jul 6) added workflow.run_id/name OTel
+    attributes to reconstruct a run. Writing moved off-camera; deciding came back on-camera. A permission
+    prompt gates the next action — it is no evidence of the hundred already taken — and the isolation
+    guard you'd otherwise trust leaked twice in eight days (v2.1.198 and v2.1.203 both fixed background
+    subagents escaping their worktree into the parent checkout), so you want an *independent* record. Two
+    layers: git is a free content-hashed, chained log (force small, attributed commits); the gap between
+    commits is what OpenTelemetry's GenAI conventions capture (invoke_agent / execute_tool spans,
+    gen_ai.tool.call.arguments/result — still Development status at SemConv 1.40.0). Claude Code emits it
+    today (CLAUDE_CODE_ENABLE_TELEMETRY=1; claude_code.tool_result / tool_decision events). The trust hole:
+    a log the actor writes about itself is a diary — Halo (Show HN, Jul 8) answers with append-only,
+    SHA-256 hash-chained records plus an external witness, "verify without trusting who produced it" (aimed
+    at SOC 2 / EU AI Act). So-what: generation went unattended, review didn't (Anthropic merges ~80%
+    Claude-written code), so the reviewer is the bottleneck and the auditable surface is the product.
   issues:
     - { label: "Dive · Autonomy Shipped Before Its Brakes Did", link: "/reports/deep-dives/2026-06-08-autonomy-before-brakes.html" }
     - { label: "Dive · 'Agent' Is a Control-Flow Decision, Not a Product", link: "/reports/deep-dives/2026-06-19-agent-is-a-control-flow-decision.html" }
@@ -235,6 +251,7 @@
     - { label: "Dive · The 128K Window You Bought Is a 64K Window", link: "/reports/deep-dives/2026-06-30-long-context-vs-rag.html" }
     - { label: "Dive · Your Real Guardrail Is a Hook", link: "/reports/deep-dives/2026-07-02-hooks-are-the-real-guardrail.html" }
     - { label: "Dive · Your Tool Calls Broke on the Upgrade", link: "/reports/deep-dives/2026-07-05-tool-schema-off-distribution.html" }
+    - { label: "Dive · Your Agent Pushed That Commit While You Weren't Looking", link: "/reports/deep-dives/2026-07-08-agent-audit-trail-unattended-commits.html" }
 
 - slug: platforms-eat-the-layer
   title: "Platforms eat the layer"

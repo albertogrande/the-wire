@@ -195,6 +195,23 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   Catch: constrain the *emission*, not the *reasoning* — JSON-mode wrecks CoT (Let-Me-Speak-Freely
   GSM8K: Claude-3-Haiku 86.5%→23.4%), so reason in prose then emit under grammar (Ronacher: removing
   thinking blocks halved failures). An upgrade is a portability event (re-eval tool calls on every bump).
+  W28 (builder lens): the brake after the agent *acts unattended* is the audit trail. Three defaults
+  flipped in a week — Claude Code v2.1.198 (Jul 1) made background subagents auto-commit/push/open a
+  draft PR "instead of stopping to ask"; v2.1.200 (Jul 3) flipped default permission mode to Manual +
+  killed AskUserQuestion auto-continue; v2.1.202 (Jul 6) added workflow.run_id/name OTel attrs to
+  reconstruct a run. Writing went off-camera, deciding came back on-camera. The permission prompt gates
+  the *next* action; it's no evidence of the hundred already taken — and the isolation guard leaked
+  twice in 8 days (v2.1.198 fixed subagents bypassing worktree isolation → shared checkout; v2.1.203
+  fixed worktree subagents running shell cmds in parent checkout), so trust an *independent* record, not
+  the harness's own guard. Two layers: git (content-hashed/chained, free — force small attributed
+  commits) + the between-commit gap = OTel GenAI semconv (invoke_agent/execute_tool spans,
+  gen_ai.tool.call.arguments/result; still **Development** status @ SemConv 1.40.0, opt-in
+  OTEL_SEMCONV_STABILITY_OPT_IN=gen_ai_latest_experimental). Claude Code emits it today
+  (CLAUDE_CODE_ENABLE_TELEMETRY=1; events claude_code.tool_result/tool_decision/commit.count/
+  pull_request.count). Trust hole: a log the actor writes about itself is a diary — Halo (Show HN, Jul 8)
+  answers with append-only SHA-256 hash-chained records (RFC 8785) + external witness, "verify without
+  trusting who produced it" (SOC 2 / EU AI Act). So-what: generation went unattended, review didn't
+  (Anthropic ~80% merged code) → reviewer is the bottleneck + the auditable surface is the product.
   → [dive 2026-06-08-autonomy](./deep-dives/2026-06-08-autonomy-before-brakes.md),
   [dive 2026-06-19](./deep-dives/2026-06-19-agent-is-a-control-flow-decision.md),
   [dive 2026-06-20](./deep-dives/2026-06-20-claude-code-compaction-save-point.md),
@@ -202,7 +219,8 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   [dive 2026-06-25](./deep-dives/2026-06-25-context-budget-sixty-percent.md),
   [dive 2026-06-26](./deep-dives/2026-06-26-agent-retries-idempotent-writes.md),
   [dive 2026-07-02](./deep-dives/2026-07-02-hooks-are-the-real-guardrail.md),
-  [dive 2026-07-05](./deep-dives/2026-07-05-tool-schema-off-distribution.md)
+  [dive 2026-07-05](./deep-dives/2026-07-05-tool-schema-off-distribution.md),
+  [dive 2026-07-08](./deep-dives/2026-07-08-agent-audit-trail-unattended-commits.md)
 - **Platforms eat the layer** `↑` — the LLMOps tool layer (gateway, tracing,
   eval, prompt store) is being absorbed from both ends: ClickHouse bought
   Langfuse (Jan, already built on ClickHouse; 23.1M SDK installs/mo) to own the
@@ -338,6 +356,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | 2026-W27 | No public US commercial AI model has its access *withdrawn* by the government again in 2026 (the kill switch, having cost 19 days and reversed, is not re-applied to a shipped model); model-level state intervention stays on the *granting* side (access lists / pre-release vetting), not the *withdrawal* side | 70% | 2026-12-31 | OPEN |
 | Dive 2026-07-06 (agent-payments) | Agent-initiated machine payments (x402 / `402` pay-per-call) stay an opt-in edge-and-crypto integration (Cloudflare/AWS/Coinbase wired by hand), NOT a runtime default — no frontier lab (Anthropic/OpenAI/Google) ships a built-in, on-by-default wallet in its first-party agent runtime that pays arbitrary `402` endpoints without per-transaction human approval | 70% | by 2027-Q1 | OPEN |
 | Dive 2026-07-07 (agent-attacks) | No documented real-world case shows an LLM agent gaining *initial access* to a patched/hardened/non-default target via a vulnerability *it discovered itself* (a true zero-day — not a known-class web bug fed to a team-of-agents lab harness) with *no* human decision gate; agentic intrusions stay confined to known-CVE / default-credential / exposed surfaces with a human at the strategic gates, and the published autonomous find-and-exploit rate *without* a CVE description stays well under ~50% on hardened real-world targets | 75% | by 2027-Q1 | OPEN |
+| Dive 2026-07-08 (agent-audit) | No major agent harness (Claude Code/Cursor/Codex/etc.) ships a *tamper-evident* run/audit log — cryptographically verifiable by a third party (signed or hash-chained, so the emitting process can't silently omit or backdate a record) — as a documented default; the built-in trail stays plain OTel telemetry + git history (author-trusted), and Halo-style verifiable-evidence logging stays a third-party opt-in — AND the OpenTelemetry GenAI semantic conventions remain in Development (not Stable) status | 72% | by 2027-Q1 | OPEN |
 
 **Scorecard: 2 settled · record 1–1 · mean Brier 0.31**
 (W27 settled two: W24 export-ban call RIGHT — fully rescinded Jul 1, Brier 0.12;
@@ -624,3 +643,19 @@ Copilot miss is the honest one: we bet the meter would blink and it didn't.)
   hygiene, not superhacker. Ends on the 7% "without-CVE" number as the tell to watch.
   news-to-framework/what-every-engineer-should-know. Levers on supply-chain-vs-throughput +
   autonomy-before-brakes; nods machine-buyer (API keys as loot). Sibling to trust-stack (06-12).
+- 2026-07-08 — "Your Agent Pushed That Commit While You Weren't Looking" (Vance) — the audit
+  trail as the brake once the committer goes unattended. Peg: Claude Code flipped three defaults
+  in a week — v2.1.198 (Jul 1) background subagents auto-commit/push/open a draft PR "instead of
+  stopping to ask"; v2.1.200 (Jul 3) default permission mode → Manual + no AskUserQuestion
+  auto-continue; v2.1.202 (Jul 6) workflow.run_id/name OTel attrs. Writing went off-camera,
+  deciding came back on-camera. Argument: a permission prompt gates the *next* action, not evidence
+  of the hundred already taken — and worktree isolation (the guard you'd trust) leaked twice in 8
+  days (v2.1.198 + v2.1.203) → want an *independent* record. Two layers: git (content-hashed, free —
+  force small attributed commits) + between-commit gap = OTel GenAI semconv (invoke_agent/execute_tool
+  spans, gen_ai.tool.call.arguments/result; still Development @ SemConv 1.40.0). Claude Code emits it
+  now (CLAUDE_CODE_ENABLE_TELEMETRY=1; claude_code.tool_result/tool_decision events). Trust hole: a
+  self-written log is a diary → Halo (Show HN, Jul 8) = append-only SHA-256 hash-chained + witness,
+  "verify without trusting who produced it" (SOC 2 / EU AI Act). So-what: generation went unattended,
+  review didn't (Anthropic ~80% merged code) → reviewer is bottleneck + auditable surface is the
+  product. architecture/practical-guide; devtools slot for W28. Lever on autonomy-before-brakes;
+  siblings hooks (07-02), worktrees (06-23), idempotency (06-26), trust-stack (06-10).

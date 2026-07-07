@@ -399,3 +399,19 @@
   confidence: 75
   due: "2027-Q1"
   status: open
+
+- id: dive-2026-07-08-agent-audit
+  made: "Dive · 2026-07-08"
+  made_link: "/reports/deep-dives/2026-07-08-agent-audit-trail-unattended-commits.html"
+  text: >-
+    No major agent harness (Claude Code / Cursor / Codex / etc.) ships a
+    tamper-evident run/audit log — cryptographically verifiable by a third
+    party (signed or hash-chained, so the emitting process can't silently omit
+    or backdate a record) — as a documented default; the built-in trail stays
+    plain OTel telemetry plus git history (author-trusted), and Halo-style
+    verifiable-evidence logging stays a third-party opt-in. AND the
+    OpenTelemetry GenAI semantic conventions remain in Development (not Stable)
+    status.
+  confidence: 72
+  due: "2027-Q1"
+  status: open
