@@ -357,6 +357,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-07-06 (agent-payments) | Agent-initiated machine payments (x402 / `402` pay-per-call) stay an opt-in edge-and-crypto integration (Cloudflare/AWS/Coinbase wired by hand), NOT a runtime default — no frontier lab (Anthropic/OpenAI/Google) ships a built-in, on-by-default wallet in its first-party agent runtime that pays arbitrary `402` endpoints without per-transaction human approval | 70% | by 2027-Q1 | OPEN |
 | Dive 2026-07-07 (agent-attacks) | No documented real-world case shows an LLM agent gaining *initial access* to a patched/hardened/non-default target via a vulnerability *it discovered itself* (a true zero-day — not a known-class web bug fed to a team-of-agents lab harness) with *no* human decision gate; agentic intrusions stay confined to known-CVE / default-credential / exposed surfaces with a human at the strategic gates, and the published autonomous find-and-exploit rate *without* a CVE description stays well under ~50% on hardened real-world targets | 75% | by 2027-Q1 | OPEN |
 | Dive 2026-07-08 (agent-audit) | No major agent harness (Claude Code/Cursor/Codex/etc.) ships a *tamper-evident* run/audit log — cryptographically verifiable by a third party (signed or hash-chained, so the emitting process can't silently omit or backdate a record) — as a documented default; the built-in trail stays plain OTel telemetry + git history (author-trusted), and Halo-style verifiable-evidence logging stays a third-party opt-in — AND the OpenTelemetry GenAI semantic conventions remain in Development (not Stable) status | 72% | by 2027-Q1 | OPEN |
+| Dive 2026-07-09 (skills) | Claude Code keeps progressive disclosure as the *default* for skills — in a regular (non-subagent) session, only skill name+description are preloaded and the full SKILL.md body loads on invocation, NOT preloaded by default — AND the default always-loaded skill-listing budget stays a small fraction of the context window (skillListingBudgetFraction default ≤ ~0.02, not full-description-for-every-skill) | 80% | by 2027-Q1 | OPEN |
 
 **Scorecard: 2 settled · record 1–1 · mean Brier 0.31**
 (W27 settled two: W24 export-ban call RIGHT — fully rescinded Jul 1, Brier 0.12;
@@ -659,3 +660,23 @@ Copilot miss is the honest one: we bet the meter would blink and it didn't.)
   review didn't (Anthropic ~80% merged code) → reviewer is bottleneck + auditable surface is the
   product. architecture/practical-guide; devtools slot for W28. Lever on autonomy-before-brakes;
   siblings hooks (07-02), worktrees (06-23), idempotency (06-26), trust-stack (06-10).
+- 2026-07-09 — "A Skill Costs You One Sentence Until You Use It" (Sandoval, Claude Code edition) —
+  skills as the pay-on-use context primitive; the new front on the context-budget thread (adding
+  capability without a standing bill, vs 06-25's how-not-to-burn-it). Progressive disclosure is
+  three-tier (Anthropic): name+description preloaded into the system prompt every session → full
+  SKILL.md loads only on trigger → bundled files on demand. So a skill is capability bought on
+  credit: you pay the description standing, the body is deferred. Inverse of a CLAUDE.md line
+  (billed every turn; adherence drops past ~200 lines). Numbers (Claude Code docs): skill *listing*
+  capped at 1% of the window (skillListingBudgetFraction); each description+when_to_use truncated at
+  1,536 chars; overflow drops least-used skills' descriptions first (/doctor shows it). Body stays in
+  context all session once invoked (keep SKILL.md <500 lines); compaction re-attaches first 5,000 tok
+  of each, 25,000 combined, most-recent-first (older skills drop → re-invoke). v2.1.202 dedups
+  identical re-invokes. disable-model-invocation:true = description not even loaded (zero standing
+  cost, manual-only). The description is the router not a summary (troubleshooting: keywords users
+  say / too-specific won't fire); skill-creator plugin tunes it by hit rate. "gotchas > happy-path"
+  = single-sourced (dev.to), flagged. News peg: v2.1.199 (Jul 2) — stacked `/a /b do X` loads up to
+  5 leading skills (was: only first); expansion stops at first non-inline/forked/`/loop` token.
+  Custom commands merged into skills (.claude/commands/x.md ≡ .claude/skills/x/SKILL.md). Decision
+  rule: CLAUDE.md = facts every turn; skill = procedure some turns ("when a CLAUDE.md section grew
+  into a procedure not a fact"). practical-guide/how-it-works. Lever on autonomy-before-brakes /
+  context-budget; siblings context-budget (06-25), hooks (07-02).

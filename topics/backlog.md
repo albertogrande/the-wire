@@ -59,8 +59,6 @@ Code Watch.*
   lifted from power users (Operator)
 - [reference] MCP servers worth wiring into Claude Code, and what each one
   actually buys you (Operator)
-- [practical-guide] Skills vs slash commands vs CLAUDE.md: where each piece of
-  automation belongs (Operator)
 - [how-it-works] Driving Claude Code headless from CI: the unattended-agent
   workflow pattern (Operator)
 - [practical-guide] Reading your context window: /context, the status line, and
@@ -93,6 +91,17 @@ Code Watch.*
 - [how-it-works] Grammar-constrained / strict decoding from the inside: how a JSON
   Schema becomes a token mask, the reasoning tax it can charge, and the supported
   subset that trips people up (Analyst)
+- [practical-guide] Skill descriptions as a routing problem: writing the one-line
+  trigger the model actually matches on, and running the skill-creator eval loop
+  (should-trigger / should-not-trigger hit rate, with-vs-without token overhead) to
+  prove a description earns its keep (Operator)
+- [how-it-works] `context: fork` — running a skill as a forked subagent: what
+  loads (SKILL.md as the prompt, agent-type system prompt, CLAUDE.md unless
+  Explore/Plan), what it can't see (your conversation), and when a forked skill
+  beats an inline one (Operator)
+- [reference] Dynamic context injection in skills: the `` !`cmd` `` preprocessing
+  syntax, `${CLAUDE_SKILL_DIR}` / `$ARGUMENTS[N]` substitutions, and how to ground
+  a skill in live repo state before the model ever reads it (Operator)
 
 ## Live — devtools & systems
 

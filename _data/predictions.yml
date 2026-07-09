@@ -415,3 +415,17 @@
   confidence: 72
   due: "2027-Q1"
   status: open
+
+- id: dive-2026-07-09-skills
+  made: "Dive · 2026-07-09"
+  made_link: "/reports/deep-dives/2026-07-09-skill-costs-one-sentence.html"
+  text: >-
+    Claude Code keeps progressive disclosure as the default for skills — in a
+    regular (non-subagent) session, only a skill's name and description are
+    preloaded and the full SKILL.md body loads on invocation, not preloaded by
+    default — AND the default always-loaded skill-listing budget stays a small
+    fraction of the context window (skillListingBudgetFraction default at or
+    below ~0.02, not a full description for every installed skill).
+  confidence: 80
+  due: "2027-Q1"
+  status: open

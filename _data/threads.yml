@@ -241,6 +241,22 @@
     SHA-256 hash-chained records plus an external witness, "verify without trusting who produced it" (aimed
     at SOC 2 / EU AI Act). So-what: generation went unattended, review didn't (Anthropic merges ~80%
     Claude-written code), so the reviewer is the bottleneck and the auditable surface is the product.
+    W28 (operator lens): the same context-budget logic runs in reverse — how to *add* capability
+    without a standing bill. A Claude Code skill is progressive disclosure (Anthropic): name +
+    description are preloaded into the system prompt every session, but the full SKILL.md body loads
+    only when the skill triggers, and bundled files only on demand. So a skill is capability bought on
+    credit — you pay the description standing, the body is deferred — the exact inverse of a CLAUDE.md
+    line, which is billed every turn (and drops adherence past ~200 lines). The standing tax is
+    bounded: the skill listing is capped at ~1% of the window (skillListingBudgetFraction), each
+    description+when_to_use truncated at 1,536 chars, and on overflow the least-used skills' descriptions
+    drop first (/doctor shows it). Once invoked, a body stays in context all session (keep it <500
+    lines), and compaction re-attaches only the first 5,000 tokens of each skill under a 25,000-token
+    combined budget, most-recent-first — so older skills silently fall off and need re-invoking.
+    disable-model-invocation:true removes even the description from context (zero standing cost,
+    manual-only). The description is a router, not a summary. News peg: v2.1.199 (Jul 2) made stacked
+    invocations (`/a /b do X`) load up to 5 leading skills, so procedures finally compose. Rule of
+    thumb from the docs: CLAUDE.md holds facts true every turn; a skill holds a procedure used some
+    turns ("when a CLAUDE.md section has grown into a procedure rather than a fact").
   issues:
     - { label: "Dive · Autonomy Shipped Before Its Brakes Did", link: "/reports/deep-dives/2026-06-08-autonomy-before-brakes.html" }
     - { label: "Dive · 'Agent' Is a Control-Flow Decision, Not a Product", link: "/reports/deep-dives/2026-06-19-agent-is-a-control-flow-decision.html" }
@@ -252,6 +268,7 @@
     - { label: "Dive · Your Real Guardrail Is a Hook", link: "/reports/deep-dives/2026-07-02-hooks-are-the-real-guardrail.html" }
     - { label: "Dive · Your Tool Calls Broke on the Upgrade", link: "/reports/deep-dives/2026-07-05-tool-schema-off-distribution.html" }
     - { label: "Dive · Your Agent Pushed That Commit While You Weren't Looking", link: "/reports/deep-dives/2026-07-08-agent-audit-trail-unattended-commits.html" }
+    - { label: "Dive · A Skill Costs You One Sentence Until You Use It", link: "/reports/deep-dives/2026-07-09-skill-costs-one-sentence.html" }
 
 - slug: platforms-eat-the-layer
   title: "Platforms eat the layer"
