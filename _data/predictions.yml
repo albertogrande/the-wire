@@ -429,3 +429,19 @@
   confidence: 80
   due: "2027-Q1"
   status: open
+
+- id: dive-2026-07-10-accept-button
+  made: "Dive · 2026-07-10"
+  made_link: "/reports/deep-dives/2026-07-10-accept-button-is-the-moat.html"
+  text: >-
+    The interaction-data moat stays asserted, not demonstrated: no AI-coding
+    vendor publicly shows a reproducible model-quality gain attributable to
+    training on IDE accept/reject/preference data via a contamination-resistant
+    agentic benchmark (SWE-bench Pro / SWE-rebench class) that independent
+    evaluators reproduce — AND enterprise/Business-tier zero-data-retention
+    stays the default, so the highest-value repositories remain contractually
+    off-limits for training. Grok 4.5, specifically, does not publish a system
+    card carrying such an independently reproduced coding score.
+  confidence: 68
+  due: "2027-Q1"
+  status: open

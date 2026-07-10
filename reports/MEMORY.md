@@ -107,6 +107,20 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   and the theoretical detector ceiling (AUROC ≤ ½+TV−TV²/2) shrinks to a coin flip as the
   laundering pushes TV→0. Watermarks catch volume + good faith, not the short adversarial case.
   → [dive 2026-07-03](./deep-dives/2026-07-03-llm-watermark-paraphrase-ceiling.md)
+  W28 (contrarian lens — the exception the thread missed): every note above says the
+  *artifact* commoditizes (weights open, outputs distillable, price at the floor). The one
+  input that doesn't is human preference-on-correctness. SpaceX bought Cursor's parent Anysphere
+  ($60B, >1M daily devs, ~$4B ARR) and trained Grok 4.5 partly on its IDE data; the real asset
+  isn't the editor or distribution but the *accept button* — every accept/reject/edit is a labeled
+  (chosen,rejected) pair (DPO's exact input) on a real coding task. Can't be scraped (GitHub = code,
+  not the ranking) or distilled (06-27: outputs≠preferences); RLAIF substitutes for style but is
+  "marginally above random on correctness," which is where coding lives → labs still treat human
+  preference as the moat. Bound: valuable slice fenced (Cursor Business = Privacy Mode/ZDR default,
+  "never trained on," ~65% of rev); label noisy (Copilot ~30% accept, accept-then-delete → GitHub
+  moved to accepted-and-retained); moat poisons its own benchmark (train on live issue-solving →
+  parity indistinguishable from contamination 11.7–31.6% verbatim; Grok shipped NO system card = the
+  tell). The moat is whoever owns the surface where the accept happens. Levers repricing + coding-subsidy.
+  → [dive 2026-07-10](./deep-dives/2026-07-10-accept-button-is-the-moat.md)
 - **Supply chain vs. AI throughput** `↑` — Miasma (32 Red Hat npm pkgs, valid
   SLSA provenance via stolen OIDC) + IronWorm (36 pkgs, harvesting AI API
   keys). Provenance + install-script scanning both defeated. Review/trust
@@ -357,6 +371,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-07-06 (agent-payments) | Agent-initiated machine payments (x402 / `402` pay-per-call) stay an opt-in edge-and-crypto integration (Cloudflare/AWS/Coinbase wired by hand), NOT a runtime default — no frontier lab (Anthropic/OpenAI/Google) ships a built-in, on-by-default wallet in its first-party agent runtime that pays arbitrary `402` endpoints without per-transaction human approval | 70% | by 2027-Q1 | OPEN |
 | Dive 2026-07-07 (agent-attacks) | No documented real-world case shows an LLM agent gaining *initial access* to a patched/hardened/non-default target via a vulnerability *it discovered itself* (a true zero-day — not a known-class web bug fed to a team-of-agents lab harness) with *no* human decision gate; agentic intrusions stay confined to known-CVE / default-credential / exposed surfaces with a human at the strategic gates, and the published autonomous find-and-exploit rate *without* a CVE description stays well under ~50% on hardened real-world targets | 75% | by 2027-Q1 | OPEN |
 | Dive 2026-07-08 (agent-audit) | No major agent harness (Claude Code/Cursor/Codex/etc.) ships a *tamper-evident* run/audit log — cryptographically verifiable by a third party (signed or hash-chained, so the emitting process can't silently omit or backdate a record) — as a documented default; the built-in trail stays plain OTel telemetry + git history (author-trusted), and Halo-style verifiable-evidence logging stays a third-party opt-in — AND the OpenTelemetry GenAI semantic conventions remain in Development (not Stable) status | 72% | by 2027-Q1 | OPEN |
+| Dive 2026-07-10 (interaction-data) | The interaction-data moat stays asserted, not demonstrated — no AI-coding vendor shows a reproducible model-quality gain from training on IDE accept/reject/preference data on a contamination-resistant agentic bench that independents reproduce, AND enterprise/Business ZDR stays default (valuable repos fenced); Grok 4.5 publishes no system card carrying such a score | 68% | by 2027-Q1 | OPEN |
 | Dive 2026-07-09 (skills) | Claude Code keeps progressive disclosure as the *default* for skills — in a regular (non-subagent) session, only skill name+description are preloaded and the full SKILL.md body loads on invocation, NOT preloaded by default — AND the default always-loaded skill-listing budget stays a small fraction of the context window (skillListingBudgetFraction default ≤ ~0.02, not full-description-for-every-skill) | 80% | by 2027-Q1 | OPEN |
 
 **Scorecard: 2 settled · record 1–1 · mean Brier 0.31**
@@ -680,3 +695,21 @@ Copilot miss is the honest one: we bet the meter would blink and it didn't.)
   rule: CLAUDE.md = facts every turn; skill = procedure some turns ("when a CLAUDE.md section grew
   into a procedure not a fact"). practical-guide/how-it-works. Lever on autonomy-before-brakes /
   context-budget; siblings context-budget (06-25), hooks (07-02).
+- 2026-07-10 — "The Moat Isn't the Model. It's the Accept Button." (Okafor) — inverts the
+  consensus read of SpaceX's $60B Anysphere/Cursor buy (distribution/revenue play) on the
+  multi-lab launch day (GPT-5.6 Sol/Terra/Luna, Grok 4.5, Muse Spark, Hy3 all GA). Peg: Grok 4.5
+  "supplemented with Cursor IDE training data" (buildfastwithai, single-sourced — no system card/
+  benchmarks/pricing, flagged). Counter-thesis: the asset is the *accept button*. DPO trains on
+  (chosen,rejected) pairs; every accept/reject/edit inside Cursor (>1M daily devs, ~$4B ARR) mints
+  exactly that on a real coding task. Non-substitutable because it can't be scraped (GitHub=code not
+  the ranking), distilled (06-27: outputs≠preferences), or synthesized (RLAIF ≈ style, "marginally
+  above random on correctness" — and coding is correctness → labs still treat human preference as
+  moat). Honest bound: valuable slice fenced (Cursor Business = Privacy Mode/ZDR by default, "never
+  trained on," ~65% rev); label noisy (Copilot ~30% accept, accept-then-delete → GitHub's accepted-
+  and-retained); moat poisons its own benchmark (live issue-solving → parity vs contamination
+  11.7–31.6% verbatim; OpenAI dropped SWE-bench Verified; Grok's missing card = the tell). So-what:
+  know your plan (Privacy Mode is the switch), don't route prod on beta claims (eval on your repos),
+  channel war one turn deeper = distribution is where you harvest judgment. Prove-me-wrong: a model
+  trained with NO proprietary interaction data matches IDE-data models on SWE-bench Pro. news-to-
+  framework. Levers channel-war (the exception it missed) + repricing + coding-subsidy; siblings
+  channel (06-09), distillation (06-27), benchmark (06-12), price-cut (06-28).

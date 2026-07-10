@@ -35,6 +35,16 @@ overtakes becomes a `news-to-framework` piece instead — that's fine.
 - [how-it-works] Optical context compression: DeepSeek-OCR's premise that a page
   carries fewer tokens than its character count — the compression-vs-fidelity
   curve, and where near-lossless recovery stops (Analyst)
+- [how-it-works] DPO/RLHF from the inside: how a (chosen, rejected) preference pair
+  becomes a weight update, the binary-loss math, and why the ranking — not the code
+  — is the scarce training input (Analyst) [surfaced by the 07-10 accept-button dive]
+- [x-vs-y] RLHF vs RLAIF: where synthetic AI feedback genuinely substitutes for human
+  preference (style, helpfulness) and where it collapses (correctness-centric
+  comparisons, where LLM judges run marginally above random) (Contrarian/Analyst)
+- [economics] The data flywheel of an AI IDE: what accept/reject/edit telemetry is
+  actually worth as training data, why zero-data-retention/Privacy Mode fences the
+  highest-value enterprise slice, and whether the flywheel is a moat or a marketing
+  line (Contrarian)
 
 ## Live — Claude Code & agent engineering
 

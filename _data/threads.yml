@@ -106,8 +106,26 @@
     >90% by baseline paraphrase (ETH SRI Lab). The best-possible detector is capped at
     AUROC ≤ ½ + TV − TV²/2, and laundering pushes TV→0 → coin flip. Same law again:
     you can't provenance-control a capability whose outputs are readable text.
+    W28 (the exception the thread missed): everything above says the artifact
+    commoditizes — weights open, outputs distillable, price at the floor. This is
+    the one input that doesn't. SpaceX bought Cursor's parent Anysphere for $60B
+    (>1M daily devs, ~$4B ARR) and trained Grok 4.5 partly on its IDE data. The
+    real asset isn't the editor or the distribution — it's the accept button: every
+    accept/reject/edit is a labeled `(chosen, rejected)` preference pair (exactly
+    DPO's input) on a real coding task, and that human correctness-judgment can't be
+    scraped (GitHub gives code, not the ranking) or distilled (outputs aren't
+    preferences). Synthetic RLAIF substitutes for *style* but is "marginally above
+    random on correctness," which is where coding lives — so labs still treat human
+    preference as the moat. Bound honestly: the valuable slice is fenced (Cursor
+    Business = Privacy Mode/ZDR by default, "never trained on," ~65% of revenue),
+    the label is noisy (Copilot ~30% accept, accept-then-delete), and the moat
+    poisons its own benchmark (train on live issue-solving → parity indistinguishable
+    from contamination, 11.7–31.6% verbatim; Grok shipped no system card). The moat
+    isn't the model or the weights — it's whoever owns the surface where the accept
+    happens.
   issues:
     - { label: "Dive · The Channel Was the Product", link: "/reports/deep-dives/2026-06-09-channel-was-the-product.html" }
+    - { label: "Dive · The Moat Is the Accept Button", link: "/reports/deep-dives/2026-07-10-accept-button-is-the-moat.html" }
     - { label: "Dive · You Cannot Export-Control a Model", link: "/reports/deep-dives/2026-06-15-cannot-export-control-a-model.html" }
     - { label: "Dive · The Coding Model You Can Run", link: "/reports/deep-dives/2026-06-17-local-coding-model-memory-budget.html" }
     - { label: "Dive · You Pay for 40 Billion", link: "/reports/deep-dives/2026-06-21-mixture-of-experts-active-parameters.html" }
