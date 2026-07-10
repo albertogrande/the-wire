@@ -275,6 +275,18 @@
     invocations (`/a /b do X`) load up to 5 leading skills, so procedures finally compose. Rule of
     thumb from the docs: CLAUDE.md holds facts true every turn; a skill holds a procedure used some
     turns ("when a CLAUDE.md section has grown into a procedure rather than a fact").
+    W28 (builder lens): a new brake surface opened — the browser as agent runtime. Chrome DevTools
+    for agents went stable (MCP server + a token-efficient CLI, 47 tools on Puppeteer/CDP) and WebMCP
+    — the page-declares-its-own-tools API — dropped a fresh W3C Community-Group draft (10 Jul, Chrome
+    origin trial). Three ways an agent reads a page, on a structure gradient: pixels (a 1080p screenshot
+    = 2,691 visual tokens per step on Opus 4.8, coords "approximate… verify"), the accessibility-tree
+    snapshot (roles + names + stable refs, ~200–400 tokens, click a handle not a hypothesis), and
+    page-declared WebMCP tools (`navigator.modelContext.registerTool`, a typed function call, zero
+    DOM-walk). More structure the page gives → less the agent guesses → lower token + flake cost. The
+    brake gap: a WebMCP tool is an authenticated same-origin action, and the spec *has no consent
+    mechanism* (delegated to "the agent provider and user agent") + ships `untrustedContentHint`
+    because a tool's output can carry a prompt injection back. So-what: switch browser agents to
+    snapshot-first now; treat page-declared tools like any other untrusted input.
   issues:
     - { label: "Dive · Autonomy Shipped Before Its Brakes Did", link: "/reports/deep-dives/2026-06-08-autonomy-before-brakes.html" }
     - { label: "Dive · 'Agent' Is a Control-Flow Decision, Not a Product", link: "/reports/deep-dives/2026-06-19-agent-is-a-control-flow-decision.html" }
@@ -287,6 +299,7 @@
     - { label: "Dive · Your Tool Calls Broke on the Upgrade", link: "/reports/deep-dives/2026-07-05-tool-schema-off-distribution.html" }
     - { label: "Dive · Your Agent Pushed That Commit While You Weren't Looking", link: "/reports/deep-dives/2026-07-08-agent-audit-trail-unattended-commits.html" }
     - { label: "Dive · A Skill Costs You One Sentence Until You Use It", link: "/reports/deep-dives/2026-07-09-skill-costs-one-sentence.html" }
+    - { label: "Dive · Stop Handing Your Agent a Screenshot of Your Own App", link: "/reports/deep-dives/2026-07-11-browser-as-agent-runtime.html" }
 
 - slug: platforms-eat-the-layer
   title: "Platforms eat the layer"

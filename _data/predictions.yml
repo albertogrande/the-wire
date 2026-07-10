@@ -445,3 +445,17 @@
   confidence: 68
   due: "2027-Q1"
   status: open
+
+- id: dive-2026-07-11-browser-runtime
+  made: "Dive · 2026-07-11"
+  made_link: "/reports/deep-dives/2026-07-11-browser-as-agent-runtime.html"
+  text: >-
+    WebMCP (navigator.modelContext) stays an origin-trial / W3C Community-Group
+    draft with no cross-browser-shipped, specified consent model — AND the
+    dominant page-perception path in shipped agent harnesses stays the
+    accessibility-tree snapshot (Playwright MCP browser_snapshot / Chrome
+    DevTools take_snapshot), not page-declared WebMCP tools and not vision-first;
+    the structure lives in the a11y tree before it lives in the page's own tools.
+  confidence: 70
+  due: "2027-Q1"
+  status: open

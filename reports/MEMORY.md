@@ -235,6 +235,14 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   [dive 2026-07-02](./deep-dives/2026-07-02-hooks-are-the-real-guardrail.md),
   [dive 2026-07-05](./deep-dives/2026-07-05-tool-schema-off-distribution.md),
   [dive 2026-07-08](./deep-dives/2026-07-08-agent-audit-trail-unattended-commits.md)
+  W28 (builder lens): a *new* brake surface — the browser as agent runtime. Page-declared
+  WebMCP tools (`navigator.modelContext.registerTool`) run as authenticated same-origin actions,
+  and the 10-Jul spec draft explicitly *has no consent mechanism* (delegated to "the agent
+  provider and user agent") + ships an `untrustedContentHint` (tool output can carry injection) →
+  the missing brake moved from "which command ran" to "which authenticated UI action fired." The
+  cheap/reliable default meanwhile is the accessibility-tree snapshot, not vision (a 1080p
+  screenshot = 2,691 visual tokens/step on Opus 4.8 vs ~200–400 for a snapshot).
+  → [dive 2026-07-11](./deep-dives/2026-07-11-browser-as-agent-runtime.md)
 - **Platforms eat the layer** `↑` — the LLMOps tool layer (gateway, tracing,
   eval, prompt store) is being absorbed from both ends: ClickHouse bought
   Langfuse (Jan, already built on ClickHouse; 23.1M SDK installs/mo) to own the
@@ -372,6 +380,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-07-07 (agent-attacks) | No documented real-world case shows an LLM agent gaining *initial access* to a patched/hardened/non-default target via a vulnerability *it discovered itself* (a true zero-day — not a known-class web bug fed to a team-of-agents lab harness) with *no* human decision gate; agentic intrusions stay confined to known-CVE / default-credential / exposed surfaces with a human at the strategic gates, and the published autonomous find-and-exploit rate *without* a CVE description stays well under ~50% on hardened real-world targets | 75% | by 2027-Q1 | OPEN |
 | Dive 2026-07-08 (agent-audit) | No major agent harness (Claude Code/Cursor/Codex/etc.) ships a *tamper-evident* run/audit log — cryptographically verifiable by a third party (signed or hash-chained, so the emitting process can't silently omit or backdate a record) — as a documented default; the built-in trail stays plain OTel telemetry + git history (author-trusted), and Halo-style verifiable-evidence logging stays a third-party opt-in — AND the OpenTelemetry GenAI semantic conventions remain in Development (not Stable) status | 72% | by 2027-Q1 | OPEN |
 | Dive 2026-07-10 (interaction-data) | The interaction-data moat stays asserted, not demonstrated — no AI-coding vendor shows a reproducible model-quality gain from training on IDE accept/reject/preference data on a contamination-resistant agentic bench that independents reproduce, AND enterprise/Business ZDR stays default (valuable repos fenced); Grok 4.5 publishes no system card carrying such a score | 68% | by 2027-Q1 | OPEN |
+| Dive 2026-07-11 (browser-runtime) | WebMCP (`navigator.modelContext`) stays an origin-trial / Community-Group draft with no cross-browser-shipped, specified consent model, AND the dominant page-perception path in shipped agent harnesses stays the accessibility-tree snapshot — not page-declared tools, and not vision-first (structure lives in the a11y tree before it lives in the page's own tools) | 70% | by 2027-Q1 | OPEN |
 | Dive 2026-07-09 (skills) | Claude Code keeps progressive disclosure as the *default* for skills — in a regular (non-subagent) session, only skill name+description are preloaded and the full SKILL.md body loads on invocation, NOT preloaded by default — AND the default always-loaded skill-listing budget stays a small fraction of the context window (skillListingBudgetFraction default ≤ ~0.02, not full-description-for-every-skill) | 80% | by 2027-Q1 | OPEN |
 
 **Scorecard: 2 settled · record 1–1 · mean Brier 0.31**
@@ -713,3 +722,27 @@ Copilot miss is the honest one: we bet the meter would blink and it didn't.)
   trained with NO proprietary interaction data matches IDE-data models on SWE-bench Pro. news-to-
   framework. Levers channel-war (the exception it missed) + repricing + coding-subsidy; siblings
   channel (06-09), distillation (06-27), benchmark (06-12), price-cut (06-28).
+- 2026-07-11 — "Stop Handing Your Agent a Screenshot of Your Own App." (Vance) — the browser
+  as an agent runtime; a three-level gradient of how an agent perceives+acts on a page, pegged
+  to Chrome DevTools for agents going stable (MCP server + token-efficient CLI, 47 tools on
+  Puppeteer/CDP, `take_snapshot`+`take_screenshot`) and WebMCP's fresh Draft Community Group
+  Report (10 Jul, Chrome origin trial / Edge native). L1 **pixels** (Computer Use): screenshot→
+  coords; cost is arithmetic — Claude images = 28×28 patches, ⌈w/28⌉×⌈h/28⌉ visual tokens, a
+  1920×1080 frame = 2,691 tok on Opus 4.8 *every step*, and coords are "approximate… verify"
+  (Anthropic vision docs) → flaky. L2 **accessibility tree** (Playwright MCP `browser_snapshot`,
+  Chrome `take_snapshot`): roles+names+stable refs (e10), click a handle not a hypothesis,
+  ~200–400 tok/snapshot (Playwright's figure, ~10× cut) — fails only on canvas/div-soup → keep
+  screenshot as fallback, not default. L3 **page-declared tools** (WebMCP `navigator.modelContext.
+  registerTool({name,description,inputSchema,execute})`): page ships typed tools, agent calls a
+  function, zero DOM-walk — cheapest+most reliable but needs you to own the page. Gradient = more
+  structure the page gives → less the agent guesses → lower token+flake cost. Honest cautions:
+  WebMCP is a CG draft not a standard (origin-trial only); a page tool is an authenticated same-
+  origin action and the spec *punts consent* to "the agent provider and user agent" (autonomy-
+  before-brakes in a new place) + ships `untrustedContentHint` (tool output can carry prompt
+  injection); could be llms.txt round two (tell it's real = a *second, independent* runtime that
+  calls the tools). do/watch/ignore: switch browser agents to snapshot-first now; watch for a
+  non-vendor runtime calling WebMCP + a specified consent model; ignore "agents browse with eyes"
+  (pixels are the fallback, not the destination) + rewriting the whole UI as tools (ship 3 not 30).
+  architecture/practical-guide; devtools slot adjacent. Levers autonomy-before-brakes; composes
+  with docs-as-distribution (07-04, "be callable"); siblings agent-control-flow (06-19), hooks (07-02),
+  tool-schema (07-05).

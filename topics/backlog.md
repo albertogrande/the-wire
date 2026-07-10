@@ -115,6 +115,10 @@ Code Watch.*
 
 ## Live — devtools & systems
 
+- [how-it-works] The accessibility tree as an agent API: how a screen-reader
+  data structure (roles, names, ARIA states, stable refs) became the cheap,
+  reliable way for agents to read a page — and what unlabeled `<div>` soup costs
+  you in tokens and flake (Builder) [surfaced by the 07-11 browser-runtime dive]
 - [how-it-works] Why your test suite is slow: the real cost model of a CI run (Analyst)
 - [x-vs-y] Monorepo vs polyrepo once AI agents are the main committer (Contrarian)
 - [postmortem] Anatomy of a dependency-confusion attack, end to end (Analyst)
@@ -158,6 +162,10 @@ Code Watch.*
   funnel math (Analyst)
 - [what-every-engineer-should-know] How open-source-as-distribution actually
   pays back (Contrarian)
+- [practical-guide] Making your webapp agent-callable with WebMCP: `registerTool`,
+  the declarative form, and why the distribution win only lands if you put a real
+  consent step in front of every write tool (Builder) [the 07-11 dive covered the
+  three-level gradient; this is the hands-on build] 
 
 ## Live — economy & the AI business
 
