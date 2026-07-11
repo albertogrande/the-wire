@@ -177,6 +177,14 @@ Code Watch.*
   marginal cost an API price really sits — the markup nobody publishes (Analyst)
 - [what-every-engineer-should-know] The capex behind the API: GPUs, power, and
   why the constraint is the grid (Analyst)
+- [how-it-works] GPU depreciation: book life vs economic life, and why a levered
+  neocloud's debt outlives the asset it's secured against — the schedule mismatch
+  that actually decides refinancing risk (Analyst) [surfaced by the 07-12
+  circular-financing dive]
+- [news-to-framework] Vendor financing, from Lucent to Nvidia: why a supplier
+  lends to its own customers, and the two ratios (financing ÷ revenue, top-customer
+  concentration) that flip it from a growth lever into a warning sign (Analyst/
+  Contrarian) [surfaced by the 07-12 circular-financing dive]
 
 ## Live — politics & policy (technical lens)
 

@@ -17,7 +17,13 @@
     financials (per Fortune/Ars, unverified) show ~$21B operating loss on ~$13B
     of 2025 revenue; the FT reported enterprises reining in AI spend; Anthropic's
     subscription split (Jun 15) repriced programmatic usage. The frontier is sold
-    below cost while a free MIT substitute (GLM-5.2) ships.
+    below cost while a free MIT substitute (GLM-5.2) ships. W28: the *financing
+    structure* of the AI trade examined — Nvidia's ~$110B of circular commitments
+    (67% of revenue vs Lucent's 24%) revived the telecom-bust analogy, but the
+    risk isn't the circle or Nvidia; it's the levered neocloud middle (CoreWeave
+    $24.86B debt, interest 25.8% of revenue, 67% one customer). The end-riders are
+    solvent (hyperscalers ~$451B OCF); the weak link is whoever can't refinance,
+    this cycle's Winstar.
   tension: >-
     W24 added a new risk-factor line — a flagship model can be administratively
     switched off overnight (the Fable 5 export ban).
@@ -25,6 +31,7 @@
     - { label: "2026-W23", link: "/reports/2026-W23.html" }
     - { label: "2026-W24", link: "/reports/2026-W24.html" }
     - { label: "2026-W25", link: "/reports/2026-W25.html" }
+    - { label: "Dive · Nvidia Isn't the Domino", link: "/reports/deep-dives/2026-07-12-gpu-circular-financing-weak-link.html" }
 
 - slug: ai-coding-subsidy-died
   title: "The AI coding subsidy died"

@@ -25,8 +25,23 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   reported enterprises reining in AI spend; Anthropic's subscription split (Jun
   15) repriced programmatic usage. Frontier sold below cost while a free MIT
   substitute (GLM-5.2) shipped — supply shock + cost squeeze on the legible US
-  leader in one week. → [2026-W23](./2026-W23.md),
-  [2026-W24](./2026-W24.md), [2026-W25](./2026-W25.md)
+  leader in one week.
+  W28 (analyst lens): the *financing structure* of the trade. "Circular financing"
+  panic (io-fund, Jul 11) — Nvidia's ~$110B of commitments to its own customers =
+  67% of $165B LTM revenue (Tunguz) vs Lucent's 24% at the telecom top; scary ratio.
+  But money-in-a-circle isn't the tell; who-pays and can-the-middle-refinance is.
+  End-riders are solvent (MSFT/GOOG/AMZN/META ~$451B 2024 OCF) — unlike telecom's
+  cash-burning CLECs (Lucent took $3.5B bad-debt 2001–02; Nortel bad loans 25.5%→80%).
+  So the AI loop passes the test telecom failed. The fragility is the *levered neocloud
+  middle*: CoreWeave $24.86B debt, −$4.71B FCF, interest 25.8% of revenue, ~$35B capex
+  on ~$12–13B revenue, 67% one customer (MSFT, 10-K); GPUs depreciate faster than the
+  debt amortizes. Lucent died from Winstar, not AT&T → watch interest-to-revenue at the
+  thinnest link + anchor renewal, not Nvidia's balance sheet. Deciding quantity = neocloud
+  interest ÷ revenue vs utilization/renewal. Capex context: Amazon $25B bond, Anthropic
+  $19B/20yr TeraWulf lease, Meta 14GW by 2027; substitutes squeeze the rent (Chinese models
+  46% of US token use). → [2026-W23](./2026-W23.md),
+  [2026-W24](./2026-W24.md), [2026-W25](./2026-W25.md),
+  [dive 2026-07-12](./deep-dives/2026-07-12-gpu-circular-financing-weak-link.md)
 - **The AI coding subsidy died** `↑` — Copilot token billing live Jun 1 (10–50x
   bills, Opus multiplier 7.5x→27x, paid code review); Cursor seat split;
   Anthropic Agent SDK credit split lands Jun 15. Flat-rate AI tooling is
@@ -381,6 +396,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-07-08 (agent-audit) | No major agent harness (Claude Code/Cursor/Codex/etc.) ships a *tamper-evident* run/audit log — cryptographically verifiable by a third party (signed or hash-chained, so the emitting process can't silently omit or backdate a record) — as a documented default; the built-in trail stays plain OTel telemetry + git history (author-trusted), and Halo-style verifiable-evidence logging stays a third-party opt-in — AND the OpenTelemetry GenAI semantic conventions remain in Development (not Stable) status | 72% | by 2027-Q1 | OPEN |
 | Dive 2026-07-10 (interaction-data) | The interaction-data moat stays asserted, not demonstrated — no AI-coding vendor shows a reproducible model-quality gain from training on IDE accept/reject/preference data on a contamination-resistant agentic bench that independents reproduce, AND enterprise/Business ZDR stays default (valuable repos fenced); Grok 4.5 publishes no system card carrying such a score | 68% | by 2027-Q1 | OPEN |
 | Dive 2026-07-11 (browser-runtime) | WebMCP (`navigator.modelContext`) stays an origin-trial / Community-Group draft with no cross-browser-shipped, specified consent model, AND the dominant page-perception path in shipped agent harnesses stays the accessibility-tree snapshot — not page-declared tools, and not vision-first (structure lives in the a11y tree before it lives in the page's own tools) | 70% | by 2027-Q1 | OPEN |
+| Dive 2026-07-12 (circular-financing) | Nvidia does NOT take a vendor-financing write-down (equity + backstop) large enough to cut an annual EPS by >5% before end-2027 — but at least one publicly traded neocloud (CoreWeave/Nebius/peer) has a credit-stress event (covenant breach, distressed/down-round refi, downgrade deeper into junk, or canceled/renegotiated anchor contract) in the same window; the risk sits in the levered middle of the circle, not at Nvidia | 60% | 2027-12-31 | OPEN |
 | Dive 2026-07-09 (skills) | Claude Code keeps progressive disclosure as the *default* for skills — in a regular (non-subagent) session, only skill name+description are preloaded and the full SKILL.md body loads on invocation, NOT preloaded by default — AND the default always-loaded skill-listing budget stays a small fraction of the context window (skillListingBudgetFraction default ≤ ~0.02, not full-description-for-every-skill) | 80% | by 2027-Q1 | OPEN |
 
 **Scorecard: 2 settled · record 1–1 · mean Brier 0.31**
@@ -746,3 +762,24 @@ Copilot miss is the honest one: we bet the meter would blink and it didn't.)
   architecture/practical-guide; devtools slot adjacent. Levers autonomy-before-brakes; composes
   with docs-as-distribution (07-04, "be callable"); siblings agent-control-flow (06-19), hooks (07-02),
   tool-schema (07-05).
+- 2026-07-12 — "Nvidia Isn't the Domino. The Neocloud It Financed Is." (Quist) — the AI capex
+  boom's circular-financing structure, pegged to io-fund's Jul 11 note reviving the telecom-bust
+  analogy. Scary headline: Nvidia's ~$110B of commitments to its own customers = 67% of $165B LTM
+  revenue (Tunguz, announced figures — flagged) vs Lucent's 24% at the top; top-2 concentration 39%
+  vs 23%. Analyst correction: money-in-a-circle isn't the tell — a supplier financing customers is old
+  (Intel Capital, Cisco); the two real tests are how-much-demand-is-financed and is-the-far-end-solvent.
+  Telecom failed both (CLECs burning junk debt → Lucent $3.5B bad-debt 2001–02, Nortel bad loans
+  25.5%→80%, industry vendor-finance $1.9B→$950M→$90M 2001–03; Winstar owed Lucent >$800M). AI fails
+  one: end-riders are the four richest firms (~$451B 2024 OCF) + real token demand (Goldman $765B'26→
+  $1.6T'31; McKinsey $5–7T) → passes the test telecom failed. But risk never sits at the solvent end
+  (Lucent died from Winstar, not AT&T) — it's the levered neocloud middle: CoreWeave $2.08B rev (+112%),
+  $24.86B debt, −$4.71B FCF, interest 25.8% of rev (→27.3%), ~$35B capex on ~$12–13B rev, 67% one
+  customer (MSFT, 10-K — primary); GPUs depreciate faster than the debt amortizes; 3yr Treasury 3.6→4.2%.
+  Nebius same shape smaller ($339M rev, $8.45B debt). Clears only if utilization + anchor-renewal +
+  refi-window all hold (CLECs needed the same three, got none). So-what: watch neocloud interest÷revenue
+  vs utilization/renewal, not Nvidia's balance sheet; the tell is a neocloud missing a refi or an anchor
+  lapsing (this cycle's Winstar), not a Nvidia headline. Deciding quantity = interest÷revenue at the
+  thinnest link. Prediction: Nvidia no material write-down but ≥1 listed neocloud credit-stress event by
+  end-2027 (60%). economics/news-to-framework. Opens the capex-financing front on the repricing thread;
+  siblings silicon (06-29), channel-war/repricing; capex context Amazon $25B bond / Anthropic $19B TeraWulf
+  lease / Meta 14GW. Single-sourced: io-fund's detailed CoreWeave quarterly figures + Tunguz's ratios (flagged).

@@ -459,3 +459,18 @@
   confidence: 70
   due: "2027-Q1"
   status: open
+
+- id: dive-2026-07-12-neocloud-weak-link
+  made: "Dive · 2026-07-12"
+  made_link: "/reports/deep-dives/2026-07-12-gpu-circular-financing-weak-link.html"
+  text: >-
+    Nvidia does NOT take a vendor-financing write-down (equity + capacity
+    backstop) large enough to cut an annual EPS by >5% before end-2027 — but at
+    least one publicly traded neocloud (CoreWeave / Nebius / a listed peer) has a
+    credit-stress event in the same window: a covenant breach, a down-round or
+    distressed refinancing, a downgrade deeper into junk, or a canceled /
+    renegotiated anchor contract. The risk sits in the levered middle of the
+    circle, not at Nvidia.
+  confidence: 60
+  due: "2027-12-31"
+  status: open
