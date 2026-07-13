@@ -55,7 +55,13 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   discount on cost/token that costs you cost/correct-answer — silent confab on code's
   exact strings. Same shape as the meter itself: routing around a price by degrading
   fidelity moves cost from a visible line item to an invisible error rate.
-  → [2026-W23](./2026-W23.md),
+  W28: the meter reached the flagship-in-subscription. Anthropic pulled Fable 5 out of Pro/Max/Team
+  weekly limits → pay-as-you-go usage credits at $10/$50 per Mtok (2× Opus 4.8; highest per-token price
+  Anthropic has ever listed for a shipped model). Frontier stays premium while the floor drops. Blinked
+  under backlash — extended included access to Jul 12, meter from Jul 13, "temporary until capacity" — but
+  a promo-extension isn't a walkback (cf. W23 Copilot bet WRONG: GitHub held+tightened, didn't blink;
+  Anthropic's blink is 4 days on a promo, meter intact). Direction identical both: flagship metered.
+  → [2026-W23](./2026-W23.md), [2026-W28](./2026-W28.md),
   [dive 2026-06-07](./deep-dives/2026-06-07-ai-coding-honest-pricing.md),
   [dive 2026-07-04](./deep-dives/2026-07-04-code-as-image-token-tax.md)
 - **The channel war / off-ramps** `↑` — model + open harness both commoditizing
@@ -136,6 +142,17 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   parity indistinguishable from contamination 11.7–31.6% verbatim; Grok shipped NO system card = the
   tell). The moat is whoever owns the surface where the accept happens. Levers repricing + coding-subsidy.
   → [dive 2026-07-10](./deep-dives/2026-07-10-accept-button-is-the-moat.md)
+  W28 (consummated on the invoice): commoditization stopped being a forecast — it's in the bill.
+  CNBC/OpenRouter: Chinese open-weight models hit 46% weekly peak of US enterprise tokens (11% prior-12-mo,
+  4.5% H1'25), ≥30% every week since Feb 8; DeepSeek single largest vendor ~17.6% (5.13T wk), Qwen 13.9%
+  (2.77T), GLM-5.2 fastest Vercel adoption 2026 (27× tokens/80× customers wk1), Kimi pulling. Driver = 60–90%
+  cheaper (DeepSeek V4 Flash $0.14 vs GPT-5.5 $5.00), "close enough." Named runners: Airbnb (Qwen CS agent,
+  3hr→6s), Lindy (DeepSeek, "millions" saved), Uber (budget gone in 4mo), Coinbase (GLM/Kimi, single-src).
+  Same week: 5 frontier models GA in one stretch (GPT-5.6 Sol/Terra/Luna, Grok 4.5, Muse Spark, Hy3 + Fable
+  5/Sonnet 5) → model = commodity input. Honest bounds: OpenRouter is dev-skewed (not all enterprise); tokens
+  ≠ $ ≠ value (cheap/error-tolerant work migrates first); 46% is a peak, ~30% the floor; self-hosted weights
+  invisible to routed-token counts (understates). So spend fled the token → power/silicon/surface/data (this
+  week's issue). → [2026-W28](./2026-W28.md), [dive 2026-07-13](./deep-dives/2026-07-13-chinese-models-commodity-tier.md)
 - **Supply chain vs. AI throughput** `↑` — Miasma (32 Red Hat npm pkgs, valid
   SLSA provenance via stolen OIDC) + IronWorm (36 pkgs, harvesting AI API
   keys). Provenance + install-script scanning both defeated. Review/trust
@@ -312,6 +329,16 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   retreated: same week OpenAI shipped GPT-5.6 Sol/Terra/Luna government-gated (~20
   orgs, EO 30-day review) — the guest list is the durable form (no capability to
   route around). Kill switch (brittle, 19d, reversed) → guest list (quiet, sticky).
+  W28 (the vector flipped): with Chinese open models at 46% of US enterprise tokens, the state stopped
+  trying to keep US models IN and started trying to keep Chinese models OUT of US firms. State Dept framing
+  ("advance Beijing's narratives, censor dissent"); House Select Committee on CCP + Homeland Security probed
+  Airbnb + Anysphere (Apr); admin weighing corporate-use restriction (reported, Jul 8). Won't reach it —
+  same law as 06-15: can't ban a download; First Amendment "code is speech"; experts concede banning open
+  weights "ultimately impossible." Viable lever = federal procurement/contractor ban (narrow perimeter, not
+  Airbnb's CS agent). Real security concern is real but backwards: it's distillation (them copying us,
+  06-27), not exfiltration (self-hosted weights never leave your infra). Booz Allen: 3/4 Chinese code models
+  +vulns under a US-gov-contractor persona (Qwen3-Coder +130%; single study). Advances the 06-15 open-weight
+  export prediction (75%, due 2026-12-31) — not yet due. → [dive 2026-07-13](./deep-dives/2026-07-13-chinese-models-commodity-tier.md)
   → [2026-W23](./2026-W23.md), [2026-W24](./2026-W24.md), [2026-W25](./2026-W25.md),
   [2026-W26](./2026-W26.md), [2026-W27](./2026-W27.md),
   [dive 2026-06-15](./deep-dives/2026-06-15-cannot-export-control-a-model.md)
@@ -348,6 +375,11 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   *structurally* (margin transfer, not promo), but the platform keeps the savings
   (price-cut-wasn't-for-you). Cross-links channel-war + repricing; sibling to the
   inference-economics dive cluster (MoE/spec-decoding/caching).
+  W28 (both sides of the Pacific, one week): Meta starts producing its "Iris" inference chip (Broadcom/TSMC)
+  in Sept, on the way to 14GW by 2027 (~$145B AI capex 2026); DeepSeek reportedly building its own inference
+  chip too — the vertical move now Chinese as well as US. Paired w/ the capital-went-vertical thesis (this
+  week's issue): as the token races to the floor, spend flees to power (Anthropic $19B/20yr TeraWulf lease,
+  401MW Kentucky) + balance sheet (Amazon $25B bond, $200B capex 2026) + silicon + surface. → [2026-W28](./2026-W28.md)
   → [dive 2026-06-29](./deep-dives/2026-06-29-why-ai-labs-build-chips.md)
 
 ## Predictions ledger
@@ -398,6 +430,8 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-07-11 (browser-runtime) | WebMCP (`navigator.modelContext`) stays an origin-trial / Community-Group draft with no cross-browser-shipped, specified consent model, AND the dominant page-perception path in shipped agent harnesses stays the accessibility-tree snapshot — not page-declared tools, and not vision-first (structure lives in the a11y tree before it lives in the page's own tools) | 70% | by 2027-Q1 | OPEN |
 | Dive 2026-07-12 (circular-financing) | Nvidia does NOT take a vendor-financing write-down (equity + backstop) large enough to cut an annual EPS by >5% before end-2027 — but at least one publicly traded neocloud (CoreWeave/Nebius/peer) has a credit-stress event (covenant breach, distressed/down-round refi, downgrade deeper into junk, or canceled/renegotiated anchor contract) in the same window; the risk sits in the levered middle of the circle, not at Nvidia | 60% | 2027-12-31 | OPEN |
 | Dive 2026-07-09 (skills) | Claude Code keeps progressive disclosure as the *default* for skills — in a regular (non-subagent) session, only skill name+description are preloaded and the full SKILL.md body loads on invocation, NOT preloaded by default — AND the default always-loaded skill-listing budget stays a small fraction of the context window (skillListingBudgetFraction default ≤ ~0.02, not full-description-for-every-skill) | 80% | by 2027-Q1 | OPEN |
+| 2026-W28 | Through Q1 2027, at least two of {Amazon, Meta, Microsoft, Alphabet} *raise* 2026–2027 AI capex / infrastructure guidance even as frontier API list prices fall or hold — the commoditizing-token vs compounding-infra-bill divergence widens, not closes | 70% | by 2027-Q1 | OPEN |
+| Dive 2026-07-13 (chinese-tokens) | Through Q1 2027, Chinese-origin models stay ≥30% of weekly routed tokens on the main public developer-usage trackers (OpenRouter-class), AND no enacted US measure removes open-weight Chinese models from general commercial use — a federal-procurement/contractor ban at most, not a broad commercial prohibition; the price gap + the download hold | 70% | by 2027-Q1 | OPEN |
 
 **Scorecard: 2 settled · record 1–1 · mean Brier 0.31**
 (W27 settled two: W24 export-ban call RIGHT — fully rescinded Jul 1, Brier 0.12;
@@ -443,6 +477,12 @@ Copilot miss is the honest one: we bet the meter would blink and it didn't.)
   Sonnet 5 default in Claude Code ($2/$10 intro, new tokenizer 1.0–1.35× "cost-neutral").
   Kill switch (brittle, reversed) vs guest list (quiet, sticky) — control relocated.
   W23 Copilot-walkback call settled WRONG
+- 2026-W28 — "The Model Got Cheap. Watch Where the Money Went." — capability commoditized (5 frontier
+  models GA in one stretch — GPT-5.6 Sol/Terra/Luna, Grok 4.5, Muse Spark, Hy3 + Fable 5/Sonnet 5;
+  Chinese open models 46% of US enterprise tokens; GLM-5.2 margin collapse) while capital went vertical
+  (Amazon $25B bond, Anthropic $19B/20yr TeraWulf lease, Meta Iris chip + 14GW). Token to the floor,
+  money to power/silicon/surface/data. Fable 5 pulled from subscriptions ($10/$50, extended to Jul 12
+  under backlash); Gemini 3.5 Pro slipped past launch day; Illinois SB 315; Sol math-proof claim
 
 ### Deep dives
 - 2026-06-11 — "The Meter Is the Confession" — AI coding pricing; metering as
@@ -783,3 +823,17 @@ Copilot miss is the honest one: we bet the meter would blink and it didn't.)
   end-2027 (60%). economics/news-to-framework. Opens the capex-financing front on the repricing thread;
   siblings silicon (06-29), channel-war/repricing; capex context Amazon $25B bond / Anthropic $19B TeraWulf
   lease / Meta 14GW. Single-sourced: io-fund's detailed CoreWeave quarterly figures + Tunguz's ratios (flagged).
+- 2026-07-13 — "Nobody Chose to Run Chinese AI. The Invoice Did." (house, weekly dive) — the commoditization
+  thesis consummated on the invoice: CNBC/OpenRouter shows Chinese open-weight models at 46% weekly peak of US
+  enterprise tokens (≥30% since Feb 8; 11% prior-12-mo), DeepSeek the single largest vendor (~17.6%), driver =
+  60–90% cheaper + "close enough" (V4 Flash $0.14 vs GPT-5.5 $5.00; GLM-5.2 27×/80× Vercel wk1). Named runners
+  Airbnb/Lindy/Uber/Coinbase, mostly via US clouds. Honest bounds: OpenRouter dev-skewed, tokens≠$≠value,
+  46% is a peak (~30% floor), self-hosted weights invisible (understates). Washington's vector flipped —
+  now trying to keep Chinese models OUT of US firms (State Dept framing; House probes Airbnb/Anysphere;
+  procurement ban the only viable lever) but can't (06-15: can't ban a download; First Amendment). Real
+  concern is distillation (them copying us), not exfiltration (self-host = data stays); Booz Allen persona
+  +vuln study (Qwen3-Coder +130%, single study). So-what: assume you're already running them; route by
+  workload×price×correctness×sensitivity; self-host the sensitive slice; eval on your repos; watch the
+  procurement ban. Prediction: ≥30% share + no broad usage ban through Q1'27 (70%). news-to-framework/
+  economics. Deepest cut of channel-war/commoditization; siblings export-control (06-15), open-weights
+  (06-16), price-cut (06-28), distillation (06-27), portability (06-22).
