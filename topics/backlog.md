@@ -45,6 +45,14 @@ overtakes becomes a `news-to-framework` piece instead — that's fine.
   actually worth as training data, why zero-data-retention/Privacy Mode fences the
   highest-value enterprise slice, and whether the flywheel is a moat or a marketing
   line (Contrarian)
+- [how-it-works] BPE tokenizers from the inside: merge tables, vocabulary budgets
+  (o200k ~200k vs cl100k ~100k), why code and whitespace fragment worse than prose,
+  and why the same file is 1.5–1.7× more tokens on one provider than another
+  (Builder/Analyst) [surfaced by the 07-14 tokenizer-price dive]
+- [practical-guide] A cost-per-solved-task harness: measuring model economics end to
+  end — tokenizer × per-token price × output share × cache-hit rate × turns-to-done —
+  instead of ranking models by the per-token list price (Analyst) [surfaced by the
+  07-14 tokenizer-price dive]
 
 ## Live — Claude Code & agent engineering
 

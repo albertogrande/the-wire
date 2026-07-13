@@ -48,11 +48,20 @@
     Fable 5), but image tokens cost the same per token and the "discount" is a
     17.8× compression ratio that lands in the lossy fall-off, so it trades
     cost/token for silent errors on code — the meter's own logic, turned on the user.
+    W29: a *second* hidden term of the meter, beside caching — the tokenizer. The
+    per-token list price isn't the price you pay; the tokenizer converts your bytes
+    to tokens at a model-specific rate, and for code it diverges hard (one July
+    benchmark: a 2,888-char TS file = 681 tokens on GPT's o200k vs 1,178 on Claude's
+    current tokenizer, 1.73×). Anthropic's own docs put the newer tokenizer at ~30%
+    more tokens for the same text, so a version bump is a re-pricing event at a stable
+    rate — and Claude's tokenizer is unpublished, so the billed count is only an API
+    round-trip. Compare models on cost-per-file, not cost-per-token.
   issues:
     - { label: "2026-W23", link: "/reports/2026-W23.html" }
     - { label: "Dive · The Meter Is the Confession", link: "/reports/deep-dives/2026-06-07-ai-coding-honest-pricing.html" }
     - { label: "Dive · Prompt Caching Pays 90% Off", link: "/reports/deep-dives/2026-06-18-prompt-caching-hit-rate.html" }
     - { label: "Dive · Imaging Your Code Is a Lossy Bet", link: "/reports/deep-dives/2026-07-04-code-as-image-token-tax.html" }
+    - { label: "Dive · The List Price Is Per Token", link: "/reports/deep-dives/2026-07-14-tokenizer-real-price-per-file.html" }
 
 - slug: channel-war-offramps
   title: "The channel war / off-ramps"

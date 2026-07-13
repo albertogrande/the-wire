@@ -474,3 +474,18 @@
   confidence: 60
   due: "2027-12-31"
   status: open
+
+- id: dive-2026-07-14-tokenizer-per-file
+  made: "Dive · 2026-07-14"
+  made_link: "/reports/deep-dives/2026-07-14-tokenizer-real-price-per-file.html"
+  text: >-
+    Anthropic does NOT ship a downloadable / offline tokenizer for its current
+    models through Q1 2027 — getting the billed token count stays an API
+    round-trip (count_tokens), with no local library that reproduces it — AND
+    the newer-tokenizer ~30% inflation (Opus 4.7+ / Fable 5 / Mythos 5 / Sonnet 5
+    vs earlier models) is not reversed or materially reduced on a shipped model.
+    So per-file token counts stay model-and-version-specific and cross-vendor
+    code ratios (Claude vs GPT) stay ≥ ~1.4×.
+  confidence: 78
+  due: "2027-Q1"
+  status: open

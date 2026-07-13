@@ -61,9 +61,24 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   under backlash — extended included access to Jul 12, meter from Jul 13, "temporary until capacity" — but
   a promo-extension isn't a walkback (cf. W23 Copilot bet WRONG: GitHub held+tightened, didn't blink;
   Anthropic's blink is 4 days on a promo, meter intact). Direction identical both: flagship metered.
+  W29 (builder lens): a *second* hidden term of the meter, beside caching — the tokenizer. The
+  per-token list price isn't the price you pay; the tokenizer converts your bytes to tokens at a
+  model-specific rate, and for code it diverges hard. One July benchmark (Playcode, single file/study
+  — flagged): a 2,888-char TS file = 681 tok on GPT-5.x's o200k vs 1,178 on Claude's current tokenizer
+  (1.73×; Rust 1.58/JS 1.52/Py 1.50); English prose ~15–20% (VentureBeat). Anthropic's own docs: the
+  newer tokenizer (Opus 4.7+/Fable 5/Mythos 5/Sonnet 5) = ~30% more tokens for the same text → a count
+  cached in spring is a third low; a version bump is a re-pricing event even at a stable rate. Claude's
+  tokenizer is proprietary/undownloadable → the only billed count is the free `count_tokens` API (returns
+  an *estimate*; counts under the model string you pass); GPT/Gemini count offline (tiktoken o200k/cl100k).
+  Rule: never trust a tokenizer you don't call; reconcile vs `usage.input_tokens` (the invoice integers).
+  Honest bound: tokens≠whole cost — output tokens priced separately, caching reclaims the repeated prefix
+  regardless of tokenizer, turns-to-done can swamp a 1.7× input multiplier → ladder is cost/token →
+  cost/file → cost/solved-task, only the last pays. So-what: compare models on cost-per-fixture (20 real
+  files, exact model ID, both providers), not cost-per-token; recount every version bump.
   → [2026-W23](./2026-W23.md), [2026-W28](./2026-W28.md),
   [dive 2026-06-07](./deep-dives/2026-06-07-ai-coding-honest-pricing.md),
-  [dive 2026-07-04](./deep-dives/2026-07-04-code-as-image-token-tax.md)
+  [dive 2026-07-04](./deep-dives/2026-07-04-code-as-image-token-tax.md),
+  [dive 2026-07-14](./deep-dives/2026-07-14-tokenizer-real-price-per-file.md)
 - **The channel war / off-ramps** `↑` — model + open harness both commoditizing
   (Kimi K2.7-Code beats Opus 4.8 on MCPMark 81.1/76.4 at ~1/10 price; OpenCode
   8M MAU, MIT). So spend moved to distribution: Google kills Gemini CLI for
@@ -432,6 +447,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-07-09 (skills) | Claude Code keeps progressive disclosure as the *default* for skills — in a regular (non-subagent) session, only skill name+description are preloaded and the full SKILL.md body loads on invocation, NOT preloaded by default — AND the default always-loaded skill-listing budget stays a small fraction of the context window (skillListingBudgetFraction default ≤ ~0.02, not full-description-for-every-skill) | 80% | by 2027-Q1 | OPEN |
 | 2026-W28 | Through Q1 2027, at least two of {Amazon, Meta, Microsoft, Alphabet} *raise* 2026–2027 AI capex / infrastructure guidance even as frontier API list prices fall or hold — the commoditizing-token vs compounding-infra-bill divergence widens, not closes | 70% | by 2027-Q1 | OPEN |
 | Dive 2026-07-13 (chinese-tokens) | Through Q1 2027, Chinese-origin models stay ≥30% of weekly routed tokens on the main public developer-usage trackers (OpenRouter-class), AND no enacted US measure removes open-weight Chinese models from general commercial use — a federal-procurement/contractor ban at most, not a broad commercial prohibition; the price gap + the download hold | 70% | by 2027-Q1 | OPEN |
+| Dive 2026-07-14 (tokenizer) | Anthropic does NOT ship a downloadable/offline tokenizer for its current models through Q1 2027 — counting the billed token count stays an API round-trip (`count_tokens`), no local library reproduces it — AND the newer-tokenizer ~30% inflation (Opus 4.7+/Fable 5/Mythos 5/Sonnet 5 vs earlier models) is not reversed or materially reduced on a shipped model; so on code, per-file token counts stay model-and-version-specific and cross-vendor code ratios (Claude vs GPT) stay ≥~1.4× | 78% | by 2027-Q1 | OPEN |
 
 **Scorecard: 2 settled · record 1–1 · mean Brier 0.31**
 (W27 settled two: W24 export-ban call RIGHT — fully rescinded Jul 1, Brier 0.12;
@@ -837,3 +853,22 @@ Copilot miss is the honest one: we bet the meter would blink and it didn't.)
   procurement ban. Prediction: ≥30% share + no broad usage ban through Q1'27 (70%). news-to-framework/
   economics. Deepest cut of channel-war/commoditization; siblings export-control (06-15), open-weights
   (06-16), price-cut (06-28), distillation (06-27), portability (06-22).
+- 2026-07-14 — "The List Price Is Per Token. Your Bill Is Per File." (Vance) — devtools/practitioner
+  economics: the per-token sticker price picks the wrong model for a coding agent because the tokenizer
+  is a second, hidden multiplier. Peg: HN "same TypeScript costs more on Claude than on GPT" (Playcode,
+  Jul 14). A tokenizer is a BPE compression table; providers built different ones (OpenAI o200k ~200k
+  vocab, published as tiktoken; Gemini SentencePiece 256k; Claude proprietary/unpublished). Code is the
+  adversarial case (indentation runs, punctuation, split identifiers) and diverges most: one 2,888-char
+  TS file = 681 tok (GPT-5.x) vs 898 (Claude old) vs 1,178 (Claude current) = 1.73× (Rust 1.58/JS 1.52/
+  Py 1.50; single benchmark, flagged); English prose ~15–20% (VentureBeat). Load-bearing primary:
+  Anthropic's own docs say the newer tokenizer (Opus 4.7+/Fable 5/Mythos 5/Sonnet 5) yields ~30% more
+  tokens for the same text (Willison measured 1.46× on a system prompt) → a version bump is a re-pricing
+  event; a cached count goes a third stale. No offline Claude tokenizer → billed count only via the free
+  `count_tokens` API (an *estimate*, counts under the model string passed); rule = never trust a tokenizer
+  you don't call, reconcile vs `usage.input_tokens`. Honest counter: tokens≠whole cost (output priced
+  separately, caching reclaims the cached prefix, turns-to-done can swamp a 1.7× input multiplier) → ladder
+  cost/token → cost/file → cost/solved-task. do/watch/ignore: build a 20-file fixture from your real repo,
+  count per exact model ID both providers, compare cost-per-fixture; recount every bump; ignore prose
+  benchmarks when your workload is code. practical-guide/how-it-works; W29 devtools slot. Lever on
+  repricing/coding-subsidy (meter's hidden terms); siblings caching (06-18), code-as-image (07-04),
+  chinese-tokens (07-13).
