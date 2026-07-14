@@ -448,6 +448,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | 2026-W28 | Through Q1 2027, at least two of {Amazon, Meta, Microsoft, Alphabet} *raise* 2026–2027 AI capex / infrastructure guidance even as frontier API list prices fall or hold — the commoditizing-token vs compounding-infra-bill divergence widens, not closes | 70% | by 2027-Q1 | OPEN |
 | Dive 2026-07-13 (chinese-tokens) | Through Q1 2027, Chinese-origin models stay ≥30% of weekly routed tokens on the main public developer-usage trackers (OpenRouter-class), AND no enacted US measure removes open-weight Chinese models from general commercial use — a federal-procurement/contractor ban at most, not a broad commercial prohibition; the price gap + the download hold | 70% | by 2027-Q1 | OPEN |
 | Dive 2026-07-14 (tokenizer) | Anthropic does NOT ship a downloadable/offline tokenizer for its current models through Q1 2027 — counting the billed token count stays an API round-trip (`count_tokens`), no local library reproduces it — AND the newer-tokenizer ~30% inflation (Opus 4.7+/Fable 5/Mythos 5/Sonnet 5 vs earlier models) is not reversed or materially reduced on a shipped model; so on code, per-file token counts stay model-and-version-specific and cross-vendor code ratios (Claude vs GPT) stay ≥~1.4× | 78% | by 2027-Q1 | OPEN |
+| Dive 2026-07-15 (on-device-speech) | On-device system speech-to-text (Apple `SpeechAnalyzer`/peers) does NOT close the hard-audio gap through Q1 2027 — on a real-world far-field/multi-speaker or accented benchmark (earnings22-class), the on-device model stays *behind* a small hosted/cloud Whisper-class model (as Argmax's earnings22 SpeechAnalyzer 14.0 vs Whisper small.en 12.8 shows), so cloud STT keeps a genuine specialist tier (hard audio + rare languages) rather than being fully displaced — even as it clearly loses the clean-English near-field default to $0 on-device | 70% | by 2027-Q1 | OPEN |
 
 **Scorecard: 2 settled · record 1–1 · mean Brier 0.31**
 (W27 settled two: W24 export-ban call RIGHT — fully rescinded Jul 1, Brier 0.12;
@@ -872,3 +873,26 @@ Copilot miss is the honest one: we bet the meter would blink and it didn't.)
   benchmarks when your workload is code. practical-guide/how-it-works; W29 devtools slot. Lever on
   repricing/coding-subsidy (meter's hidden terms); siblings caching (06-18), code-as-image (07-04),
   chinese-tokens (07-13).
+- 2026-07-15 — "2.12%: The Number That Ends the Speech-to-Text Round-Trip" (Quist) — on-device vs
+  cloud speech-to-text, the x-vs-y/economics. Peg: HN benchmark (Inscribe/get-inscribe, Jul 14 — one
+  team's LibriSpeech run on read English, flagged) of Apple's iOS/macOS 26 `SpeechAnalyzer`/
+  `SpeechTranscriber`. Numbers (LibriSpeech, on-device, M2 Pro): SpeechAnalyzer 2.12% clean / 4.56%
+  noisy WER vs Whisper Small 3.74%/7.95% (~460MB), Base 5.42%/12.51%, Tiny 7.88%/17.04%, legacy
+  SFSpeechRecognizer 9.02%/16.25% → Apple cut its own WER 3.5–4× in one gen AND the free system model
+  now beats the *small* Whisper devs actually ship on-device. Ceiling unmoved: Whisper Large v3 ~2.1%
+  clean but GPU-bound, not real-time on-device. Speed: 12–40× real-time (1hr → 1.5–5 min); MacStories'
+  Yap = 34-min video → 45s SRT, 2.2× vs MacWhisper Large V3 Turbo; API streams volatile→final results
+  via AsyncSequence (WWDC25 s277, Apple docs). Economics: cloud STT $/min — OpenAI whisper-1 $0.006,
+  Deepgram Nova-3 $0.0043 batch, AssemblyAI ~$0.0025 list, Groq Turbo ~$0.0006 — vs $0 marginal
+  on-device; 1M user-hours/mo = ~$360k (OpenAI) the on-device competitor spends $0, + kills the network
+  dep, latency floor, and privacy liability. Honest counter (the read-vs-real gap): LibriSpeech is read
+  English (easy); on earnings22 (real far-field/multi-speaker) Argmax measured SpeechAnalyzer 14.0 WER
+  *behind* Whisper small.en 12.8 (vendor source, flagged) — and Apple covers ~10 langs/~30 locales vs
+  Whisper's 100+. So the default flipped for the COMMON case (English/near-field/one-speaker); cloud STT
+  becomes the *specialist* tier (languages, hard audio, frontier accuracy), not dead. Frame = mirror of
+  the local-coding-model dive (06-17): on-device wins exactly when the model is small + the task bounded
+  (STT under the line), loses when it must be 150GB (coding over it) — same deciding variable, opposite
+  verdict. Deciding quantity = device-WER − cloud-WER on YOUR audio, weighed vs $0.006/min + the network
+  dep; ~0 for clean English, still positive elsewhere. x-vs-y/economics. Lever on channel-war/
+  commoditization (commodity tier → $0 on-device, frontier stays paid); siblings local-coding (06-17),
+  chinese-tokens (07-13), price-cut (06-28).

@@ -489,3 +489,17 @@
   confidence: 78
   due: "2027-Q1"
   status: open
+
+- id: dive-2026-07-15-on-device-speech
+  made: "Dive · 2026-07-15"
+  made_link: "/reports/deep-dives/2026-07-15-on-device-speech-vs-cloud.html"
+  text: >-
+    On-device system speech-to-text (Apple SpeechAnalyzer and peers) does NOT
+    close the hard-audio gap through Q1 2027: on a real-world far-field /
+    multi-speaker / accented benchmark (earnings22-class), the on-device model
+    stays behind a small hosted or cloud Whisper-class model — so cloud STT keeps
+    a genuine specialist tier (hard audio + rare languages), even as it plainly
+    loses the clean-English, near-field, single-speaker default to $0 on-device.
+  confidence: 70
+  due: "2027-Q1"
+  status: open

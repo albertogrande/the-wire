@@ -53,6 +53,15 @@ overtakes becomes a `news-to-framework` piece instead — that's fine.
   end — tokenizer × per-token price × output share × cache-hit rate × turns-to-done —
   instead of ranking models by the per-token list price (Analyst) [surfaced by the
   07-14 tokenizer-price dive]
+- [x-vs-y] On-device vs cloud inference, the general rule: the decision is model-size
+  the task needs ÷ device memory budget — why speech-to-text flipped to on-device
+  (small model, bounded task) while frontier coding didn't (~150GB model), and how to
+  tell which side of the line a workload sits on (Analyst) [surfaced by the 07-15
+  on-device-speech dive; sibling to local-coding 06-17]
+- [how-it-works] How speech recognition is scored and built: what word error rate
+  (WER) actually counts, why read-speech benchmarks (LibriSpeech) flatter a model vs
+  real far-field/multi-speaker audio (earnings22), streaming volatile-vs-final results,
+  and the accuracy/latency/coverage tradeoffs of a transcription stack (Analyst)
 
 ## Live — Claude Code & agent engineering
 
