@@ -88,8 +88,15 @@ Code Watch.*
   actually buys you (Operator)
 - [how-it-works] Driving Claude Code headless from CI: the unattended-agent
   workflow pattern (Operator)
-- [practical-guide] Reading your context window: /context, the status line, and
-  what's actually eating your tokens (Builder)
+- [how-it-works] Tool Search / deferred tool loading from the inside: how
+  `defer_loading` and an on-demand tool-discovery step keep a 58-tool library out of
+  context until the model needs 3–5 of them, the round-trip it adds, and why fewer
+  tools in view *raises* tool-call accuracy — not just cuts tokens (Operator/Analyst)
+  [surfaced by the 07-16 context-tax dive]
+- [practical-guide] An MCP context-budget audit: measuring each connected server's
+  standing token cost with /context, ranking them by cost-per-use, and deciding which
+  to defer, disconnect, or scope per-project (Operator) [surfaced by the 07-16
+  context-tax dive]
 - [postmortem] When a compaction summary drops the thing you needed — designing
   CLAUDE.md compaction rules and checkpoints that survive the save (Builder)
 - [architecture] The anatomy of an MCP server: transport, tool schemas, and
@@ -255,6 +262,10 @@ product engineering" pools above.*
 
 ## Used
 
+- [practical-guide] Reading your context window: /context, /doctor, and what's
+  actually eating your tokens — the fixed preamble + the MCP tool-schema tax
+  (Operator) — 2026-07-16,
+  reports/deep-dives/2026-07-16-context-tax-before-your-prompt.md
 - [what-every-engineer-should-know] What a benchmark number actually measures —
   and how to read a model card without being fooled (Contrarian) — 2026-06-13,
   reports/deep-dives/2026-06-12-reading-a-coding-benchmark.md

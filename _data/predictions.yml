@@ -503,3 +503,17 @@
   confidence: 70
   due: "2027-Q1"
   status: open
+
+- id: dive-2026-07-16-context-tax
+  made: "Dive · 2026-07-16"
+  made_link: "/reports/deep-dives/2026-07-16-context-tax-before-your-prompt.html"
+  text: >-
+    Claude Code (the standard CLI) does NOT make MCP tool-definition deferral
+    the default through Q1 2027 — a freshly connected MCP server still injects
+    its full tool schemas into every request by default, and pruning stays a
+    manual opt-in (/doctor, defer_loading, or disconnecting the server); no
+    on-by-default Tool-Search / deferred-loading path ships in the CLI that
+    hides an unused server's schemas without the user configuring it.
+  confidence: 65
+  due: "2027-Q1"
+  status: open

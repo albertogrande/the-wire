@@ -303,6 +303,25 @@
     mechanism* (delegated to "the agent provider and user agent") + ships `untrustedContentHint`
     because a tool's output can carry a prompt injection back. So-what: switch browser agents to
     snapshot-first now; treat page-declared tools like any other untrusted input.
+    W29 (operator lens): the context brake *before the conversation starts* — the fixed preamble
+    every request pays. A wire-level proxy measured Claude Code sending ~33k tokens before the user
+    prompt vs OpenCode's ~7k (Systima, HN #1, 206 comments — one team's snapshot), and ~72% of it is
+    tool schemas (27 built-in tools ~24k), not the system prompt (~6.5k). A leaner trace found a
+    14,328-token floor via a cache_read reset, so treat the total as version/config-specific in a
+    ~14k–33k band; the mechanism (fixed, re-sent every request, tool-schema-dominated) is the durable
+    part. MCP is the swing line: every connected server injects all its tool schemas into every
+    request whether used or not (Postgres ~35 tokens, GitHub MCP ~55k; a loaded real-world setup runs
+    75–85k = a third of the window gone before a keystroke). Prompt caching refunds the *dollars* (the
+    byte-identical prefix caches at ~0.1×) but not the *window* (still occupied, hits compaction
+    sooner) or the *attention*: Anthropic's own number — deferring so the model sees ~3–5 tools not
+    58 raised MCP-eval accuracy 79.5%→88.1% on Opus 4.5 and 49%→74% on Opus 4, so a crowded tool list
+    makes the model worse, and caching doesn't refund those points. Fix chain: /context reads the bill
+    by category; /doctor (alias /checkup, v2.1.205, Jul 8) prunes unused skills/MCP against their
+    context cost, dedups CLAUDE.md, and flags slow hooks; defer_loading:true / the Tool Search Tool
+    cuts 58 tools across 5 servers from ~55k to ~8.7k (85%, preserving 191,300 vs 122,800 tokens) — or
+    just disconnect the servers you aren't using. Caveat: deferral is an opt-in setting on the
+    Developer Platform, not a CLI default (the open question, and this dive's prediction). So-what: the
+    preamble isn't free just because it's cached — measure, prune, defer to buy back window + attention.
   issues:
     - { label: "Dive · Autonomy Shipped Before Its Brakes Did", link: "/reports/deep-dives/2026-06-08-autonomy-before-brakes.html" }
     - { label: "Dive · 'Agent' Is a Control-Flow Decision, Not a Product", link: "/reports/deep-dives/2026-06-19-agent-is-a-control-flow-decision.html" }
@@ -316,6 +335,7 @@
     - { label: "Dive · Your Agent Pushed That Commit While You Weren't Looking", link: "/reports/deep-dives/2026-07-08-agent-audit-trail-unattended-commits.html" }
     - { label: "Dive · A Skill Costs You One Sentence Until You Use It", link: "/reports/deep-dives/2026-07-09-skill-costs-one-sentence.html" }
     - { label: "Dive · Stop Handing Your Agent a Screenshot of Your Own App", link: "/reports/deep-dives/2026-07-11-browser-as-agent-runtime.html" }
+    - { label: "Dive · Your Session Starts 33,000 Tokens in the Hole", link: "/reports/deep-dives/2026-07-16-context-tax-before-your-prompt.html" }
 
 - slug: platforms-eat-the-layer
   title: "Platforms eat the layer"

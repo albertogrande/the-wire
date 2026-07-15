@@ -290,6 +290,17 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   cheap/reliable default meanwhile is the accessibility-tree snapshot, not vision (a 1080p
   screenshot = 2,691 visual tokens/step on Opus 4.8 vs ~200–400 for a snapshot).
   → [dive 2026-07-11](./deep-dives/2026-07-11-browser-as-agent-runtime.md)
+  W29 (operator lens): the context brake *before the conversation even starts* — the fixed
+  preamble. A wire-level proxy measured Claude Code sending ~33k tokens before the user prompt
+  vs OpenCode's ~7k (Systima, HN #1), ~72% of it tool schemas (27 built-ins ~24k), not the
+  system prompt; MCP is the swing (each server injects all its tool schemas every request —
+  GitHub MCP ~55k alone; loaded setups 75–85k = ⅓ of the window before a keystroke). Caching
+  refunds the *dollars* (byte-identical prefix) but not the *window* or the *attention*:
+  Anthropic's own number — deferring to ~3–5 tools raised MCP-eval accuracy 79.5%→88.1% (Opus
+  4.5), 49%→74% (Opus 4), so a crowded tool list makes the model worse. Fix: /context to read
+  it, /doctor (v2.1.205, finds unused skills/MCP vs cost + dedups CLAUDE.md), defer_loading /
+  Tool Search (55k→8.7k, 85% cut) or disconnect unused servers. Deferral is opt-in, not a CLI
+  default (open Q). → [dive 2026-07-16](./deep-dives/2026-07-16-context-tax-before-your-prompt.md)
 - **Platforms eat the layer** `↑` — the LLMOps tool layer (gateway, tracing,
   eval, prompt store) is being absorbed from both ends: ClickHouse bought
   Langfuse (Jan, already built on ClickHouse; 23.1M SDK installs/mo) to own the
@@ -448,6 +459,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | 2026-W28 | Through Q1 2027, at least two of {Amazon, Meta, Microsoft, Alphabet} *raise* 2026–2027 AI capex / infrastructure guidance even as frontier API list prices fall or hold — the commoditizing-token vs compounding-infra-bill divergence widens, not closes | 70% | by 2027-Q1 | OPEN |
 | Dive 2026-07-13 (chinese-tokens) | Through Q1 2027, Chinese-origin models stay ≥30% of weekly routed tokens on the main public developer-usage trackers (OpenRouter-class), AND no enacted US measure removes open-weight Chinese models from general commercial use — a federal-procurement/contractor ban at most, not a broad commercial prohibition; the price gap + the download hold | 70% | by 2027-Q1 | OPEN |
 | Dive 2026-07-14 (tokenizer) | Anthropic does NOT ship a downloadable/offline tokenizer for its current models through Q1 2027 — counting the billed token count stays an API round-trip (`count_tokens`), no local library reproduces it — AND the newer-tokenizer ~30% inflation (Opus 4.7+/Fable 5/Mythos 5/Sonnet 5 vs earlier models) is not reversed or materially reduced on a shipped model; so on code, per-file token counts stay model-and-version-specific and cross-vendor code ratios (Claude vs GPT) stay ≥~1.4× | 78% | by 2027-Q1 | OPEN |
+| Dive 2026-07-16 (context-tax) | Claude Code (the standard CLI) does NOT make MCP tool-definition deferral the *default* through Q1 2027 — a freshly connected MCP server still injects its full tool schemas into every request by default, and pruning stays a manual opt-in (`/doctor`, `defer_loading`, or disconnecting the server); no on-by-default Tool-Search/deferred-loading path ships in the CLI that hides an unused server's schemas without the user configuring it | 65% | by 2027-Q1 | OPEN |
 | Dive 2026-07-15 (on-device-speech) | On-device system speech-to-text (Apple `SpeechAnalyzer`/peers) does NOT close the hard-audio gap through Q1 2027 — on a real-world far-field/multi-speaker or accented benchmark (earnings22-class), the on-device model stays *behind* a small hosted/cloud Whisper-class model (as Argmax's earnings22 SpeechAnalyzer 14.0 vs Whisper small.en 12.8 shows), so cloud STT keeps a genuine specialist tier (hard audio + rare languages) rather than being fully displaced — even as it clearly loses the clean-English near-field default to $0 on-device | 70% | by 2027-Q1 | OPEN |
 
 **Scorecard: 2 settled · record 1–1 · mean Brier 0.31**
@@ -896,3 +908,32 @@ Copilot miss is the honest one: we bet the meter would blink and it didn't.)
   dep; ~0 for clean English, still positive elsewhere. x-vs-y/economics. Lever on channel-war/
   commoditization (commodity tier → $0 on-device, frontier stays paid); siblings local-coding (06-17),
   chinese-tokens (07-13), price-cut (06-28).
+- 2026-07-16 — "Your Session Starts 33,000 Tokens in the Hole. Most of That Is Tools You
+  Won't Use." (Sandoval, Claude Code edition) — the fixed preamble every request pays,
+  a new front on the context-budget thread (06-25 = the *growing* conversation; this = the
+  *fixed startup* tax). Peg: wire-level proxy measured Claude Code ~33k tokens before the
+  user prompt vs OpenCode ~7k (4.7×; Systima, HN #1 206 comments — one team's snapshot,
+  flagged). Breakdown: system prompt ~6.5k (3 blocks) + tool schemas ~24k (27 built-in
+  tools, Piebald extract) + agent/skill scaffolding ~2k → tool defs are ~72% of the bill,
+  not the system prompt. A leaner trace found a 14,328-tok floor via cache_read-reset
+  (slima4) → treat the total as version/config-specific in a ~14k–33k band; the mechanism
+  (fixed, re-sent every request, tool-schema-dominated) is the durable part. The swing line
+  is MCP: every connected server injects ALL its tool schemas every request used-or-not —
+  Postgres ~35 tok, GitHub MCP ~55k, Playwright ~3,500, 20-tool server 5–10k; 5 servers
+  ~55k "before the agent says a word" (kenimo); loaded real setup 75–85k = a third of the
+  window gone (practitioner accounting, flagged). Honest counter: prompt caching (06-18)
+  refunds the *dollars* (byte-identical prefix, cache-read ~0.1×) but NOT the *window*
+  (still occupies 200k, hits compaction sooner) or the *attention* — Anthropic's own number:
+  deferring tools so the model sees ~3–5 not 58 raised MCP-eval accuracy 79.5%→88.1% (Opus
+  4.5), 49%→74% (Opus 4) → a crowded tool list makes the model worse, and caching doesn't
+  refund those 25 points. Fix chain: measure with /context (itemized by category), prune with
+  /doctor (alias /checkup, v2.1.205 Jul 8 — finds unused skills/MCP vs context cost, dedups
+  CLAUDE.md, trims derivable CLAUDE.md, flags slow hooks, fixes on confirm), defer heavy MCP
+  schemas (`defer_loading:true` / Tool Search Tool: 58 tools/5 servers 55k→8.7k, preserves
+  191,300 vs 122,800 tok = 85% cut — Anthropic advanced tool use) or just disconnect unused
+  servers. Caveat: deferral is an opt-in setting on the Developer Platform, NOT a CLI default
+  (some write-ups claim default-on; Anthropic docs describe a flag — flagged). So-what: the
+  preamble isn't free just because it's cached; measure→prune→defer to buy back window +
+  attention. practical-guide/reference; Claude Code slot for W29. Lever on autonomy-before-
+  brakes/context-budget; siblings context-budget (06-25), skills (07-09), caching (06-18),
+  tokenizer (07-14).
