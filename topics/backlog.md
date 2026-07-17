@@ -175,6 +175,18 @@ Code Watch.*
   harvest first: internet-facing known-CVE services, default credentials
   (minioadmin:minioadmin), unrotated signing keys — and the boring hardening that
   actually blunts an agentic attacker (Builder/Analyst)
+- [practical-guide] Proxy your agent: a mitmproxy recipe for reading exactly what
+  a coding CLI sends over the wire — the host list, the request bodies, the
+  telemetry pipes — and the traffic-control env vars worth setting (Builder)
+  [surfaced by the 07-17 agent-egress dive; that piece is the news peg — this is
+  the deeper standalone how-to]
+- [reference] The MCP trust boundary: every connected server sees what you hand
+  it — mapping the data-egress surface of a loaded MCP config, per-server scoping,
+  and what "State of MCP Security 2026" actually found (Builder/Analyst)
+  [surfaced by the 07-17 agent-egress dive]
+- [x-vs-y] Open-source vs closed coding CLIs as a *trust* decision (not a price
+  one): what reading the source buys you, what it doesn't, and why license ≠ safety
+  once the tool runs with your keys (Contrarian) [surfaced by the 07-17 dive]
 
 ## Live — DevRel, dev marketing, product engineering
 

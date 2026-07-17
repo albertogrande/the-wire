@@ -192,9 +192,19 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   surface = a defense-and-hygiene story, not a superhacker. Loot detail: the agent swept for
   OpenAI/Anthropic/DeepSeek/AWS keys + crypto wallets (levers machine-buyer thread — creds are
   fuel *and* payment rail). Cross-levers autonomy-before-brakes.
+  W29 (builder lens): the trust boundary moved *inside your own toolchain* — the coding agent
+  is a networked program holding your keys + reading every file. cereblab's mitmproxy teardown
+  (Jul 13, single-source) caught xAI's Grok CLI uploading a whole 12 GB test repo (5.1 GiB, 73
+  ~75MB chunks) to `gs://grok-code-session-traces`, unredacted `.env` secrets on `/v1/responses` +
+  `/v1/storage`, including files the agent was told not to open — then xAI open-sourced Grok Build
+  (Apache 2.0) Jul 16. Three egress channels (model request unavoidable / telemetry / third-party
+  MCP); Claude Code telemetry redacts code+prompts+paths by default (docs), Grok's didn't. Can't
+  tell from the marketing page → proxy it (`HTTPS_PROXY`+`NODE_EXTRA_CA_CERTS`) or read the source;
+  license ≠ safety. Cross-levers channel-war (open-the-CLI = trust move).
   → [2026-W23](./2026-W23.md),
   [dive 2026-06-10](./deep-dives/2026-06-10-trust-stack-human-speed.md),
-  [dive 2026-07-07](./deep-dives/2026-07-07-autonomous-ransomware-known-cve.md)
+  [dive 2026-07-07](./deep-dives/2026-07-07-autonomous-ransomware-known-cve.md),
+  [dive 2026-07-17](./deep-dives/2026-07-17-what-your-coding-agent-sends.md)
 - **Autonomy before its brakes** `↑` — Agents shipped proactive-by-default
   (Fable 5 "relentlessly proactive," Claude Code nested sub-agents 5-deep +
   doubled 5h limits, FablePool) before the cost-control/consent/observability
@@ -460,6 +470,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-07-13 (chinese-tokens) | Through Q1 2027, Chinese-origin models stay ≥30% of weekly routed tokens on the main public developer-usage trackers (OpenRouter-class), AND no enacted US measure removes open-weight Chinese models from general commercial use — a federal-procurement/contractor ban at most, not a broad commercial prohibition; the price gap + the download hold | 70% | by 2027-Q1 | OPEN |
 | Dive 2026-07-14 (tokenizer) | Anthropic does NOT ship a downloadable/offline tokenizer for its current models through Q1 2027 — counting the billed token count stays an API round-trip (`count_tokens`), no local library reproduces it — AND the newer-tokenizer ~30% inflation (Opus 4.7+/Fable 5/Mythos 5/Sonnet 5 vs earlier models) is not reversed or materially reduced on a shipped model; so on code, per-file token counts stay model-and-version-specific and cross-vendor code ratios (Claude vs GPT) stay ≥~1.4× | 78% | by 2027-Q1 | OPEN |
 | Dive 2026-07-16 (context-tax) | Claude Code (the standard CLI) does NOT make MCP tool-definition deferral the *default* through Q1 2027 — a freshly connected MCP server still injects its full tool schemas into every request by default, and pruning stays a manual opt-in (`/doctor`, `defer_loading`, or disconnecting the server); no on-by-default Tool-Search/deferred-loading path ships in the CLI that hides an unused server's schemas without the user configuring it | 65% | by 2027-Q1 | OPEN |
+| Dive 2026-07-17 (agent-egress) | Claude Code (the standard CLI) stays closed-source through Q1 2027 — Anthropic does NOT open-source the core agent/CLI, and answers the transparency competition (against open challengers OpenCode/Grok Build) with published data-flow docs + telemetry opt-outs rather than a source release; the frontier vendors keep the harness closed even as challengers go open | 72% | by 2027-Q1 | OPEN |
 | Dive 2026-07-15 (on-device-speech) | On-device system speech-to-text (Apple `SpeechAnalyzer`/peers) does NOT close the hard-audio gap through Q1 2027 — on a real-world far-field/multi-speaker or accented benchmark (earnings22-class), the on-device model stays *behind* a small hosted/cloud Whisper-class model (as Argmax's earnings22 SpeechAnalyzer 14.0 vs Whisper small.en 12.8 shows), so cloud STT keeps a genuine specialist tier (hard audio + rare languages) rather than being fully displaced — even as it clearly loses the clean-English near-field default to $0 on-device | 70% | by 2027-Q1 | OPEN |
 
 **Scorecard: 2 settled · record 1–1 · mean Brier 0.31**
@@ -937,3 +948,26 @@ Copilot miss is the honest one: we bet the meter would blink and it didn't.)
   attention. practical-guide/reference; Claude Code slot for W29. Lever on autonomy-before-
   brakes/context-budget; siblings context-budget (06-25), skills (07-09), caching (06-18),
   tokenizer (07-14).
+- 2026-07-17 — "It Uploaded the Files You Told It Not to Open" (Vance) — a new front:
+  the *data egress* of your coding agent (distinct from 07-16's token *count* and 07-08's
+  action *audit*). Peg: cereblab's mitmproxy teardown of xAI's Grok CLI (Jul 13, single-source
+  gist) caught it uploading the WHOLE repo — 5.1 GiB of a 12 GB test repo in 73 ~75MB chunks to
+  `gs://grok-code-session-traces`, unredacted `.env` secrets on `POST /v1/responses` + `/v1/storage`,
+  including files the agent was told not to open — then xAI open-sourced Grok Build (Apache 2.0,
+  Rust) Jul 16, README calling network/telemetry specifics "implementation details." Frame: three
+  egress channels, only one unavoidable — (1) the model request (necessarily prompt+context+file
+  contents; Anthropic docs "all user prompts and model outputs"; CC sends context, not the whole
+  tree by default), (2) telemetry/diagnostics (CC metrics default-on Claude API "never include your
+  code, prompts, or file paths"; error reports Pro/Max v2.1.198+ redacted; WebFetch hostname preflight
+  always-on, not covered by the master switch), (3) third parties via MCP/tools (State of MCP Security
+  2026). Method (the payoff): mitmproxy + `HTTPS_PROXY` + `NODE_EXTRA_CA_CERTS`, read one turn — how
+  many hosts / what's in the body / size shape; or grep the source for open tools (Grok Build Apache,
+  OpenCode MIT). Knobs: `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1` (folds telemetry/error/bug/survey,
+  NOT WebFetch preflight); Pro/Max personal data can train if setting on, commercial/API not by default;
+  `~/.claude/projects/` plaintext transcripts 30d. Extension (unforced, channel/dev-marketing): harness
+  commoditizes → trust = legibility → open-source-the-CLI is the new trust move; same logic as docs-as-
+  distribution (07-04). Ignore license-≠-safety (Grok open yet captured; CC closed yet redacts). Prediction:
+  CC stays closed-source through Q1'27, answers transparency with data-flow docs + telemetry switches not
+  source (72%). practical-guide/how-it-works. Opens toolchain-data-egress front on supply-chain-vs-throughput
+  + channel-war threads; siblings audit-trail (07-08), context-tax (07-16), docs-as-distribution (07-04),
+  hooks (07-02).

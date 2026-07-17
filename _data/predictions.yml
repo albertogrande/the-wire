@@ -517,3 +517,17 @@
   confidence: 65
   due: "2027-Q1"
   status: open
+
+- id: dive-2026-07-17-agent-egress
+  made: "Dive · 2026-07-17"
+  made_link: "/reports/deep-dives/2026-07-17-what-your-coding-agent-sends.html"
+  text: >-
+    Claude Code (the standard CLI) stays closed-source through Q1 2027 —
+    Anthropic does NOT open-source the core agent/CLI, and answers the
+    transparency competition (against open challengers OpenCode and Grok Build)
+    with published data-flow docs plus telemetry opt-outs rather than a source
+    release; the frontier vendors keep the harness closed even as challengers go
+    open.
+  confidence: 72
+  due: "2027-Q1"
+  status: open

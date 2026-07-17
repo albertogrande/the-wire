@@ -178,6 +178,16 @@
     marginal cost of the already-possible attack, shifting the threat to volume and
     lower-skill operators against the exposed/unpatched/default surface. A
     defense-and-hygiene problem, not a superhacker.
+    W29 (builder lens): the trust boundary moved inside your own toolchain — the coding
+    agent itself is a networked program holding your keys and reading every file. An
+    independent mitmproxy teardown (cereblab, Jul 13, single-source) caught xAI's Grok CLI
+    uploading a whole 12 GB test repo (5.1 GiB, 73 chunks) to a `grok-code-session-traces`
+    bucket, unredacted `.env` secrets included, plus files the agent was told not to open —
+    then xAI open-sourced Grok Build (Apache 2.0) days later. Three egress channels (model
+    request / telemetry / third-party MCP); only the model request is unavoidable, and Claude
+    Code's telemetry redacts code+prompts+paths by default while Grok's did not. You can't tell
+    from the marketing page — you proxy it (`HTTPS_PROXY` + `NODE_EXTRA_CA_CERTS`) or read the
+    source. License ≠ safety (Grok open yet captured; Claude Code closed yet redacts).
   tension: >-
     Defenses ship at institution speed, attacks at copy-paste speed; the
     exploited OIDC ref-binding hole remains unfixed (npm v12 closes install
@@ -186,6 +196,7 @@
     - { label: "2026-W23", link: "/reports/2026-W23.html" }
     - { label: "Dive · The Trust Stack", link: "/reports/deep-dives/2026-06-10-trust-stack-human-speed.html" }
     - { label: "Dive · The AI Ran the Ransomware", link: "/reports/deep-dives/2026-07-07-autonomous-ransomware-known-cve.html" }
+    - { label: "Dive · It Uploaded the Files You Told It Not to Open", link: "/reports/deep-dives/2026-07-17-what-your-coding-agent-sends.html" }
 
 - slug: autonomy-before-brakes
   title: "Autonomy before its brakes"
