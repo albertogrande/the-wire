@@ -531,3 +531,18 @@
   confidence: 72
   due: "2027-Q1"
   status: open
+
+- id: dive-2026-07-18-reasoning-cost
+  made: "Dive · 2026-07-18"
+  made_link: "/reports/deep-dives/2026-07-18-reasoning-tokens-cost-per-answer.html"
+  text: >-
+    Through Q1 2027, on a hard contamination-resistant reasoning/agentic
+    benchmark, no frontier lab demonstrates that reaching its TOP accuracy tier
+    costs materially fewer tokens-per-solved-task than the prior generation —
+    per-token list prices keep falling but peak-accuracy cost-per-solved-task
+    stays flat-to-rising, because closing the last points keeps requiring
+    super-linear test-time compute (long thinking plus best-of-N); the
+    reasoning/sampling tax is passed to the bill, not absorbed by training.
+  confidence: 70
+  due: "2027-Q1"
+  status: open

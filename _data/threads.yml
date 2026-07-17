@@ -56,12 +56,25 @@
     more tokens for the same text, so a version bump is a re-pricing event at a stable
     rate — and Claude's tokenizer is unpublished, so the billed count is only an API
     round-trip. Compare models on cost-per-file, not cost-per-token.
+    W29 (analyst lens): the *third* and largest hidden multiplier, beside caching and the
+    tokenizer — reasoning/sampling. The frontier's capability gains moved to test-time compute:
+    the model emits thousands of hidden thinking tokens per answer, billed at the OUTPUT rate
+    (~5× input) and not shown to you (Anthropic docs: the "billed output token count will not
+    match" the visible response; OpenAI: reasoning tokens billed as output, "not visible via the
+    API"). Accuracy rises log-linear in compute so the last points are exponential — o3 on
+    ARC-AGI went 75.7% at ~$26/task to 87.5% using 172× the compute (~$4,560/task, 1,024
+    samples). Two knobs: think-longer (thinkingBudget) and sample-more (best-of-N, the "64
+    subagents" behind GPT-5.6 Sol's unverified proof). Gemini 3.5 Pro gates Deep Think behind the
+    $250/mo Ultra tier — the pricing tell. So the per-token floor and the per-answer ceiling move
+    opposite: the cheap token buys a more expensive answer. Measure cost-per-solved-task, not
+    cost-per-token.
   issues:
     - { label: "2026-W23", link: "/reports/2026-W23.html" }
     - { label: "Dive · The Meter Is the Confession", link: "/reports/deep-dives/2026-06-07-ai-coding-honest-pricing.html" }
     - { label: "Dive · Prompt Caching Pays 90% Off", link: "/reports/deep-dives/2026-06-18-prompt-caching-hit-rate.html" }
     - { label: "Dive · Imaging Your Code Is a Lossy Bet", link: "/reports/deep-dives/2026-07-04-code-as-image-token-tax.html" }
     - { label: "Dive · The List Price Is Per Token", link: "/reports/deep-dives/2026-07-14-tokenizer-real-price-per-file.html" }
+    - { label: "Dive · Eleven More Points Cost 172×", link: "/reports/deep-dives/2026-07-18-reasoning-tokens-cost-per-answer.html" }
 
 - slug: channel-war-offramps
   title: "The channel war / off-ramps"

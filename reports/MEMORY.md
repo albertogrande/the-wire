@@ -75,10 +75,26 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   regardless of tokenizer, turns-to-done can swamp a 1.7× input multiplier → ladder is cost/token →
   cost/file → cost/solved-task, only the last pays. So-what: compare models on cost-per-fixture (20 real
   files, exact model ID, both providers), not cost-per-token; recount every version bump.
+  W29 (analyst lens): the *third* and largest hidden multiplier of the meter, beside caching + tokenizer —
+  reasoning/sampling. The frontier's capability gains moved to test-time compute: the model emits thousands
+  of hidden thinking tokens per answer, billed at the OUTPUT rate (~5× input) and not shown (Anthropic docs:
+  "billed output token count will not match" the visible response; OpenAI: reasoning tokens billed as output,
+  "not visible via the API," "a few hundred to tens of thousands," reserve ≥25k). Accuracy rises log-linear
+  in compute (OpenAI o1 on AIME) so the last points are exponential: o1 AIME 12%(GPT-4o)→74%(1 sample)→83%
+  (64 samples)→93%(1,000 samples); o3 ARC-AGI 75.7% @ ~$26/task → 87.5% @ 172× compute (~$4,560/task, 1,024
+  samples). Two knobs: think-longer (thinkingBudget) + sample-more (best-of-N / self-consistency, Wang 2022 —
+  the "64 subagents" behind GPT-5.6 Sol's unverified Cycle-Double-Cover proof). Gemini 3.5 Pro (Jul 17) gates
+  Deep Think behind the $250/mo Ultra tier = the pricing tell. So the per-token floor (46% Chinese tokens) and
+  the per-answer ceiling move opposite: token cheap, tokens-per-answer up, on the output side, without limit.
+  Cross-levers labs-go-vertical (test-time compute is the demand pump keeping inference capex alive — TSMC sold
+  out, Anthropic $1.25B/mo, Samsung chip talks). So-what: measure cost/solved-task + output-token share; cap
+  thinkingBudget/N by difficulty (Snell: allocate compute by difficulty); deciding quantity = $/correct-answer
+  at required accuracy, set on the hard end by samples×thinking-tokens (now 172×).
   → [2026-W23](./2026-W23.md), [2026-W28](./2026-W28.md),
   [dive 2026-06-07](./deep-dives/2026-06-07-ai-coding-honest-pricing.md),
   [dive 2026-07-04](./deep-dives/2026-07-04-code-as-image-token-tax.md),
-  [dive 2026-07-14](./deep-dives/2026-07-14-tokenizer-real-price-per-file.md)
+  [dive 2026-07-14](./deep-dives/2026-07-14-tokenizer-real-price-per-file.md),
+  [dive 2026-07-18](./deep-dives/2026-07-18-reasoning-tokens-cost-per-answer.md)
 - **The channel war / off-ramps** `↑` — model + open harness both commoditizing
   (Kimi K2.7-Code beats Opus 4.8 on MCPMark 81.1/76.4 at ~1/10 price; OpenCode
   8M MAU, MIT). So spend moved to distribution: Google kills Gemini CLI for
@@ -472,6 +488,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-07-16 (context-tax) | Claude Code (the standard CLI) does NOT make MCP tool-definition deferral the *default* through Q1 2027 — a freshly connected MCP server still injects its full tool schemas into every request by default, and pruning stays a manual opt-in (`/doctor`, `defer_loading`, or disconnecting the server); no on-by-default Tool-Search/deferred-loading path ships in the CLI that hides an unused server's schemas without the user configuring it | 65% | by 2027-Q1 | OPEN |
 | Dive 2026-07-17 (agent-egress) | Claude Code (the standard CLI) stays closed-source through Q1 2027 — Anthropic does NOT open-source the core agent/CLI, and answers the transparency competition (against open challengers OpenCode/Grok Build) with published data-flow docs + telemetry opt-outs rather than a source release; the frontier vendors keep the harness closed even as challengers go open | 72% | by 2027-Q1 | OPEN |
 | Dive 2026-07-15 (on-device-speech) | On-device system speech-to-text (Apple `SpeechAnalyzer`/peers) does NOT close the hard-audio gap through Q1 2027 — on a real-world far-field/multi-speaker or accented benchmark (earnings22-class), the on-device model stays *behind* a small hosted/cloud Whisper-class model (as Argmax's earnings22 SpeechAnalyzer 14.0 vs Whisper small.en 12.8 shows), so cloud STT keeps a genuine specialist tier (hard audio + rare languages) rather than being fully displaced — even as it clearly loses the clean-English near-field default to $0 on-device | 70% | by 2027-Q1 | OPEN |
+| Dive 2026-07-18 (reasoning-cost) | Through Q1 2027, on a hard contamination-resistant reasoning/agentic benchmark, no frontier lab demonstrates that reaching its TOP accuracy tier costs *materially fewer* tokens-per-solved-task than the prior generation — per-token list prices keep falling but peak-accuracy cost-per-solved-task stays flat-to-rising, because closing the last points keeps requiring super-linear test-time compute (long thinking + best-of-N); the reasoning/sampling tax is passed to the bill, not absorbed by training | 70% | by 2027-Q1 | OPEN |
 
 **Scorecard: 2 settled · record 1–1 · mean Brier 0.31**
 (W27 settled two: W24 export-ban call RIGHT — fully rescinded Jul 1, Brier 0.12;
@@ -971,3 +988,24 @@ Copilot miss is the honest one: we bet the meter would blink and it didn't.)
   source (72%). practical-guide/how-it-works. Opens toolchain-data-egress front on supply-chain-vs-throughput
   + channel-war threads; siblings audit-trail (07-08), context-tax (07-16), docs-as-distribution (07-04),
   hooks (07-02).
+- 2026-07-18 — "Eleven More Points of Accuracy Cost 172× the Compute" (Quist) — the economics of
+  test-time compute, the *third* hidden multiplier of the meter (after tokenizer 07-14, caching 06-18).
+  Open on one number: ARC-AGI o3 same weights/questions scored 75.7% @ ~$26/task → 87.5% using 172× the
+  compute (~$4,560/task, 1,024 samples). Capability moved to inference: o1 trained to reason, accuracy
+  log-linear in test-time compute (OpenAI; ARC Prize found identical on ARC-AGI, o1 70h vs GPT-4o 30min on
+  400 tasks). Mechanism: reasoning/thinking tokens billed at the OUTPUT rate (~5× input) and invisible —
+  Anthropic docs "billed output token count will not match" the response, OpenAI "not visible via the API,"
+  "a few hundred to tens of thousands," reserve ≥25k; budgets to 32k+. Two knobs: think-longer
+  (thinkingBudget) + sample-more (best-of-N / self-consistency Wang 2022). AIME o1: 12%(GPT-4o)→74%(1)→83%
+  (64 samples)→93%(1,000) = +9 pts for 64×, +10 more for 1,000×. GPT-5.6 Sol's 64-subagent Cycle-Double-
+  Cover proof = self-consistency with a research budget (unverified, not peer-reviewed — Bloom "very nice"
+  but missing citations; flagged). Gemini 3.5 Pro (Jul 17) gates Deep Think behind $250/mo Ultra + a
+  thinkingBudget param = the pricing tell. Thesis: per-token floor (46% Chinese tokens) and per-answer
+  ceiling move opposite → the cheap token buys a more expensive answer; three multipliers now sit between
+  list price and bill (tokenizer/cache/reasoning). Extension (unforced): test-time compute is the demand
+  pump keeping inference capex alive (TSMC sold out, Anthropic $1.25B/mo, Samsung chip talks) — why the
+  silicon thread won't quit. So-what: measure $/solved-task + output-token share; cap thinkingBudget/N by
+  difficulty (Snell: allocate compute by difficulty); deciding quantity = $/correct-answer at required
+  accuracy, set by samples×thinking-tokens (now 172×). Prediction: peak-accuracy $/solved-task flat-to-
+  rising through Q1'27 (70%). economics/how-it-works. Advances meter/repricing (subsidy-died) thread;
+  cross-levers labs-go-vertical; siblings tokenizer (07-14), caching (06-18), silicon (06-29), MoE (06-21).

@@ -62,6 +62,15 @@ overtakes becomes a `news-to-framework` piece instead — that's fine.
   (WER) actually counts, why read-speech benchmarks (LibriSpeech) flatter a model vs
   real far-field/multi-speaker audio (earnings22), streaming volatile-vs-final results,
   and the accuracy/latency/coverage tradeoffs of a transcription stack (Analyst)
+- [how-it-works] Test-time compute from the inside: self-consistency (majority vote),
+  best-of-N with a reward model / verifier, and beam/tree search over reasoning chains —
+  why accuracy scales log-linear with samples, what a verifier actually buys over a raw
+  vote, and where parallel sampling beats one long chain (Analyst) [surfaced by the
+  07-18 reasoning-cost dive]
+- [practical-guide] Setting a thinking budget: measuring the accuracy-vs-cost curve of
+  `thinkingBudget`/`reasoning_effort` on your own workload, allocating compute by task
+  difficulty (Snell), and picking the N for best-of-N where a wrong answer is worth 64
+  right ones (Analyst/Operator) [surfaced by the 07-18 reasoning-cost dive]
 
 ## Live — Claude Code & agent engineering
 
