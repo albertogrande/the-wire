@@ -546,3 +546,17 @@
   confidence: 70
   due: "2027-Q1"
   status: open
+
+- id: dive-2026-07-21-context-price-cliff
+  made: "Dive · 2026-07-21"
+  made_link: "/reports/deep-dives/2026-07-21-context-window-price-cliff.html"
+  text: >-
+    OpenAI's flagship coding model (the GPT-5.6 line or its successor) keeps a
+    long-context price surcharge through Q1 2027 — a fixed input-token threshold
+    above which the request reprices at a higher input/output multiplier — rather
+    than moving to flat pricing across its full advertised context window the way
+    Anthropic did (Mar 2026, >200k surcharge removed). The long-context cliff does
+    not become obsolete; metered long context stays OpenAI's default.
+  confidence: 72
+  due: "2027-Q1"
+  status: open

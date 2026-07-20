@@ -17,8 +17,6 @@ overtakes becomes a `news-to-framework` piece instead — that's fine.
 
 ## Live — AI & models
 
-- [how-it-works] How a context window actually works: attention cost, the
-  lost-in-the-middle effect, and where recall degrades (Analyst)
 - [how-it-works] What a tool call costs: tokens, latency, and round-trips in
   an agent loop (Builder)
 - [x-vs-y] Open weights vs closed APIs: the real total cost once you price
@@ -67,6 +65,11 @@ overtakes becomes a `news-to-framework` piece instead — that's fine.
   why accuracy scales log-linear with samples, what a verifier actually buys over a raw
   vote, and where parallel sampling beats one long chain (Analyst) [surfaced by the
   07-18 reasoning-cost dive]
+- [x-vs-y] Flat vs metered long-context pricing: why Anthropic removed its >200k
+  2×/1.5× surcharge for flat 1M while OpenAI kept a 272k price cliff on GPT-5.6 —
+  what the KV-cache-linear + attention-quadratic cost curve says about which bet is
+  sustainable, and how to read a provider's context tiers before you budget (Analyst)
+  [surfaced by the 07-21 context-price-cliff dive]
 - [practical-guide] Setting a thinking budget: measuring the accuracy-vs-cost curve of
   `thinkingBudget`/`reasoning_effort` on your own workload, allocating compute by task
   difficulty (Snell), and picking the N for best-of-N where a wrong answer is worth 64
@@ -283,6 +286,10 @@ product engineering" pools above.*
 
 ## Used
 
+- [how-it-works] How a context window actually works: attention cost, the
+  lost-in-the-middle effect, and where recall degrades (Analyst) — 2026-07-21
+  (as news-to-framework, pegged to OpenAI's Codex 372k→272k cut),
+  reports/deep-dives/2026-07-21-context-window-price-cliff.md
 - [practical-guide] Reading your context window: /context, /doctor, and what's
   actually eating your tokens — the fixed preamble + the MCP tool-schema tax
   (Operator) — 2026-07-16,

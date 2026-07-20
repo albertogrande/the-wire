@@ -68,6 +68,19 @@
     $250/mo Ultra tier — the pricing tell. So the per-token floor and the per-answer ceiling move
     opposite: the cheap token buys a more expensive answer. Measure cost-per-solved-task, not
     cost-per-token.
+    W30 (analyst lens): a *fourth* hidden term, and the first one shaped like a cliff rather than a
+    multiplier — the long-context price tier. GPT-5.6 Sol advertises a 1,050,000-token window at
+    $5/$30, but requests above 272,000 input tokens are billed 2× input / 1.5× output on the *entire*
+    request. Codex's harness was pinned at 372,000, so it silently walked users 100k past the cliff;
+    the July 19 metadata change (PR #33972, no blog post) moved the default back to 272,000 — not a
+    nerf, a stop to the silent overcharge. The cliff tracks a real cost curve (attention prefill is
+    quadratic — 372k² / 272k² ≈ 1.87, an 87% compute premium — plus a linear KV-cache tax), and the
+    served range is already past where recall holds (NoLiMa: 10/12 models ≤ half their base score by
+    32k). Anthropic ran the identical 2×/1.5×-above-200k cliff, then *removed* it (Mar 13) for flat
+    1M pricing — so the two leading labs now bet opposite on whether long context is metered or
+    absorbed. So-what: set your harness limit to the provider's price cliff, not its billboard
+    window; budget to the effective window; the deciding quantity is cost-per-correct-answer at the
+    length you actually use.
   issues:
     - { label: "2026-W23", link: "/reports/2026-W23.html" }
     - { label: "Dive · The Meter Is the Confession", link: "/reports/deep-dives/2026-06-07-ai-coding-honest-pricing.html" }
@@ -75,6 +88,7 @@
     - { label: "Dive · Imaging Your Code Is a Lossy Bet", link: "/reports/deep-dives/2026-07-04-code-as-image-token-tax.html" }
     - { label: "Dive · The List Price Is Per Token", link: "/reports/deep-dives/2026-07-14-tokenizer-real-price-per-file.html" }
     - { label: "Dive · Eleven More Points Cost 172×", link: "/reports/deep-dives/2026-07-18-reasoning-tokens-cost-per-answer.html" }
+    - { label: "Dive · The Window Says 1,050,000", link: "/reports/deep-dives/2026-07-21-context-window-price-cliff.html" }
 
 - slug: channel-war-offramps
   title: "The channel war / off-ramps"

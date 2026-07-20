@@ -522,6 +522,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-07-18 (reasoning-cost) | Through Q1 2027, on a hard contamination-resistant reasoning/agentic benchmark, no frontier lab demonstrates that reaching its TOP accuracy tier costs *materially fewer* tokens-per-solved-task than the prior generation — per-token list prices keep falling but peak-accuracy cost-per-solved-task stays flat-to-rising, because closing the last points keeps requiring super-linear test-time compute (long thinking + best-of-N); the reasoning/sampling tax is passed to the bill, not absorbed by training | 70% | by 2027-Q1 | OPEN |
 | 2026-W29 | Through Q1 2027, no frontier lab (OpenAI/Anthropic) regains default-model status inside Microsoft 365's high-volume Copilot surfaces — Microsoft's in-house MAI substitution holds or expands to ≥1 more flagship surface and is not reversed; the enterprise default keeps migrating to the cheapest-adequate-and-governed model even as the frontier keeps the hard-task tail | 68% | by 2027-Q1 | OPEN |
 | Dive 2026-07-20 (cheapest-adequate) | Companion call to W29 above (same thesis, enterprise-buyer framing) — no separate ledger row; settle together | — | by 2027-Q1 | OPEN |
+| Dive 2026-07-21 (context-price-cliff) | OpenAI's flagship coding model (GPT-5.6 line or successor) keeps a long-context price surcharge through Q1 2027 — a fixed input-token threshold above which the whole request reprices at a higher input/output multiplier — rather than moving to flat pricing across its full advertised window the way Anthropic did (Mar 2026); metered long context stays OpenAI's default | 72% | by 2027-Q1 | OPEN |
 
 **Scorecard: 2 settled · record 1–1 · mean Brier 0.31**
 (Note: `_data/predictions.yml` had drift — W23/W24 settlements were not mirrored and several open weekly rows (W26/W27/W28) + dive rows (06-15/06-29/07-13) are still missing there. W29 corrected the two settled rows so the site scorecard reads 1–1; the missing OPEN rows remain to be backfilled.)
@@ -1071,3 +1072,23 @@ Copilot miss is the honest one: we bet the meter would blink and it didn't.)
   governed dependency. Prediction: shared with W29 (68%). news-to-framework/dev-marketing/economics. Levers
   channel-war/commoditization + platforms-eat-the-layer + repricing; siblings LLMOps (06-11), chinese-tokens
   (07-13), reasoning-cost (07-18), accept-button (07-10), price-cut (06-28), tokenizer (07-14).
+- 2026-07-21 — "The Window Says 1,050,000. The Bill Starts at 272,000." (Quist) — the long-context price
+  cliff as the meter's *fourth* hidden term (after caching 06-18, tokenizer 07-14, reasoning 07-18) — and the
+  first shaped like a step function, not a per-token multiplier. Peg: OpenAI quietly cut Codex's GPT-5.6
+  context window 372k→272k (July 19, PR #33972 metadata backport, no blog post; HN #48965850). Not a nerf —
+  a stop to a silent overcharge. GPT-5.6 Sol advertises 1,050,000 tokens at $5/$30 (OpenRouter) but requests
+  >272k input reprice the ENTIRE request at 2× input / 1.5× output; Codex's harness pinned at 372k walked
+  users 100k past the cliff (OpenAI itself flagged the overcharge, Kun Chen/X). Three numbers now hide in one
+  word: billboard (1.05M) / base-price ceiling (272k) / effective recall (NoLiMa: 10/12 models ≤ half base by
+  32k; RULER same verdict). The cliff tracks a real cost curve — prefill attention is quadratic (372k²/272k²
+  ≈1.87, the HN "87% more"), KV cache linear (1.37×). Contrast: Anthropic ran the identical 2×/1.5×-above-200k
+  whole-request surcharge, then REMOVED it Mar 13 for flat 1M pricing (tokencost/New Stack) — two leading labs
+  now bet opposite on whether long context is metered or absorbed. Caveat: windows aren't the same unit — Sol
+  ~2× token-efficient vs Claude on code (single-src, flagged) → 272k Sol ≈ ~500k Claude-equiv (links tokenizer
+  07-14). Distinct from the other meter terms: a cliff your tool crosses without telling you, fixed by editing
+  one integer, not choosing a model. So-what: set harness limit = provider price cliff (272k not 372k for
+  GPT-5.6 in Cursor/Windsurf/custom wrappers), budget to the effective window (compact/design-doc/retrieve),
+  normalize "1M" for both cliff and tokenizer. Prove-me-wrong: a model whose RULER-grade effective recall holds
+  past its cliff AND priced flat. Deciding quantity = cost-per-correct-answer at the length you actually use.
+  news-to-framework/economics; W30 devtools slot (first dive of the week). Advances meter/coding-subsidy thread;
+  siblings tokenizer (07-14), reasoning-cost (07-18), long-context-vs-RAG (06-30), context-tax (07-16), caching (06-18).
