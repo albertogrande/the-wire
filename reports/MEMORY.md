@@ -184,6 +184,20 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   ≠ $ ≠ value (cheap/error-tolerant work migrates first); 46% is a peak, ~30% the floor; self-hosted weights
   invisible to routed-token counts (understates). So spend fled the token → power/silicon/surface/data (this
   week's issue). → [2026-W28](./2026-W28.md), [dive 2026-07-13](./deep-dives/2026-07-13-chinese-models-commodity-tier.md)
+  W29 (reached the sales script): commoditization moved from the invoice to the enterprise pitch. Microsoft —
+  OpenAI's biggest backer, Anthropic's paying customer — swaps its own MAI models under Word/Excel (Bloomberg;
+  Suleyman "reduce and ultimately eliminate that cost"; MAI Superintelligence team "set free" from OpenAI,
+  7 models from scratch at Build 2026) and its FY27 playbook sells *against* the frontier labs on cost/security,
+  Nadella reframing "which model is best" → "which platform governs the spend" (Unilever ~$300M saved). The
+  durable asset is the *router* (Azure Foundry Model Router: Quality/Balanced/Cost modes, Azure Policy gates,
+  4.5–14.2% savings) — when the model commoditizes, the layer that routes+governs it eats it (platforms-eat-
+  the-layer, one level down). Same premise from 3 other players same week: Kimi K3 (2.8T, largest open-weight
+  ever), Inkling (Murati, 975B/41B Apache-2.0, "own+customize not rent"), Xi/WAICO (give the model away, sell
+  the alliance, 29 nations). Frontier labs bet opposite (raised prices, pulled discounts). Bound (the dive):
+  "adequate" is workload-specific + benchmarks≠production accuracy → good-enough wins the back office, frontier
+  keeps the correctness-critical tail (172× 07-18, accept-button 07-10). Tension vs the thread's "artifact
+  commoditizes" — human-preference-on-correctness still doesn't (07-10). → [2026-W29](./2026-W29.md),
+  [dive 2026-07-20](./deep-dives/2026-07-20-cheapest-adequate-model.md)
 - **Supply chain vs. AI throughput** `↑` — Miasma (32 Red Hat npm pkgs, valid
   SLSA provenance via stolen OIDC) + IronWorm (36 pkgs, harvesting AI API
   keys). Provenance + install-script scanning both defeated. Review/trust
@@ -343,7 +357,10 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   primary (Jun 25) after backing a data-center project; a Box Elder commissioner
   said the vote "cost me the election"; polling puts local opposition near 70%;
   Chevron signed a 20-yr Microsoft power deal (Jun 22). Populist-politics story,
-  now live. → [2026-W23](./2026-W23.md), [2026-W26](./2026-W26.md)
+  now live. W29: went from politics to statute — NY became the first US state to
+  ban new hyperscale AI data centers (Hochul EO, 1-yr moratorium, Jul 14, grid/bill
+  strain); Ireland's DCs hit 23% of national electricity same week. Hard constraint.
+  → [2026-W23](./2026-W23.md), [2026-W26](./2026-W26.md), [2026-W29](./2026-W29.md)
 - **Washington vs. the labs / safety as a weapon** `↑` — escalated hard in W24.
   Amazon's Jassy (Anthropic's biggest investor *and* a model competitor) told
   Treasury's Bessent that Fable 5 yields cyberattack info; Commerce export-banned
@@ -391,6 +408,13 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   06-27), not exfiltration (self-hosted weights never leave your infra). Booz Allen: 3/4 Chinese code models
   +vulns under a US-gov-contractor persona (Qwen3-Coder +130%; single study). Advances the 06-15 open-weight
   export prediction (75%, due 2026-12-31) — not yet due. → [dive 2026-07-13](./deep-dives/2026-07-13-chinese-models-commodity-tier.md)
+  W29 (the two governance models diverged in one week): China institutionalized a bloc — Xi's first in-person
+  WAIC appearance (Jul 17) launched the World AI Cooperation Organization (29 nations, HQ Shanghai, Global
+  South; 5,000 training slots, weather model to 30 countries) = give the model away (open weights), sell the
+  alliance/governance. Meanwhile the US fought itself: FTC opened comment (deadline Jul 31) arguing state
+  AI-output laws are impliedly preempted, reinforcing the Great American AI Act's 3-yr preemption of state
+  model-development law (Obernolte–Trahan, 269pp); NY banned hyperscale DCs. Bloc-building vs internal
+  jurisdiction fight. → [2026-W29](./2026-W29.md)
   → [2026-W23](./2026-W23.md), [2026-W24](./2026-W24.md), [2026-W25](./2026-W25.md),
   [2026-W26](./2026-W26.md), [2026-W27](./2026-W27.md),
   [dive 2026-06-15](./deep-dives/2026-06-15-cannot-export-control-a-model.md)
@@ -407,6 +431,10 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   Tension: tiny volume, stablecoin/regulatory/CDN-lock-in friction; could stall in
   the Flattr gap. The tell that it's real = a wallet shipped inside an agent runtime.
   Levers on meter/repricing + channel threads.
+  W29: the human-payment rails consolidated as the machine layer circles them — Stripe + Advent bid $53B for
+  PayPal ($60.50/sh, 28% premium, $50B committed financing, board met Jul 20); Venmo (consumer wallet) is the
+  strategic prize. Largest fintech deal ever; watch whether the merged rail exposes an agent-native (x402/AP2)
+  path. → [2026-W29](./2026-W29.md)
   → [dive 2026-07-06](./deep-dives/2026-07-06-agent-with-a-wallet.md),
   [dive 2026-07-04 docs](./deep-dives/2026-07-04-docs-for-agents-distribution.md)
 - **Labs go vertical / own the silicon** `↑` (new) — the deepest layer of the
@@ -432,7 +460,10 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   chip too — the vertical move now Chinese as well as US. Paired w/ the capital-went-vertical thesis (this
   week's issue): as the token races to the floor, spend flees to power (Anthropic $19B/20yr TeraWulf lease,
   401MW Kentucky) + balance sheet (Amazon $25B bond, $200B capex 2026) + silicon + surface. → [2026-W28](./2026-W28.md)
-  → [dive 2026-06-29](./deep-dives/2026-06-29-why-ai-labs-build-chips.md)
+  W29: supply stayed sold out — TSMC posted a record Q2 (~$39.6B reported), N3 sold out through year-end,
+  +$100B Arizona (total US ~$265B, as reported); Anthropic in early talks with Samsung for a custom 2nm
+  inference chip (had been OpenAI's, talks stalled Jun); South Korea committed $880B to AI over a decade.
+  → [dive 2026-06-29](./deep-dives/2026-06-29-why-ai-labs-build-chips.md), [2026-W29](./2026-W29.md)
 
 ## Predictions ledger
 
@@ -489,8 +520,11 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-07-17 (agent-egress) | Claude Code (the standard CLI) stays closed-source through Q1 2027 — Anthropic does NOT open-source the core agent/CLI, and answers the transparency competition (against open challengers OpenCode/Grok Build) with published data-flow docs + telemetry opt-outs rather than a source release; the frontier vendors keep the harness closed even as challengers go open | 72% | by 2027-Q1 | OPEN |
 | Dive 2026-07-15 (on-device-speech) | On-device system speech-to-text (Apple `SpeechAnalyzer`/peers) does NOT close the hard-audio gap through Q1 2027 — on a real-world far-field/multi-speaker or accented benchmark (earnings22-class), the on-device model stays *behind* a small hosted/cloud Whisper-class model (as Argmax's earnings22 SpeechAnalyzer 14.0 vs Whisper small.en 12.8 shows), so cloud STT keeps a genuine specialist tier (hard audio + rare languages) rather than being fully displaced — even as it clearly loses the clean-English near-field default to $0 on-device | 70% | by 2027-Q1 | OPEN |
 | Dive 2026-07-18 (reasoning-cost) | Through Q1 2027, on a hard contamination-resistant reasoning/agentic benchmark, no frontier lab demonstrates that reaching its TOP accuracy tier costs *materially fewer* tokens-per-solved-task than the prior generation — per-token list prices keep falling but peak-accuracy cost-per-solved-task stays flat-to-rising, because closing the last points keeps requiring super-linear test-time compute (long thinking + best-of-N); the reasoning/sampling tax is passed to the bill, not absorbed by training | 70% | by 2027-Q1 | OPEN |
+| 2026-W29 | Through Q1 2027, no frontier lab (OpenAI/Anthropic) regains default-model status inside Microsoft 365's high-volume Copilot surfaces — Microsoft's in-house MAI substitution holds or expands to ≥1 more flagship surface and is not reversed; the enterprise default keeps migrating to the cheapest-adequate-and-governed model even as the frontier keeps the hard-task tail | 68% | by 2027-Q1 | OPEN |
+| Dive 2026-07-20 (cheapest-adequate) | Companion call to W29 above (same thesis, enterprise-buyer framing) — no separate ledger row; settle together | — | by 2027-Q1 | OPEN |
 
 **Scorecard: 2 settled · record 1–1 · mean Brier 0.31**
+(Note: `_data/predictions.yml` had drift — W23/W24 settlements were not mirrored and several open weekly rows (W26/W27/W28) + dive rows (06-15/06-29/07-13) are still missing there. W29 corrected the two settled rows so the site scorecard reads 1–1; the missing OPEN rows remain to be backfilled.)
 (W27 settled two: W24 export-ban call RIGHT — fully rescinded Jul 1, Brier 0.12;
 W23 Copilot-walkback call WRONG — no walkback, GitHub tightened, Brier 0.49. The
 Copilot miss is the honest one: we bet the meter would blink and it didn't.)
@@ -540,6 +574,16 @@ Copilot miss is the honest one: we bet the meter would blink and it didn't.)
   (Amazon $25B bond, Anthropic $19B/20yr TeraWulf lease, Meta Iris chip + 14GW). Token to the floor,
   money to power/silicon/surface/data. Fable 5 pulled from subscriptions ($10/$50, extended to Jul 12
   under backlash); Gemini 3.5 Pro slipped past launch day; Illinois SB 315; Sol math-proof claim
+- 2026-W29 — "Nobody Sold the Model This Week" — commoditization reached the sales script: Microsoft's
+  FY27 playbook coaches selling *against* OpenAI/Anthropic ("model quality is beside the point; buy the
+  platform that governs cheap-model spend"), swaps its own MAI models under Word/Excel (Bloomberg; Suleyman:
+  "reduce and ultimately eliminate" the Anthropic bill; Unilever ~$300M saved). Same week the model became the
+  giveaway: Kimi K3 (2.8T, largest open-weight ever, weights Jul 27, $3/$15), Inkling (Murati/Thinking Machines,
+  975B/41B MoE, Apache 2.0, "own+customize not rent"), Xi/WAICO (29 nations, Global South). Frontier labs bet
+  opposite (raised prices). Thesis: model = commodity input, moat = the layer above; good-enough wins the back
+  office, frontier keeps the hard tail. Also: NY first-state hyperscale DC ban; TSMC $265B US/N3 sold out;
+  Stripe-Advent $53B for PayPal; FLI Safety Index (Anthropic C+ top); GAAIA + FTC state-preemption; Gemini
+  3.5 Pro missed Jul 17 again
 
 ### Deep dives
 - 2026-06-11 — "The Meter Is the Confession" — AI coding pricing; metering as
@@ -1009,3 +1053,21 @@ Copilot miss is the honest one: we bet the meter would blink and it didn't.)
   accuracy, set by samples×thinking-tokens (now 172×). Prediction: peak-accuracy $/solved-task flat-to-
   rising through Q1'27 (70%). economics/how-it-works. Advances meter/repricing (subsidy-died) thread;
   cross-levers labs-go-vertical; siblings tokenizer (07-14), caching (06-18), silicon (06-29), MoE (06-21).
+- 2026-07-20 — "The Cheapest Adequate Model Is a Great Strategy Until You Define 'Adequate'" (house, weekly
+  dive) — the enterprise-buyer half of the W29 essay: Microsoft's "cheapest adequate model + governance"
+  bet, steelmanned and bounded. Peg: MAI Superintelligence team ("set free" from OpenAI ~6mo pre-Build 2026,
+  7 models from scratch), MAI-under-Word/Excel (Bloomberg), Suleyman "eliminate that cost", Unilever ~$300M.
+  Core move: the real product is the *router* — Azure Foundry Model Router (Quality/Balanced/Cost modes,
+  Azure Policy gates eligible models, published savings 4.5–14.2%) turns model dispatch from an app concern
+  into a platform concern → when the model commoditizes, the router becomes the durable asset (extends
+  platforms-eat-the-layer 06-11 + channel 06-09 one layer down). Bound: the load-bearing word is "adequate,"
+  and benchmark scores don't predict production accuracy — hallucination 3–4% frontier vs 22–30% small/open,
+  69–88% legal / 43–64% medical high-stakes (as reported), $67.4B '24 losses (single-src) → "cheapest
+  adequate" silently decays to "cheapest" without your own eval; cost moves from visible line-item to
+  invisible error rate (same shape as pxpipe 07-04, tokenizer 07-14). Frontier reasserts on the correctness-
+  critical tail (172× 07-18, accept-button 07-10). Steelman for standardize-on-one: routing overhead >
+  savings (14.2% cap). So-what: own the def of "adequate" (real-task fixtures), measure $/correct-answer,
+  segment workloads (back-office→cheapest-adequate+governance; hard tail→frontier), model = swappable
+  governed dependency. Prediction: shared with W29 (68%). news-to-framework/dev-marketing/economics. Levers
+  channel-war/commoditization + platforms-eat-the-layer + repricing; siblings LLMOps (06-11), chinese-tokens
+  (07-13), reasoning-cost (07-18), accept-button (07-10), price-cut (06-28), tokenizer (07-14).
