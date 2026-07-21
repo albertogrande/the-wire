@@ -341,6 +341,22 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   it, /doctor (v2.1.205, finds unused skills/MCP vs cost + dedups CLAUDE.md), defer_loading /
   Tool Search (55k→8.7k, 85% cut) or disconnect unused servers. Deferral is opt-in, not a CLI
   default (open Q). → [dive 2026-07-16](./deep-dives/2026-07-16-context-tax-before-your-prompt.md)
+  W30 (contrarian lens): the brake itself deskills. "Human in the loop" is not a system property —
+  it's a claim about the reviewer's attention + skill, the two things automation erodes. Model the
+  reviewer as a classifier with a false-negative rate that ISN'T fixed: complacency scales with
+  reliability (Parasuraman/Manzey 2010 — omission+commission errors, appears in experts, un-trainable,
+  worse under multi-task load) + skill decays with disuse (Bainbridge 1983 "Ironies of Automation" —
+  monitoring is the task humans are worst at; the hard-case skill rots exactly when needed). So real
+  defect rate ≈ agent_error × reviewer_miss, and the 2nd term GROWS as the 1st shrinks → the brake
+  wears out as the engine gets stronger, now that ~80% of merged code is agent-written and the reviewer
+  is the ONLY brake. Evidence: 2026 trivia study (Capraro et al., Claude 3.5 Flash) accuracy 27%→9% but
+  confidence 30%→76%, admit-ignorance 44%→3% (incentives → 8%, un-buyable); METR 2025 RCT (16 expert
+  OSS devs, 246 issues, Cursor+Sonnet) 19% SLOWER yet believed 20% FASTER — 40-pt calibration gap in
+  experts. Nobody benchmarks the human term. So-what: engineer attention (produce not approve; failing-
+  test-first; predict-the-diff; seed known-bad diffs to measure your own miss rate). Prove-me-wrong: an
+  RCT on AI-assisted *review* (not authoring) where expert catch-rate on injected defects holds as agent
+  reliability rises. Levers autonomy-before-brakes; siblings accept-button (07-10), audit-trail (07-08).
+  → [dive 2026-07-22](./deep-dives/2026-07-22-human-in-the-loop-deskilled.md)
 - **Platforms eat the layer** `↑` — the LLMOps tool layer (gateway, tracing,
   eval, prompt store) is being absorbed from both ends: ClickHouse bought
   Langfuse (Jan, already built on ClickHouse; 23.1M SDK installs/mo) to own the
@@ -523,6 +539,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | 2026-W29 | Through Q1 2027, no frontier lab (OpenAI/Anthropic) regains default-model status inside Microsoft 365's high-volume Copilot surfaces — Microsoft's in-house MAI substitution holds or expands to ≥1 more flagship surface and is not reversed; the enterprise default keeps migrating to the cheapest-adequate-and-governed model even as the frontier keeps the hard-task tail | 68% | by 2027-Q1 | OPEN |
 | Dive 2026-07-20 (cheapest-adequate) | Companion call to W29 above (same thesis, enterprise-buyer framing) — no separate ledger row; settle together | — | by 2027-Q1 | OPEN |
 | Dive 2026-07-21 (context-price-cliff) | OpenAI's flagship coding model (GPT-5.6 line or successor) keeps a long-context price surcharge through Q1 2027 — a fixed input-token threshold above which the whole request reprices at a higher input/output multiplier — rather than moving to flat pricing across its full advertised window the way Anthropic did (Mar 2026); metered long context stays OpenAI's default | 72% | by 2027-Q1 | OPEN |
+| Dive 2026-07-22 (deskilled-reviewer) | Through Q1 2027, no published controlled study demonstrates that experienced engineers' defect *catch-rate* in AI-assisted code *review* (not authoring) holds steady or improves as agent reliability rises — the automation-complacency result (reviewer miss-rate rising with automation reliability, per Parasuraman/Manzey) either reproduces in the code-review setting or the human catch-rate stays unmeasured by vendors/benchmarks; "human in the loop" keeps being asserted as a control without a miss-rate number | 70% | by 2027-Q1 | OPEN |
 
 **Scorecard: 2 settled · record 1–1 · mean Brier 0.31**
 (Note: `_data/predictions.yml` had drift — W23/W24 settlements were not mirrored and several open weekly rows (W26/W27/W28) + dive rows (06-15/06-29/07-13) are still missing there. W29 corrected the two settled rows so the site scorecard reads 1–1; the missing OPEN rows remain to be backfilled.)
@@ -1092,3 +1109,18 @@ Copilot miss is the honest one: we bet the meter would blink and it didn't.)
   past its cliff AND priced flat. Deciding quantity = cost-per-correct-answer at the length you actually use.
   news-to-framework/economics; W30 devtools slot (first dive of the week). Advances meter/coding-subsidy thread;
   siblings tokenizer (07-14), reasoning-cost (07-18), long-context-vs-RAG (06-30), context-tax (07-16), caching (06-18).
+- 2026-07-22 — "The Loop Deskills the Human It Depends On" (Okafor) — inverts "keep a human in the loop"
+  as the answer to agent autonomy. Consensus steelmanned (review is real; it's the regulatory + engineering
+  story). Broken: "human in the loop" isn't a system property, it's a claim about the reviewer's attention +
+  skill — the two things automation erodes. Model the reviewer as a classifier whose false-negative rate ISN'T
+  fixed: complacency scales with reliability (Parasuraman/Manzey 2010 — omission+commission, in experts,
+  un-trainable, worse multi-task) + skill decays with disuse (Bainbridge 1983 "Ironies of Automation"). So
+  system defect rate ≈ agent_error × reviewer_miss and the 2nd term grows as the 1st shrinks → the brake wears
+  out as the engine strengthens, with ~80% merged code agent-written + reviewer the only brake. Hook = 2026
+  Capraro et al. trivia study (Claude 3.5 Flash): accuracy 27%→9%, confidence 30%→76%, admit-ignorance 44%→3%
+  (incentives→8%). Bridge = METR 2025 RCT (16 expert devs, 246 issues): 19% slower yet believed 20% faster
+  (40-pt calibration gap). Honest bounds: trivia is adversarial-by-design, METR n=16/old models/authoring-not-
+  review/labeled historical. So-what: engineer attention — produce not approve, failing-test-first, predict-the-
+  diff, seed known-bad diffs to measure your own miss rate. Prove-me-wrong: an RCT on AI-assisted *review*
+  where expert catch-rate holds as agent reliability rises. news-to-framework/what-every-engineer-should-know.
+  Opens the deskilled-reviewer front on autonomy-before-brakes; siblings accept-button (07-10), audit-trail (07-08).

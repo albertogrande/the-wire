@@ -43,6 +43,15 @@ overtakes becomes a `news-to-framework` piece instead — that's fine.
   actually worth as training data, why zero-data-retention/Privacy Mode fences the
   highest-value enterprise slice, and whether the flywheel is a moat or a marketing
   line (Contrarian)
+- [how-it-works] Why AI is better at math counterexamples than proofs: the
+  verifier asymmetry (a counterexample is a certificate you check in one pass; a
+  proof isn't), why search-against-a-cheap-verifier is the shape of every task
+  agents are good at — including code that passes tests — and where the absence of
+  a verifier caps them (Contrarian/Analyst) [surfaced by 07-20 Xena/Jacobian-conjecture signal]
+- [what-every-engineer-should-know] Measuring your own review miss-rate: seeding
+  known-bad diffs, the aviation "inject failures in training" practice, and why a
+  false-negative rate you've never measured is the real safety number of an
+  AI-assisted codebase (Builder/Contrarian) [surfaced by the 07-22 deskilled-reviewer dive]
 - [how-it-works] BPE tokenizers from the inside: merge tables, vocabulary budgets
   (o200k ~200k vs cl100k ~100k), why code and whitespace fragment worse than prose,
   and why the same file is 1.5–1.7× more tokens on one provider than another

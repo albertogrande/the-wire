@@ -360,6 +360,21 @@
     just disconnect the servers you aren't using. Caveat: deferral is an opt-in setting on the
     Developer Platform, not a CLI default (the open question, and this dive's prediction). So-what: the
     preamble isn't free just because it's cached — measure, prune, defer to buy back window + attention.
+    W30 (contrarian lens): the brake itself deskills. "Human in the loop" — the standard answer to all of
+    the above — is not a system property; it's a claim about the reviewer's attention and skill, the two
+    faculties automation erodes. Model the reviewer as a classifier whose false-negative rate is NOT fixed:
+    automation complacency scales with reliability (Parasuraman/Manzey 2010 — omission + commission errors,
+    present in experts, un-trainable, worse under multi-task load) and skill decays with disuse (Bainbridge
+    1983, "Ironies of Automation" — monitoring is the task humans are worst at; the hard-case skill rots for
+    lack of practice). So the system's real defect rate is roughly agent_error × reviewer_miss, and the
+    second term GROWS as the first shrinks — the brake wears out as the engine gets stronger, now that ~80%
+    of merged code is agent-written and the reviewer is the only brake. Evidence: a 2026 trivia study
+    (Capraro et al., Claude 3.5 Flash) found accuracy 27%→9% but confidence 30%→76% and willingness to admit
+    ignorance 44%→3% (monetary incentives moved it only to 8%); METR's 2025 RCT (16 expert OSS devs, 246
+    issues, Cursor + Sonnet) measured them 19% SLOWER yet believing they were 20% faster — a ~40-point
+    calibration gap in experts. Nobody benchmarks the human term. So-what: engineer attention rather than
+    exhort it — produce, don't just approve; gate approval on a failing-test-first; predict the diff before
+    reading it; seed known-bad diffs to measure your own miss rate.
   issues:
     - { label: "Dive · Autonomy Shipped Before Its Brakes Did", link: "/reports/deep-dives/2026-06-08-autonomy-before-brakes.html" }
     - { label: "Dive · 'Agent' Is a Control-Flow Decision, Not a Product", link: "/reports/deep-dives/2026-06-19-agent-is-a-control-flow-decision.html" }
@@ -374,6 +389,7 @@
     - { label: "Dive · A Skill Costs You One Sentence Until You Use It", link: "/reports/deep-dives/2026-07-09-skill-costs-one-sentence.html" }
     - { label: "Dive · Stop Handing Your Agent a Screenshot of Your Own App", link: "/reports/deep-dives/2026-07-11-browser-as-agent-runtime.html" }
     - { label: "Dive · Your Session Starts 33,000 Tokens in the Hole", link: "/reports/deep-dives/2026-07-16-context-tax-before-your-prompt.html" }
+    - { label: "Dive · The Loop Deskills the Human It Depends On", link: "/reports/deep-dives/2026-07-22-human-in-the-loop-deskilled.html" }
 
 - slug: platforms-eat-the-layer
   title: "Platforms eat the layer"

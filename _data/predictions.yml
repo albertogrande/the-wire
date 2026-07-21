@@ -560,3 +560,18 @@
   confidence: 72
   due: "2027-Q1"
   status: open
+
+- id: dive-2026-07-22-deskilled-reviewer
+  made: "Dive · 2026-07-22"
+  made_link: "/reports/deep-dives/2026-07-22-human-in-the-loop-deskilled.html"
+  text: >-
+    Through Q1 2027, no published controlled study demonstrates that experienced
+    engineers' defect catch-rate in AI-assisted code REVIEW (not authoring) holds
+    steady or improves as agent reliability rises — the automation-complacency
+    result (reviewer miss-rate rising with automation reliability, per
+    Parasuraman/Manzey) either reproduces in the code-review setting or the human
+    catch-rate stays unmeasured by vendors and benchmarks. "Human in the loop"
+    keeps being asserted as a control without a reviewer miss-rate number.
+  confidence: 70
+  due: "2027-Q1"
+  status: open
