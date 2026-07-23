@@ -99,8 +99,6 @@ Code Watch.*
 - [how-it-works] PostToolUse hooks as *quality* gates — lint, test, and format
   the agent's output before it lands (distinct from the PreToolUse security
   veto covered 2026-07-02) (Operator)
-- [reference] Sandbox mode: OS-level filesystem/network isolation for Bash and
-  its children, and when it beats a permission rule you can subvert (Operator)
 - [practical-guide] Subagent orchestration that saves wall-clock time, not
   just tokens (Operator)
 - [n-lessons] What the top Claude Code workflows have in common — patterns
@@ -157,6 +155,16 @@ Code Watch.*
 - [reference] Dynamic context injection in skills: the `` !`cmd` `` preprocessing
   syntax, `${CLAUDE_SKILL_DIR}` / `$ARGUMENTS[N]` substitutions, and how to ground
   a skill in live repo state before the model ever reads it (Operator)
+- [how-it-works] Credential masking in the sandbox proxy: `credentials.mode:"mask"`
+  + `network.tlsTerminate` — how a per-session sentinel value is swapped for the real
+  token only on the request that leaves for an `injectHosts` domain, so the command
+  (and its logs) never hold the secret. When mask beats deny, and why it needs the
+  proxy to terminate TLS (Operator) [surfaced by the 07-23 sandbox dive]
+- [practical-guide] Sandboxing the MCP servers you didn't write: wrapping a local MCP
+  server in `srt` (`@anthropic-ai/sandbox-runtime`) so a third-party tool server runs
+  inside the same filesystem+network fence — the config, the deny-all-network default,
+  and what it does and doesn't contain (Operator) [surfaced by the 07-23 sandbox dive;
+  sibling to the MCP-trust-boundary and egress items]
 
 ## Live — devtools & systems
 
@@ -295,6 +303,9 @@ product engineering" pools above.*
 
 ## Used
 
+- [reference] Sandbox mode: OS-level filesystem/network isolation for Bash and
+  its children, and when it beats a permission rule you can subvert (Operator) —
+  2026-07-23, reports/deep-dives/2026-07-23-sandbox-is-the-real-brake.md
 - [how-it-works] How a context window actually works: attention cost, the
   lost-in-the-middle effect, and where recall degrades (Analyst) — 2026-07-21
   (as news-to-framework, pegged to OpenAI's Codex 372k→272k cut),

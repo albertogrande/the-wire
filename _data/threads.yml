@@ -375,6 +375,30 @@
     calibration gap in experts. Nobody benchmarks the human term. So-what: engineer attention rather than
     exhort it — produce, don't just approve; gate approval on a failing-test-first; predict the diff before
     reading it; seed known-bad diffs to measure your own miss rate.
+    W30 (operator lens): if the permission prompt is a human classifier that rubber-stamps under load, move
+    the brake off the prompt and onto the operating system. Claude Code's sandboxed Bash tool fences every
+    shell command and its children to working-directory writes plus named network domains, enforced by
+    Seatbelt (macOS) or bubblewrap (Linux/WSL2) with no container — and, crucially, on the *running* process,
+    so it "holds regardless of what the model chose to run … even if an allowed command does more than its
+    name suggests." That is why auto-allow is safe: containment no longer depends on anyone reading the
+    command right, which is the exact faculty that decays. Anthropic's own figure — sandboxing "safely
+    reduces permission prompts by 84%." It is a distinct layer from the 07-02 hook (a hook/permission rule
+    decides *whether* a command runs, from its string, before it runs; the sandbox decides *what it can
+    touch* once running, at the kernel). Config traps: the default *write* perimeter is tight (cwd + temp)
+    but the default *read* perimeter is the whole disk — `~/.ssh` and `~/.aws/credentials` are readable
+    unless you add a `sandbox.credentials` deny list, so that block is mandatory, not optional; for
+    unattended runs set `allowUnsandboxedCommands:false` (strict mode, kills the `dangerouslyDisableSandbox`
+    escape hatch) and `failIfUnavailable:true`. Honest limits (Anthropic: "not a complete isolation
+    boundary"): the proxy filters on the claimed hostname and does not terminate TLS by default, so a broad
+    `allowedDomains` entry like github.com is an exfiltration path (gist, issue comment, domain fronting);
+    the sandbox is Bash-only, so Read/Edit/Write go through permissions, not the box; and a sandbox is only
+    as trustworthy as its documentation (Willison, citing the `api.anthropic.com/v1/files` upload vector).
+    New this week: v2.1.216 (Jul 20) added `sandbox.filesystem.disabled` (keep network isolation, drop the
+    filesystem layer for workloads whose writes you trust but whose egress you don't) and fixed worktree
+    subagents escaping to the shared checkout; the engine also ships standalone as
+    `@anthropic-ai/sandbox-runtime`, whose `srt` CLI wraps arbitrary commands and local MCP servers in the
+    same fence. The VM is the wall (Anthropic runs Cowork in one); the sandbox is the fence (Claude Code) —
+    match the boundary to the blast radius you can afford.
   issues:
     - { label: "Dive · Autonomy Shipped Before Its Brakes Did", link: "/reports/deep-dives/2026-06-08-autonomy-before-brakes.html" }
     - { label: "Dive · 'Agent' Is a Control-Flow Decision, Not a Product", link: "/reports/deep-dives/2026-06-19-agent-is-a-control-flow-decision.html" }
@@ -390,6 +414,7 @@
     - { label: "Dive · Stop Handing Your Agent a Screenshot of Your Own App", link: "/reports/deep-dives/2026-07-11-browser-as-agent-runtime.html" }
     - { label: "Dive · Your Session Starts 33,000 Tokens in the Hole", link: "/reports/deep-dives/2026-07-16-context-tax-before-your-prompt.html" }
     - { label: "Dive · The Loop Deskills the Human It Depends On", link: "/reports/deep-dives/2026-07-22-human-in-the-loop-deskilled.html" }
+    - { label: "Dive · The Kernel Approves Commands Better Than You Do", link: "/reports/deep-dives/2026-07-23-sandbox-is-the-real-brake.html" }
 
 - slug: platforms-eat-the-layer
   title: "Platforms eat the layer"

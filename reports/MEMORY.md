@@ -357,6 +357,26 @@ stalling) and, when evidence cuts against it, a `Tension:` note inline.
   RCT on AI-assisted *review* (not authoring) where expert catch-rate on injected defects holds as agent
   reliability rises. Levers autonomy-before-brakes; siblings accept-button (07-10), audit-trail (07-08).
   → [dive 2026-07-22](./deep-dives/2026-07-22-human-in-the-loop-deskilled.md)
+  W30 (operator lens): the OS-level brake — move containment off the permission prompt onto the kernel.
+  The prompt is a human classifier under load (07-22): by prompt ~40 you rubber-stamp; the two exits are
+  approval fatigue (prompt = formality) or `--dangerously-skip-permissions` (no brake). Third setting: the
+  sandboxed Bash tool (Seatbelt macOS / bubblewrap Linux+WSL2) fences every Bash subprocess to cwd-writes +
+  named domains, enforced on the running process "regardless of what the model chose to run … even if an
+  allowed command does more than its name suggests." So auto-allow is safe — containment no longer depends
+  on reading the command right. Anthropic's own number: sandboxing "safely reduces permission prompts by
+  84%." Distinct layer from 07-02 (hook/permission = *whether* it runs, from the string, before; sandbox =
+  *what it can touch* once running, at the kernel). Config gotchas: default *write* = cwd+tmp (tight) but
+  default *read* = whole disk incl ~/.ssh/~/.aws → `credentials.files` deny is mandatory; strict mode =
+  `allowUnsandboxedCommands:false` (kills the `dangerouslyDisableSandbox` escape hatch) + `failIfUnavailable`
+  for unattended. Leaks (Anthropic: "not a complete isolation boundary"): proxy filters hostname not TLS →
+  broad `allowedDomains` (github.com) = exfil via gist/domain-fronting; sandbox is Bash-only (Read/Edit/Write
+  go through permissions, so `denyRead`≠Read-tool — claudecodecamp, single-src); Willison — trust = docs, cites
+  `api.anthropic.com/v1/files` upload vector. News: v2.1.216 (Jul 20) `sandbox.filesystem.disabled` (keep net,
+  drop FS) + fixed worktree-subagent escape; `@anthropic-ai/sandbox-runtime` (`srt`) wraps arbitrary cmds/MCP
+  servers standalone. VM is the wall (Cowork), sandbox is the fence (Claude Code) — match boundary to blast
+  radius. So-what: enable+auto-allow, add credential deny + scoped domains day one, strict for unattended.
+  practical-guide/reference. Siblings hooks (07-02), egress (07-17), worktrees (06-23), deskilled-reviewer (07-22).
+  → [dive 2026-07-23](./deep-dives/2026-07-23-sandbox-is-the-real-brake.md)
 - **Platforms eat the layer** `↑` — the LLMOps tool layer (gateway, tracing,
   eval, prompt store) is being absorbed from both ends: ClickHouse bought
   Langfuse (Jan, already built on ClickHouse; 23.1M SDK installs/mo) to own the
@@ -1124,3 +1144,18 @@ Copilot miss is the honest one: we bet the meter would blink and it didn't.)
   diff, seed known-bad diffs to measure your own miss rate. Prove-me-wrong: an RCT on AI-assisted *review*
   where expert catch-rate holds as agent reliability rises. news-to-framework/what-every-engineer-should-know.
   Opens the deskilled-reviewer front on autonomy-before-brakes; siblings accept-button (07-10), audit-trail (07-08).
+- 2026-07-23 — "The Kernel Approves Commands Better Than You Do" (Sandoval, Claude Code edition) — the OS
+  sandbox as the brake that lets you drop the permission prompt without going YOLO; a NEW front on autonomy-
+  before-brakes distinct from Sandoval's context-budget cluster (06-25/07-09/07-16) and the hook/permission
+  layer (07-02). Peg: v2.1.216 (Jul 20) `sandbox.filesystem.disabled` + Bash/PowerShell hardening (v2.1.214).
+  Argument: the prompt is a human classifier that rubber-stamps under load (links 07-22); the sandboxed Bash
+  tool (Seatbelt/bubblewrap, no container) fences every subprocess to cwd-writes + named domains, OS-enforced
+  on the running process so containment doesn't depend on reading the command right → auto-allow is safe.
+  Load-bearing primary: Anthropic's own "sandboxing safely reduces permission prompts by 84%." Config: default
+  read = whole disk (~/.ssh, ~/.aws readable) → `credentials.files` deny mandatory; `allowUnsandboxedCommands:
+  false` = strict mode + `failIfUnavailable` for unattended. Honest counter: proxy filters hostname not TLS
+  (broad `allowedDomains` = gist/domain-front exfil); Bash-only (Read/Edit/Write via permissions — `denyRead`≠
+  Read tool, claudecodecamp single-src); Willison trust/docs + `/v1/files` vector. `@anthropic-ai/sandbox-runtime`
+  (`srt`) wraps MCP servers standalone. VM=wall (Cowork) vs sandbox=fence (Claude Code). practical-guide/reference;
+  Claude Code slot for W30. Lever on autonomy-before-brakes; siblings hooks (07-02), egress (07-17), worktrees
+  (06-23), deskilled-reviewer (07-22).
