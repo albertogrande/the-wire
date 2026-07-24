@@ -575,3 +575,19 @@
   confidence: 70
   due: "2027-Q1"
   status: open
+
+- id: dive-2026-07-24-verifier-asymmetry
+  made: "Dive · 2026-07-24"
+  made_link: "/reports/deep-dives/2026-07-24-verifier-asymmetry-check-vs-find.html"
+  text: >-
+    Through Q1 2027, frontier AI's headline math and coding wins stay
+    concentrated on the verifier-backed side — no frontier system is credited by
+    domain experts with an ORIGINAL, human-novel proof of a universal (∀)
+    statement that lacks a cheap external checker (a genuinely new conceptual
+    result, not a Lean formalization, a counterexample/witness, or a
+    verifier-search construction à la FunSearch/AlphaEvolve) at anything like the
+    cadence of its counterexample and construction results; capability keeps
+    tracking the availability of a cheap, faithful, runnable verifier.
+  confidence: 72
+  due: "2027-Q1"
+  status: open

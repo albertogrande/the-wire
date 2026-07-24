@@ -560,6 +560,7 @@ Lower is better; 0.25 = coin-flip guessing.
 | Dive 2026-07-20 (cheapest-adequate) | Companion call to W29 above (same thesis, enterprise-buyer framing) — no separate ledger row; settle together | — | by 2027-Q1 | OPEN |
 | Dive 2026-07-21 (context-price-cliff) | OpenAI's flagship coding model (GPT-5.6 line or successor) keeps a long-context price surcharge through Q1 2027 — a fixed input-token threshold above which the whole request reprices at a higher input/output multiplier — rather than moving to flat pricing across its full advertised window the way Anthropic did (Mar 2026); metered long context stays OpenAI's default | 72% | by 2027-Q1 | OPEN |
 | Dive 2026-07-22 (deskilled-reviewer) | Through Q1 2027, no published controlled study demonstrates that experienced engineers' defect *catch-rate* in AI-assisted code *review* (not authoring) holds steady or improves as agent reliability rises — the automation-complacency result (reviewer miss-rate rising with automation reliability, per Parasuraman/Manzey) either reproduces in the code-review setting or the human catch-rate stays unmeasured by vendors/benchmarks; "human in the loop" keeps being asserted as a control without a miss-rate number | 70% | by 2027-Q1 | OPEN |
+| Dive 2026-07-24 (verifier-asymmetry) | Through Q1 2027, frontier AI's headline math/coding wins stay concentrated on the verifier-backed side — no frontier system is credited by domain experts with an *original, human-novel proof of a universal (∀) statement that lacks a cheap external checker* (a genuinely new conceptual result, not a Lean formalization, a counterexample/witness, or a verifier-search construction à la FunSearch/AlphaEvolve) at anything like the cadence of its counterexample/construction results; capability keeps tracking the availability of a cheap, faithful, runnable verifier | 72% | by 2027-Q1 | OPEN |
 
 **Scorecard: 2 settled · record 1–1 · mean Brier 0.31**
 (Note: `_data/predictions.yml` had drift — W23/W24 settlements were not mirrored and several open weekly rows (W26/W27/W28) + dive rows (06-15/06-29/07-13) are still missing there. W29 corrected the two settled rows so the site scorecard reads 1–1; the missing OPEN rows remain to be backfilled.)
@@ -1159,3 +1160,25 @@ Copilot miss is the honest one: we bet the meter would blink and it didn't.)
   (`srt`) wraps MCP servers standalone. VM=wall (Cowork) vs sandbox=fence (Claude Code). practical-guide/reference;
   Claude Code slot for W30. Lever on autonomy-before-brakes; siblings hooks (07-02), egress (07-17), worktrees
   (06-23), deskilled-reviewer (07-22).
+- 2026-07-24 — "A Counterexample Checks in One Pass. That's Why the Machine Found It." (Quist) — the verifier
+  asymmetry as the shape of what LLMs are good at; a NEW front (capability/CS-theory), away from the recent
+  pricing/Claude-Code/autonomy cluster. Peg: Fable's Jacobian-conjecture counterexample (Tao's Jul-21 "digestion":
+  det=−2 constant + 3 points collide → not invertible; Tao used AI only to "confirm calculations"; Buzzard/Xena
+  Jul-20 catalogues Erdős unit-distance, 60-yr Grothendieck group-scheme = 1,076 Lean lines checked in 4h). Core:
+  a counterexample is a *certificate* — witness for ∃¬, settled on one example, checkable in one pass (P-time
+  verification, the P-vs-NP asymmetry: verifying a witness is cheap even when finding it isn't); a proof of ∀ has
+  no single witness → large structured object, huge search. Contrast: AlphaProof IMO-2024 solved 1 problem in
+  minutes, up to **3 days** for the others (Lean kernel = the check; finding is the cost). Both checkable — a Lean
+  proof is sound once the kernel accepts — the gap is find-cost not check-cost. Pattern under the headlines = model
+  + verifier + search: FunSearch (Nature 2023, automated evaluator "guards against hallucinations," cap-set best
+  gain in 20yr) + AlphaEvolve (2025, evolutionary vs automated scorer, 4×4 complex matmul in 48 mults beat
+  Strassen's 49 since 1969; 20% of 50 open problems). Engineering translation: a test suite IS a verifier → agents
+  win on test-passing code (SWE-bench 06-12), best-of-N pays (07-18, o3 ARC 75.7→87.5% @172×) exactly where a cheap
+  runnable check exists; lose on "right architecture?" / "secure?" (universal, no cheap faithful verifier). Trap =
+  same fact: a runnable verifier is over-optimizable (Goodhart) → proxy verifiers (LLM judge marginally-above-random
+  on correctness 07-10) get gamed; human is verifier-of-last-resort and deskills (07-22). Deciding quantity =
+  verifier fidelity × verifier cost. So-what: before pointing an agent, ask "is there a cheap/faithful/runnable
+  verifier?" — if yes let it search + turn up N; if no, build the verifier FIRST (failing test / property / eval
+  fixture); the ceiling on agent output = the quality of your check. how-it-works/news-to-framework. Opens the
+  verifier-asymmetry front on the agent-capability thread; siblings benchmark (06-12), reasoning-cost (07-18),
+  accept-button (07-10), deskilled-reviewer (07-22).

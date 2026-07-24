@@ -17,6 +17,21 @@ overtakes becomes a `news-to-framework` piece instead — that's fine.
 
 ## Live — AI & models
 
+- [how-it-works] Search against a verifier: how FunSearch (Nature 2023) and
+  AlphaEvolve (2025) turn an LLM plus an automated evaluator into a discovery
+  engine — the evolutionary loop, why the *scorer* not the model is what guards
+  against hallucination, and the exact class of problems it fits (constructions
+  with a cheap runnable checker: cap-set bounds, 48-mult matrix multiply)
+  (Analyst) [surfaced by the 07-24 verifier-asymmetry dive]
+- [what-every-engineer-should-know] Write the verifier first: the failing test,
+  the property, the fuzzer, the eval fixture — why the quality of your check is
+  the ceiling on everything an agent produces, and how to tell a faithful
+  verifier from a gameable proxy before best-of-N Goodharts it (Builder/Analyst)
+  [surfaced by the 07-24 verifier-asymmetry dive]
+- [how-it-works] What "verified by Lean" actually guarantees: the proof-assistant
+  kernel as a trusted core, why a kernel-checked proof is sound but "sound" ≠
+  "the theorem you meant," and where autoformalization silently mis-states the
+  goal (Analyst) [surfaced by the 07-24 verifier-asymmetry dive]
 - [how-it-works] What a tool call costs: tokens, latency, and round-trips in
   an agent loop (Builder)
 - [x-vs-y] Open weights vs closed APIs: the real total cost once you price
@@ -43,11 +58,6 @@ overtakes becomes a `news-to-framework` piece instead — that's fine.
   actually worth as training data, why zero-data-retention/Privacy Mode fences the
   highest-value enterprise slice, and whether the flywheel is a moat or a marketing
   line (Contrarian)
-- [how-it-works] Why AI is better at math counterexamples than proofs: the
-  verifier asymmetry (a counterexample is a certificate you check in one pass; a
-  proof isn't), why search-against-a-cheap-verifier is the shape of every task
-  agents are good at — including code that passes tests — and where the absence of
-  a verifier caps them (Contrarian/Analyst) [surfaced by 07-20 Xena/Jacobian-conjecture signal]
 - [what-every-engineer-should-know] Measuring your own review miss-rate: seeding
   known-bad diffs, the aviation "inject failures in training" practice, and why a
   false-negative rate you've never measured is the real safety number of an
@@ -303,6 +313,12 @@ product engineering" pools above.*
 
 ## Used
 
+- [how-it-works] Why AI is better at math counterexamples than proofs: the
+  verifier asymmetry — a counterexample is a certificate you check in one pass,
+  a proof isn't; search-against-a-cheap-verifier is the shape of every task
+  agents win at (Analyst) — 2026-07-24 (as news-to-framework, pegged to Fable's
+  Jacobian-conjecture counterexample + Tao/Buzzard),
+  reports/deep-dives/2026-07-24-verifier-asymmetry-check-vs-find.md
 - [reference] Sandbox mode: OS-level filesystem/network isolation for Bash and
   its children, and when it beats a permission rule you can subvert (Operator) —
   2026-07-23, reports/deep-dives/2026-07-23-sandbox-is-the-real-brake.md
